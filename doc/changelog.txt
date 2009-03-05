@@ -1,0 +1,460 @@
+Version 0.19 - not yet released
+-------------------------------
+    - changed validator C6
+    
+    - fixed unreported bug in BAV_Validator_Iteration and methods 17, B9
+    
+    - BAV_DataBackend_File->getTempdir() works also if sys_get_temp_dir() doesn't exist.
+
+
+Version 0.18 - October 2nd, 2008
+--------------------------------
+    - implemented validators D2, D3
+
+
+Version 0.17 - June 30, 2008
+----------------------------
+    - https://sourceforge.net/forum/message.php?msg_id=4908493
+    
+    - implemented validators C8, C9, D0, D1
+
+
+Version 0.16 - January 16, 2008
+-------------------------------
+    - [API 2.3] BAV_DataBackend_PDO->getAgencies($sql)
+    
+    - [API 2.3] BAV_DataBackend_PDO->getPrefix()
+    
+    - [API 2.3] BAV_Agency->isMainAgency()
+    
+    - fixed Validators 75
+    
+    - implemented validators C5, C6, C7
+
+
+Version 0.15 - April 8, 2007
+----------------------------
+    - [API 2.2] BAV_Encoding->__construct throws BAV_EncodingException_Unsupported
+    
+    - [API 2.2] BAV_Encoding::isSupported($encoding)
+    
+    - Default encoding is UTF-8; if wether mb_* nor iconv_* is present then it is latin9;
+    
+    - implemented validators C3, C4
+    
+    - changed validator 74
+
+
+Version 0.14 - December 28, 2006
+--------------------------------
+    - [API 2.1] added BAV_DataBackend->bankExists($bankID);
+    
+    - [API 2.1] Encoding of BAV can be configured by BAV::setEncoding();
+    
+    - BAV_Autoloader improved error handling when working in a stack;
+    
+    - BAV_Autoloader->loadDirectly() removes itself from the autoloader stack;
+    
+    - BAV_Autoloader uses Reflection API to decide if a class constructor is present;
+
+
+Version 0.13 - December 18, 2006
+--------------------------------
+    - reimplemented all Validators; implemented missing Validators
+    
+    - [API 2.0] changed complete API to version 2.0
+    
+    - uses PHP5 specific syntax and features
+    
+    - provide information about a bank
+    
+    - removed the CLI script bav.php
+
+
+Version 0.12b - November 20, 2006
+---------------------------------
+    - fixed Validators 07, B4
+
+
+Version 0.12a - November 19, 2006
+---------------------------------
+    - fixed Validator C0
+
+
+Version 0.12 - November 17, 2006
+--------------------------------
+    - applied patch for new format
+
+    - fixed Validators B6, 22
+    
+    - [API 1.2] renamed HTTPHeader::getVersion() and setVersion() to getHTTPVersion()
+      and setHTTPVersion()
+    
+    - changed validator 57
+    
+    - implemented validators B9, C0, C1, C2
+
+
+Version 0.11 - December 4, 2005
+-------------------------------
+    - added optional constant BAV_UPDATE_TMP to enter a writable directory for
+      temporary files.
+
+    - Bundesbank thinks that's a good idea to terminate a line by \n *or* by \r\n.
+      So BAV_BUNDESBANK_LINE_LENGTH was removed, as BAV_BankFactory_BinarySearch has
+      to find it automatically.
+
+
+Version 0.10 - October 5, 2005
+------------------------------
+    - implemented new validators: B6, B7, B8
+
+    - moved test/SQL.php to test/sql/*.php
+    
+    - added BAV_Version.
+     
+    - [API 1.1] BAV::getVersion() and BAV::getAPIVersion() are returning BAV_Version objects.
+    
+    - [API 1.1] corrected the typo "weight" in validator classes.
+      
+    - BAV_BankSaver_Bundesbank::save() uses rename() which doesn't work on PHP before 4.3.3 on
+      different partitions. This is fixed now.
+
+
+Version 0.9 - May 29, 2005
+--------------------------
+    - renamed BAV_Bank::getNewAccount() to BAV_Bank::getAccount()
+    
+    - renamed BAV_Validator::validate() to BAV_Validator::getValidatorResult()
+    
+    - renamed BAV_Account::validate() to BAV_Account::getValidatorResult()
+    
+    - renamed BAV_Controller::validate() to BAV_Controller::getValidatorResult()
+    
+    - BAV_Bank::validate() is deprecated, BAV_Bank::getValidatorResult() added
+
+    - removed BAV_Bank::getBLZ(), which is since some versions marked as deprecated
+    
+    - added BAV::getVersion() and BAV::getAPIVersion()
+
+    - added some more tests
+    
+    - added BAV_SQL_PearDB
+    
+    - added -v option in bav.php
+    
+    - added BAV_SQL_Connection which is the parent class for all DBS which work with connections.
+      So the ancient classes BAV_SQL_MySQL, BAV_SQL_Postgres and BAV_SQL_SQLite moved to 
+      connection/BAV_SQL_Connection_*.php
+      
+    - moved sql configuration to config/sql/*
+    
+    - All BAV_SQL_Connection classes can now be initialized by an existing connection
+          
+    - the Bundesbank released a new bank file
+    
+    - added protected method BAV_Validator::isValidType()
+    
+    - changed BAV_BankSaver
+    
+    - deleted scripts/bav_install.php
+    
+    - added scripts/update.php
+    
+    - added BAV_SQL::replaceTable()
+
+
+Version 0.8 - April 24, 2005
+----------------------------
+    - Bundesbank changed validator 90
+
+    - Bundesbank added validator B5
+      I'm not sure if it's correct, as it says that 1151043211 is valid, but the Bundesbank says
+      it should be wrong at the first validator. It is wrong at the first validator, but the
+      second validator says it's valid and so it's valid for the complete B5.
+      
+    - Added a new BankFactory which works on the Bundesbank file. The new factory is fast, as it
+      uses a binary search (it even may be improved by better handling of the '00000000' exception).
+      And it needs only an unmodified file of the Bundesbank. So it became the new default factory.
+      
+    - Changed BAV_BankFactory_File_Hashtable and BAV_BankFactory_File_Bundesbank to
+      BAV_BankFactory_Hashtable and BAV_BankFactory_Hashtable_Bundesbank.
+      
+    - added new directory test/ and moved scripts/checkValidators.php to it.
+
+
+Version 0.7e - April 4, 2005
+----------------------------
+    - BAV_BankFactory_File::bankExists() and BAV_BankFactory_SQL::bankExists() were overwritten.
+      BAV_SQL gets a getFoundRows().
+    
+    - Repaired validators: 44, 90
+    
+    - added test to find missing require_onces.
+    
+    - added require_once BAV_CLASS_PATH.'validator/BAV_Validator.php':
+      88, A6, 93_Aux
+      
+    - My SQLite Version doesn't understand LIMIT in UPDATE. So a statement changed.
+      
+    - Implemented specification change of A8
+    
+    - Implemented B4
+
+
+Version 0.7d - November 29, 2004
+--------------------------------
+    - Bundesbank changed 73
+    
+    - Bundesbank specified B0 and B3.  
+
+    
+Version 0.7c - October 20, 2004
+-------------------------------
+    - changed the shebang line from /usr/local/bin/php to /usr/bin/php.
+      If you use the scripts you should modify it anyway!
+
+    - fixed validator 52 again - Thanks to Enrico Stahn
+
+    - fixed 53, but there seems to be one bug left
+
+    - checkValidators.php was rewritten and supports now bank IDs in the
+      verify.ini
+
+    - reimplemented validators: 20
+
+    - reimplemented because of specification change: 51, 73, 80, 81, 84, 86, 87
+
+    - little change of the verify.ini: PHP5 treats text with a leading '0' like
+      '09' as an octal number, which we cannot use.
+
+
+Version 0.7b - September 5, 2004
+--------------------------------
+    - updated bank list
+
+    - fixed validators: 88, 52
+
+    - implemented validators: B1, B2
+
+
+Version 0.7a - August 16, 2004
+------------------------------
+    - reimplemented validator: 05
+
+    - fixed validators: 24, 61
+
+
+Version 0.7 - August 2, 2004
+----------------------------
+    - BAV_Bank::getBLZ() is deprecated. Use BAV_Bank::getID() instead.
+
+    - reimplemented validator because of notices: 22
+
+    - dropped XML support as there is really no need at the moment
+
+    - added PHPDoc documentation
+
+    - added a layer for Postgresql
+
+    - changed the implementation of BAV_BankSaver_SQL::_save(),
+      because Postgres doesn't know REPLACE
+
+    - The BankID index has to be quoted, as Postgres should cast
+      it to fit to an index.
+
+    - Every SQL Query uses now ' instead of " as quotes.
+
+    - added ANALYZE and VACUUM to installation
+
+    - README was updated.
+
+    - added BAV_Controller::isInvalid()
+
+    - added BAV_Bank_Extended and removed it again. I hope it has
+      been removed completely.
+
+    - replaced import_* and install* with bav_install.php
+
+    - fixed unimportant bug in BAV_Validator_KontoCheck
+
+    - fixed BUG with static table in BAV_Validator_KontoCheck,
+      which affected PHP 4.3.0.
+
+    - BAV_Validator_KontoCheck does a preNulls() on the validated IDs. This
+      is a workaround for the old validators, which expected to validate
+      normalized bank IDs.
+
+
+Version 0.6a - July 1, 2004
+---------------------------
+    - fixed Validators: 13, 50, 87
+
+    - added verifyImport.php
+
+    - checkValidators.php searches also for verfahren_* calls.
+      There seems to be no more.
+
+
+Version 0.6 - June 28, 2004
+---------------------------
+    - fixed Validators: 93
+
+    - The install_* scripts don't print "#!/usr/local/bin/php" now.
+
+    - The Factory for the file of the Bundesbank doesn't use file() anymore,
+      so the memory amount is still below the 8 MB limit.
+
+    - Changed the SQL structure for the tables.
+
+    - the install_* scripts will now print error messages from the import_* scripts
+
+    - Because of the few changes (which aren't very serious) this release
+      might be one of the last beta releases.
+
+    - update of the banklist.txt
+
+
+Version 0.5 - May 01, 2004
+--------------------------
+    - bav.php reads interactively also the \n which made the bank unknown.
+
+    - fixed Validators: 00, 10, 25, 28, 29, 32, 35, 36, 37, 38, 39, 43, 44, 47, 51,
+                        73, 78, 81, 88, A0, A1
+
+    - implemented Validators: 52, 53, 54, 58, 66, 71, 72, 74, 75, 80, 83, 84, 85, 86, 87
+                              89, 90, 92, 93, 96, 97, 98, A2, A3, A4, A5, A6, A7, A8
+
+    - reimplemented because of Notices: 14, 16, 23, 26, 40, 64, 68, 77
+
+    - BAV_Validator_Waighted had a serious bug which caused wrong validation results
+      if a validator object is used more than once.
+
+    - splitted BAV_Validator_Waighted into BAV_Validator_Waighted and its new
+      super class BAV_Validator_Iteration. BAV_Validator_Iteration can be used by other
+      validators like BAV_Validator_Transformation.
+
+    - added BAV_Validator_Tranformation as new abstract super class for validators which
+      are using transformation tables.
+
+    - example/full.php used the old path.
+
+    - added BAV_Validator_Multi as abstract super class for validators which implements
+      several validation algorithmns.
+
+    - BAV_Validator_06 was modified, in order to be reusable by more validators
+
+    - BAV_Validator_02::__construct()'s parameters were modified, in order to be reusable
+      by more validators
+
+    - checkValidators.php recognizes more accurant which validators are buggy.
+
+
+Version 0.4 - April 27, 2004
+----------------------------
+    - BAV_ValidationResult distinguishes betweend unknown bank
+      and unknown algorithm. So exit codes of bav.php and result codes of
+      BAV_ValidationResult have changed.
+
+    - corrected Validators: 81 (a half).
+
+    - checkValidators.php uses verify.txt to check the corectness of the algorithms.
+      This is still in Beta, because I don't know how these bank accounts should be
+      treated for real.
+
+    - change of banklist.xml structure. This file is still unused, but it is prepared
+      to contain all the data for exporting (including test accounts).
+
+    - BAV_BankFactory_SQL::getBank($bankID) is safer, because it escapes the bankID
+      with BAV_SQL::escape()
+
+    - There is no need to define BAV_ROOT_PATH, this will be done in config/paths.php
+      So you have only to care about the correct include of config/paths.php.
+
+    - config.php uses per default the hashtable, so you can use BAV without installing
+      any database.
+
+    - added BAV_Controller to hide all the BAV_* classes (like BAV_Bank, BAV_Factory,
+      BAV_Account) and provide a more simple interface. But you can and should still
+      use the old way to validate an account. This class is intended for users which
+      are not scripting so object oriented.
+
+
+Version 0.3a - April 22, 2004
+-----------------------------
+    - BAV_Validator_42 was not implemented correctly.
+
+
+Version 0.3 - April 22, 2004
+----------------------------
+    - BAV adds support for an unified standard constructor __construct()
+
+    - New powerfull abstract class BAV_Validator_Waighted and its subclass
+      BAV_Validator_Waighted_Default. These classes offer support for iterating
+      through waighted algorithmns.
+
+    - Implementation of Validator_56, Validator_57, Validator_91, Validator_A9.
+      So 34 more Bank IDs are supported.
+
+    - Validator_01 and Validator_06 were rewritten, in order to be used by
+      other Validators. So these two Validators are verified.
+
+    - Validator_08 and Validator_79 were only slightly verified by
+      checkValidators.php, and there were return values missing.
+      They've been patched, but the algorithms were not verified!
+
+
+Version 0.2a - April 05, 2004
+-----------------------------
+    - BAV is inherited explictly from stdClass.
+
+    - The Script's path is detected correctly by using __FILE__
+      instead of $_SERVER['SCRIPT_FILENAME'], which is not available
+      on every platform.
+
+    - BAV_Validator::crossSum() is fixed.
+
+    - corrected and rewritten algorithm for Validator_63
+
+
+Version 0.2 - March 20, 2004
+----------------------------
+    - The data source changed. The old text file will no more be supported.
+      Instead the text file of the Deutsche Bundesbank is supported. This file
+      is included in this package and also located in a ZIP archiv at
+      <http://www.bundesbank.de/zahlungsverkehr/zahlungsverkehr_bankleitzahlen_download.php>
+
+    - Bank name support is completely removed (it even wasn't implemented
+      completely), because several banks have the same BLZ. So the datastructures
+      only saves the relation between BLZ and validation algorithm.
+
+    - Class model was slightly improved (the BAV_BankFactory_File hierarchy).
+
+    - XML support was added. This will be usefull in future releases, when
+      the validator is responsable for different countries. All different data
+      sources will be exported in one single XML document. So a user needs only the
+      XML document to update his validator.
+
+    - bav.php was added. This is a command line validator.
+      It may operate interactively or takes the parameters from the command line.
+      It throws exit codes, so it may be used by other command line scripts.
+
+    - Bug with the default bank constructor was fixed.
+
+    - All files have a licence note.
+
+    - This Changelog was added
+
+    - Scripts are independent of the CWD.
+
+    - the BAV_BankFactory gets a singleton object which will be initialized in
+      the central config file config/config.php.
+
+
+Version 0.1 - March 15, 2004
+----------------------------
+    - This is the first release. It comes with generated and fixed validators and
+      several data structures (serialized hashtable, SQLite and an import script
+      for MySQL). As source for the data structure a text file from the original
+      project (php_kontocheck) is used.
+
