@@ -6,7 +6,6 @@ require_once dirname(__FILE__)."/../classes/autoloader/BAV_Autoloader.php";
 BAV_Autoloader::add('../classes/BAV.php');
 BAV_Autoloader::add('../classes/bank/BAV_Bank.php');
 BAV_Autoloader::add('../classes/validator/BAV_Validator_BankDependent.php');
-BAV_Autoloader::add('../classes/verify/testAPI/BAV_TestAPIResults.php');
 BAV_Autoloader::add('../classes/verify/testAPI/BAV_TestAPIResult_Error.php');
 BAV_Autoloader::add('../classes/verify/testAPI/BAV_TestAPI_BAV.php');
 BAV_Autoloader::add('../classes/verify/testAPI/BAV_TestAPI_Kontocheck.php');
@@ -142,7 +141,7 @@ class BAV_CheckAgainstTestAPIs extends BAV {
 		}
 		echo "\n";
 		
-		$this->differences[] = new BAV_TestAPIResults($bank, $account, $results);
+		$this->differences[] = array($bank, $account, $results);
 	}
 	
 	
