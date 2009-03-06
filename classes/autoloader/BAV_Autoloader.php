@@ -127,14 +127,19 @@ class BAV_Autoloader {
             
         }
         
-        $split = strrpos($classPath, '/'); 
+        /**
+         * This fixes path problems with windows.
+         */
+        $classPath = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $classPath);
+        
+        $split = strrpos($classPath, DIRECTORY_SEPARATOR); 
         if ($split !== false) {
             $split++;
             $dir  = substr($classPath, 0, $split);
             $file = substr($classPath, $split);
             
         } else {
-            $dir  = './';
+            $dir  = '.' . DIRECTORY_SEPARATOR;
             $file = $classPath;
             
         }
@@ -150,10 +155,10 @@ class BAV_Autoloader {
             
         }
         
-        if ($dir{0} != '/') {
+        if ($dir{0} != DIRECTORY_SEPARATOR) {
             $_context = debug_backtrace();
             $_file    = $_context[self::BACKTRACE_INDEX][self::BACKTRACE_FILE];
-            $dir      = dirname(realpath($_file)).'/'.$dir;
+            $dir      = dirname(realpath($_file)) . DIRECTORY_SEPARATOR . $dir;
             
         }
         $this->classTable[$name] = $dir.$file;
