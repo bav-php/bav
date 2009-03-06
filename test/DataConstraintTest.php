@@ -40,9 +40,9 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase {
             index(shortterm),
             index(pan),
             index(bic)
-        ) engine=InnoDB");
+        ) engine=MEMORY");
    
-        $fp = fopen(dirname(realpath(__FILE__)).'/../data/banklist.txt', 'r');
+        $fp = fopen(dirname(__FILE__) . '/../data/banklist.txt', 'r');
         if (! is_resource($fp)) {
             throw new RuntimeException('I/O-Error');
         
@@ -82,16 +82,6 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase {
     }
     
     
-    protected function setUp() {
-    	self::$pdo->beginTransaction();
-    }
-    
-    
-    protected function tearDown() {
-        self::$pdo->rollback();
-    }
-    
-    
     /**
      * @return Array
      */
@@ -112,7 +102,7 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase {
     
     
     /**
-     * @dataProvider provideLines
+     * @dataProvider provideParsedLines
      */
     public function testParser($blz, $type) {
         $this->assertRegExp('~^\d{8}$~',        $blz);
@@ -146,7 +136,7 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase {
     }
     
     
-    public function checkBLZDatatype () {
+    public function testBLZDatatype () {
         $statement = self::$pdo->query("SELECT blz FROM bank WHERE blz LIKE '0%'");
         $this->assertFalse(
             $statement->fetch(),
