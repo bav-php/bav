@@ -1,7 +1,7 @@
-#!/usr/bin/php
 <?php
+
+require_once 'PHPUnit/Framework.php';
 require_once dirname(__FILE__)."/../classes/autoloader/BAV_Autoloader.php";
-BAV_Autoloader::add('../classes/BAV.php');
 BAV_Autoloader::add('../classes/verify/BAV_VerifyImport.php');
 BAV_Autoloader::add('../classes/dataBackend/BAV_DataBackend_File.php');
 BAV_Autoloader::add('../classes/dataBackend/exception/BAV_DataBackendException_BankNotFound.php');
@@ -11,7 +11,7 @@ BAV_Autoloader::add('../classes/dataBackend/exception/BAV_DataBackendException_B
  * A test for BAV_VerifyImport.
  *
  *
- * Copyright (C) 2006  Markus Malkusch <bav@malkusch.de>
+ * Copyright (C) 2009  Markus Malkusch <bav@malkusch.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,14 +27,14 @@ BAV_Autoloader::add('../classes/dataBackend/exception/BAV_DataBackendException_B
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * @package scripts
+ * @package test
  * @author Markus Malkusch <bav@malkusch.de>
- * @copyright Copyright (C) 2006 Markus Malkusch
+ * @copyright Copyright (C) 2009 Markus Malkusch
  * @see BAV_VerifyImport
  */
 
 
-class BAV_CheckVerifyImport extends BAV {
+class VerifyImportTest extends PHPUnit_Framework_TestCase {
 
 
     private
@@ -52,40 +52,32 @@ class BAV_CheckVerifyImport extends BAV {
     $databack;
     
     
-    public function __construct() {
+    protected function setUp() {
         $this->databack    = new BAV_DataBackend_File();
         $this->verifyArray = parse_ini_file(dirname(__FILE__).'/../data/verify.ini', true);
         
-        if (! $this->verifyArray) {
-            throw new RuntimeException("Could not parse verify.ini");
-        
-        }
+        $this->assertType(
+            PHPUnit_Framework_Constraint_IsType::TYPE_ARRAY,
+            $this->verifyArray,
+            "Could not parse verify.ini"
+        );
         
         foreach ($this->databack->getAllBanks() as $bank) {
             $this->validationMap[$bank->getValidationType()] = $bank;
         
-        }        
-        
-        $this->testSequentialImport();
-        $this->testFileImport();
-    }
-    /**
-     * @return BAV_VerifyImport
-     */
-    private function createImporter() {
-        return new BAV_VerifyImport($this->databack);
+        }
     }
     
     
-    private function testFileImport() {
-        $importer = $this->createImporter();
+    public function testFileImport() {
+        $importer = new BAV_VerifyImport($this->databack);
         $importer->importVerifyFile();
-        $this->compareImporter($importer);
+        $this->assertImporter($importer);
     }
     
     
-    private function testSequentialImport() {
-        $importer       = $this->createImporter();
+    public function testSequentialImport() {
+        $importer       = new BAV_VerifyImport($this->databack);
         $notSupported   = array();
         foreach ($this->verifyArray as $expect => $array) {
             foreach ($array as $type => $accounts) {
@@ -106,43 +98,44 @@ class BAV_CheckVerifyImport extends BAV {
             }
             
         }
-        $this->compareImporter($importer, $notSupported);
+        $this->assertImporter($importer, $notSupported);
     }
     
     
-    private function compareImporter(BAV_VerifyImport $importer, Array $notSupported = array()) {
+    private function assertImporter(BAV_VerifyImport $importer, Array $notSupported = array()) {
         $file = tempnam('/tmp', 'BAV');
-        if (! $file) {
-            throw new RuntimeException("Could not create temporary file.");
+        $this->assertFileExists($file);
         
-        }
         $importer->save($file);
         $checkArray = parse_ini_file($file, true);
         unlink($file);
-        if (! $checkArray) {
-            throw new RuntimeException("Could not parse temporary file $file.");
         
-        }
+        $this->assertType(
+            PHPUnit_Framework_Constraint_IsType::TYPE_ARRAY,
+            $checkArray,
+            "Could not parse temporary file $file."
+        );
+        
         foreach ($this->verifyArray as $expect => $array) {
             foreach ($array as $type => $accounts) {
-                if (array_search($type, $notSupported) !== false || preg_replace('~\D~', '', $checkArray[$expect][$type]) === preg_replace('~\D~', '', $accounts)) {
-                    unset($checkArray[$expect][$type]);
-                
-                }else {
-                    throw new LogicException(
-                        "$type is not equal!\n".
-                        "Should be: '$accounts'\n".
-                        "       Is: '{$checkArray[$expect][$type]}'");
-                
-                }
+            	$actualAccounts = @$checkArray[$expect][$type];
+            	unset($checkArray[$expect][$type]);
+            	if (array_search($type, $notSupported) !== false) {
+            		continue;
+            		
+            	}
+            	$this->assertEquals(
+            	    preg_replace('~\D~', '', $accounts),
+            	    preg_replace('~\D~', '', $actualAccounts),
+            	    "[$expect]$type is not equal!"
+            	);
                 
             }
             
         }
-        if (! (empty($checkArray['valid']) && empty($checkArray['invalid']))) {
-            throw new LogicException("checkArray is not empty.");
         
-        }
+        $this->assertEquals(0, count($checkArray['valid']));
+        $this->assertEquals(0, count($checkArray['invalid']));
     }
     
     
@@ -160,7 +153,5 @@ class BAV_CheckVerifyImport extends BAV {
 
 }
 
-
-new BAV_CheckVerifyImport();
 
 ?>

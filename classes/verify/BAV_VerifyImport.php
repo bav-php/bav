@@ -3,6 +3,7 @@ BAV_Autoloader::add('../BAV.php');
 BAV_Autoloader::add('../validator/validators/BAV_Validator_52.php');
 BAV_Autoloader::add('../validator/validators/BAV_Validator_B6.php');
 BAV_Autoloader::add('../validator/validators/BAV_Validator_C0.php');
+BAV_Autoloader::add('../validator/BAV_Validator_BankDependent.php');
 BAV_Autoloader::add('../dataBackend/BAV_DataBackend.php');
 BAV_Autoloader::add('exception/BAV_VerifyException.php');
 BAV_Autoloader::add('exception/BAV_VerifyException_IO.php');
@@ -122,10 +123,9 @@ class BAV_VerifyImport extends BAV {
         $bankID     = $this->normalize($bankID);
         $accountID  = $this->normalize($accountID);
         $bank       = $this->dataBackend->getBank($bankID);
-        $type       = ($bank->getValidator() instanceof BAV_Validator_52
-                    || $bank->getValidator() instanceof BAV_Validator_B6
-                    || $bank->getValidator() instanceof BAV_Validator_C0)
-                    ? $bankID : $bank->getValidationType();
+        $type       = $bank->getValidator() instanceof BAV_Validator_BankDependent
+                    ? $bankID
+                    : $bank->getValidationType();
         if ($isValid) {
             $this->validNumbers[$type][] = $accountID;
 
@@ -141,7 +141,7 @@ class BAV_VerifyImport extends BAV {
      * @return string
      */
     private function normalize($id) {
-        return preg_replace('~\D+~', '', $id);
+        return (string) preg_replace('~\D+~', '', $id);
     }
     /**
      * @param string $filePath The file where the arrays are saved (default's to ../../data/verify.ini)
