@@ -8,6 +8,8 @@ Version 0.19 - not yet released
     
     - BAV_DataBackend_File->getTempdir() works also if sys_get_temp_dir()
       doesn't exist.
+      
+    - BAV_Autoloader works also in a Windows environment (untested)
 
 
 Version 0.18 - October 2, 2008
