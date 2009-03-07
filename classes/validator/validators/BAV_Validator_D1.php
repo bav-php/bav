@@ -60,7 +60,8 @@ class BAV_Validator_D1 extends BAV_Validator {
      * @return bool
      */
     protected function getResult() {
-        return $this->validator->isValid($this->transformedAccount);
+        return ! in_array($this->account{0}, array(0, 3, 9))
+            && $this->validator->isValid($this->transformedAccount);
     }
     
 

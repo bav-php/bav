@@ -2,7 +2,7 @@ Version 0.19 - not yet released
 -------------------------------
     - changed validator C6
     
-    - fixed unreported bug in BAV_Validator_Iteration and methods 17, B9
+    - fixed unreported bug in BAV_Validator_Iteration and methods 17, B9, D1
     
     - BAV_DataBackend_File->getTempdir() works also if sys_get_temp_dir() doesn't exist.
 
