@@ -2,15 +2,16 @@ Version 0.19 - not yet released
 -------------------------------
     - changed validator C6
     
-    - fixed unreported bug in BAV_Validator_Iteration and methods:
-      17, B9, D1, 23 (fixed in 16)
+    - fixed bug in BAV_Validator_Iteration
+    
+    - fixed validators: 17, B9, D1, 23 (fixed in 16), 65
     
     - BAV_DataBackend_File->getTempdir() works also if sys_get_temp_dir()
       doesn't exist.
 
 
-Version 0.18 - October 2nd, 2008
---------------------------------
+Version 0.18 - October 2, 2008
+------------------------------
     - implemented validators D2, D3
 
 
@@ -317,8 +318,8 @@ Version 0.6 - June 28, 2004
     - update of the banklist.txt
 
 
-Version 0.5 - May 01, 2004
---------------------------
+Version 0.5 - May 1, 2004
+-------------------------
     - bav.php reads interactively also the \n which made the bank unknown.
 
     - fixed Validators: 00, 10, 25, 28, 29, 32, 35, 36, 37, 38, 39, 43, 44, 47, 51,
@@ -406,8 +407,8 @@ Version 0.3 - April 22, 2004
       They've been patched, but the algorithms were not verified!
 
 
-Version 0.2a - April 05, 2004
------------------------------
+Version 0.2a - April 5, 2004
+----------------------------
     - BAV is inherited explictly from stdClass.
 
     - The Script's path is detected correctly by using __FILE__

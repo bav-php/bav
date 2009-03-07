@@ -30,7 +30,7 @@ class BAV_Validator_65 extends BAV_Validator_00 {
     public function __construct(BAV_Bank $bank) {
         parent::__construct($bank);
 
-        $this->setWeights(array(2, 1, 2, 1, 2, 1, 2, 0, 2, 1));
+        $this->setWeights(array(2, 1, 2, 1, 2, 1, 2, 0, 1, 2));
         $this->setStart(0);
         $this->setChecknumberPosition(7);
     }
