@@ -52,7 +52,7 @@ class BAV_CheckAgainstTestAPIs extends BAV {
 	 * @var int
 	 */
 	#$lastAccount = 9999999999,
-	$lastAccount = 99999,
+	$lastAccount = 999999,
 	/**
 	 * @var Array
 	 */
