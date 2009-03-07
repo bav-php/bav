@@ -1,5 +1,5 @@
-Version 0.19 - not yet released
--------------------------------
+Version 0.19 - March 7, 2009
+----------------------------
     - changed validator C6
     
     - fixed bug in BAV_Validator_Iteration
