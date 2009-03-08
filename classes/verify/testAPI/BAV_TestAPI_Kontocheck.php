@@ -35,6 +35,7 @@ class BAV_TestAPI_Kontocheck extends BAV_TestAPI {
 	
 	const NOT_INITIALIZED = -40;
 	const BANK_NOT_FOUND  = -4;
+	const INVALID_NULL    = -12;
 	const INVALID_KTO     = -3;
 	const INVALID_FALSE   =  0;
 	
@@ -73,6 +74,7 @@ class BAV_TestAPI_Kontocheck extends BAV_TestAPI {
 			case self::BANK_NOT_FOUND:
                 throw new BAV_TestAPIException_Validation_BankNotFound($bank->getBankID());
                 
+            case self::INVALID_NULL:
             case self::INVALID_KTO:
             case self::INVALID_FALSE:
                 return false;
