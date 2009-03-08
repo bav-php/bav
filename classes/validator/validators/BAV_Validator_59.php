@@ -35,7 +35,9 @@ class BAV_Validator_59 extends BAV_Validator_00 {
     
     
     public function isValid($account) {
-        return strlen($account) < 9 || parent::isValid($account);
+        return ltrim($account, "0") != ""
+            && strlen($account) < 9
+            || parent::isValid($account);
     }
 
 
