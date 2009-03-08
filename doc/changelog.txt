@@ -1,3 +1,8 @@
+Version 0.20 - not yet released
+-------------------------------
+    - fixed Validators: 16 (again)
+    
+
 Version 0.19 - March 7, 2009
 ----------------------------
     - changed validator C6
