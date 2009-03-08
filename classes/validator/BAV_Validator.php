@@ -88,7 +88,7 @@ abstract class BAV_Validator extends BAV {
     	try {
             $this->init($account);
             $this->validate();
-            return $this->getResult();
+            return ltrim($account, "0") != "0" && $this->getResult();
             
     	} catch (BAV_ValidatorException_OutOfBounds $e) {
     		return false;
