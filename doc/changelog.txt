@@ -1,5 +1,7 @@
 Version 0.20 - not yet released
 -------------------------------
+    - 0 is always invalid
+
     - fixed Validators: 16 (again)
     
 
