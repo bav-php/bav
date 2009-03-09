@@ -52,8 +52,12 @@ class BAV_CheckAgainstTestAPIs extends BAV {
 	/**
 	 * @var int
 	 */
-	#$lastAccount = 9999999999,
-	$lastAccount = 99999,
+	#$firstAccount = 9999999999,
+	$firstAccount = 999,
+	/**
+	 * @var int
+	 */
+	$lastAccount = 1,
 	/**
 	 * @var Array
 	 */
@@ -81,6 +85,8 @@ class BAV_CheckAgainstTestAPIs extends BAV {
 		
 		#$backend = new BAV_DataBackend_File();
 		$backend = new BAV_DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
+		
+		
 		foreach ($backend->getAllBanks() as $bank) {
 			try {
 				if ( array_key_exists($bank->getValidationType(), $this->testedValidators)
@@ -90,8 +96,12 @@ class BAV_CheckAgainstTestAPIs extends BAV {
 				     
 			    }
 			    
-			    for ($account = $this->lastAccount; $account >= 0; $account--) {
-	                for($pad = strlen($account); $pad <= strlen($this->lastAccount); $pad++) {
+			    $increment = $this->lastAccount > $this->firstAccount ? 1 : -1;
+			    $padLength = strlen(max($this->lastAccount, $this->firstAccount));
+			    $afterLastAccount = $this->lastAccount += $increment;
+			    
+			    for ($account = $this->firstAccount; $account != $afterLastAccount; $account += $increment) {
+	                for($pad = strlen($account); $pad <= $padLength; $pad++) {
 	                	$paddedAccount = str_pad($account, $pad, "0", STR_PAD_LEFT);
 				    	$differences = count($this->differences);
 				    	$this->testAccount($bank, $paddedAccount);
