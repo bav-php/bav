@@ -50,9 +50,16 @@ abstract class BAV_TestAPI extends BAV {
     
 	
 	public function __construct() {
-		$this->name = get_class($this);
+		$this->setName(get_class($this));
 	}
 	
+	
+	/**
+	 * @param string $name
+	 */
+	protected function setName($name) {
+		$this->name = $name;	
+	}
 	
 	/**
 	 * @param int $account

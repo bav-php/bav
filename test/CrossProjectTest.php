@@ -8,6 +8,7 @@ BAV_Autoloader::add('../classes/validator/BAV_Validator_BankDependent.php');
 BAV_Autoloader::add('../classes/verify/testAPI/BAV_TestAPIResult_Error.php');
 BAV_Autoloader::add('../classes/verify/testAPI/BAV_TestAPI_BAV.php');
 BAV_Autoloader::add('../classes/verify/testAPI/BAV_TestAPI_Kontocheck.php');
+BAV_Autoloader::add('../classes/verify/testAPI/BAV_TestAPI_Ktoblzcheck.php');
 BAV_Autoloader::add('../classes/verify/testAPI/exception/BAV_TestAPIException_Validation_BankNotFound.php');
 BAV_Autoloader::add('../classes/dataBackend/BAV_DataBackend_File.php');
 BAV_Autoloader::add('../classes/dataBackend/BAV_DataBackend_PDO.php');
@@ -63,9 +64,15 @@ class CrossProjectTest extends PHPUnit_Framework_TestCase {
 	 * @return Array
 	 */
 	protected function setUp() {
+        $ktoblzcheckPath = dirname(__FILE__) . "/../tmp/ktoblzcheck/ktoblzcheck-1.21/src";
+	   
 		$this->testAPIs = array(
             new BAV_TestAPI_BAV(),
-            new BAV_TestAPI_Kontocheck('/etc/blz.lut2', 2)
+            new BAV_TestAPI_Kontocheck('/etc/blz.lut2', 2),
+            new BAV_TestAPI_Ktoblzcheck(
+                "$ktoblzcheckPath/bankdata/bankdata.txt",
+                "$ktoblzcheckPath/bin/ktoblzcheck"
+            )
         );
 	}
 	

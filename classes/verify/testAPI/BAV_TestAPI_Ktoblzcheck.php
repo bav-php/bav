@@ -7,7 +7,7 @@ BAV_Autoloader::add('../bank/BAV_Bank.php');
 
 
 /**
- * The API for  Michael Plugge's kontocheck.
+ * The API for ktoblzcheck
  *
  * Copyright (C) 2009  Markus Malkusch <bav@malkusch.de>
  *
@@ -30,35 +30,43 @@ BAV_Autoloader::add('../bank/BAV_Bank.php');
  * @author Markus Malkusch <bav@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
-class BAV_TestAPI_Kontocheck extends BAV_TestAPI {
+class BAV_TestAPI_Ktoblzcheck extends BAV_TestAPI {
+
+
+    const BINARY            = "ktoblzcheck";
+    const VALID             = 0;
+    const INVALID           = 2;
+    const BANK_NOT_FOUND    = 3;
+    
+
 	
-	
-	const NOT_INITIALIZED = -40;
-	const BANK_NOT_FOUND  = -4;
-	const INVALID_NULL    = -12;
-	const INVALID_KTO     = -3;
-	const INVALID_FALSE   =  0;
+	private
+	/**
+     * @var String
+     */
+	$binary = '',
+	/**
+	 * @var String
+	 */
+	$bankdata = '';
 	
 	
 	/**
-	 * @param String $lutFile
-	 * @param int $lutVersion
+	 * @param String $bankdata
+	 * @param String $binary
 	 * @throws BAV_TestAPIException
 	 */
-	public function __construct($lutFile, $lutVersion) {
+	public function __construct($bankdata, $binary = null) {
 		parent::__construct();
 		
-		$this->setName("kc");
+		$this->setName("ktoblzcheck");
 		
-		if (! lut_init($lutFile, $lutVersion)) {
-			throw new BAV_TestAPIException("Could not initialize LUT.");
-			
-		}
+		$this->bankdata = realpath($bankdata);
+		$this->binary   = is_null($binary) ? self::BINARY : realpath($binary);
 	}
 	
 	
 	/**
-	 * @param int $bank
 	 * @param int $account
 	 * @return bool
 	 * @throws BAV_TestAPIException_Validation
@@ -66,29 +74,27 @@ class BAV_TestAPI_Kontocheck extends BAV_TestAPI {
 	 * @throws BAV_TestAPIException_Validation_BankNotFound
 	 */
 	protected function isValid(BAV_Bank $bank, $account) {
-		$isValid = kto_check_blz($bank->getBankID(), $account);
-		
-		switch ($isValid) {
-			
-			case self::NOT_INITIALIZED:
-				throw new BAV_TestAPIException_Validation_NotInitialized("LUT not initialized");
-			
-			case self::BANK_NOT_FOUND:
-                throw new BAV_TestAPIException_Validation_BankNotFound($bank->getBankID());
+        exec(
+            "$this->binary --file=$this->bankdata {$bank->getBankID()} $account",
+            $out,
+            $result
+        );
+        
+        switch ($result) {
+        
+            case self::VALID:
+                return true;
                 
-            case self::INVALID_NULL:
-            case self::INVALID_KTO:
-            case self::INVALID_FALSE:
+            case self::INVALID:
                 return false;
                 
+            case self::BANK_NOT_FOUND:
+                throw new BAV_TestAPIException_Validation_BankNotFound($bank->getBankID());
+                
             default:
-            	if ($isValid < 0) {
-            		throw new BAV_TestAPIException_Validation("unknown code $isValid");
-            		
-            	}
-            	return true;
-			
-		}
+                throw new BAV_TestAPIException_Validation("unknown code $result: " . implode("\n", $out));
+        
+        }
 	}
 	
 	
