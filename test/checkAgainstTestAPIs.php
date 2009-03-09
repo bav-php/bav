@@ -87,6 +87,46 @@ class BAV_CheckAgainstTestAPIs extends BAV {
 		$backend = new BAV_DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
 		
 		
+		if (! empty($GLOBALS['argv'][1])) {
+            $nodeNumber = $GLOBALS['argv'][1];
+            $nodeCount  = @$GLOBALS['argv'][2];
+            
+            if ($nodeNumber * $nodeCount == 0 || min($nodeNumber, $nodeCount) < 0) {
+            	trigger_error(
+                    'Expect two numeric arguments > 0: $nodeNumber $nodeCount',
+            	    E_USER_ERROR
+            	);
+            	
+            }
+            
+            if ($nodeNumber > $nodeCount) {
+            	trigger_error(
+            	    'Expect first argument ($nodeNumber) <= second argument ($nodeCount)',
+            	    E_USER_ERROR
+            	);
+            	
+            }
+			
+		} else {
+			$nodeNumber = 1;
+            $nodeCount  = 1;
+			
+		}
+		
+		$increment = $this->lastAccount > $this->firstAccount ? 1 : -1;
+        $padLength = strlen(max($this->lastAccount, $this->firstAccount));
+        
+		$count            = ceil(abs($this->lastAccount - $this->firstAccount) / $nodeCount);
+		$firstAccount     = $this->firstAccount + $increment * ($nodeNumber - 1) * ($count + 1);
+		
+		if ($nodeCount == $nodeNumber) {
+			$afterLastAccount = $this->lastAccount + $increment;
+			
+		} else {
+            $afterLastAccount = $firstAccount + $increment * ($count + 1);	
+			
+		}
+		
 		foreach ($backend->getAllBanks() as $bank) {
 			try {
 				if ( array_key_exists($bank->getValidationType(), $this->testedValidators)
@@ -96,12 +136,8 @@ class BAV_CheckAgainstTestAPIs extends BAV {
 				     
 			    }
 			    
-			    $increment = $this->lastAccount > $this->firstAccount ? 1 : -1;
-			    $padLength = strlen(max($this->lastAccount, $this->firstAccount));
-			    $afterLastAccount = $this->lastAccount + $increment;
-			    
-			    for ($account = $this->firstAccount; $account != $afterLastAccount; $account += $increment) {
-	                for($pad = strlen($account); $pad <= $padLength; $pad++) {
+			    for ($account = $firstAccount; $account != $afterLastAccount; $account += $increment) {
+			    	for($pad = strlen($account); $pad <= $padLength; $pad++) {
 	                	$paddedAccount = str_pad($account, $pad, "0", STR_PAD_LEFT);
 				    	$differences = count($this->differences);
 				    	$this->testAccount($bank, $paddedAccount);
