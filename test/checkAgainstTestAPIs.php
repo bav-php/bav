@@ -98,7 +98,7 @@ class BAV_CheckAgainstTestAPIs extends BAV {
 			    
 			    $increment = $this->lastAccount > $this->firstAccount ? 1 : -1;
 			    $padLength = strlen(max($this->lastAccount, $this->firstAccount));
-			    $afterLastAccount = $this->lastAccount += $increment;
+			    $afterLastAccount = $this->lastAccount + $increment;
 			    
 			    for ($account = $this->firstAccount; $account != $afterLastAccount; $account += $increment) {
 	                for($pad = strlen($account); $pad <= $padLength; $pad++) {
