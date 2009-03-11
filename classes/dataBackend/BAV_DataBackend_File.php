@@ -376,7 +376,7 @@ class BAV_DataBackend_File extends BAV_DataBackend {
         	
         }
         
-        $tempfile = tempnam(uniqid(rand(), true), '');
+        $tempfile = tempnam(uniqid(mt_rand(), true), '');
         if (file_exists($tempfile)) {
             unlink($tempfile);
             return realpath(dirname($tempfile));
