@@ -354,6 +354,8 @@ class BAV_DataBackend_File extends BAV_DataBackend {
         }
         return $context;
     }
+    
+    
     /**
      * @throws BAV_DataBackendException_IO
      * @return String a writable directory for temporary files
@@ -361,9 +363,9 @@ class BAV_DataBackend_File extends BAV_DataBackend {
     private function getTempdir() {
         $tmpDirs = array(
             function_exists('sys_get_temp_dir') ? sys_get_temp_dir() : false,
-            @$_ENV['TMP'],
-            @$_ENV['TMPDIR'],
-            @$_ENV['TEMP'],
+            empty($_ENV['TMP'])    ? false : $_ENV['TMP'],
+            empty($_ENV['TMPDIR']) ? false : $_ENV['TMPDIR'],
+            empty($_ENV['TEMP'])   ? false : $_ENV['TEMP'],
             ini_get('upload_tmp_dir'),
             '/tmp'
         );
@@ -386,7 +388,6 @@ class BAV_DataBackend_File extends BAV_DataBackend {
         throw new BAV_DataBackendException_IO();
     }
     
-
 
 }
 
