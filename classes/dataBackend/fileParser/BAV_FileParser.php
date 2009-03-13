@@ -173,7 +173,7 @@ class BAV_FileParser extends BAV {
      */
     public function getBankID($line) {
         $this->seekLine($line, self::BANKID_OFFSET);
-        return  self::$encoding->convert(fread($this->getFileHandle(), self::BANKID_LENGTH), self::FILE_ENCODING);
+        return self::$encoding->convert(fread($this->getFileHandle(), self::BANKID_LENGTH), self::FILE_ENCODING);
     }
     /**
      * @throws BAV_FileParserException_FileNotExists
