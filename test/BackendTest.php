@@ -62,6 +62,16 @@ class BackendTest extends PHPUnit_Framework_TestCase {
     
     
     /**
+     */
+    public function provideInstallationBackends() {
+        return array(
+            array(new BAV_DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'), 'bavtest_')),
+            array(new BAV_DataBackend_File(tempnam(BAV_DataBackend_File::getTempdir(), 'bavtest')))
+        );
+    }
+    
+    
+    /**
      * @return Array
      */
     public function provideBanks() {
@@ -103,6 +113,16 @@ class BackendTest extends PHPUnit_Framework_TestCase {
         	
         }
         return $agencies;
+    }
+    
+    
+    /**
+     * @dataProvider provideInstallationBackends
+     */
+    public function testInstallation(BAV_DataBackend $backend) {
+    	$backend->install();
+    	$backend->update();
+    	$backend->uninstall();
     }
     
     
