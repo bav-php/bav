@@ -100,7 +100,7 @@ class BAV_DataBackend_File extends BAV_DataBackend {
         
         }
         
-        $temp    = tempnam($this->getTempdir(), "BAV_");
+        $temp    = tempnam(self::getTempdir(), "BAV_");
         $tempH   = fopen($temp, 'w');
         if (! ($temp && $tempH)) {
             throw new BAV_DataBackendException_IO();
@@ -131,7 +131,7 @@ class BAV_DataBackend_File extends BAV_DataBackend {
         curl_close($ch);
         
         if ($isZIP) {
-            $file = tempnam($this->getTempdir(), "BAV_");
+            $file = tempnam(self::getTempdir(), "BAV_");
             if (! $file) {
                 unlink($temp);
                 throw new BAV_DataBackendException_IO();
@@ -360,7 +360,7 @@ class BAV_DataBackend_File extends BAV_DataBackend {
      * @throws BAV_DataBackendException_IO
      * @return String a writable directory for temporary files
      */
-    private function getTempdir() {
+    public static function getTempdir() {
         $tmpDirs = array(
             function_exists('sys_get_temp_dir') ? sys_get_temp_dir() : false,
             empty($_ENV['TMP'])    ? false : $_ENV['TMP'],

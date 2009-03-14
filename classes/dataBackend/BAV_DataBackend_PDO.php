@@ -186,7 +186,7 @@ class BAV_DataBackend_PDO extends BAV_DataBackend {
     public function update() {
         $useTA = false;
         try {
-            $fileBackend    = new BAV_DataBackend_File();
+            $fileBackend = new BAV_DataBackend_File(tempnam(BAV_DataBackend_File::getTempdir(), 'bav'));
             $fileBackend->install();
             
             $insertBank     = $this->pdo->prepare(
