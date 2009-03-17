@@ -90,6 +90,7 @@ class BAV_TestAPI_Ktoblzcheck extends BAV_TestAPI {
                 
             case self::BANK_NOT_FOUND:
                 throw new BAV_TestAPIException_Validation_BankNotFound("Bank not found: {$bank->getBankID()}");                
+            
             default:
                 throw new BAV_TestAPIException_Validation("unknown code $result: " . implode("\n", $out));
         
