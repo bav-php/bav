@@ -109,7 +109,7 @@ try {
      * Now you would know that the bank 10000000 does not exist.
      * BAV_DataBackend->bankExists(10000000) would also tell that:
      */
-    if (! $databackend->bankExists($error->getBankID())) { // of course that's the same as if(true)
+    if (! $databack->bankExists($error->getBankID())) { // of course that's the same as if(true)
         die("Bank {$error->getBankID()} does not exist.");
 
     }
