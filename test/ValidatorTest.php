@@ -90,13 +90,29 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
             $validatorType = $matchType[1];
             $bank = array_key_exists($validatorType, self::$knownBanks)
                   ? self::$knownBanks[$validatorType]
-                  : new BAV_Bank(self::$dataBackend, 0, $validatorType);
+                  : new BAV_Bank(self::$dataBackend, 12345678, $validatorType);
 
             $banks[] = array($bank);
             self::$implementedBanks[$validatorType] = $bank;
             
         }
         return $banks;
+    }
+    
+    
+    /**
+     * @return Array
+     */
+    public function provideAccountsAndBanksInAllLengths() {
+        $providedAccountsAndBanks = array();
+        foreach ($this->provideBanks() as $bank) {
+            $bank = $bank[0];
+            for ($length = 1; $length <= 10; $length++) {
+                $providedAccountsAndBanks[] = array($bank, str_repeat(1, $length));
+                
+            }
+        }
+        return $providedAccountsAndBanks;
     }
 
 
@@ -137,6 +153,19 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
             );
     		
     	}
+    }
+    
+    
+    /**
+     * Short accounts should not raise exception.
+     *
+     * @param int $account
+     * @throws BAV_ClassFileException_IO
+     * @throws BAV_ClassFileException_MissingClass
+     * @dataProvider provideAccountsAndBanksInAllLengths
+     */
+    public function testAccountLength(BAV_Bank $bank, $account) {
+        $bank->isValid($account);
     }
     
     
@@ -199,7 +228,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
                         $bank = new BAV_Bank(self::$dataBackend, $e->getBankID(), '52');
                         break;
                             
-                    case '16052072':
+                    case '16052072': case '85055142':
                         $bank = new BAV_Bank(self::$dataBackend, $e->getBankID(), '53');
                         break;
                     
