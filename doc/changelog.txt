@@ -1,5 +1,5 @@
-Version 0.20 - not yet released
--------------------------------
+Version 0.20 - September 2, 2009
+--------------------------------
     - 0 is always invalid
 
     - fixed Validators: 16 (again)
