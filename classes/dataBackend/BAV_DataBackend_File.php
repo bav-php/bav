@@ -95,6 +95,16 @@ class BAV_DataBackend_File extends BAV_DataBackend {
         $isZIP = (exec('unzip -v') == '')
                ? false
                : preg_match(':Aktuelle Version der Bankleitzahlendateien.+href *= *"([^"]+txt\.zip)":sU', $content, $zipMatches);
+               
+        /**
+         * There is an unresolved bug, that doesn't allow to uncompress
+         * the zip archive. Zip support is disabled until it's repaired.
+         * 
+         * @see http://sourceforge.net/forum/message.php?msg_id=7555232
+         * TODO enable Zip support
+         */
+        $isZIP = false;
+               
         if (! ($isTXT || $isZIP)) {
             throw new BAV_DataBackendException();
         
