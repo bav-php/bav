@@ -52,8 +52,7 @@ class BAV_CheckAgainstTestAPIs extends BAV {
 	/**
 	 * @var int
 	 */
-	#$firstAccount = 9999999999,
-	$firstAccount = 999,
+	$firstAccount = 9999999999,
 	/**
 	 * @var int
 	 */
@@ -77,10 +76,12 @@ class BAV_CheckAgainstTestAPIs extends BAV {
 	
 		$this->testAPIs[] = new BAV_TestAPI_BAV();
 		$this->testAPIs[] = new BAV_TestAPI_Kontocheck('/etc/blz.lut', 2);
+		/*
 		$this->testAPIs[] = new BAV_TestAPI_Ktoblzcheck(
             "$ktoblzcheckPath/bankdata/bankdata.txt",
 		    "$ktoblzcheckPath/bin/ktoblzcheck"
         );
+        */
 		
 		
 		#$backend = new BAV_DataBackend_File();
