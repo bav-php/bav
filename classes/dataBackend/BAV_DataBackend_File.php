@@ -32,6 +32,8 @@ BAV_Autoloader::add('exception/BAV_DataBackendException_BankNotFound.php');
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * 
+ * @FIXME BAV_DataBackend_File is broken as Bundesbank appends new Banks at the end of the file
  */
 class BAV_DataBackend_File extends BAV_DataBackend {
 
@@ -75,7 +77,8 @@ class BAV_DataBackend_File extends BAV_DataBackend {
     }
     /**
      * This method works only if your PHP is compiled with cURL.
-     *
+     * TODO: test this with a proxy
+     * 
      * @see BAV_DataBackend::update()
      * @throws BAV_DataBackendException_IO
      */
@@ -400,6 +403,3 @@ class BAV_DataBackend_File extends BAV_DataBackend {
     
 
 }
-
-
-?>
