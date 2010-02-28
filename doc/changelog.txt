@@ -1,3 +1,11 @@
+Version 0.21 - not yet released
+-------------------------------
+    - Support for InnoDB tables.
+    
+    - Bundesbank doesn't provide an ordered bank file anymore.
+      see http://sourceforge.net/projects/bav/forums/forum/405655/topic/3568342
+      
+
 Version 0.20 - September 2, 2009
 --------------------------------
     - 0 is always invalid

@@ -3,6 +3,7 @@ BAV_Autoloader::add('BAV_DataBackend.php');
 BAV_Autoloader::add('BAV_DataBackend_File.php');
 BAV_Autoloader::add('fileParser/BAV_FileParser.php');
 BAV_Autoloader::add('exception/BAV_DataBackendException_BankNotFound.php');
+BAV_Autoloader::add('exception/BAV_DataBackendException_NoMainAgency.php');
 BAV_Autoloader::add('exception/BAV_DataBackendException_IO.php');
 BAV_Autoloader::add('exception/BAV_DataBackendException_IO_MissingAttributes.php');
 BAV_Autoloader::add('../bank/BAV_Bank.php');
@@ -209,26 +210,33 @@ class BAV_DataBackend_PDO extends BAV_DataBackend {
             $this->pdo->exec("DELETE FROM {$this->prefix}bank");
             
             foreach ($fileBackend->getAllBanks() as $bank) {
-                $insertBank->execute(array(
-                    ":bankID"       => $bank->getBankID(),
-                    ":validator"    => $bank->getValidationType(),
-                    ":mainAgency"   => $bank->getMainAgency()->getID(),
-                ));
-                $agencies   = $bank->getAgencies();
-                $agencies[] = $bank->getMainAgency();
-                foreach ($agencies as $agency) {
-                    $insertAgency->execute(array(
-                        ":id"           => $agency->getID(),
-                        ":name"         => $agency->getName(),
-                        ":postcode"     => $agency->getPostcode(),
-                        ":city"         => $agency->getCity(),
-                        ":shortTerm"    => $agency->getShortTerm(),
-                        ":bank"         => $bank->getBankID(),
-                        ":pan"          => $agency->hasPAN() ? $agency->getPAN() : null,
-                        ":bic"          => $agency->hasBIC() ? $agency->getBIC() : null
-                    ));
-                
-                }
+            	try {
+	                $insertBank->execute(array(
+	                    ":bankID"       => $bank->getBankID(),
+	                    ":validator"    => $bank->getValidationType(),
+	                    ":mainAgency"   => $bank->getMainAgency()->getID(),
+	                ));
+	                $agencies   = $bank->getAgencies();
+	                $agencies[] = $bank->getMainAgency();
+	                foreach ($agencies as $agency) {
+	                    $insertAgency->execute(array(
+	                        ":id"           => $agency->getID(),
+	                        ":name"         => $agency->getName(),
+	                        ":postcode"     => $agency->getPostcode(),
+	                        ":city"         => $agency->getCity(),
+	                        ":shortTerm"    => $agency->getShortTerm(),
+	                        ":bank"         => $bank->getBankID(),
+	                        ":pan"          => $agency->hasPAN() ? $agency->getPAN() : null,
+	                        ":bic"          => $agency->hasBIC() ? $agency->getBIC() : null
+	                    ));
+	                
+	                }
+            	} catch(BAV_DataBackendException_NoMainAgency $e) {
+            	   	trigger_error(
+                        "Skipping bank {$e->getBank()->getBankID()} without any main agency."
+               	    );
+            		
+            	}
             }
             if ($useTA) {
                 $this->pdo->commit();
@@ -246,7 +254,9 @@ class BAV_DataBackend_PDO extends BAV_DataBackend {
                 throw $e;
                     
             } catch (PDOException $e2) {
-                throw new BAV_DataBackendException_IO();
+                throw new BAV_DataBackendException_IO(
+                    get_class($e) . ": {$e->getMessage()}\nadditionally: {$e2->getMessage()}"
+                );
                 
             }
         
@@ -260,15 +270,23 @@ class BAV_DataBackend_PDO extends BAV_DataBackend {
      */
     public function install() {
         try {
+        	$createOptions = '';
+        	switch ($this->pdo->getAttribute(PDO::ATTR_DRIVER_NAME)) {
+        		
+        		case 'mysql':
+        			$createOptions .= " engine=InnoDB";
+        			break;
+        			
+        	}
             $this->pdo->exec("
             
                 CREATE TABLE {$this->prefix}bank(
                     id          int primary key,
                     validator   char(2) NOT NULL,
-                    mainAgency  int NOT NULL,
+                    mainAgency  int NOT NULL
                     
-                    FOREIGN KEY (mainAgency) REFERENCES {$this->prefix}agency(id)
-                )
+                    /* FOREIGN KEY (mainAgency) REFERENCES {$this->prefix}agency(id) */
+                )$createOptions
             
             ");
             $this->pdo->exec("
@@ -284,13 +302,13 @@ class BAV_DataBackend_PDO extends BAV_DataBackend {
                     bic         varchar(".BAV_FileParser::BIC_LENGTH.")         NULL,
                     
                     FOREIGN KEY (bank) REFERENCES {$this->prefix}bank(id)
-                )
+                )$createOptions
             
             ");
             $this->update();
         
         } catch (PDOException $e) {
-            throw new BAV_DataBackendException_IO();
+            throw new BAV_DataBackendException_IO($e->getMessage());
         
         }
     }

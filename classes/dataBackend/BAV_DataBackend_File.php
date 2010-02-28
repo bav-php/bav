@@ -10,6 +10,7 @@ BAV_Autoloader::add('fileParser/exception/BAV_FileParserContextException_Undefin
 BAV_Autoloader::add('exception/BAV_DataBackendException.php');
 BAV_Autoloader::add('exception/BAV_DataBackendException_IO.php');
 BAV_Autoloader::add('exception/BAV_DataBackendException_BankNotFound.php');
+BAV_Autoloader::add('exception/BAV_DataBackendException_NoMainAgency.php');
 
 
 /**
@@ -58,6 +59,61 @@ class BAV_DataBackend_File extends BAV_DataBackend {
     public function __construct($file = null) {
         $this->parser = new BAV_FileParser($file);
     }
+    
+    
+    /**
+     * Since March 8th 2010 the file (>=blz_20100308.txt) of the
+     * Bundesbank started to append new banks at the end of the file.
+     * That broked binary search. This method sorts the lines so
+     * that binary search is working again.
+     * 
+     * Be aware that this needs some amount of memory.
+     * 
+     * @param String $file
+     * @throws BAV_DataBackendException_IO
+     */
+    private function sortFile($file) {
+        //read the unordered bank file
+        $lines = file($file);
+        if (! is_array($lines) || empty($lines)) {
+            throw new BAV_DataBackendException_IO("Could not read lines in '$file'.");
+            
+        }
+        
+        //build a sorted index for the bankIDs
+        $index = array();
+        foreach ($lines as $line => $data) {
+            $bankID = substr($data, BAV_FileParser::BANKID_OFFSET, BAV_FileParser::BANKID_LENGTH);
+            $index[$line] = $bankID;
+            
+        }
+        asort($index);
+        
+        //write a sorted bank file atomically
+        $temp    = tempnam(self::getTempdir(), "BAV_");
+        $tempH   = fopen($temp, 'w');
+        if (! ($temp && $tempH)) {
+            throw new BAV_DataBackendException_IO("Could not open a temporary file.");
+        
+        }
+        foreach (array_keys($index) as $line) {
+            $data = $lines[$line];
+            
+            $writtenBytes = fputs($tempH, $data);
+            if ($writtenBytes != strlen($data)) {
+                throw new BAV_DataBackendException_IO("Could not write sorted data: '$data' into $temp.");
+                
+            }
+            
+        }
+        fclose($tempH);
+        if (! rename($temp, $file)) {
+            throw new BAV_DataBackendException_IO("Could not rename '$temp' to '$file'.");
+            
+        }
+    }
+    
+    
     /**
      * @see BAV_DataBackend::uninstall()
      * @throws BAV_DataBackendException_IO
@@ -91,7 +147,9 @@ class BAV_DataBackend_File extends BAV_DataBackend {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $content = curl_exec($ch);
         if (! $content) {
-            throw new BAV_DataBackendException_IO();
+            throw new BAV_DataBackendException_IO(
+                "Failed to download '" . self::DOWNLOAD_URI . "'."
+            );
         
         }
         $isTXT = preg_match(':Aktuelle Version der Bankleitzahlendateien.+href *= *"([^"]+\.txt)":sU', $content, $txtMatches); 
@@ -161,6 +219,9 @@ class BAV_DataBackend_File extends BAV_DataBackend {
             $file = $temp;
         
         }
+        
+        // Bundesbank stopped shipping out a sorted file.
+        $this->sortFile($file);
         
         if (! rename($file, $this->parser->getFile())) {
             throw new BAV_DataBackendException_IO();
@@ -273,6 +334,7 @@ class BAV_DataBackend_File extends BAV_DataBackend {
     /**
      * @see BAV_DataBackend::_getMainAgency()
      * @throws BAV_DataBackendException
+     * @throws BAV_DataBackendException_NoMainAgency
      * @return BAV_Agency
      */
     public function _getMainAgency(BAV_Bank $bank) {
@@ -285,16 +347,17 @@ class BAV_DataBackend_File extends BAV_DataBackend {
                 
                 }
             }
-            throw new LogicException('A bank without a main agency is invalid.');
+            // Maybe there are banks without a main agency
+            throw new BAV_DataBackendException_NoMainAgency($bank);
             
         } catch (BAV_FileParserContextException_Undefined $e) {
-            throw new LogicException('start and end should be defined.');
+            throw new LogicException("Start and end should be defined.");
         
         } catch (BAV_FileParserException_IO $e) {
-            throw new BAV_DataBackendException_IO("Parser Exception bei Bank {$bank->getBankID()}");
+            throw new BAV_DataBackendException_IO("Parser Exception at bank {$bank->getBankID()}");
         
         } catch (BAV_FileParserException_ParseError $e) {
-            throw new BAV_DataBackendException();
+            throw new BAV_DataBackendException(get_class($e) . ": " . $e->getMessage());
             
         }
     }
@@ -318,7 +381,7 @@ class BAV_DataBackend_File extends BAV_DataBackend {
             return $agencies;
             
         } catch (BAV_FileParserContextException_Undefined $e) {
-            throw new LogicException('start and end should be defined.');
+            throw new LogicException("Start and end should be defined.");
         
         } catch (BAV_FileParserException_IO $e) {
             throw new BAV_DataBackendException_IO();
