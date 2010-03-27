@@ -197,7 +197,7 @@ class BAV_DataBackend_File extends BAV_DataBackend {
         }
         fclose($tempH);
         curl_close($ch);
-        
+
         if ($isZIP) {
             $file = tempnam(self::getTempdir(), "BAV_");
             if (! $file) {
@@ -216,9 +216,14 @@ class BAV_DataBackend_File extends BAV_DataBackend {
             $file = $temp;
         
         }
-        
+
         // blz_20100308.txt is not sorted.
-        $this->sortFile($file);
+        $parser     = new BAV_FileParser($file);
+        $lastBankID = $parser->getBankID($parser->getLines());
+        if ($lastBankID < 80000000) {
+            $this->sortFile($file);
+
+        }
 
         $this->safeRename($file, $this->parser->getFile());
     }
@@ -232,7 +237,7 @@ class BAV_DataBackend_File extends BAV_DataBackend {
      * @throws BAV_DataBackendException_IO
      */
     private function safeRename($source, $destination) {
-        $isRenamed = rename($source, $destination);
+        $isRenamed = @rename($source, $destination);
         if ($isRenamed) {
             return;
 

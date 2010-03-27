@@ -116,10 +116,12 @@ class BAV_FileParser extends BAV {
         }
         $this->lineLength = strlen($dummyLine);
         
-        
+        clearstatcache(); // filesize() seems to be 0 sometimes
         $filesize = filesize($this->file);
         if (! $filesize) {
-            throw new BAV_FileParserException_IO();
+            throw new BAV_FileParserException_IO(
+                "Could not read filesize for '$this->file'."
+            );
         
         }        
         $this->lines = floor(($filesize - 1) / $this->lineLength);

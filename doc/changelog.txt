@@ -2,8 +2,10 @@ Version 0.21 - not yet released
 -------------------------------
     - Support for InnoDB tables.
     
-    - Bundesbank doesn't provide an ordered bank file anymore.
+    - blz_20100308.txt is not ordered.
       see http://sourceforge.net/projects/bav/forums/forum/405655/topic/3568342
+
+    - filesize() in BAV_FileParser::init() returns sometimes 0.
       
 
 Version 0.20 - September 2, 2009
