@@ -62,8 +62,8 @@ class BAV_DataBackend_File extends BAV_DataBackend {
     
     
     /**
-     * Since March 8th 2010 the file (>=blz_20100308.txt) of the
-     * Bundesbank started to append new banks at the end of the file.
+     * For the file of March 8th 2010 (blz_20100308.txt)
+     * Bundesbank appended new banks at the end of the file.
      * That broked binary search. This method sorts the lines so
      * that binary search is working again.
      * 
@@ -107,10 +107,7 @@ class BAV_DataBackend_File extends BAV_DataBackend {
             
         }
         fclose($tempH);
-        if (! rename($temp, $file)) {
-            throw new BAV_DataBackendException_IO("Could not rename '$temp' to '$file'.");
-            
-        }
+        $this->safeRename($temp, $file);
     }
     
     
@@ -220,14 +217,54 @@ class BAV_DataBackend_File extends BAV_DataBackend {
         
         }
         
-        // Bundesbank stopped shipping out a sorted file.
+        // blz_20100308.txt is not sorted.
         $this->sortFile($file);
-        
-        if (! rename($file, $this->parser->getFile())) {
-            throw new BAV_DataBackendException_IO();
-            
+
+        $this->safeRename($file, $this->parser->getFile());
+    }
+
+
+    /**
+     * Renames a file atomically between different filesystems.
+     *
+     * @param String $source path of the source
+     * @param String $destination path of the destination
+     * @throws BAV_DataBackendException_IO
+     */
+    private function safeRename($source, $destination) {
+        $isRenamed = rename($source, $destination);
+        if ($isRenamed) {
+            return;
+
+        }
+
+        // copy to the target filesystem
+        $tempFileOnSameFS = "$destination.tmp";
+
+        $isCopied = copy($source, $tempFileOnSameFS);
+        if (! $isCopied) {
+            throw new BAV_DataBackendException_IO(
+                "failed to copy $source to $tempFileOnSameFS."
+            );
+
+        }
+
+        $isUnlinked = unlink($source);
+        if (! $isUnlinked) {
+            trigger_error("Failed to unlink $source.");
+
+        }
+
+        $isRenamed = rename($tempFileOnSameFS, $destination);
+        if (! $isRenamed) {
+            throw new BAV_DataBackendException_IO(
+                "failed to rename $tempFileOnSameFS to $destination."
+            );
+
         }
     }
+
+
     /**
      * @throws BAV_DataBackendException_IO
      * @throws BAV_DataBackendException
