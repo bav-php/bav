@@ -1,11 +1,12 @@
 <?php
+
 BAV_Autoloader::add('BAV_Validator_00.php');
 BAV_Autoloader::add('../BAV_Validator.php');
 BAV_Autoloader::add('../../bank/BAV_Bank.php');
 
 
 /**
- * Copyright (C) 2008  Markus Malkusch <bav@malkusch.de>
+ * Copyright (C) 2010  Markus Malkusch <bav@malkusch.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,11 +26,34 @@ BAV_Autoloader::add('../../bank/BAV_Bank.php');
  * @package classes
  * @subpackage validator
  * @author Markus Malkusch <bav@malkusch.de>
- * @copyright Copyright (C) 2008 Markus Malkusch
+ * @copyright Copyright (C) 2010 Markus Malkusch
  */
 class BAV_Validator_D1 extends BAV_Validator {
 
 
+    const TRANSFORMATION_A = 436338;
+    const TRANSFORMATION_B = 428259;
+
+
+    static private
+	/**
+	 * @var Array
+	 */
+	$transformation = array(
+        0 => self::TRANSFORMATION_A,
+        3 => self::TRANSFORMATION_A,
+        4 => self::TRANSFORMATION_A,
+        5 => self::TRANSFORMATION_A,
+        9 => self::TRANSFORMATION_A,
+
+        1 => self::TRANSFORMATION_B,
+        2 => self::TRANSFORMATION_B,
+        6 => self::TRANSFORMATION_B,
+        7 => self::TRANSFORMATION_B,
+        8 => self::TRANSFORMATION_B
+	);
+
+    
     protected
     /**
      * @var String
@@ -40,19 +64,20 @@ class BAV_Validator_D1 extends BAV_Validator {
      */
     $validator;
     
-    const TRANSFORMATION = 428259;
-
-
+    
     public function __construct(BAV_Bank $bank) {
         parent::__construct($bank);
         
         $this->validator = new BAV_Validator_00($bank);
-        $this->validator->setNormalizedSize(10 + strlen(self::TRANSFORMATION));
+        $this->validator->setNormalizedSize(10 + strlen(self::TRANSFORMATION_A));
     }
     
     
     protected function validate() {
-        $this->transformedAccount = self::TRANSFORMATION.$this->account;
+        $transformationIndex    = $this->account{0};
+        $transformationPrefix   = self::$transformation[$transformationIndex];
+
+        $this->transformedAccount = $transformationPrefix . $this->account;
     }
     
     
@@ -60,12 +85,8 @@ class BAV_Validator_D1 extends BAV_Validator {
      * @return bool
      */
     protected function getResult() {
-        return ! in_array($this->account{0}, array(0, 3, 9))
-            && $this->validator->isValid($this->transformedAccount);
+        return $this->validator->isValid($this->transformedAccount);
     }
     
 
 }
-
-
-?>
