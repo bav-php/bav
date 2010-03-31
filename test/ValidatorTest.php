@@ -107,7 +107,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
         $providedAccountsAndBanks = array();
         foreach ($this->provideBanks() as $bank) {
             $bank = $bank[0];
-            for ($length = 1; $length <= 10; $length++) {
+            for ($length = 0; $length <= 10; $length++) {
                 $providedAccountsAndBanks[] = array($bank, str_repeat(1, $length));
                 
             }
@@ -145,7 +145,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
      * @dataProvider provideBanks
      */
     public function testNullIsInvalid(BAV_Bank $bank) {
-    	for ($length = 1; $length <= 10; $length++) {
+    	for ($length = 0; $length <= 10; $length++) {
     		$account = str_pad("0", $length, "0", STR_PAD_LEFT);
     		$this->assertFalse(
                 $bank->isValid($account),
@@ -220,16 +220,18 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
             } catch (BAV_DataBackendException_BankNotFound $e) {
                 switch ($e->getBankID()) {
                     
-                    case '80053762': case '80053772': case '80053782':
-                        $bank = new BAV_Bank(self::$dataBackend, $e->getBankID(), 'B6');
-                        break;
-                        
+                    case '13051052':
                     case '13051172':
                         $bank = new BAV_Bank(self::$dataBackend, $e->getBankID(), '52');
                         break;
                             
-                    case '16052072': case '85055142':
+                    case '16052072':
+                    case '85055142':
                         $bank = new BAV_Bank(self::$dataBackend, $e->getBankID(), '53');
+                        break;
+
+                    case '80053762': case '80053772': case '80053782':
+                        $bank = new BAV_Bank(self::$dataBackend, $e->getBankID(), 'B6');
                         break;
                     
                     default: throw $e;
@@ -246,6 +248,3 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
 
 
 }
-
-
-?>
