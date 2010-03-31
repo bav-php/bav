@@ -66,7 +66,7 @@ abstract class BAV {
      * @return BAV_Version version of BAV
      */
     static public function get_bav_version() {
-        return new BAV_Version('0.21');
+        return new BAV_Version('0.22');
     }
     /**
      * Returns the version of the API. Note that different BAV versions

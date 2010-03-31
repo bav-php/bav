@@ -38,6 +38,7 @@ class BAV_Validator_C6 extends BAV_Validator {
         0 => 4451970,
         1 => 4451981,
         2 => 4451992,
+        3 => 4451993,
         7 => 5499570,
         9 => 5499579
 	);
@@ -81,6 +82,3 @@ class BAV_Validator_C6 extends BAV_Validator {
     
 
 }
-
-
-?>
