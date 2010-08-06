@@ -241,7 +241,11 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
         }
         
         foreach ($accountIDs as $accountID) {
-        	$this->assertTrue($bank->isValid($accountID) === $expectedValidation);
+		$this->assertEquals(
+			$expectedValidation,
+			$bank->isValid($accountID),
+			"$accountID validates wrongly."
+		);
 
         }
     }

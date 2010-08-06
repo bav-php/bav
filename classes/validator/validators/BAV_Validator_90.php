@@ -51,8 +51,8 @@ class BAV_Validator_90 extends BAV_Validator_Chain {
         $this->defaultValidators[0]->setEnd(3);
         
         $this->defaultValidators[] = new BAV_Validator_06($bank);
-        $this->defaultValidators[0]->setWeights(array(2, 3, 4, 5, 6));
-        $this->defaultValidators[0]->setEnd(4);
+        $this->defaultValidators[1]->setWeights(array(2, 3, 4, 5, 6));
+        $this->defaultValidators[1]->setEnd(4);
         
         $this->defaultValidators[] = new BAV_Validator_90c($bank);
         $this->defaultValidators[] = new BAV_Validator_90d($bank);

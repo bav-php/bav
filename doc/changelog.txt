@@ -4,6 +4,8 @@ Version 0.22 - not yet released
 
     - New Validator D4
 
+    - Repaired Validators: 90
+
 
 Version 0.21 - March 27, 2010
 -----------------------------
