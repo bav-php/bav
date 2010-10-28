@@ -5,6 +5,10 @@ Version 0.22 - not yet released
     - New Validators: D4, D5
 
     - Repaired Validators: 90
+      https://sourceforge.net/projects/bav/forums/forum/405655/topic/3758753
+
+    - fixed shortTerm-Bug
+      https://sourceforge.net/projects/bav/forums/forum/405655/topic/3798274
 
 
 Version 0.21 - March 27, 2010

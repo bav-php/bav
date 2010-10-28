@@ -127,6 +127,15 @@ class BackendTest extends PHPUnit_Framework_TestCase {
     
     
     /**
+     * @dataProvider provideInstallationBackends
+     */
+    public function testInstallationIsComplete(BAV_DataBackend $backend) {
+        $this->markTestIncomplete();
+        //TODO test if the installation process fills all banks
+    }
+    
+    
+    /**
      * Testet, dass ein erneutes $backend->getBank($id) das selbe
      * Objekt zurückliefert. 
      * 
@@ -203,6 +212,3 @@ class BackendTest extends PHPUnit_Framework_TestCase {
 
 
 }
-
-
-?>

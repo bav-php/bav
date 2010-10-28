@@ -163,7 +163,8 @@ class BAV_DataBackend_PDO extends BAV_DataBackend {
         
         $this->selectBank = $this->pdo->prepare("SELECT id, validator FROM {$this->prefix}bank WHERE id = :bankID");
         
-        $agencyAttributes = "a.id, name, postcode, city, shortTerm, pan, bic";
+        $agencyAttributes
+            = "a.id, name, postcode, city, shortTerm AS 'shortTerm', pan, bic";
         $this->selectMainAgency = $this->pdo->prepare(
             "SELECT $agencyAttributes FROM {$this->prefix}bank b
                 INNER JOIN {$this->prefix}agency a ON b.mainAgency = a.id
