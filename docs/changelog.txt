@@ -1,4 +1,4 @@
-Version 0.22 - not yet released
+Version 0.22 - October 28, 2010
 -------------------------------
     - Changed Validators: C6, D1
 
