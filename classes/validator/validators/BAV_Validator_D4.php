@@ -5,6 +5,8 @@ BAV_Autoloader::add('../../bank/BAV_Bank.php');
 
 
 /**
+ * Implements D4
+ *
  * Copyright (C) 2010  Markus Malkusch <bav@malkusch.de>
  *
  * This program is free software; you can redistribute it and/or modify

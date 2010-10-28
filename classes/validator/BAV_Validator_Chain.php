@@ -4,7 +4,7 @@ BAV_Autoloader::add('../bank/BAV_Bank.php');
 
 
 /**
- * This abstract class offers support for algorithmns which uses more algorithmns
+ * This class offers support for algorithmns which uses more algorithmns
  *
  * You have to add the algorithms to the $this->validators array.
  *
@@ -30,7 +30,7 @@ BAV_Autoloader::add('../bank/BAV_Bank.php');
  * @author Markus Malkusch <bav@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-abstract class BAV_Validator_Chain extends BAV_Validator {
+class BAV_Validator_Chain extends BAV_Validator {
 
 
     protected
@@ -41,10 +41,20 @@ abstract class BAV_Validator_Chain extends BAV_Validator {
 
 
     /**
+     * Adds a validator to the chain
+     *
+     * @param BAV_Validator $validator Validator
+     *
+     * @return void
+     */
+    public function addValidator(BAV_Validator $validator) {
+        $this->validators[] = $validator;
+    }
+
+
+    /**
      * Iterates through the validators.
      *
-     * @access protected
-     * @param BAV_Account $account
      * @return bool
      */
     protected function getResult() {

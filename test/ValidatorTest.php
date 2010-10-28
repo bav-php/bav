@@ -222,6 +222,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
                     
                     case '13051052':
                     case '13051172':
+                    case '81053132':
                         $bank = new BAV_Bank(self::$dataBackend, $e->getBankID(), '52');
                         break;
                             
@@ -230,8 +231,15 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
                         $bank = new BAV_Bank(self::$dataBackend, $e->getBankID(), '53');
                         break;
 
-                    case '80053762': case '80053772': case '80053782':
+                    case '80053762': 
+                    case '80053772':
+                    case '80053782':
                         $bank = new BAV_Bank(self::$dataBackend, $e->getBankID(), 'B6');
+                        break;
+
+                    case '81053272':
+                    case '86055462':
+                        $bank = new BAV_Bank(self::$dataBackend, $e->getBankID(), 'C0');
                         break;
                     
                     default: throw $e;
@@ -241,11 +249,11 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
         }
         
         foreach ($accountIDs as $accountID) {
-		$this->assertEquals(
-			$expectedValidation,
-			$bank->isValid($accountID),
-			"$accountID validates wrongly."
-		);
+            $this->assertEquals(
+                $expectedValidation,
+                $bank->isValid($accountID),
+                "$accountID validates wrongly."
+            );
 
         }
     }

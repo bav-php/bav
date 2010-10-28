@@ -2,7 +2,7 @@ Version 0.22 - not yet released
 -------------------------------
     - Changed Validators: C6, D1
 
-    - New Validator D4
+    - New Validators: D4, D5
 
     - Repaired Validators: 90
 
