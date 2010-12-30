@@ -2,6 +2,8 @@ Version 0.23 - not yet released
 -------------------------------
     - Changed Validators: D1
 
+    - New Validators: D6
+
 
 Version 0.22 - October 28, 2010
 -------------------------------
