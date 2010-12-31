@@ -24,9 +24,12 @@ BAV_Autoloader::add('BAV_Validator_68.php');
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ * @package classes
+ * @subpackage validator
+ * @author Markus Malkusch <bav@malkusch.de>
+ * @copyright Copyright (C) 2010 Markus Malkusch
  */
-
-
 class BAV_Validator_D2 extends BAV_Validator_Chain {
 	
 	

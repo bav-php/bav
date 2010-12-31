@@ -1,12 +1,13 @@
 <?php
 BAV_Autoloader::add('../../bank/BAV_Bank.php');
 BAV_Autoloader::add('../BAV_Validator_Chain.php');
+BAV_Autoloader::add('BAV_Validator_07.php');
+BAV_Autoloader::add('BAV_Validator_03.php');
 BAV_Autoloader::add('BAV_Validator_00.php');
-BAV_Autoloader::add('BAV_Validator_27.php');
 
 
 /**
- * Implements D3
+ * Implements D6
  *
  * Copyright (C) 2008  Markus Malkusch <bav@malkusch.de>
  *
@@ -29,18 +30,16 @@ BAV_Autoloader::add('BAV_Validator_27.php');
  * @author Markus Malkusch <bav@malkusch.de>
  * @copyright Copyright (C) 2010 Markus Malkusch
  */
-class BAV_Validator_D3 extends BAV_Validator_Chain {
+class BAV_Validator_D6 extends BAV_Validator_Chain {
 
 
     public function __construct(BAV_Bank $bank) {
         parent::__construct($bank);
 
+        $this->validators[] = new BAV_Validator_07($bank);
+        $this->validators[] = new BAV_Validator_03($bank);
         $this->validators[] = new BAV_Validator_00($bank);
-        $this->validators[] = new BAV_Validator_27($bank);
     }
 
 
 }
-
-
-?>
