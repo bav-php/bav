@@ -1,3 +1,10 @@
+Version 0.24 - March 30, 2011
+-----------------------------
+    - Changed Validators: B8, C6, D4
+
+    - New Validators: D7, D8
+
+
 Version 0.23 - December 31, 2010
 --------------------------------
     - Changed Validators: D1

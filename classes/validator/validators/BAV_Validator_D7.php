@@ -1,13 +1,12 @@
 <?php
-BAV_Autoloader::add('BAV_Validator_00.php');
-BAV_Autoloader::add('../BAV_Validator.php');
 BAV_Autoloader::add('../../bank/BAV_Bank.php');
+BAV_Autoloader::add('../BAV_Validator_Iteration_Weighted.php');
 
 
 /**
- * Implements D4
+ * Implements D7
  *
- * Copyright (C) 2010  Markus Malkusch <bav@malkusch.de>
+ * Copyright (C) 2011  Markus Malkusch <bav@malkusch.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,44 +26,29 @@ BAV_Autoloader::add('../../bank/BAV_Bank.php');
  * @package classes
  * @subpackage validator
  * @author Markus Malkusch <bav@malkusch.de>
- * @copyright Copyright (C) 2010 Markus Malkusch
+ * @copyright Copyright (C) 2011 Markus Malkusch
  */
-class BAV_Validator_D4 extends BAV_Validator {
-
-
-    protected
-    /**
-     * @var String
-     */
-    $transformedAccount = '',
-    /**
-     * @var BAV_Validator_00
-     */
-    $validator;
-    
-    const TRANSFORMATION = 428259;
+class BAV_Validator_D7 extends BAV_Validator_Iteration_Weighted {
 
 
     public function __construct(BAV_Bank $bank) {
         parent::__construct($bank);
-        
-        $this->validator = new BAV_Validator_00($bank);
-        $this->validator->setNormalizedSize(10 + strlen(self::TRANSFORMATION));
+
+        $this->setWeights(array(2, 1));
+        $this->setDivisor(10);
     }
-    
-    
-    protected function validate() {
-        $this->transformedAccount = self::TRANSFORMATION.$this->account;
+
+
+    protected function iterationStep() {
+        $this->accumulator += $this->crossSum($this->number * $this->getWeight());
     }
-    
-    
-    /**
-     * @return bool
-     */
+
+
     protected function getResult() {
-        return $this->account{0} != 0
-            && $this->validator->isValid($this->transformedAccount);
+        $result = $this->accumulator % $this->divisor;
+        return (string)$result === $this->getCheckNumber();
     }
-    
 
 }
+
+?>
