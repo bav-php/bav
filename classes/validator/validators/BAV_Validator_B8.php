@@ -3,6 +3,7 @@ BAV_Autoloader::add('../../bank/BAV_Bank.php');
 BAV_Autoloader::add('../BAV_Validator_Chain.php');
 BAV_Autoloader::add('BAV_Validator_20.php');
 BAV_Autoloader::add('BAV_Validator_29.php');
+BAV_Autoloader::add('BAV_Validator_09.php');
 
 
 /**
@@ -27,6 +28,12 @@ BAV_Autoloader::add('BAV_Validator_29.php');
 
 
 class BAV_Validator_B8 extends BAV_Validator_Chain {
+
+    private
+    /**
+     * @param BAV_Validator_09 Validator
+     */
+    $_validator9;
   
   
     public function __construct(BAV_Bank $bank) {
@@ -36,6 +43,25 @@ class BAV_Validator_B8 extends BAV_Validator_Chain {
         $this->validators[0]->setWeights(array(2, 3, 4, 5, 6, 7, 8, 9, 3));
         
         $this->validators[] = new BAV_Validator_29($bank);
+        
+        $this->_validator9 = new BAV_Validator_09($bank);
+        $this->validators[] = $this->_validator9;
+    }
+
+    /**
+     * Limits Validator_09 to the accounts
+     *
+     * @return bool
+     */
+    protected function useValidator(BAV_Validator $validator) {
+        if ($validator !== $this->_validator9) {
+            return true;
+
+        }
+        $set1 = substr($this->account, 0, 2);
+        $set2 = substr($this->account, 0, 3);
+        return ($set1 >= 51  && $set1 <= 59)
+            || ($set2 >= 901 && $set2 <= 910);
     }
 
 

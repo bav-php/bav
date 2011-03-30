@@ -5,7 +5,9 @@ BAV_Autoloader::add('../../bank/BAV_Bank.php');
 
 
 /**
- * Copyright (C) 2007  Markus Malkusch <bav@malkusch.de>
+ * Implements D8
+ *
+ * Copyright (C) 2011  Markus Malkusch <bav@malkusch.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,51 +27,27 @@ BAV_Autoloader::add('../../bank/BAV_Bank.php');
  * @package classes
  * @subpackage validator
  * @author Markus Malkusch <bav@malkusch.de>
- * @copyright Copyright (C) 2007 Markus Malkusch
+ * @copyright Copyright (C) 2011 Markus Malkusch
  */
-class BAV_Validator_C6 extends BAV_Validator {
-	
-	
-	static private
-	/**
-	 * @var Array
-	 */
-	$transformation = array(
-        0 => 4451970,
-        1 => 4451981,
-        2 => 4451992,
-        3 => 4451993,
-        5 => 4344990,
-        6 => 4344991,
-        7 => 5499570,
-        9 => 5499579
-	);
+class BAV_Validator_D8 extends BAV_Validator {
 
 
-    protected
-    /**
-     * @var String
-     */
-    $transformedAccount = '',
+    private
     /**
      * @var BAV_Validator_00
      */
-    $validator;
-    
+    $_validator;
+
 
     public function __construct(BAV_Bank $bank) {
         parent::__construct($bank);
         
-        $this->validator = new BAV_Validator_00($bank);
+        $this->_validator = new BAV_Validator_00($bank);
     }
-    
-    
+
+
     protected function validate() {
-    	$transformation = array_key_exists($this->account{0}, self::$transformation)
-    	                ? self::$transformation[$this->account{0}]
-    	                : '';
-        $this->transformedAccount = $transformation . substr($this->account, 1);
-        $this->validator->setNormalizedSize(9 + strlen($transformation));
+
     }
     
     
@@ -77,9 +55,12 @@ class BAV_Validator_C6 extends BAV_Validator {
      * @return bool
      */
     protected function getResult() {
-        return in_array($this->account{0}, array_keys(self::$transformation))
-             ? $this->validator->isValid($this->transformedAccount)
-             : false;
+        if ($this->account{0} != 0) {
+            return $this->_validator->isValid($this->account);
+
+        }
+        $set = (int) substr($this->account, 0, 3);
+        return $set >= 1 && $set <= 9;
     }
     
 
