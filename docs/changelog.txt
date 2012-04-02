@@ -1,5 +1,7 @@
-Version 0.25 - not yet released
--------------------------------
+Version 0.25 - April 2, 2012
+-----------------------------
+    - New Validators: D9
+
     - Changed Validators: B6, D1
 
     - repaired Bundesbank download
