@@ -71,10 +71,9 @@ try {
     $databack->install();
 
 } catch (BAV_DataBackendException $error) {
-    die("Installation failed");
+    die("Installation failed: {$error->getMessage()}\n");
 
 }
-
 
 /**
  * If you want to update your installed data structure to a new Bundesbank file

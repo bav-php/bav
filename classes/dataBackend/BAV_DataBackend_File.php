@@ -149,10 +149,10 @@ class BAV_DataBackend_File extends BAV_DataBackend {
             );
         
         }
-        $isTXT = preg_match(':Aktuelle Version der Bankleitzahlendateien.+href *= *"([^"]+\.txt)":sU', $content, $txtMatches); 
+        $isTXT = preg_match(':Nachstehend finden Sie die aktuell.+href *= *"([^"]+\.txt)":sU', $content, $txtMatches);
         $isZIP = (exec('unzip -v') == '')
                ? false
-               : preg_match(':Aktuelle Version der Bankleitzahlendateien.+href *= *"([^"]+txt\.zip)":sU', $content, $zipMatches);
+               : preg_match(':Nachstehend finden Sie die aktuell.+href *= *"([^"]+txt\.zip)":sU', $content, $zipMatches);
                
         /**
          * There is an unresolved bug, that doesn't allow to uncompress
@@ -164,7 +164,7 @@ class BAV_DataBackend_File extends BAV_DataBackend {
         $isZIP = false;
                
         if (! ($isTXT || $isZIP)) {
-            throw new BAV_DataBackendException();
+            throw new BAV_DataBackendException("Could not find a file.");
         
         }
         
