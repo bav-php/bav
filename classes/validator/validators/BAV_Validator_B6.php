@@ -57,9 +57,12 @@ class BAV_Validator_B6 extends BAV_Validator implements BAV_Validator_BankDepend
         $this->mode2->setWeights(array(2, 4, 8, 5, 10, 9, 7, 3, 6, 1, 2, 4));
     }
     protected function validate() {
-        $this->validator = $this->account{0} === '0'
-                         ? $this->mode2
-                         : $this->mode1;
+        if ($this->account{0} !== '0' || preg_match("/^0269[1-9]/", $this->account)) {
+            $this->validator = $this->mode1;
+
+        } else {
+            $this->validator = $this->mode2;
+        }
     }
     /**
      * @return bool

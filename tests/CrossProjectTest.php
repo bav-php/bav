@@ -1,7 +1,6 @@
 <?php
 
 
-require_once 'PHPUnit/Framework.php';
 require_once dirname(__FILE__)."/../classes/autoloader/BAV_Autoloader.php";
 BAV_Autoloader::add('../classes/bank/BAV_Bank.php');
 BAV_Autoloader::add('../classes/validator/BAV_Validator_BankDependent.php');

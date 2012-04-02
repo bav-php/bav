@@ -22,7 +22,6 @@
  */
 
 
-require_once 'PHPUnit/Framework.php';
 require_once dirname(__FILE__) . '/AgencyQueryTest.php';
 require_once dirname(__FILE__) . '/BackendTest.php';
 require_once dirname(__FILE__) . '/DataConstraintTest.php';

@@ -3,7 +3,6 @@
  * This scripts checks if the banklist.txt fits into our model.
  */
  
-require_once 'PHPUnit/Framework.php';
 require_once dirname(__FILE__).'/../classes/autoloader/BAV_Autoloader.php';
 BAV_Autoloader::add('../classes/dataBackend/fileParser/BAV_FileParser.php');
 

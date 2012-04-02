@@ -38,6 +38,7 @@ class BAV_Validator_D1 extends BAV_Validator {
 	$_transformation = array(
         0 => 4363380,
         1 => 4363381,
+        2 => 4363382,
         3 => 4363383,
         4 => 4363384,
         5 => 4363385,
