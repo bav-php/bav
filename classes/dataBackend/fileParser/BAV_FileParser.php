@@ -96,7 +96,7 @@ class BAV_FileParser extends BAV {
             return;
         
         }
-        $this->fp = fopen($this->file, 'r');
+        $this->fp = @fopen($this->file, 'r');
         if (! is_resource($this->fp)) {
             if (! file_exists($this->file)) {
                 throw new BAV_FileParserException_FileNotExists($this->file);

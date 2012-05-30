@@ -39,7 +39,7 @@ BAV_Autoloader::add('exception/BAV_DataBackendException_NoMainAgency.php');
 class BAV_DataBackend_File extends BAV_DataBackend {
 
 
-    const DOWNLOAD_URI = "http://www.bundesbank.de/zahlungsverkehr/zahlungsverkehr_bankleitzahlen_download.php";
+    const DOWNLOAD_URI = "http://www.bundesbank.de/Redaktion/DE/Standardartikel/Kerngeschaeftsfelder/Unbarer_Zahlungsverkehr/bankleitzahlen_download.html";
 
 
     private
@@ -149,10 +149,10 @@ class BAV_DataBackend_File extends BAV_DataBackend {
             );
         
         }
-        $isTXT = preg_match(':Nachstehend finden Sie die aktuell.+href *= *"([^"]+\.txt)":sU', $content, $txtMatches);
+        $isTXT = preg_match('/Bankleitzahlendateien ungepackt.+href *= *"([^"]+\.txt[^"]*)"/sU', $content, $txtMatches);
         $isZIP = (exec('unzip -v') == '')
                ? false
-               : preg_match(':Nachstehend finden Sie die aktuell.+href *= *"([^"]+txt\.zip)":sU', $content, $zipMatches);
+               : preg_match('/Bankleitzahlendateien gepackt.+href *= *"([^"]+\.zip[^"]*)"/sU', $content, $zipMatches);
                
         /**
          * There is an unresolved bug, that doesn't allow to uncompress
@@ -174,7 +174,12 @@ class BAV_DataBackend_File extends BAV_DataBackend {
             throw new BAV_DataBackendException_IO();
         
         }
-        $pathParts = explode('/', dirname(self::DOWNLOAD_URI).'/'.($isZIP ? $zipMatches[1] : $txtMatches[1]));
+        $path = $isZIP ? $zipMatches[1] : $txtMatches[1];
+        if (strlen($path) > 0 && $path{0} != "/") {
+            $path = sprintf("/%s/%s", dirname(self::DOWNLOAD_URI), $path);
+            
+        }
+        $pathParts = explode('/', $path);
         foreach($pathParts as $i => $part) {
             switch ($part) {
                 case '..':
@@ -187,12 +192,17 @@ class BAV_DataBackend_File extends BAV_DataBackend {
 
         }
         $path = implode('/', $pathParts);
-        curl_setopt($ch, CURLOPT_URL, $path);
+        $urlParts = parse_url(self::DOWNLOAD_URI);
+        $url = sprintf("%s://%s%s", $urlParts["scheme"],  $urlParts["host"], $path);
+        
+        curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_FILE, $tempH);
         if (! curl_exec($ch)) {
             fclose($tempH);
             unlink($temp);
-            throw new BAV_DataBackendException_IO();
+            throw new BAV_DataBackendException_IO(
+                curl_error($ch), curl_errno($ch)
+            );
         
         }
         fclose($tempH);

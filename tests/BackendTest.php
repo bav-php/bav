@@ -30,7 +30,6 @@ BAV_Autoloader::add('../classes/dataBackend/BAV_DataBackend_File.php');
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
 
-BackendTest::__static();
 class BackendTest extends PHPUnit_Framework_TestCase {
 
 
@@ -211,3 +210,4 @@ class BackendTest extends PHPUnit_Framework_TestCase {
 
 
 }
+BackendTest::__static();
