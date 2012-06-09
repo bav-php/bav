@@ -2,6 +2,7 @@ Version 0.27 - not yet released
 -------------------------------
     - replaced the autoloader with http://php-autoloader.malkusch.de
 
+
 Version 0.26 - June 3, 2012
 ---------------------------
     - Repaired Bundesbank download
