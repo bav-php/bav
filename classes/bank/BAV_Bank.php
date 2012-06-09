@@ -1,7 +1,7 @@
 <?php
-BAV_Autoloader::add('../BAV.php');
-BAV_Autoloader::add('../validator/BAV_Validator.php');
-BAV_Autoloader::add('../dataBackend/BAV_DataBackend.php');
+
+
+
 
 
 /**
@@ -14,7 +14,7 @@ BAV_Autoloader::add('../dataBackend/BAV_DataBackend.php');
  * to get a BAV_Bank object.
  *
  *
- * Copyright (C) 2006  Markus Malkusch <bav@malkusch.de>
+ * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ BAV_Autoloader::add('../dataBackend/BAV_DataBackend.php');
  *
  * @package classes
  * @subpackage bank
- * @author Markus Malkusch <bav@malkusch.de>
+ * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
 class BAV_Bank extends BAV {

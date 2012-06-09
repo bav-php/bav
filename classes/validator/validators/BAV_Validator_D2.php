@@ -1,15 +1,15 @@
 <?php
-BAV_Autoloader::add('../../bank/BAV_Bank.php');
-BAV_Autoloader::add('../BAV_Validator_Chain.php');
-BAV_Autoloader::add('BAV_Validator_95.php');
-BAV_Autoloader::add('BAV_Validator_00.php');
-BAV_Autoloader::add('BAV_Validator_68.php');
+
+
+
+
+
 
 
 /**
  * Implements D2
  *
- * Copyright (C) 2008  Markus Malkusch <bav@malkusch.de>
+ * Copyright (C) 2008  Markus Malkusch <markus@malkusch.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ BAV_Autoloader::add('BAV_Validator_68.php');
  *
  * @package classes
  * @subpackage validator
- * @author Markus Malkusch <bav@malkusch.de>
+ * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2010 Markus Malkusch
  */
 class BAV_Validator_D2 extends BAV_Validator_Chain {

@@ -1,16 +1,16 @@
 <?php
-BAV_Autoloader::add('../bank/BAV_Bank.php');
-BAV_Autoloader::add('BAV_DataBackend.php');
-BAV_Autoloader::add('fileParser/BAV_FileParser.php');
-BAV_Autoloader::add('fileParser/BAV_FileParserContext.php');
-BAV_Autoloader::add('fileParser/exception/BAV_FileParserException.php');
-BAV_Autoloader::add('fileParser/exception/BAV_FileParserException_IO.php');
-BAV_Autoloader::add('fileParser/exception/BAV_FileParserException_ParseError.php');
-BAV_Autoloader::add('fileParser/exception/BAV_FileParserContextException_Undefined.php');
-BAV_Autoloader::add('exception/BAV_DataBackendException.php');
-BAV_Autoloader::add('exception/BAV_DataBackendException_IO.php');
-BAV_Autoloader::add('exception/BAV_DataBackendException_BankNotFound.php');
-BAV_Autoloader::add('exception/BAV_DataBackendException_NoMainAgency.php');
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /**
@@ -18,7 +18,7 @@ BAV_Autoloader::add('exception/BAV_DataBackendException_NoMainAgency.php');
  * This is the easiest way to use BAV. BAV can work as a standalone application without
  * any DBS.
  *
- * Copyright (C) 2006  Markus Malkusch <bav@malkusch.de>
+ * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

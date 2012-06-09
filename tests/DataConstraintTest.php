@@ -3,11 +3,11 @@
  * This scripts checks if the banklist.txt fits into our model.
  */
  
-require_once dirname(__FILE__).'/../classes/autoloader/BAV_Autoloader.php';
-BAV_Autoloader::add('../classes/dataBackend/fileParser/BAV_FileParser.php');
+require_once __DIR__ . "/../autoloader/autoloader.php";
 
 
-DataConstraintTest::__static();
+
+DataConstraintTest::classConstructor();
 class DataConstraintTest extends PHPUnit_Framework_TestCase {
 
 
@@ -18,7 +18,7 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase {
     $pdo;
     
     
-    static public function __static() {
+    static public function classConstructor() {
         self::$pdo = new PDO('mysql:host=localhost;dbname=test', 'test');
         self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         

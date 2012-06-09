@@ -1,20 +1,11 @@
 <?php
 
 
-require_once dirname(__FILE__)."/../classes/autoloader/BAV_Autoloader.php";
-BAV_Autoloader::add('../classes/bank/BAV_Bank.php');
-BAV_Autoloader::add('../classes/validator/BAV_Validator_BankDependent.php');
-BAV_Autoloader::add('../classes/verify/testAPI/BAV_TestAPIResult_Error.php');
-BAV_Autoloader::add('../classes/verify/testAPI/BAV_TestAPI_BAV.php');
-BAV_Autoloader::add('../classes/verify/testAPI/BAV_TestAPI_Kontocheck.php');
-BAV_Autoloader::add('../classes/verify/testAPI/BAV_TestAPI_Ktoblzcheck.php');
-BAV_Autoloader::add('../classes/verify/testAPI/exception/BAV_TestAPIException_Validation_BankNotFound.php');
-BAV_Autoloader::add('../classes/dataBackend/BAV_DataBackend_File.php');
-BAV_Autoloader::add('../classes/dataBackend/BAV_DataBackend_PDO.php');
+require_once __DIR__ . "/../autoloader/autoloader.php";
 
 
 /**
- * Copyright (C) 2009  Markus Malkusch <bav@malkusch.de>
+ * Copyright (C) 2009  Markus Malkusch <markus@malkusch.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,7 +22,7 @@ BAV_Autoloader::add('../classes/dataBackend/BAV_DataBackend_PDO.php');
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  * @package test
- * @author Markus Malkusch <bav@malkusch.de>
+ * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
 

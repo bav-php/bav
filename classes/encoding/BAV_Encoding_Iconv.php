@@ -1,6 +1,6 @@
 <?php
-BAV_Autoloader::add('BAV_Encoding.php');
-BAV_Autoloader::add('exception/BAV_EncodingException.php');
+
+
 
 
 /**
@@ -8,7 +8,7 @@ BAV_Autoloader::add('exception/BAV_EncodingException.php');
  * PHP must be compiled with these functions.
  *
  *
- * Copyright (C) 2006  Markus Malkusch <bav@malkusch.de>
+ * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ BAV_Autoloader::add('exception/BAV_EncodingException.php');
  *
  * @package classes
  * @subpackage dataBackend
- * @author Markus Malkusch <bav@malkusch.de>
+ * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
 class BAV_Encoding_Iconv extends BAV_Encoding {

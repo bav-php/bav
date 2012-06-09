@@ -1,7 +1,7 @@
 <?php 
-BAV_Autoloader::add('BAV_Version.php');
-BAV_Autoloader::add('encoding/BAV_Encoding.php');
-BAV_Autoloader::add('encoding/exception/BAV_EncodingException_Unsupported.php');
+
+
+
 
 
 /**
@@ -10,7 +10,7 @@ BAV_Autoloader::add('encoding/exception/BAV_EncodingException_Unsupported.php');
  * an implementation of a namespace and set some configuration like
  * the project's encoding.
  *
- * Copyright (C) 2006  Markus Malkusch <bav@malkusch.de>
+ * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ BAV_Autoloader::add('encoding/exception/BAV_EncodingException_Unsupported.php');
  *
  *
  * @package classes
- * @author Markus Malkusch <bav@malkusch.de>
+ * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
 abstract class BAV {
@@ -41,7 +41,7 @@ abstract class BAV {
     $encoding;
 
 
-    static public function __static() {
+    static public function classConstructor() {
         try {
             self::setEncoding('UTF-8');
             
@@ -66,7 +66,7 @@ abstract class BAV {
      * @return BAV_Version version of BAV
      */
     static public function get_bav_version() {
-        return new BAV_Version('0.26');
+        return new BAV_Version('0.27');
     }
     /**
      * Returns the version of the API. Note that different BAV versions
@@ -75,7 +75,7 @@ abstract class BAV {
      * @return BAV_Version version of BAV's API
      */
     static public function get_bav_api_version() {
-        return new BAV_Version('2.3');
+        return new BAV_Version('2.4');
     }
 
 

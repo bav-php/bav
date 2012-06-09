@@ -1,15 +1,15 @@
 <?php
-BAV_Autoloader::add('../../bank/BAV_Bank.php');
-BAV_Autoloader::add('BAV_Validator_06.php');
-BAV_Autoloader::add('BAV_Validator_33.php');
-BAV_Autoloader::add('BAV_Validator_02.php');
-BAV_Autoloader::add('../BAV_Validator_Chain.php');
+
+
+
+
+
 
 
 /**
  * Implements 85
  *
- * Copyright (C) 2006  Markus Malkusch <bav@malkusch.de>
+ * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

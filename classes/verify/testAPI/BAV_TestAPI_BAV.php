@@ -1,13 +1,13 @@
 <?php
-BAV_Autoloader::add('BAV_TestAPI.php');
-BAV_Autoloader::add('exception/BAV_TestAPIException_Validation_BankNotFound.php');
-BAV_Autoloader::add('../bank/BAV_Bank.php');
+
+
+
 
 
 /**
  * The API for BAV itself.
  *
- * Copyright (C) 2009  Markus Malkusch <bav@malkusch.de>
+ * Copyright (C) 2009  Markus Malkusch <markus@malkusch.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ BAV_Autoloader::add('../bank/BAV_Bank.php');
  * 
  * @package classes
  * @subpackage verify
- * @author Markus Malkusch <bav@malkusch.de>
+ * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
 class BAV_TestAPI_BAV extends BAV_TestAPI {

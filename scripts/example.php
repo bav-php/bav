@@ -1,9 +1,9 @@
-#!/usr/bin/php
+#!/bin/env php
 <?php
 /**
  * This script shows examples how to use BAV
  *
- * Copyright (C) 2006  Markus Malkusch <bav@malkusch.de>
+ * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
  *
  * @package example
  * @filesource
- * @author Markus Malkusch <bav@malkusch.de>
+ * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  * @see BAV_DataBackend
  * @see BAV_Bank
@@ -30,35 +30,22 @@
 
 
 /**
- * We need to require the BAV_Autoloader
+ * We need to require the autoloader
  */
-require_once dirname(__FILE__)."/../classes/autoloader/BAV_Autoloader.php";
-
-
-/**
- * Some class definitions are needed in this example
- */
-BAV_Autoloader::add('../classes/dataBackend/exception/BAV_DataBackendException.php');
-BAV_Autoloader::add('../classes/dataBackend/exception/BAV_DataBackendException_BankNotFound.php');
+require_once __DIR__ . "/../autoloader/autoloader.php";
 
 
 /**
  * Now we have to decide which data backend we'll use.
  *
  * BAV_DataBackend_File:
- *
- *  BAV_Autoloader::add('../classes/dataBackend/BAV_DataBackend_File.php');
  *  $databack = new BAV_DataBackend_File();
  *
  * or BAV_DataBackend_PDO:
- *
- *  BAV_Autoloader::add('../classes/dataBackend/BAV_DataBackend_PDO.php');
  *  $databack = new BAV_DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
- *
  *
  * In this example we take BAV_DataBackend_File:
  */
-BAV_Autoloader::add('../classes/dataBackend/BAV_DataBackend_File.php');
 $databack = new BAV_DataBackend_File();
 
 
@@ -139,7 +126,7 @@ try {
  * edit the PDO object to create a valid DBS connection.
  */
 try {
-    BAV_Autoloader::add('../classes/dataBackend/BAV_DataBackend_PDO.php');
+
     $databackPDO = new BAV_DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
     $databackPDO->install();
 
@@ -175,5 +162,3 @@ try {
     die($error->getTraceAsString());
 
 }
-
-?>

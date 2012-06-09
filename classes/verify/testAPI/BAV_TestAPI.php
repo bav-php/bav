@@ -1,16 +1,16 @@
 <?php
-BAV_Autoloader::add('BAV_TestAPIResult.php');
-BAV_Autoloader::add('BAV_TestAPIResult_Error.php');
-BAV_Autoloader::add('exception/BAV_TestAPIException_Validation.php');
-BAV_Autoloader::add('../BAV.php');
-BAV_Autoloader::add('../bank/BAV_Bank.php');
+
+
+
+
+
 
 
 /**
  * This abstract class defines the API for using other validation
  * projects. It's useful to test other projects agains each other.
  *
- * Copyright (C) 2009  Markus Malkusch <bav@malkusch.de>
+ * Copyright (C) 2009  Markus Malkusch <markus@malkusch.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ BAV_Autoloader::add('../bank/BAV_Bank.php');
  * 
  * @package classes
  * @subpackage verify
- * @author Markus Malkusch <bav@malkusch.de>
+ * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
 abstract class BAV_TestAPI extends BAV {

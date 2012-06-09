@@ -1,15 +1,12 @@
 <?php
 
-require_once dirname(__FILE__)."/../classes/autoloader/BAV_Autoloader.php";
-BAV_Autoloader::add('../classes/dataBackend/BAV_DataBackend_PDO.php');
-BAV_Autoloader::add('../classes/dataBackend/BAV_DataBackend_File.php');
-
+require_once __DIR__ . "/../autoloader/autoloader.php";
 
 /**
  * Tests the Backends.
  * This test needs some memory (about 400M)!
  *
- * Copyright (C) 2009  Markus Malkusch <bav@malkusch.de>
+ * Copyright (C) 2009  Markus Malkusch <markus@malkusch.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +23,7 @@ BAV_Autoloader::add('../classes/dataBackend/BAV_DataBackend_File.php');
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  * @package test
- * @author Markus Malkusch <bav@malkusch.de>
+ * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
 
@@ -43,7 +40,7 @@ class BackendTest extends PHPUnit_Framework_TestCase {
     /**
      * Defines the reference backend
      */
-    static public function __static() {
+    static public function classConstructor() {
         self::$referenceBackend = new BAV_DataBackend_File();
     }
     
@@ -210,4 +207,4 @@ class BackendTest extends PHPUnit_Framework_TestCase {
 
 
 }
-BackendTest::__static();
+BackendTest::classConstructor();

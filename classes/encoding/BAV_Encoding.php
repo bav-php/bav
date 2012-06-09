@@ -1,17 +1,17 @@
 <?php
-BAV_Autoloader::add('../BAV.php');
-BAV_Autoloader::add('BAV_Encoding_MB.php');
-BAV_Autoloader::add('BAV_Encoding_Iconv.php');
-BAV_Autoloader::add('BAV_Encoding_ISO8859.php');
-BAV_Autoloader::add('exception/BAV_EncodingException.php');
-BAV_Autoloader::add('exception/BAV_EncodingException_Unsupported.php');
+
+
+
+
+
+
 
 
 /**
  * This class provides methods for any encoded strings
  *
  *
- * Copyright (C) 2006  Markus Malkusch <bav@malkusch.de>
+ * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ BAV_Autoloader::add('exception/BAV_EncodingException_Unsupported.php');
  *
  * @package classes
  * @subpackage dataBackend
- * @author Markus Malkusch <bav@malkusch.de>
+ * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
 abstract class BAV_Encoding extends BAV {

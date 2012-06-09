@@ -1,14 +1,14 @@
 <?php
-BAV_Autoloader::add('../BAV.php');
-BAV_Autoloader::add('exception/BAV_ClassFileException_IO.php');
-BAV_Autoloader::add('exception/BAV_ClassFileException_MissingClass.php');
+
+
+
 
 
 /**
  * This class is used for debugging purposes. An Object contains the path to the class
  * and can create instances.
  *
- * Copyright (C) 2006  Markus Malkusch <bav@malkusch.de>
+ * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -82,7 +82,7 @@ class BAV_ClassFile extends BAV {
          * Find other class definitions
          */
         preg_match_all(':require_once +([^;]+);:i', $this->getClassDefinition(), $matchesRequire);
-        preg_match_all('~BAV_Autoloader::add *\( *(.+) *\) *;~i', $this->getClassDefinition(), $matchesAuto);
+
         foreach (array_merge($matchesRequire[1], $matchesAuto[1]) as $match) {
             eval('$path = '.$match.';');
             $classFile = self::getClassFile($path);

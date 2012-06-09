@@ -1,11 +1,11 @@
-#!/usr/bin/php
+#!/bin/env php
 <?php
 /**
  * A sample script for importing many test accounts to a verify.ini
  * you need to modify this script. It won't work unmodified.
  *
  *
- * Copyright (C) 2006  Markus Malkusch <bav@malkusch.de>
+ * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,14 +22,16 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  * @package scripts
- * @author Markus Malkusch <bav@malkusch.de>
+ * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  * @see BAV_VerifyImport
  */
 
 
-require_once dirname(__FILE__)."/../classes/autoloader/BAV_Autoloader.php";
-BAV_Autoloader::add('../classes/verify/BAV_VerifyImport.php');
+/**
+ * We need to require the autoloader
+ */
+require_once __DIR__ . "/../autoloader/autoloader.php";
 
 
 /**
@@ -37,7 +39,6 @@ BAV_Autoloader::add('../classes/verify/BAV_VerifyImport.php');
  * means there must exist a ../data/banklist.txt. If this does not apply to
  * you, you have to change these lines.
  */
-BAV_Autoloader::add('../classes/dataBackend/BAV_DataBackend_File.php');
 $databack = new BAV_DataBackend_File();
 
 
@@ -70,6 +71,3 @@ while ($youHaveMoreAccounts) {                // <- Please change
  * Default's to ../data/verify.ini
  */
 $importer->save();
-
-
-?>
