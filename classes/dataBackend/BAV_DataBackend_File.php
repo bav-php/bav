@@ -143,6 +143,12 @@ class BAV_DataBackend_File extends BAV_DataBackend {
         }
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $content = curl_exec($ch);
+        $curl_info = curl_getinfo($ch);
+	    if ($curl_info['http_code'] >= 400) {
+			throw new BAV_DataBackendException_IO(
+				"Failed to download '" . self::DOWNLOAD_URI . "'. HTTP Code: " . $curl_info['http_code'] . ". Content: " . $content
+			);
+		}
         if (! $content) {
             throw new BAV_DataBackendException_IO(
                 "Failed to download '" . self::DOWNLOAD_URI . "'."
