@@ -13,8 +13,6 @@ require_once __DIR__ . "/../../autoloader/autoloader.php";
  * This autoloader was removed.
  *
  * @deprecated
- * @see  AutoloaderBuilder::build()
- * @link http://php-autoloader.malkusch.de/en/
  */
 class BAV_Autoloader
 {
