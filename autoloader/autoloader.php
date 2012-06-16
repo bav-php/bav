@@ -13,13 +13,13 @@
  * @link http://php-autoloader.malkusch.de/en/
  */
 
-require_once dirname(__FILE__) . '/InstantAutoloader.php';
+require_once __DIR__ . '/InstantAutoloader.php';
 
-$_autoloader = new InstantAutoloader(dirname(__FILE__) . '/index/0.php');
-$_autoloader->setBasePath(dirname(__FILE__));
+$_autoloader = new InstantAutoloader(__DIR__ . '/index/0.php');
+$_autoloader->setBasePath(__DIR__);
 $_autoloader->register();
 
-$_autoloader = new InstantAutoloader(dirname(__FILE__) . '/index/1.php');
-$_autoloader->setBasePath(dirname(__FILE__));
+$_autoloader = new InstantAutoloader(__DIR__ . '/index/1.php');
+$_autoloader->setBasePath(__DIR__);
 $_autoloader->register();
 unset($_autoloader);

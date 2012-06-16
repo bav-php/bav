@@ -23,6 +23,7 @@ return array(
     'bav_encoding' => '../classes/encoding/BAV_Encoding.php',
     'bav_classfile' => '../classes/class/BAV_ClassFile.php',
     'bav_validator' => '../classes/validator/BAV_Validator.php',
+    'bav_autoloader' => '../classes/autoloader/BAV_Autoloader.php',
     'bav_fileparser' => '../classes/dataBackend/fileParser/BAV_FileParser.php',
     'bav_databackend' => '../classes/dataBackend/BAV_DataBackend.php',
     'bav_encoding_mb' => '../classes/encoding/BAV_Encoding_MB.php',
