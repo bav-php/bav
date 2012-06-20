@@ -50,7 +50,7 @@ class VerifyImportTest extends PHPUnit_Framework_TestCase {
     
     protected function setUp() {
         $this->databack    = new BAV_DataBackend_File();
-        $this->verifyArray = parse_ini_file(dirname(__FILE__).'/../data/verify.ini', true);
+        $this->verifyArray = parse_ini_file(__DIR__.'/../data/verify.ini', true);
         
         $this->assertType(
             PHPUnit_Framework_Constraint_IsType::TYPE_ARRAY,

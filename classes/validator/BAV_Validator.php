@@ -70,7 +70,7 @@ abstract class BAV_Validator extends BAV {
     static public function getInstance(BAV_Bank $bank) {
         $type  = trim(strtoupper($bank->getValidationType()));
         $class = "BAV_Validator_$type";
-        $file  = dirname(__FILE__)."/validators/$class.php";
+        $file  = __DIR__."/validators/$class.php";
         if (! file_exists($file)) {
             throw new BAV_ValidatorException_NotExists($bank);
 

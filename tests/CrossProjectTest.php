@@ -54,7 +54,7 @@ class CrossProjectTest extends PHPUnit_Framework_TestCase {
 	 * @return Array
 	 */
 	protected function setUp() {
-        $ktoblzcheckPath = dirname(__FILE__) . "/../tmp/ktoblzcheck/ktoblzcheck-1.21/src";
+        $ktoblzcheckPath = __DIR__ . "/../tmp/ktoblzcheck/ktoblzcheck-1.21/src";
 	   
 		$this->testAPIs = array(
             new BAV_TestAPI_BAV(),

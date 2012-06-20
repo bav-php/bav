@@ -79,19 +79,6 @@ class BAV_ClassFile extends BAV {
         
         
         /**
-         * Find other class definitions
-         */
-        preg_match_all(':require_once +([^;]+);:i', $this->getClassDefinition(), $matchesRequire);
-
-        foreach (array_merge($matchesRequire[1], $matchesAuto[1]) as $match) {
-            eval('$path = '.$match.';');
-            $classFile = self::getClassFile($path);
-            $this->neededClasses[$classFile->getName()] = $classFile;
-        
-        }
-        
-        
-        /**
          * check parent class
          */
         preg_match_all(':extends +([a-zA-Z0-9_]+):', $this->getClassDefinition(), $matches);

@@ -22,11 +22,11 @@
  */
 
 
-require_once dirname(__FILE__) . '/AgencyQueryTest.php';
-require_once dirname(__FILE__) . '/BackendTest.php';
-require_once dirname(__FILE__) . '/DataConstraintTest.php';
-require_once dirname(__FILE__) . '/ValidatorTest.php';
-require_once dirname(__FILE__) . '/VerifyImportTest.php';
+require_once __DIR__ . '/AgencyQueryTest.php';
+require_once __DIR__ . '/BackendTest.php';
+require_once __DIR__ . '/DataConstraintTest.php';
+require_once __DIR__ . '/ValidatorTest.php';
+require_once __DIR__ . '/VerifyImportTest.php';
 
 
 class TestSuite extends PHPUnit_Framework_TestSuite {

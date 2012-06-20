@@ -63,7 +63,7 @@ class BAV_CheckAgainstTestAPIs extends BAV {
 	
 	
 	public function __construct() {
-        $ktoblzcheckPath = dirname(__FILE__) . "/../tmp/ktoblzcheck/ktoblzcheck-1.21/src";
+        $ktoblzcheckPath = __DIR__ . "/../tmp/ktoblzcheck/ktoblzcheck-1.21/src";
 	
 		$this->testAPIs[] = new BAV_TestAPI_BAV();
 		$this->testAPIs[] = new BAV_TestAPI_Kontocheck('/etc/blz.lut', 2);

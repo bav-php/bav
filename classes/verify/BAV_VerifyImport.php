@@ -73,7 +73,7 @@ class BAV_VerifyImport extends BAV {
      */
     private function getFile($file) {
         return is_null($file)
-             ? dirname(__FILE__).'/../../data/verify.ini'
+             ? __DIR__.'/../../data/verify.ini'
              : $file;
     }
     /**

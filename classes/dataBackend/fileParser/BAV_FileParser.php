@@ -84,7 +84,7 @@ class BAV_FileParser extends BAV {
      */
     public function __construct($file = null) {
         $this->file = is_null($file)
-                    ? dirname(__FILE__) . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "data" . DIRECTORY_SEPARATOR . "banklist.txt"
+                    ? __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "data" . DIRECTORY_SEPARATOR . "banklist.txt"
                     : $file;
     }
     /**

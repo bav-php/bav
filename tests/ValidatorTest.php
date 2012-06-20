@@ -73,7 +73,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
     	$this->setUp();
     	
     	$banks = array();
-        $files = BAV_ClassFile::getClassFiles(dirname(__FILE__).'/../classes/validator/validators/');
+        $files = BAV_ClassFile::getClassFiles(__DIR__.'/../classes/validator/validators/');
         foreach ($files as $class) {
            if (! preg_match('~^BAV_Validator_([A-Z0-9]{2})$~', $class->getName(), $matchType)) {
                 continue;
@@ -165,7 +165,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
      * @return Array
      */
     public function provideTestAccounts() {
-        $verifyArray = parse_ini_file(dirname(__FILE__).'/../data/verify.ini', true);
+        $verifyArray = parse_ini_file(__DIR__.'/../data/verify.ini', true);
         if (! $verifyArray) {
             throw new RuntimeException("couldn't parse verify.ini.");
             
