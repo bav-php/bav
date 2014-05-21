@@ -5,6 +5,8 @@ Version 0.27 - not yet released
     - fixed validator C5
       see https://github.com/malkusch/bav/issues/12
 
+    - changed download URI
+      see https://github.com/malkusch/bav/issues/10
 
 Version 0.26 - June 3, 2012
 ---------------------------
