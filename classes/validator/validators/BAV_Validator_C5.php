@@ -93,7 +93,7 @@ class BAV_Validator_C5 extends BAV_Validator {
 
                 } else {
                     $circle = substr($account, 0, 2);
-                    if ($circle == 70 || $circle = 85) {
+                    if ($circle == 70 || $circle == 85) {
                         $this->validator = $this->mode4;
                         
                     }

@@ -2,6 +2,9 @@ Version 0.27 - not yet released
 -------------------------------
     - replaced the autoloader with http://php-autoloader.malkusch.de
 
+    - fixed validator C5
+      see https://github.com/malkusch/bav/issues/12
+
 
 Version 0.26 - June 3, 2012
 ---------------------------
