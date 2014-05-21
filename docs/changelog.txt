@@ -10,7 +10,7 @@ Version 0.27 - not yet released
 
     - changed Validators: C6, D1
 
-    - added validator E0
+    - added validators E0, E1
 
 Version 0.26 - June 3, 2012
 ---------------------------
