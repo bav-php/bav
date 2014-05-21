@@ -39,7 +39,7 @@
 class BAV_DataBackend_File extends BAV_DataBackend {
 
 
-    const DOWNLOAD_URI = "http://www.bundesbank.de/Redaktion/DE/Standardartikel/Kerngeschaeftsfelder/Unbarer_Zahlungsverkehr/bankleitzahlen_download.html";
+    const DOWNLOAD_URI = "http://www.bundesbank.de/Redaktion/DE/Standardartikel/Aufgaben/Unbarer_Zahlungsverkehr/bankleitzahlen_download.html";
 
 
     private
