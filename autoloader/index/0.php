@@ -167,6 +167,7 @@ return array(
     'bav_validator_d7' => '../classes/validator/validators/BAV_Validator_D7.php',
     'bav_validator_d8' => '../classes/validator/validators/BAV_Validator_D8.php',
     'bav_validator_d9' => '../classes/validator/validators/BAV_Validator_D9.php',
+    'bav_validator_e0' => '../classes/validator/validators/BAV_Validator_E0.php',
     'bav_verifyimport' => '../classes/verify/BAV_VerifyImport.php',
     'bav_validator_51x' => '../classes/validator/validators/BAV_Validator_51x.php',
     'bav_validator_69b' => '../classes/validator/validators/BAV_Validator_69b.php',
