@@ -43,6 +43,7 @@ class BAV_Validator_D1 extends BAV_Validator {
         4 => 4363384,
         5 => 4363385,
         6 => 4363386,
+        7 => 4363387,
         9 => 4363389
 	);
 
