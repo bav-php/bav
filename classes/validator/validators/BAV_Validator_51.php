@@ -46,28 +46,31 @@ class BAV_Validator_51 extends BAV_Validator_Chain {
     /**
      * @var BAV_Validator_33
      */
-    $validatorC;
+    $validatorD;
     
     
     public function __construct(BAV_Bank $bank) {
         parent::__construct($bank);
         
-        $this->validatorC = new BAV_Validator_33($this->bank);
-        
-        $this->defaultValidators[] = new BAV_Validator_06($this->bank);
-        $this->defaultValidators[] = new BAV_Validator_33($this->bank);
-        $this->defaultValidators[] = $this->validatorC;
-        
+        $this->defaultValidators[0] = new BAV_Validator_06($this->bank);
         $this->defaultValidators[0]->setWeights(array(2, 3, 4, 5, 6, 7));
         $this->defaultValidators[0]->setEnd(3);
         
+        $this->defaultValidators[1] = new BAV_Validator_33($this->bank);
         $this->defaultValidators[1]->setWeights(array(2, 3, 4, 5, 6));
         $this->defaultValidators[1]->setEnd(4);
         
-        $this->defaultValidators[2]->setWeights(array(2, 3, 4, 5, 6));
-        $this->defaultValidators[2]->setEnd(4);
-        $this->defaultValidators[2]->setDivisor(7);
+        $this->defaultValidators[2] = new BAV_Validator_00($this->bank);
+        $this->defaultValidators[2]->setWeights(array(2, 1));
+        $this->defaultValidators[2]->setEnd(3);
+        $this->defaultValidators[2]->setDivisor(10);
         
+        $this->validatorD = new BAV_Validator_33($this->bank);
+        $this->defaultValidators[3] = $this->validatorD;
+        $this->defaultValidators[3]->setWeights(array(2, 3, 4, 5, 6));
+        $this->defaultValidators[3]->setEnd(4);
+        $this->defaultValidators[3]->setDivisor(7);
+
         $this->exceptionValidators = self::getExceptionValidators($bank);
     }
     
@@ -99,7 +102,7 @@ class BAV_Validator_51 extends BAV_Validator_Chain {
     
     
     protected function continueValidation(BAV_Validator $validator) {
-        if ($validator !== $this->validatorC) {
+        if ($validator !== $this->validatorD) {
             return true;
         
         }
