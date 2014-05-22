@@ -39,7 +39,8 @@ class BAV_Validator_95 extends BAV_Validator_06 {
             || $this->isBetween(1, 1999999)
             || $this->isBetween(9000000, 25999999)
             || $this->isBetween(396000000, 499999999)
-            || $this->isBetween(700000000, 799999999);
+            || $this->isBetween(700000000, 799999999)
+            || $this->isBetween(910000000, 989999999);
     }
 
 
