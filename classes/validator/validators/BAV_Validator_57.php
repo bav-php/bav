@@ -1,10 +1,5 @@
 <?php
 
-
-
-
-
-
 /**
  * Implements 57
  *
@@ -80,7 +75,6 @@ class BAV_Validator_57 extends BAV_Validator {
             65 => 1,
             66 => 1,
             70 => 1,
-            73 => 1,
             88 => 1,
             94 => 1,
             95 => 1,
@@ -95,7 +89,6 @@ class BAV_Validator_57 extends BAV_Validator {
             69 => 2,
             71 => 2,
             72 => 2,
-            74 => 2,
             89 => 2,
             90 => 2,
             92 => 2,
@@ -169,7 +162,7 @@ class BAV_Validator_57 extends BAV_Validator {
         
         }
 
-        if ($firstTwo >= 75 && $firstTwo <= 82) {
+        if ($firstTwo >= 73 && $firstTwo <= 82) {
             return 1;
         
         } elseif (($firstTwo >= 32 && $firstTwo <= 39)

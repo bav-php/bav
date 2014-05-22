@@ -8,7 +8,7 @@ Version 0.27 - not yet released
     - changed download URI
       see https://github.com/malkusch/bav/issues/10
 
-    - changed Validators: C6, D1, 51
+    - changed Validators: C6, D1, 51, 57
 
     - added validators E0, E1
 
