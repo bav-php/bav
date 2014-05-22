@@ -42,6 +42,11 @@ class BAV_Validator_66 extends BAV_Validator_Iteration_Weighted {
 
 
     protected function getResult() {
+        // update 2014-03-03
+        if ($this->account{1} == '9') {
+            return true;
+
+        }
         $result = (11 - $this->accumulator % 11) % 10;
         return $this->account{0} == '0' && (string)$result === $this->getCheckNumber();
     }
