@@ -44,11 +44,17 @@ class BAV_Validator_84 extends BAV_Validator_Chain {
     public function __construct(BAV_Bank $bank) {
         parent::__construct($bank);
 
-        $this->defaultValidators[] = new BAV_Validator_33($bank);
+        $this->defaultValidators[0] = new BAV_Validator_33($bank);
         $this->defaultValidators[0]->setWeights(array(2, 3, 4, 5, 6));
         $this->defaultValidators[0]->setEnd(4);
         
-        $this->defaultValidators[] = new BAV_Validator_84b($bank);
+        $this->defaultValidators[1] = new BAV_Validator_84b($bank);
+        
+        // Bundesbank update 2013-06-03
+        $this->defaultValidators[2] = new BAV_Validator_06($bank);
+        $this->defaultValidators[2]->setWeights(array(2, 1));
+        $this->defaultValidators[2]->setEnd(4);
+        $this->defaultValidators[2]->setDivisor(10);
         
         $this->exceptionValidators = BAV_Validator_51::getExceptionValidators($bank);
     }
