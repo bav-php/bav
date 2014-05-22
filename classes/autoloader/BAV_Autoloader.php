@@ -7,6 +7,8 @@
  */
 require_once __DIR__ . "/../../autoloader/autoloader.php";
 
+BAV_Autoloader::_triggerDeprecationWarning();
+
 /**
  * Deprecated Autoloader
  * 
@@ -17,7 +19,7 @@ require_once __DIR__ . "/../../autoloader/autoloader.php";
 class BAV_Autoloader
 {
     
-    private static function _triggerDeprecationWarning()
+    public static function _triggerDeprecationWarning()
     {
         trigger_error(
             "BAV_Autoloader is deprecated. Include bav/autoloader/autoloader.php instead.",
