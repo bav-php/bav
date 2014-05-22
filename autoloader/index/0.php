@@ -180,6 +180,7 @@ return array(
     'bav_validator_90c' => '../classes/validator/validators/BAV_Validator_90c.php',
     'bav_validator_90d' => '../classes/validator/validators/BAV_Validator_90d.php',
     'bav_validator_90e' => '../classes/validator/validators/BAV_Validator_90e.php',
+    'bav_validator_90g' => '../classes/validator/validators/BAV_Validator_90g.php',
     'bav_validator_a4b' => '../classes/validator/validators/BAV_Validator_A4b.php',
     'bav_validator_b9a' => '../classes/validator/validators/BAV_Validator_B9a.php',
     'bav_validator_b9b' => '../classes/validator/validators/BAV_Validator_B9b.php',

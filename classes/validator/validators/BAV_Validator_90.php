@@ -46,17 +46,18 @@ class BAV_Validator_90 extends BAV_Validator_Chain {
         parent::__construct($bank);
 
         
-        $this->defaultValidators[] = new BAV_Validator_06($bank);
-        $this->defaultValidators[0]->setWeights(array(2, 3, 4, 5, 6, 7));
-        $this->defaultValidators[0]->setEnd(3);
+        $this->defaultValidators["a"] = new BAV_Validator_06($bank);
+        $this->defaultValidators["a"]->setWeights(array(2, 3, 4, 5, 6, 7));
+        $this->defaultValidators["a"]->setEnd(3);
         
-        $this->defaultValidators[] = new BAV_Validator_06($bank);
-        $this->defaultValidators[1]->setWeights(array(2, 3, 4, 5, 6));
-        $this->defaultValidators[1]->setEnd(4);
+        $this->defaultValidators["b"] = new BAV_Validator_06($bank);
+        $this->defaultValidators["b"]->setWeights(array(2, 3, 4, 5, 6));
+        $this->defaultValidators["b"]->setEnd(4);
         
-        $this->defaultValidators[] = new BAV_Validator_90c($bank);
-        $this->defaultValidators[] = new BAV_Validator_90d($bank);
-        $this->defaultValidators[] = new BAV_Validator_90e($bank);
+        $this->defaultValidators["c"] = new BAV_Validator_90c($bank);
+        $this->defaultValidators["d"] = new BAV_Validator_90d($bank);
+        $this->defaultValidators["e"] = new BAV_Validator_90e($bank);
+        $this->defaultValidators["g"] = new BAV_Validator_90g($bank);
         
         $this->modeF = new BAV_Validator_06($bank);
         $this->modeF->setWeights(array(2, 3, 4, 5, 6, 7, 8));
