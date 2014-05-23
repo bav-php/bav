@@ -54,7 +54,7 @@ class BAV_ClassFile extends BAV
     $classDefinition = '';
     
     
-    static private
+    private static
     /**
      * @var array
      */
@@ -111,7 +111,7 @@ class BAV_ClassFile extends BAV
      * @param string $path
      * @return BAV_ClassFile
      */
-    static public function getClassFile($path) {
+    public static function getClassFile($path) {
         if (! isset(self::$instances[$path])) {
             self::$instances[$path] = new self($path);
         
@@ -124,7 +124,7 @@ class BAV_ClassFile extends BAV
      * @param string $dir
      * @return array BAV_ClassFile objects
      */
-    static public function getClassFiles($dir) {
+    public static function getClassFiles($dir) {
         $classFiles = array();
         $dh         = opendir($dir);
         if (! $dh) {

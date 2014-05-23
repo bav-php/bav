@@ -41,7 +41,7 @@ class BackendTest extends PHPUnit_Framework_TestCase
     /**
      * Defines the reference backend
      */
-    static public function classConstructor() {
+    public static function classConstructor() {
         self::$referenceBackend = new BAV_DataBackend_File();
     }
     

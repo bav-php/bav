@@ -26,7 +26,7 @@
 class BAV_Validator_E1 extends BAV_Validator_Iteration_Weighted
 {
 
-    static private $subsitutions = array(48, 49, 50, 51, 52, 53, 54, 55, 56, 57);
+    private static $subsitutions = array(48, 49, 50, 51, 52, 53, 54, 55, 56, 57);
 
     public function __construct(BAV_Bank $bank) {
         parent::__construct($bank);

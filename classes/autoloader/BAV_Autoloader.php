@@ -62,13 +62,13 @@ class BAV_Autoloader
         self::_triggerDeprecationWarning();
     }
 
-    static public function getInstance()
+    public static function getInstance()
     {
         self::_triggerDeprecationWarning();
         return new self();
     }
 
-    static public function add($classPath)
+    public static function add($classPath)
     {
         self::_triggerDeprecationWarning();
     }

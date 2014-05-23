@@ -35,14 +35,14 @@ abstract class BAV
 {
 
 
-    static protected
+    protected static
     /**
      * @var BAV_Encoding
      */
     $encoding;
 
 
-    static public function classConstructor() {
+    public static function classConstructor() {
         try {
             self::setEncoding('UTF-8');
             
@@ -58,7 +58,7 @@ abstract class BAV
      * @param mixed $encoding
      * @see BAV_Encoding
      */
-    static public function setEncoding($encoding) {
+    public static function setEncoding($encoding) {
         self::$encoding = ($encoding instanceof BAV_Encoding)
                         ? $encoding
                         : BAV_Encoding::getInstance($encoding);
@@ -66,7 +66,7 @@ abstract class BAV
     /**
      * @return BAV_Version version of BAV
      */
-    static public function get_bav_version() {
+    public static function get_bav_version() {
         return new BAV_Version('0.28');
     }
     /**
@@ -75,7 +75,7 @@ abstract class BAV
      *
      * @return BAV_Version version of BAV's API
      */
-    static public function get_bav_api_version() {
+    public static function get_bav_api_version() {
         return new BAV_Version('2.4');
     }
 

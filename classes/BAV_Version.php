@@ -30,7 +30,7 @@ class BAV_Version extends BAV
 {
 
     
-    static private
+    private static
     /**
      * @var BAV_Version
      */
@@ -147,7 +147,7 @@ class BAV_Version extends BAV
     /**
      * @return BAV_Version
      */
-    static public function getPHPVersion() {
+    public static function getPHPVersion() {
         if (empty(self::$phpVersion)) {
             self::$phpVersion = new BAV_Version(phpversion());
             

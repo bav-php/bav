@@ -76,7 +76,7 @@ abstract class BAV_Encoding extends BAV
      * @param String
      * @return bool
      */
-    static public function isSupported($encoding) {
+    public static function isSupported($encoding) {
         return false;
     }
     /**
@@ -84,7 +84,7 @@ abstract class BAV_Encoding extends BAV
      * @param String $encoding
      * @return BAV_Encoding
      */
-    static public function getInstance($encoding) {
+    public static function getInstance($encoding) {
         if (BAV_Encoding_Iconv::isSupported($encoding)) {
             return new BAV_Encoding_Iconv($encoding);
         

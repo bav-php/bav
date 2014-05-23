@@ -19,7 +19,7 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase
     $pdo;
     
     
-    static public function classConstructor() {
+    public static function classConstructor() {
         self::$pdo = new PDO('mysql:host=localhost;dbname=test', 'test');
         self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         

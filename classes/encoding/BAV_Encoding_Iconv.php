@@ -37,7 +37,7 @@ class BAV_Encoding_Iconv extends BAV_Encoding
     /**
      * @return bool
      */
-    static public function isSupported($encoding) {
+    public static function isSupported($encoding) {
         return function_exists("iconv_set_encoding");
     }
     /**

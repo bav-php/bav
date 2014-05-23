@@ -31,7 +31,7 @@ class BAV_Validator_C6 extends BAV_Validator
 {
 	
 	
-	static private
+	private static
 	/**
 	 * @var Array
 	 */

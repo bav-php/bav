@@ -35,7 +35,7 @@ class BAV_Encoding_MB extends BAV_Encoding
     /**
      * @return bool
      */
-    static public function isSupported($encoding) {
+    public static function isSupported($encoding) {
         return function_exists("mb_list_encodings")
             && in_array($encoding, mb_list_encodings());
     }

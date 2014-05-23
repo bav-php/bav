@@ -79,7 +79,7 @@ class BAV_Validator_51 extends BAV_Validator_Chain
     /**
      * @return array
      */
-    static public function getExceptionValidators(BAV_Bank $bank) {
+    public static function getExceptionValidators(BAV_Bank $bank) {
         $exceptionValidators = array();
         $exceptionValidators[] = new BAV_Validator_51x($bank);
         $exceptionValidators[] = new BAV_Validator_51x($bank);
