@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * Wrapper for the iconv Functions. If you use this wrapper
  * PHP must be compiled with these functions.
@@ -33,7 +30,6 @@
 class BAV_Encoding_Iconv extends BAV_Encoding
 {
 
-
     /**
      * @return bool
      */
@@ -41,6 +37,7 @@ class BAV_Encoding_Iconv extends BAV_Encoding
     {
         return function_exists("iconv_set_encoding");
     }
+
     /**
      * @throws BAV_EncodingException_Unsupported
      * @param String $encoding
@@ -51,6 +48,7 @@ class BAV_Encoding_Iconv extends BAV_Encoding
 
         iconv_set_encoding("internal_encoding", $encoding);
     }
+
     /**
      * @return int length of $string
      */
@@ -58,6 +56,7 @@ class BAV_Encoding_Iconv extends BAV_Encoding
     {
         return iconv_strlen($string);
     }
+
     /**
      * @param String $string
      * @param int $offset
@@ -70,6 +69,7 @@ class BAV_Encoding_Iconv extends BAV_Encoding
              ? iconv_substr($string, $offset)
              : iconv_substr($string, $offset, $length);
     }
+
     /**
      * @throws BAV_EncodingException
      * @param String $string
@@ -85,8 +85,4 @@ class BAV_Encoding_Iconv extends BAV_Encoding
         }
         return $encoded;
     }
-
-
 }
-
-
