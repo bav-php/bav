@@ -7,19 +7,19 @@
  */
 require_once __DIR__ . "/../../autoloader/autoloader.php";
 
-BAV_Autoloader::_triggerDeprecationWarning();
+BAV_Autoloader::triggerDeprecationWarning();
 
 /**
  * Deprecated Autoloader
  * 
  * This autoloader was removed.
  *
- * @deprecated
+ * @deprecated 0.27
  */
 class BAV_Autoloader
 {
     
-    public static function _triggerDeprecationWarning()
+    public static function triggerDeprecationWarning()
     {
         trigger_error(
             "BAV_Autoloader is deprecated. Include bav/autoloader/autoloader.php instead.",
@@ -29,48 +29,47 @@ class BAV_Autoloader
 
     public function register($classPath)
     {
-        self::_triggerDeprecationWarning();
+        self::triggerDeprecationWarning();
     }
     
     public function loadDirectly()
     {
-        self::_triggerDeprecationWarning();
+        self::triggerDeprecationWarning();
     }
     
     public function loadDeferred()
     {
-        self::_triggerDeprecationWarning();
+        self::triggerDeprecationWarning();
     }
 
     public function ignoreErrors()
     {
-        self::_triggerDeprecationWarning();
+        self::triggerDeprecationWarning();
     }
 
     public function dontIgnoreErrors()
     {
-        self::_triggerDeprecationWarning();
+        self::triggerDeprecationWarning();
     }
 
     public function autoload($className)
     {
-        self::_triggerDeprecationWarning();
+        self::triggerDeprecationWarning();
     }
     
     public function getPath($className)
     {
-        self::_triggerDeprecationWarning();
+        self::triggerDeprecationWarning();
     }
 
     public static function getInstance()
     {
-        self::_triggerDeprecationWarning();
+        self::triggerDeprecationWarning();
         return new self();
     }
 
     public static function add($classPath)
     {
-        self::_triggerDeprecationWarning();
+        self::triggerDeprecationWarning();
     }
-
 }
