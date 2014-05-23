@@ -1,11 +1,5 @@
 <?php
 
-
-
-
-
-
-
 /**
  * Implements 83
  *
@@ -25,26 +19,23 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-
 class BAV_Validator_83 extends BAV_Validator_Chain
 {
 
-
-    private
     /**
      * @var BAV_Validator_33
      */
-    $modeC,
-    /**
-     * @var array
-     */
-    $defaultValidators = array(),
-    /**
-     * @var array
-     */
-    $exceptionValidators = array();
+    private $modeC;
 
+    /**
+     * @var array
+     */
+    private $defaultValidators = array();
+
+    /**
+     * @var array
+     */
+    private $exceptionValidators = array();
 
     public function __construct(BAV_Bank $bank)
     {
@@ -67,7 +58,6 @@ class BAV_Validator_83 extends BAV_Validator_Chain
         $this->exceptionValidators[] = new BAV_Validator_83x($bank);
     }
 
-
     /**
      */
     protected function init($account)
@@ -83,7 +73,4 @@ class BAV_Validator_83 extends BAV_Validator_Chain
     {
         return $validator !== $this->modeC || $this->account{9} < 7;
     }
-
-
 }
-

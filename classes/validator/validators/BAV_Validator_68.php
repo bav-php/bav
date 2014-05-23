@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 /**
  * implements 68
  *
@@ -32,13 +28,10 @@
 class BAV_Validator_68 extends BAV_Validator_Chain
 {
 
-
-    private
     /**
      * @var BAV_Validator_10
      */
-    $validator10;
-
+    private $validator10;
 
     public function __construct(BAV_Bank $bank)
     {
@@ -53,7 +46,6 @@ class BAV_Validator_68 extends BAV_Validator_Chain
         $this->validators[1]->setWeights(array(2, 1, 2, 1, 2, 0, 0, 1));
     }
 
-
     public function isValid($account)
     {
         switch (strlen($account)) {
@@ -66,8 +58,11 @@ class BAV_Validator_68 extends BAV_Validator_Chain
                     return false;
 
                 }
+                return parent::isValid($account);
 
-            case 6: case 7: case 8: case 9:
+            case 6:
+            case 7:
+            case 8:
                 return parent::isValid($account);
 
             default:
@@ -75,8 +70,4 @@ class BAV_Validator_68 extends BAV_Validator_Chain
 
         }
     }
-
-
 }
-
-

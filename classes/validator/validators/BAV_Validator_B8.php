@@ -1,11 +1,5 @@
 <?php
 
-
-
-
-
-
-
 /**
  * Implements B8
  *
@@ -25,17 +19,13 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-
 class BAV_Validator_B8 extends BAV_Validator_Chain
 {
 
-    private
     /**
      * @param BAV_Validator_09 Validator
      */
-    $_validator9;
-
+    private $validator9;
 
     public function __construct(BAV_Bank $bank)
     {
@@ -46,8 +36,8 @@ class BAV_Validator_B8 extends BAV_Validator_Chain
 
         $this->validators[] = new BAV_Validator_29($bank);
 
-        $this->_validator9 = new BAV_Validator_09($bank);
-        $this->validators[] = $this->_validator9;
+        $this->validator9 = new BAV_Validator_09($bank);
+        $this->validators[] = $this->validator9;
     }
 
     /**
@@ -57,7 +47,7 @@ class BAV_Validator_B8 extends BAV_Validator_Chain
      */
     protected function useValidator(BAV_Validator $validator)
     {
-        if ($validator !== $this->_validator9) {
+        if ($validator !== $this->validator9) {
             return true;
 
         }
@@ -66,8 +56,4 @@ class BAV_Validator_B8 extends BAV_Validator_Chain
         return ($set1 >= 51  && $set1 <= 59)
             || ($set2 >= 901 && $set2 <= 910);
     }
-
-
 }
-
-

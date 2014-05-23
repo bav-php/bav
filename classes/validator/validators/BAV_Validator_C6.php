@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 /**
  * Copyright (C) 2007  Markus Malkusch <markus@malkusch.de>
  *
@@ -30,12 +26,10 @@
 class BAV_Validator_C6 extends BAV_Validator
 {
 
-
-    private static
     /**
      * @var Array
      */
-    $transformation = array(
+    private static $transformation = array(
         0 => 4451970,
         1 => 4451981,
         2 => 4451992,
@@ -48,17 +42,15 @@ class BAV_Validator_C6 extends BAV_Validator
         9 => 5499579
     );
 
-
-    protected
     /**
      * @var String
      */
-    $transformedAccount = '',
+    protected $transformedAccount = '';
+
     /**
      * @var BAV_Validator_00
      */
-    $validator;
-
+    protected $validator;
 
     public function __construct(BAV_Bank $bank)
     {
@@ -66,7 +58,6 @@ class BAV_Validator_C6 extends BAV_Validator
 
         $this->validator = new BAV_Validator_00($bank);
     }
-
 
     protected function validate()
     {
@@ -77,7 +68,6 @@ class BAV_Validator_C6 extends BAV_Validator
         $this->validator->setNormalizedSize(9 + strlen($transformation));
     }
 
-
     /**
      * @return bool
      */
@@ -87,6 +77,4 @@ class BAV_Validator_C6 extends BAV_Validator
              ? $this->validator->isValid($this->transformedAccount)
              : false;
     }
-
-
 }

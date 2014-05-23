@@ -1,7 +1,5 @@
 <?php
 
-
-
 /**
  * Implements 53
  *
@@ -21,18 +19,11 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-
 class BAV_Validator_53 extends BAV_Validator_52
 {
-
 
     protected function normalizeAccount($size)
     {
         $this->account = $this->getEser9();
     }
-
-
 }
-
-

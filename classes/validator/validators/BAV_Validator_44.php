@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * Implements 44
  *
@@ -22,11 +19,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-
 class BAV_Validator_44 extends BAV_Validator_33
 {
-
 
     public function __construct(BAV_Bank $bank)
     {
@@ -34,7 +28,4 @@ class BAV_Validator_44 extends BAV_Validator_33
 
         $this->setWeights(array(2, 4, 8, 5, 10, 0, 0, 0, 0));
     }
-
-
 }
-

@@ -1,11 +1,5 @@
 <?php
 
-
-
-
-
-
-
 /**
  * Implements C0
  *
@@ -25,11 +19,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-
 class BAV_Validator_C0 extends BAV_Validator_Chain implements BAV_Validator_BankDependent
 {
-
 
     public function __construct(BAV_Bank $bank)
     {
@@ -42,14 +33,9 @@ class BAV_Validator_C0 extends BAV_Validator_Chain implements BAV_Validator_Bank
         $this->validators[1]->setWeights(array(2, 3, 4, 5, 6, 7, 8, 9, 3));
     }
 
-
     public function useValidator(BAV_Validator $validator)
     {
         return $validator !== $this->validators[0]
             || preg_match('~^00[^0]~', $this->account);
     }
-
-
 }
-
-

@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * Implements 31
  *
@@ -22,11 +19,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-
 class BAV_Validator_31 extends BAV_Validator_Iteration_Weighted
 {
-
 
     public function __construct(BAV_Bank $bank)
     {
@@ -35,12 +29,10 @@ class BAV_Validator_31 extends BAV_Validator_Iteration_Weighted
         $this->setWeights(array(9, 8, 7, 6, 5, 4, 3, 2, 1));
     }
 
-
     protected function iterationStep()
     {
         $this->accumulator += $this->number * $this->getWeight();
     }
-
 
     protected function getResult()
     {
@@ -54,7 +46,4 @@ class BAV_Validator_31 extends BAV_Validator_Iteration_Weighted
         }
         return (string)$result === $this->getCheckNumber();
     }
-
 }
-
-

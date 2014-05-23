@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 /**
  * Implements D8
  *
@@ -32,27 +28,22 @@
 class BAV_Validator_D8 extends BAV_Validator
 {
 
-
-    private
     /**
      * @var BAV_Validator_00
      */
-    $_validator;
-
+    private $validator;
 
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
 
-        $this->_validator = new BAV_Validator_00($bank);
+        $this->validator = new BAV_Validator_00($bank);
     }
-
 
     protected function validate()
     {
 
     }
-
 
     /**
      * @return bool
@@ -60,12 +51,10 @@ class BAV_Validator_D8 extends BAV_Validator
     protected function getResult()
     {
         if ($this->account{0} != 0) {
-            return $this->_validator->isValid($this->account);
+            return $this->validator->isValid($this->account);
 
         }
         $set = (int) substr($this->account, 0, 3);
         return $set >= 1 && $set <= 9;
     }
-
-
 }

@@ -1,12 +1,5 @@
 <?php
 
-
-
-
-
-
-
-
 /**
  * Implements 90
  *
@@ -26,22 +19,18 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-
 class BAV_Validator_90 extends BAV_Validator_Chain
 {
 
-
-    private
     /**
      * @var BAV_Validator
      */
-    $modeF,
+    private $modeF;
+
     /**
      * @var array
      */
-    $defaultValidators = array();
-
+    private $defaultValidators = array();
 
     public function __construct(BAV_Bank $bank)
     {
@@ -66,7 +55,6 @@ class BAV_Validator_90 extends BAV_Validator_Chain
         $this->modeF->setEnd(2);
     }
 
-
     /**
      */
     protected function init($account)
@@ -77,9 +65,4 @@ class BAV_Validator_90 extends BAV_Validator_Chain
                           ? array($this->modeF)
                           : $this->defaultValidators;
     }
-
-
 }
-
-
-

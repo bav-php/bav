@@ -1,10 +1,5 @@
 <?php
 
-
-
-
-
-
 /**
  * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
@@ -31,21 +26,20 @@
 class BAV_Validator_C1 extends BAV_Validator
 {
 
-
-    protected
     /**
      * @var BAV_Validator
      */
-    $validator,
+    protected $validator;
+
     /**
      * @var BAV_Validator_17
      */
-    $mode1,
+    protected $mode1;
+
     /**
      * @var BAV_Validator_C1b
      */
-    $mode2;
-
+    protected $mode2;
 
     public function __construct(BAV_Bank $bank)
     {
@@ -56,12 +50,14 @@ class BAV_Validator_C1 extends BAV_Validator
 
         $this->mode2 = new BAV_Validator_C1b($bank);
     }
+
     protected function validate()
     {
         $this->validator = $this->account{0} != '5'
                          ? $this->mode1
                          : $this->mode2;
     }
+
     /**
      * @return bool
      */
@@ -69,8 +65,4 @@ class BAV_Validator_C1 extends BAV_Validator
     {
         return $this->validator->isValid($this->account);
     }
-
-
 }
-
-

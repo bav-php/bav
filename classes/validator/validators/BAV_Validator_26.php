@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * Implements 26
  *
@@ -22,11 +19,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-
 class BAV_Validator_26 extends BAV_Validator_06
 {
-
 
     public function __construct(BAV_Bank $bank)
     {
@@ -38,7 +32,6 @@ class BAV_Validator_26 extends BAV_Validator_06
         $this->setChecknumberPosition(7);
     }
 
-
     protected function init($account)
     {
         parent::init($account);
@@ -48,8 +41,4 @@ class BAV_Validator_26 extends BAV_Validator_06
 
         }
     }
-
-
 }
-
-

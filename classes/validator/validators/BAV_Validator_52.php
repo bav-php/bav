@@ -1,11 +1,5 @@
 <?php
 
-
-
-
-
-
-
 /**
  * Implements 52
  *
@@ -25,22 +19,18 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-
 class BAV_Validator_52 extends BAV_Validator_Iteration_Weighted implements BAV_Validator_BankDependent
 {
 
-
-    private
     /**
      * @var BAV_Validator_20
      */
-    $validator20,
+    private $validator20;
+
     /**
      * @var int
      */
-    $checknumberWeight = 0;
-
+    private $checknumberWeight = 0;
 
     public function __construct(BAV_Bank $bank)
     {
@@ -53,7 +43,6 @@ class BAV_Validator_52 extends BAV_Validator_Iteration_Weighted implements BAV_V
 
         $this->validator20 = new BAV_Validator_20($bank);
     }
-
 
     public function isValid($account)
     {
@@ -68,7 +57,6 @@ class BAV_Validator_52 extends BAV_Validator_Iteration_Weighted implements BAV_V
         }
     }
 
-
     protected function iterationStep()
     {
         if ($this->position == $this->getEserChecknumberPosition()) {
@@ -80,17 +68,13 @@ class BAV_Validator_52 extends BAV_Validator_Iteration_Weighted implements BAV_V
         }
     }
 
-
     protected function normalizeAccount($size)
     {
         $this->account = $this->getEser8();
     }
 
-
     protected function getResult()
     {
         return 10 === ($this->accumulator % 11 + $this->checknumberWeight * $this->getEserChecknumber()) % 11;
     }
-
 }
-

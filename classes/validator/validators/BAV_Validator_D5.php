@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 /**
  * Implements D5
  *
@@ -32,45 +28,44 @@
 class BAV_Validator_D5 extends BAV_Validator
 {
 
-
-    private
     /**
      * @var BAV_Validator
      */
-    $_validator,
+    private $validator;
+
     /**
      * @var BAV_Validator_06
      */
-    $_validator1,
+    private $validator1;
+
     /**
      * @var BAV_Validator_Chain
      */
-    $_validatorChain;
+    private $validatorChain;
 
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
 
-        $this->_validator1 = new BAV_Validator_06($bank);
-        $this->_validator1->setWeights(array(2, 3, 4, 5, 6, 7, 8, 0, 0));
+        $this->validator1 = new BAV_Validator_06($bank);
+        $this->validator1->setWeights(array(2, 3, 4, 5, 6, 7, 8, 0, 0));
 
-        $this->_validatorChain = new BAV_Validator_Chain($bank);
+        $this->validatorChain = new BAV_Validator_Chain($bank);
 
         $validator2 = new BAV_Validator_06($bank);
         $validator2->setWeights(array(2, 3, 4, 5, 6, 7, 0, 0, 0));
-        $this->_validatorChain->addValidator($validator2);
+        $this->validatorChain->addValidator($validator2);
 
         $validator3 = new BAV_Validator_06($bank);
         $validator3->setWeights(array(2, 3, 4, 5, 6, 7, 0, 0, 0));
         $validator3->setDivisor(7);
-        $this->_validatorChain->addValidator($validator3);
+        $this->validatorChain->addValidator($validator3);
 
         $validator4 = new BAV_Validator_06($bank);
         $validator4->setWeights(array(2, 3, 4, 5, 6, 7, 0, 0, 0));
         $validator4->setDivisor(10);
-        $this->_validatorChain->addValidator($validator4);
+        $this->validatorChain->addValidator($validator4);
     }
-
 
     /**
      * Uses the validator
@@ -79,9 +74,8 @@ class BAV_Validator_D5 extends BAV_Validator
      */
     protected function getResult()
     {
-        return $this->_validator->isValid($this->account);
+        return $this->validator->isValid($this->account);
     }
-
 
     /**
      * decide which validators are used
@@ -90,11 +84,9 @@ class BAV_Validator_D5 extends BAV_Validator
      */
     protected function validate()
     {
-        $this->_validator
+        $this->validator
             = substr($this->account, 2, 2) == 99
-            ? $this->_validator1
-            : $this->_validatorChain;
+            ? $this->validator1
+            : $this->validatorChain;
     }
-
-
 }

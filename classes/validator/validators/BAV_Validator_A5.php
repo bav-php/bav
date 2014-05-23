@@ -1,10 +1,5 @@
 <?php
 
-
-
-
-
-
 /**
  * Implements A5
  *
@@ -24,13 +19,10 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-
 class BAV_Validator_A5 extends BAV_Validator_Chain
 {
 
-
-  public function __construct(BAV_Bank $bank)
+    public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
 
@@ -41,7 +33,6 @@ class BAV_Validator_A5 extends BAV_Validator_Chain
         $this->validators[1]->setWeights(array(2, 3, 4, 5, 6, 7, 8, 9, 10));
     }
 
-
     protected function continueValidation(BAV_Validator $validator)
     {
         if ($validator === $this->validators[1]) {
@@ -50,8 +41,4 @@ class BAV_Validator_A5 extends BAV_Validator_Chain
         }
         return true;
     }
-
-
 }
-
-

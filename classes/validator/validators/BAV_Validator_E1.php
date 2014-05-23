@@ -36,12 +36,10 @@ class BAV_Validator_E1 extends BAV_Validator_Iteration_Weighted
         $this->setDivisor(11);
     }
 
-
     protected function iterationStep()
     {
         $this->accumulator += self::$subsitutions[$this->number] * $this->getWeight();
     }
-
 
     protected function getResult()
     {
@@ -52,6 +50,4 @@ class BAV_Validator_E1 extends BAV_Validator_Iteration_Weighted
         }
         return (string) $result === $this->getCheckNumber();
     }
-
 }
-

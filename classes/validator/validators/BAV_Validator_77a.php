@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * Implements 77a
  *
@@ -22,11 +19,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-
 class BAV_Validator_77a extends BAV_Validator_Iteration_Weighted
 {
-
 
     public function __construct(BAV_Bank $bank)
     {
@@ -36,18 +30,14 @@ class BAV_Validator_77a extends BAV_Validator_Iteration_Weighted
         $this->setEnd(5);
     }
 
-
     protected function iterationStep()
     {
         $this->accumulator += $this->number * $this->getWeight();
     }
-
 
     protected function getResult()
     {
         $result = $this->accumulator % 11;
         return $result === 0;
     }
-
 }
-

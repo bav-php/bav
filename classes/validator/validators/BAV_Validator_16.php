@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * Implements 16
  *
@@ -22,11 +19,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-
 class BAV_Validator_16 extends BAV_Validator_06
 {
-
 
     public function __construct(BAV_Bank $bank)
     {
@@ -35,15 +29,10 @@ class BAV_Validator_16 extends BAV_Validator_06
         $this->setWeights(array(2, 3, 4, 5, 6, 7));
     }
 
-
     protected function getResult()
     {
          return $this->accumulator % 11 === 1
               ? $this->getChecknumber() === $this->account{$this->getNormalizedPosition($this->checknumberPosition) - 1}
               : parent::getResult();
     }
-
-
 }
-
-

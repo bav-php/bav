@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * Implements 97
  *
@@ -31,13 +28,10 @@
 class BAV_Validator_97 extends BAV_Validator
 {
 
-
-    private
     /**
      * @var int
      */
-    $result = 0;
-
+    private $result = 0;
 
     protected function validate()
     {
@@ -45,6 +39,7 @@ class BAV_Validator_97 extends BAV_Validator
         $this->result = $account - (int)($account / 11) * 11;
 
     }
+
     /**
      * @return bool
      */
@@ -53,10 +48,4 @@ class BAV_Validator_97 extends BAV_Validator
         return strlen(ltrim($this->account, '0')) >= 5
             && $this->result === (int) $this->getChecknumber();
     }
-
-
-
-
 }
-
-

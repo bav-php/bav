@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 /**
  * Implements D4
  *
@@ -32,19 +28,17 @@
 class BAV_Validator_D4 extends BAV_Validator
 {
 
-
-    protected
     /**
      * @var String
      */
-    $transformedAccount = '',
+    protected $transformedAccount = '';
+
     /**
      * @var BAV_Validator_00
      */
-    $validator;
+    protected $validator;
 
     const TRANSFORMATION = 428259;
-
 
     public function __construct(BAV_Bank $bank)
     {
@@ -54,12 +48,10 @@ class BAV_Validator_D4 extends BAV_Validator
         $this->validator->setNormalizedSize(10 + strlen(self::TRANSFORMATION));
     }
 
-
     protected function validate()
     {
         $this->transformedAccount = self::TRANSFORMATION.$this->account;
     }
-
 
     /**
      * @return bool
@@ -69,6 +61,4 @@ class BAV_Validator_D4 extends BAV_Validator
         return $this->account{0} != 0
             && $this->validator->isValid($this->transformedAccount);
     }
-
-
 }

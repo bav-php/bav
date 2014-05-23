@@ -1,11 +1,5 @@
 <?php
 
-
-
-
-
-
-
 /**
  * Implements D2
  *
@@ -33,13 +27,10 @@
 class BAV_Validator_D2 extends BAV_Validator_Chain
 {
 
-
-    protected
     /**
      * @var bool
      */
-    $doNormalization = false;
-
+    protected $doNormalization = false;
 
     public function __construct(BAV_Bank $bank)
     {
@@ -49,8 +40,4 @@ class BAV_Validator_D2 extends BAV_Validator_Chain
         $this->validators[] = new BAV_Validator_00($bank);
         $this->validators[] = new BAV_Validator_68($bank);
     }
-
-
 }
-
-

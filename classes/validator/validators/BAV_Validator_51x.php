@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * Implements Exception in 51x
  *
@@ -22,11 +19,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-
 class BAV_Validator_51x extends BAV_Validator_Iteration_Weighted
 {
-
 
     public function __construct(BAV_Bank $bank)
     {
@@ -37,12 +31,10 @@ class BAV_Validator_51x extends BAV_Validator_Iteration_Weighted
         $this->setEnd(2);
     }
 
-
     protected function iterationStep()
     {
         $this->accumulator += $this->number * $this->getWeight();
     }
-
 
     protected function getResult()
     {
@@ -52,6 +44,4 @@ class BAV_Validator_51x extends BAV_Validator_Iteration_Weighted
                 : $result % 10;
         return (string)$result === $this->getCheckNumber();
     }
-
 }
-

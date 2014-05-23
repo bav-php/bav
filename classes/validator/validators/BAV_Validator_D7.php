@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * Implements D7
  *
@@ -31,7 +28,6 @@
 class BAV_Validator_D7 extends BAV_Validator_Iteration_Weighted
 {
 
-
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
@@ -40,18 +36,14 @@ class BAV_Validator_D7 extends BAV_Validator_Iteration_Weighted
         $this->setDivisor(10);
     }
 
-
     protected function iterationStep()
     {
         $this->accumulator += $this->crossSum($this->number * $this->getWeight());
     }
-
 
     protected function getResult()
     {
         $result = $this->accumulator % $this->divisor;
         return (string)$result === $this->getCheckNumber();
     }
-
 }
-

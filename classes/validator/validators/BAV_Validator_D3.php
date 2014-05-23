@@ -1,10 +1,5 @@
 <?php
 
-
-
-
-
-
 /**
  * Implements D3
  *
@@ -32,7 +27,6 @@
 class BAV_Validator_D3 extends BAV_Validator_Chain
 {
 
-
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
@@ -40,8 +34,4 @@ class BAV_Validator_D3 extends BAV_Validator_Chain
         $this->validators[] = new BAV_Validator_00($bank);
         $this->validators[] = new BAV_Validator_27($bank);
     }
-
-
 }
-
-

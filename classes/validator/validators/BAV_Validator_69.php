@@ -1,10 +1,5 @@
 <?php
 
-
-
-
-
-
 /**
  * implements 69
  *
@@ -33,7 +28,6 @@
 class BAV_Validator_69 extends BAV_Validator_Chain
 {
 
-
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
@@ -44,12 +38,10 @@ class BAV_Validator_69 extends BAV_Validator_Chain
         $this->validators[] = new BAV_Validator_69b($bank);
     }
 
-
     public function isValid($account)
     {
         return ($account >= 9300000000 && $account <= 9399999999) || parent::isValid($account);
     }
-
 
     /**
      * @return bool
@@ -62,8 +54,4 @@ class BAV_Validator_69 extends BAV_Validator_Chain
         }
         return true;
     }
-
-
 }
-
-

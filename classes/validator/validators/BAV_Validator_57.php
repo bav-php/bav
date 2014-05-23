@@ -19,36 +19,35 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-
 class BAV_Validator_57 extends BAV_Validator
 {
 
-
-    private
     /**
      * @var BAV_Validator
      */
-    $validator,
+    private $validator;
+
     /**
      * @var BAV_Validator_09
      */
-    $validator09,
+    private $validator09;
+
     /**
      * @var array
      */
-    $modeMap = array(),
+    private $modeMap = array();
+
     /**
      * @private
      * @var BAV_Validator_00
      */
-    $mode1,
-     /**
+    private $mode1;
+
+    /**
      * @private
      * @var BAV_Validator_00
      */
-    $mode2;
-
+    private $mode2;
 
     public function __construct(BAV_Bank $bank)
     {
@@ -106,7 +105,6 @@ class BAV_Validator_57 extends BAV_Validator
         );
     }
 
-
     protected function validate()
     {
         $this->validator = null;
@@ -117,7 +115,8 @@ class BAV_Validator_57 extends BAV_Validator
 
             case 1:
                 switch (substr($this->account, 0, 6)) {
-                    case 777777: case 888888:
+                    case 777777:
+                    case 888888:
                         $this->validator = $this->validator09;
                         break;
 
@@ -142,9 +141,10 @@ class BAV_Validator_57 extends BAV_Validator
                 $this->validator = $this->account === '0185125434' || ($pos34 >= 1 && $pos34 <= 12 && $pos79 <= 500)
                                  ? $this->validator09
                                  : null;
-                 break;
+                break;
         }
     }
+
     protected function getResult()
     {
         return ! is_null($this->validator) && $this->validator->isValid($this->account);
@@ -184,8 +184,4 @@ class BAV_Validator_57 extends BAV_Validator
 
         }
     }
-
-
 }
-
-

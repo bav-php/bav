@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * Implements 24
  *
@@ -22,11 +19,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-
 class BAV_Validator_24 extends BAV_Validator_Iteration_Weighted
 {
-
 
     public function __construct(BAV_Bank $bank)
     {
@@ -37,7 +31,6 @@ class BAV_Validator_24 extends BAV_Validator_Iteration_Weighted
         $this->setEnd(-2);
     }
 
-
     protected function init($account)
     {
         parent::init($account);
@@ -45,18 +38,14 @@ class BAV_Validator_24 extends BAV_Validator_Iteration_Weighted
         $this->account = preg_replace('~^([3456]|9..)?0*~', '', $this->account);
     }
 
-
     protected function iterationStep()
     {
         $this->accumulator += ($this->number * $this->getWeight() + $this->getWeight()) % 11;
     }
-
 
     protected function getResult()
     {
         $result = $this->accumulator % 10;
         return (string)$result === $this->getCheckNumber();
     }
-
 }
-

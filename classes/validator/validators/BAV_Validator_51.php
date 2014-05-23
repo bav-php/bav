@@ -1,11 +1,5 @@
 <?php
 
-
-
-
-
-
-
 /**
  * implements 51
  *
@@ -34,21 +28,20 @@
 class BAV_Validator_51 extends BAV_Validator_Chain
 {
 
+    /**
+     * @var array
+     */
+    private $defaultValidators = array();
 
-    private
     /**
      * @var array
      */
-    $defaultValidators = array(),
-    /**
-     * @var array
-     */
-    $exceptionValidators = array(),
+    private $exceptionValidators = array();
+
     /**
      * @var BAV_Validator_33
      */
-    $validatorD;
-
+    private $validatorD;
 
     public function __construct(BAV_Bank $bank)
     {
@@ -76,7 +69,6 @@ class BAV_Validator_51 extends BAV_Validator_Chain
         $this->exceptionValidators = self::getExceptionValidators($bank);
     }
 
-
     /**
      * @return array
      */
@@ -92,7 +84,6 @@ class BAV_Validator_51 extends BAV_Validator_Chain
         return $exceptionValidators;
     }
 
-
     /**
      */
     protected function init($account)
@@ -104,7 +95,6 @@ class BAV_Validator_51 extends BAV_Validator_Chain
                           : $this->defaultValidators;
     }
 
-
     protected function continueValidation(BAV_Validator $validator)
     {
         if ($validator !== $this->validatorD) {
@@ -112,7 +102,9 @@ class BAV_Validator_51 extends BAV_Validator_Chain
 
         }
         switch ($this->account{9}) {
-            case 7: case 8: case 9:
+            case 7:
+            case 8:
+            case 9:
                 return false;
 
             default:
@@ -120,8 +112,4 @@ class BAV_Validator_51 extends BAV_Validator_Chain
 
         }
     }
-
-
 }
-
-

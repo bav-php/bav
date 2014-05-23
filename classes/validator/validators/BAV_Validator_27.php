@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 /**
  * Implements 27
  *
@@ -23,18 +19,13 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-
 class BAV_Validator_27 extends BAV_Validator_Iteration_Transformation
 {
 
-
-    private
     /**
      * @var BAV_Validator_00
      */
-    $validator00;
-
+    private $validator00;
 
     public function __construct(BAV_Bank $bank)
     {
@@ -49,6 +40,7 @@ class BAV_Validator_27 extends BAV_Validator_Iteration_Transformation
             array(0,1,2,3,4,5,6,7,8,9),
         ));
     }
+
     /**
      * @param string $account
      * @return bool
@@ -59,6 +51,7 @@ class BAV_Validator_27 extends BAV_Validator_Iteration_Transformation
              ? $this->validator00->isValid($account)
              : parent::isValid($account);
     }
+
     /**
      * @return bool
      */
@@ -67,6 +60,4 @@ class BAV_Validator_27 extends BAV_Validator_Iteration_Transformation
         $result = (10 - ($this->accumulator % 10)) % 10;
         return (string)$result === $this->getCheckNumber();
     }
-
 }
-

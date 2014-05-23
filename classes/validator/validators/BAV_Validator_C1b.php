@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * Implements C1b
  *
@@ -22,11 +19,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-
 class BAV_Validator_C1b extends BAV_Validator_Iteration_Weighted
 {
-
 
     public function __construct(BAV_Bank $bank)
     {
@@ -37,18 +31,14 @@ class BAV_Validator_C1b extends BAV_Validator_Iteration_Weighted
         $this->setEnd(-2);
     }
 
-
     protected function iterationStep()
     {
         $this->accumulator += $this->crossSum($this->number * $this->getWeight());
     }
-
 
     protected function getResult()
     {
         $result = (10 - (($this->accumulator - 1) % 11)) % 10;
         return (string)$result === $this->getCheckNumber();
     }
-
 }
-

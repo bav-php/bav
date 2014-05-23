@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * Implements B7
  *
@@ -22,11 +19,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-
 class BAV_Validator_B7 extends BAV_Validator_01
 {
-
 
     public function __construct(BAV_Bank $bank)
     {
@@ -35,14 +29,10 @@ class BAV_Validator_B7 extends BAV_Validator_01
         $this->setWeights(array(3, 7, 1));
     }
 
-
     protected function getResult()
     {
         return ($this->isBetween(1000000, 5999999) || $this->isBetween(700000000, 899999999))
              ? parent::getResult()
              : true;
     }
-
-
 }
-

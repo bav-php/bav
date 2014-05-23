@@ -1,10 +1,5 @@
 <?php
 
-
-
-
-
-
 /**
  * Copyright (C) 2010  Markus Malkusch <markus@malkusch.de>
  *
@@ -31,12 +26,10 @@
 class BAV_Validator_D1 extends BAV_Validator
 {
 
-
-    private static
     /**
      * @var Array
      */
-    $_transformation = array(
+    private static $transformation = array(
         0 => 4363380,
         1 => 4363381,
         2 => 4363382,
@@ -48,17 +41,15 @@ class BAV_Validator_D1 extends BAV_Validator
         9 => 4363389
     );
 
-
-    protected
     /**
      * @var String
      */
-    $transformedAccount = '',
+    protected $transformedAccount = '';
+
     /**
      * @var BAV_Validator_00
      */
-    $validator;
-
+    protected $validator;
 
     public function __construct(BAV_Bank $bank)
     {
@@ -67,20 +58,18 @@ class BAV_Validator_D1 extends BAV_Validator
         $this->validator = new BAV_Validator_00($bank);
     }
 
-
     protected function validate()
     {
-        $transformationIndex = $this->_getTransformationIndex();
-        if (! array_key_exists($transformationIndex, self::$_transformation)) {
+        $transformationIndex = $this->getTransformationIndex();
+        if (! array_key_exists($transformationIndex, self::$transformation)) {
             return;
 
         }
-        $transformationPrefix = self::$_transformation[$transformationIndex];
+        $transformationPrefix = self::$transformation[$transformationIndex];
         $this->validator->setNormalizedSize(10 + strlen($transformationPrefix));
         $this->transformedAccount
             = $transformationPrefix . substr($this->account, 1);
     }
-
 
     /**
      * @return bool
@@ -89,21 +78,18 @@ class BAV_Validator_D1 extends BAV_Validator
     {
         return
             array_key_exists(
-                $this->_getTransformationIndex(),
-                self::$_transformation
+                $this->getTransformationIndex(),
+                self::$transformation
             )
             &&
             $this->validator->isValid($this->transformedAccount);
     }
 
-
     /**
      * @return int
      */
-    private function _getTransformationIndex()
+    private function getTransformationIndex()
     {
         return $this->account{0};
     }
-
-
 }

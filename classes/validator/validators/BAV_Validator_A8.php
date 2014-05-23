@@ -1,11 +1,5 @@
 <?php
 
-
-
-
-
-
-
 /**
  * implements A8
  *
@@ -34,17 +28,15 @@
 class BAV_Validator_A8 extends BAV_Validator_Chain
 {
 
-
-    private
     /**
      * @var array
      */
-    $defaultValidators = array(),
+    private $defaultValidators = array();
+
     /**
      * @var array
      */
-    $exceptionValidators = array();
-
+    private $exceptionValidators = array();
 
     public function __construct(BAV_Bank $bank)
     {
@@ -62,7 +54,6 @@ class BAV_Validator_A8 extends BAV_Validator_Chain
         $this->exceptionValidators = BAV_Validator_51::getExceptionValidators($bank);
     }
 
-
     /**
      */
     protected function init($account)
@@ -73,8 +64,4 @@ class BAV_Validator_A8 extends BAV_Validator_Chain
                           ? $this->exceptionValidators
                           : $this->defaultValidators;
     }
-
-
 }
-
-

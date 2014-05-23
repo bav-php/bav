@@ -1,10 +1,5 @@
 <?php
 
-
-
-
-
-
 /**
  * implements 49
  *
@@ -33,7 +28,6 @@
 class BAV_Validator_49 extends BAV_Validator_Chain
 {
 
-
     /**
      */
     public function __construct(BAV_Bank $bank)
@@ -43,8 +37,4 @@ class BAV_Validator_49 extends BAV_Validator_Chain
         $this->validators[] = new BAV_Validator_00($bank);
         $this->validators[] = new BAV_Validator_01($bank);
     }
-
-
 }
-
-
