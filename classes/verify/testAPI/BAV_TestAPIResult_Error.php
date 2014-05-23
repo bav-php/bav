@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * Copyright (C) 2009  Markus Malkusch <markus@malkusch.de>
  *
@@ -25,18 +22,13 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
-
-
 class BAV_TestAPIResult_Error extends BAV_TestAPIResult
 {
 
-
-    private
     /**
      * @var String
      */
-    $message = '';
-
+    private $message = '';
 
     /**
      * @param BAV_TestAPI $testAPI
@@ -50,7 +42,6 @@ class BAV_TestAPIResult_Error extends BAV_TestAPIResult
         $this->message = $message;
     }
 
-
     /**
      * @return String
      */
@@ -58,8 +49,4 @@ class BAV_TestAPIResult_Error extends BAV_TestAPIResult
     {
         return $this->message;
     }
-
-
 }
-
-
