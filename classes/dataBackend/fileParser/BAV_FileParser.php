@@ -1,13 +1,5 @@
 <?php
 
-
-
-
-
-
-
-
-
 /**
  * This class is responsable for I/O and formating which helps the BAV_DataBackend_File.
  *
@@ -37,7 +29,6 @@
 class BAV_FileParser extends BAV
 {
 
-
     const FILE_ENCODING     = 'ISO-8859-15';
     const BANKID_OFFSET     = 0;
     const BANKID_LENGTH     = 8;
@@ -60,35 +51,41 @@ class BAV_FileParser extends BAV
     const ID_OFFSET         = 152;
     const ID_LENGTH         = 6;
 
-
-    private
     /**
      * @var resource
      */
-    $fp,
+    private $fp;
+    
     /**
      * @var string
      */
-    $file = '',
+    private $file = '';
+
     /**
      * @var int,
      */
-    $lines = 0,
+    private $lines = 0;
+
     /**
      * @var int
      */
-    $lineLength = 0;
-
+    private $lineLength = 0;
 
     /**
      * @param String $file The data source
      */
     public function __construct($file = null)
     {
-        $this->file = is_null($file)
-                    ? __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "data" . DIRECTORY_SEPARATOR . "banklist.txt"
-                    : $file;
+        $defaultFile =
+            __DIR__ . DIRECTORY_SEPARATOR . ".."
+            . DIRECTORY_SEPARATOR . ".."
+            . DIRECTORY_SEPARATOR . ".."
+            . DIRECTORY_SEPARATOR . "data"
+            . DIRECTORY_SEPARATOR . "banklist.txt";
+
+        $this->file = is_null($file) ? $defaultFile: $file;
     }
+
     /**
      * @throws BAV_FileParserException_IO
      * @throws BAV_FileParserException_FileNotExists
@@ -129,6 +126,7 @@ class BAV_FileParser extends BAV
         }
         $this->lines = floor(($filesize - 1) / $this->lineLength);
     }
+
     /**
      * @throws BAV_FileParserException_IO
      * @throws BAV_FileParserException_FileNotExists
@@ -139,6 +137,7 @@ class BAV_FileParser extends BAV
         $this->init();
         return $this->lines;
     }
+
     /**
      * @throws BAV_FileParserException_IO
      * @throws BAV_FileParserException_FileNotExists
@@ -150,6 +149,7 @@ class BAV_FileParser extends BAV
 
         }
     }
+
     /**
      * @throws BAV_FileParserException_IO
      * @throws BAV_FileParserException_FileNotExists
@@ -163,6 +163,7 @@ class BAV_FileParser extends BAV
 
         }
     }
+
     /**
      * @throws BAV_FileParserException_IO
      * @throws BAV_FileParserException_FileNotExists
@@ -174,6 +175,7 @@ class BAV_FileParser extends BAV
         $this->seekLine($line);
         return self::$encoding->convert(fread($this->getFileHandle(), $this->lineLength), self::FILE_ENCODING);
     }
+
     /**
      * @throws BAV_FileParserException_IO
      * @throws BAV_FileParserException_FileNotExists
@@ -185,6 +187,7 @@ class BAV_FileParser extends BAV
         $this->seekLine($line, self::BANKID_OFFSET);
         return self::$encoding->convert(fread($this->getFileHandle(), self::BANKID_LENGTH), self::FILE_ENCODING);
     }
+
     /**
      * @throws BAV_FileParserException_FileNotExists
      * @throws BAV_FileParserException_IO
@@ -195,6 +198,7 @@ class BAV_FileParser extends BAV
         $this->init();
         return $this->fp;
     }
+
     /**
      * @throws BAV_FileParserException_FileNotExists
      * @throws BAV_FileParserException_IO
@@ -205,6 +209,7 @@ class BAV_FileParser extends BAV
         $this->init();
         return $this->lineLength;
     }
+
     /**
      */
     public function __destruct()
@@ -214,6 +219,7 @@ class BAV_FileParser extends BAV
 
         }
     }
+
     /**
      * @throws BAV_FileParserException_ParseError
      * @param string $line
@@ -229,6 +235,7 @@ class BAV_FileParser extends BAV
         $bankID = self::$encoding->substr($line, self::BANKID_OFFSET, self::BANKID_LENGTH);
         return new BAV_Bank($dataBackend, $bankID, $type);
     }
+
     /**
      * @throws BAV_FileParserException_ParseError
      * @param string $line
@@ -249,6 +256,7 @@ class BAV_FileParser extends BAV
         $pan = trim(self::$encoding->substr($line, self::PAN_OFFSET, self::PAN_LENGTH));
         return new BAV_Agency($id, $bank, $name, $shortTerm, $city, $postcode, $bic, $pan);
     }
+
     /**
      * @throws BAV_FileParserException_ParseError
      * @param string $line
@@ -262,6 +270,7 @@ class BAV_FileParser extends BAV
         }
         return self::$encoding->substr($line, self::ISMAIN_OFFSET, 1) === '1';
     }
+
     /**
      * @return string
      */
@@ -269,7 +278,4 @@ class BAV_FileParser extends BAV
     {
         return $this->file;
     }
-
-
 }
-
