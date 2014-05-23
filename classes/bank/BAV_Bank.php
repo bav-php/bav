@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 /**
  * A bank can validate a bank account (BAV_Bank->isValid(String $account)) and
  * has a bank ID, a main agency (BAV_Bank->getMainAgency()) and optionally some
@@ -39,33 +35,35 @@
 class BAV_Bank extends BAV
 {
 
+    /**
+     * @var string
+     */
+    private $bankID = '';
 
-    private
     /**
      * @var string
      */
-    $bankID = '',
-    /**
-     * @var string
-     */
-    $validationType = '',
+    private $validationType = '';
+
     /**
      * @var BAV_Validator
      */
-    $validator,
+    private $validator;
+
     /**
      * @var BAV_DataBackend
      */
-    $dataBackend,
+    private $dataBackend;
+
     /**
      * @var BAV_Agency
      */
-    $mainAgency,
+    private $mainAgency;
+
     /**
      * @var Array
      */
-    $agencies;
-
+    private $agencies;
 
     /**
      * Do not even think to use new BAV_Bank()!
@@ -80,6 +78,7 @@ class BAV_Bank extends BAV
         $this->bankID = $bankID;
         $this->validationType = $validationType;
     }
+
     /**
      * @return string
      */
@@ -87,6 +86,7 @@ class BAV_Bank extends BAV
     {
         return $this->validationType;
     }
+
     /**
      * @return string
      */
@@ -94,6 +94,7 @@ class BAV_Bank extends BAV
     {
         return (string) $this->bankID;
     }
+
     /**
      * Every bank has one main agency. This agency is not included in getAgencies().
      *
@@ -108,6 +109,7 @@ class BAV_Bank extends BAV
         }
         return $this->mainAgency;
     }
+
     /**
      * A bank may have more agencies.
      *
@@ -122,6 +124,7 @@ class BAV_Bank extends BAV
         }
         return $this->agencies;
     }
+
     /**
      * Use this method to check your bank account.
      *
@@ -133,6 +136,7 @@ class BAV_Bank extends BAV
     {
         return $this->getValidator()->isValid($account);
     }
+
     /**
      * @throws BAV_ValidatorException_NotExists
      * @return BAV_Validator
@@ -145,8 +149,4 @@ class BAV_Bank extends BAV
         }
         return $this->validator;
     }
-
-
 }
-
-
