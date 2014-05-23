@@ -26,17 +26,13 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
-
 class BackendTest extends PHPUnit_Framework_TestCase
 {
 
-
-    private static
     /**
      * @var BAV_DataBackend_File
      */
-    $referenceBackend;
-
+    private static $referenceBackend;
 
     /**
      * Defines the reference backend
@@ -45,7 +41,6 @@ class BackendTest extends PHPUnit_Framework_TestCase
     {
         self::$referenceBackend = new BAV_DataBackend_File();
     }
-
 
     /**
      * @return Array The tested backends
@@ -58,7 +53,6 @@ class BackendTest extends PHPUnit_Framework_TestCase
         );
     }
 
-
     /**
      */
     public function provideInstallationBackends()
@@ -68,7 +62,6 @@ class BackendTest extends PHPUnit_Framework_TestCase
             array(new BAV_DataBackend_File(tempnam(BAV_DataBackend_File::getTempdir(), 'bavtest')))
         );
     }
-
 
     /**
      * @return Array
@@ -86,7 +79,6 @@ class BackendTest extends PHPUnit_Framework_TestCase
         }
         return $banks;
     }
-
 
     /**
      * @return Array
@@ -116,7 +108,6 @@ class BackendTest extends PHPUnit_Framework_TestCase
         return $agencies;
     }
 
-
     /**
      * @dataProvider provideInstallationBackends
      */
@@ -127,7 +118,6 @@ class BackendTest extends PHPUnit_Framework_TestCase
         $backend->uninstall();
     }
 
-
     /**
      * @dataProvider provideInstallationBackends
      */
@@ -136,7 +126,6 @@ class BackendTest extends PHPUnit_Framework_TestCase
         $this->markTestIncomplete();
         //TODO test if the installation process fills all banks
     }
-
 
     /**
      * Testet, dass ein erneutes $backend->getBank($id) das selbe
@@ -148,12 +137,11 @@ class BackendTest extends PHPUnit_Framework_TestCase
     {
         foreach (self::$referenceBackend->getAllBanks() as $refBank) {
             $this->assertTrue(
-               $backend->getBank($refBank->getBankID()) === $backend->getBank($refBank->getBankID()),
-               "Different objects for bank {$refBank->getBankID()}"
+                $backend->getBank($refBank->getBankID()) === $backend->getBank($refBank->getBankID()),
+                "Different objects for bank {$refBank->getBankID()}"
             );
         }
     }
-
 
     /**
      * @dataProvider provideBackends
@@ -165,7 +153,6 @@ class BackendTest extends PHPUnit_Framework_TestCase
             count($backend->getAllBanks())
         );
     }
-
 
     /**
      * @dataProvider provideBanks
@@ -188,7 +175,6 @@ class BackendTest extends PHPUnit_Framework_TestCase
         );
     }
 
-
     /**
      * @dataProvider provideAgencies
      */
@@ -196,7 +182,6 @@ class BackendTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEqualAgency($referenceAgency, $testedAgency);
     }
-
 
     private function assertEqualAgency(BAV_Agency $a, BAV_Agency $b)
     {
@@ -217,7 +202,6 @@ class BackendTest extends PHPUnit_Framework_TestCase
 
         }
     }
-
-
 }
+
 BackendTest::classConstructor();

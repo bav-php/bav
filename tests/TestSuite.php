@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (C) 2009  Markus Malkusch <markus@malkusch.de>
  *
@@ -21,17 +22,14 @@
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
 
-
 require_once __DIR__ . '/AgencyQueryTest.php';
 require_once __DIR__ . '/BackendTest.php';
 require_once __DIR__ . '/DataConstraintTest.php';
 require_once __DIR__ . '/ValidatorTest.php';
 require_once __DIR__ . '/VerifyImportTest.php';
 
-
 class TestSuite extends PHPUnit_Framework_TestSuite
 {
-
 
     /**
      * @return TestSuite
@@ -48,8 +46,4 @@ class TestSuite extends PHPUnit_Framework_TestSuite
 
         return $suite;
     }
-
-
 }
-
-

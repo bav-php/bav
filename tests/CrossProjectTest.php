@@ -1,8 +1,6 @@
 <?php
 
-
 require_once __DIR__ . "/../autoloader/autoloader.php";
-
 
 /**
  * Copyright (C) 2009  Markus Malkusch <markus@malkusch.de>
@@ -25,31 +23,29 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
-
-
 class CrossProjectTest extends PHPUnit_Framework_TestCase
 {
 
-
-    private
     /**
      * @var int
      */
-    #$lastAccount = 9999999999,
-    $lastAccount = 99999,
-    /**
-     * @var Array
-     */
-    $testedValidators = array(),
-    /**
-     * @var Array
-     */
-    $failedBankDependentValidators = array(),
-    /**
-     * @var Array
-     */
-    $testAPIs = array();
+    #private $lastAccount = 9999999999,
+    private $lastAccount = 99999;
 
+    /**
+     * @var Array
+     */
+    private $testedValidators = array();
+
+    /**
+     * @var Array
+     */
+    private $failedBankDependentValidators = array();
+
+    /**
+     * @var Array
+     */
+    private $testAPIs = array();
 
     /**
      * @return Array
@@ -68,7 +64,6 @@ class CrossProjectTest extends PHPUnit_Framework_TestCase
         );
     }
 
-
     /**
      * @return Array
      */
@@ -82,7 +77,6 @@ class CrossProjectTest extends PHPUnit_Framework_TestCase
         }
         return $banks;
     }
-
 
     /**
      * @dataProvider provideBanks
@@ -121,7 +115,6 @@ class CrossProjectTest extends PHPUnit_Framework_TestCase
         $this->testedValidators[$bank->getValidationType()] = true;
     }
 
-
     private function assertSameResult(BAV_Bank $bank, $account)
     {
         $results = array();
@@ -139,7 +132,6 @@ class CrossProjectTest extends PHPUnit_Framework_TestCase
             $this->getErrorMessage($bank, $account, $results)
         );
     }
-
 
     /**
      * @param BAV_Bank $bank
@@ -171,8 +163,4 @@ class CrossProjectTest extends PHPUnit_Framework_TestCase
 
         return $message;
     }
-
-
 }
-
-

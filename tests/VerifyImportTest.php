@@ -28,26 +28,23 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
  * @copyright Copyright (C) 2009 Markus Malkusch
  * @see BAV_VerifyImport
  */
-
-
 class VerifyImportTest extends PHPUnit_Framework_TestCase
 {
 
+    /**
+     * @var array
+     */
+    private $validationMap = array();
 
-    private
     /**
      * @var array
      */
-    $validationMap = array(),
-    /**
-     * @var array
-     */
-    $verifyArray = array(),
+    private $verifyArray = array();
+
     /**
      * @var BAV_DataBackend_File
      */
-    $databack;
-
+    private $databack;
 
     protected function setUp()
     {
@@ -66,14 +63,12 @@ class VerifyImportTest extends PHPUnit_Framework_TestCase
         }
     }
 
-
     public function testFileImport()
     {
         $importer = new BAV_VerifyImport($this->databack);
         $importer->importVerifyFile();
         $this->assertImporter($importer);
     }
-
 
     public function testSequentialImport()
     {
@@ -100,7 +95,6 @@ class VerifyImportTest extends PHPUnit_Framework_TestCase
         }
         $this->assertImporter($importer, $notSupported);
     }
-
 
     private function assertImporter(BAV_VerifyImport $importer, Array $notSupported = array())
     {
@@ -139,7 +133,6 @@ class VerifyImportTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(0, count($checkArray['invalid']));
     }
 
-
     /**
      * @param String $validationType
      * @return BAV_Bank
@@ -152,7 +145,4 @@ class VerifyImportTest extends PHPUnit_Framework_TestCase
         }
         return $this->validationMap[$validationType];
     }
-
 }
-
-

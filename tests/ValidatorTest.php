@@ -26,26 +26,23 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
-
-
 class ValidatorTest extends PHPUnit_Framework_TestCase
 {
 
-
-    private static
     /**
      * @var BAV_DataBackend
      */
-    $dataBackend,
+    private static $dataBackend;
+
     /**
      * @var array This array contains all names of implemented algorithms as keys.
      */
-    $implementedBanks = array(),
+    private static $implementedBanks = array();
+
     /**
      * @var array all known banks
      */
-    $knownBanks = array();
-
+    private static $knownBanks = array();
 
     /**
      * @throws BAV_FileParserException_IO
@@ -67,7 +64,6 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         }
     }
 
-
     /**
      * @return Array
      */
@@ -78,7 +74,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $banks = array();
         $files = BAV_ClassFile::getClassFiles(__DIR__.'/../classes/validator/validators/');
         foreach ($files as $class) {
-           if (! preg_match('~^BAV_Validator_([A-Z0-9]{2})$~', $class->getName(), $matchType)) {
+            if (! preg_match('~^BAV_Validator_([A-Z0-9]{2})$~', $class->getName(), $matchType)) {
                 continue;
 
             }
@@ -93,7 +89,6 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         }
         return $banks;
     }
-
 
     /**
      * @return Array
@@ -110,7 +105,6 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         }
         return $providedAccountsAndBanks;
     }
-
 
     /**
      * This Test runs all validators in order to find parse Errors
@@ -132,7 +126,6 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         }
     }
 
-
     /**
      * 0 - 0000000000 should always be invalid
      *
@@ -153,7 +146,6 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         }
     }
 
-
     /**
      * Short accounts should not raise exception.
      *
@@ -166,7 +158,6 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     {
         $bank->isValid($account);
     }
-
 
     /**
      * @return Array
@@ -184,7 +175,6 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         );
     }
 
-
     /**
      * @return Array
      */
@@ -201,7 +191,6 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         }
         return $accounts;
     }
-
 
     /**
      * @dataProvider provideTestAccounts
@@ -244,7 +233,8 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
                         $bank = new BAV_Bank(self::$dataBackend, $e->getBankID(), 'C0');
                         break;
 
-                    default: throw $e;
+                    default:
+                        throw $e;
 
                 }
             }
@@ -259,6 +249,4 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
 
         }
     }
-
-
 }

@@ -25,17 +25,13 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
-
-
 class AgencyQueryTest extends PHPUnit_Framework_TestCase
 {
-
 
     /**
      * @var BAV_DataBackend_PDO
      */
     private $backend;
-
 
     /**
      */
@@ -44,30 +40,29 @@ class AgencyQueryTest extends PHPUnit_Framework_TestCase
         $this->backend = new BAV_DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
     }
 
-
     public function testOnlyID()
     {
         $agencies = $this->backend->getAgencies(
-            'SELECT id FROM bav_agency LIMIT 100');
+            'SELECT id FROM bav_agency LIMIT 100'
+        );
         $this->assertAgencies($agencies, 100);
     }
-
 
     public function testIDAndBank()
     {
         $agencies = $this->backend->getAgencies(
-            'SELECT id, bank FROM bav_agency LIMIT 100');
+            'SELECT id, bank FROM bav_agency LIMIT 100'
+        );
         $this->assertAgencies($agencies, 100);
     }
-
 
     public function testNoBank()
     {
         $agencies = $this->backend->getAgencies(
-            'SELECT id, name, postcode, city, shortTerm, pan, bic FROM bav_agency LIMIT 100');
+            'SELECT id, name, postcode, city, shortTerm, pan, bic FROM bav_agency LIMIT 100'
+        );
         $this->assertAgencies($agencies, 100);
     }
-
 
     /**
      * @expectedException BAV_DataBackendException_IO_MissingAttributes
@@ -78,7 +73,6 @@ class AgencyQueryTest extends PHPUnit_Framework_TestCase
             'SELECT name, postcode, city, shortTerm, pan, bic, bank FROM bav_agency LIMIT 1'
         );
     }
-
 
     private function assertAgencies(Array $agencies, $count)
     {
@@ -111,8 +105,4 @@ class AgencyQueryTest extends PHPUnit_Framework_TestCase
             }
         }
     }
-
-
 }
-
-

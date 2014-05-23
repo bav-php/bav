@@ -6,18 +6,14 @@
 require_once __DIR__ . "/../autoloader/autoloader.php";
 
 
-
 DataConstraintTest::classConstructor();
 class DataConstraintTest extends PHPUnit_Framework_TestCase
 {
 
-
-    private static
     /**
      * @var PDO
      */
-    $pdo;
-
+    private static $pdo;
 
     public static function classConstructor()
     {
@@ -25,23 +21,25 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase
         self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         self::$pdo->exec("DROP TABLE IF EXISTS bank");
-        self::$pdo->exec("CREATE TEMPORARY TABLE bank (
-            id int primary key,
-            blz char(8),
-            isMain tinyint(1),
-            name varchar(58),
-            plz varchar(5),
-            city varchar(35),
-            shortterm varchar(27),
-            pan char(5),
-            bic varchar(11),
-            validator char(2),
-            index(blz),
-            index(name),
-            index(shortterm),
-            index(pan),
-            index(bic)
-        ) engine=MEMORY");
+        self::$pdo->exec(
+            "CREATE TEMPORARY TABLE bank (
+                id int primary key,
+                blz char(8),
+                isMain tinyint(1),
+                name varchar(58),
+                plz varchar(5),
+                city varchar(35),
+                shortterm varchar(27),
+                pan char(5),
+                bic varchar(11),
+                validator char(2),
+                index(blz),
+                index(name),
+                index(shortterm),
+                index(pan),
+                index(bic)
+            ) engine=MEMORY"
+        );
 
         $fp = fopen(__DIR__ . '/../data/banklist.txt', 'r');
         if (! is_resource($fp)) {
@@ -49,10 +47,11 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase
 
         }
 
-        $insert = self::$pdo->prepare("
-            INSERT INTO bank
+        $insert = self::$pdo->prepare(
+            "INSERT INTO bank
                    ( id,  blz,  isMain,  name,  plz,  city,  shortterm,  pan,  bic,  validator)
-            VALUES (:id, :blz, :isMain, :name, :plz, :city, :shortTerm, :pan, :bic, :validator)");
+            VALUES (:id, :blz, :isMain, :name, :plz, :city, :shortTerm, :pan, :bic, :validator)"
+        );
         $insert->bindParam(':id', $id);
         $insert->bindParam(':blz', $blz);
         $insert->bindParam(':isMain', $isMain);
@@ -82,7 +81,6 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase
         fclose($fp);
     }
 
-
     /**
      * @return Array
      */
@@ -102,7 +100,6 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase
         return $lines;
     }
 
-
     /**
      * @dataProvider provideParsedLines
      */
@@ -112,21 +109,19 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase
         $this->assertRegExp('~^[\dA-Z]\d$~', $type);
     }
 
-
     /**
      * Every bankID should have exact one validator
      */
     public function testValidatorCount()
     {
-        $statement = self::$pdo->query("
-            SELECT blz FROM bank GROUP BY blz HAVING count(DISTINCT validator) != 1
-        ");
+        $statement = self::$pdo->query(
+            "SELECT blz FROM bank GROUP BY blz HAVING count(DISTINCT validator) != 1"
+        );
         $this->assertFalse(
             $statement->fetch(),
             "bankID <-> validator is not n:1!"
         );
     }
-
 
     /**
      * Every bankID should have exact one mainAgency
@@ -140,7 +135,6 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase
         );
     }
 
-
     public function testBLZDatatype ()
     {
         $statement = self::$pdo->query("SELECT blz FROM bank WHERE blz LIKE '0%'");
@@ -149,7 +143,4 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase
             "Every bankID should not start with 0."
         );
     }
-
 }
-
-

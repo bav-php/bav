@@ -27,41 +27,39 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
-
-
 class BAV_CheckAgainstTestAPIs extends BAV
 {
-
 
     const VALID            = 1;
     const INVALID          = 2;
     const BANK_NOT_FOUND   = 3;
     const ERROR            = 4;
 
-
-    private
     /**
      * @var int
      */
-    #$firstAccount = 9999999999,
-    $firstAccount = 999,
+    #private $firstAccount = 9999999999,
+    private $firstAccount = 999;
+
     /**
      * @var int
      */
-    $lastAccount = 1,
-    /**
-     * @var Array
-     */
-    $testedValidators = array(),
-    /**
-     * @var Array
-     */
-    $differences = array(),
-    /**
-     * @var Array
-     */
-    $testAPIs = array();
+    private $lastAccount = 1;
 
+    /**
+     * @var Array
+     */
+    private $testedValidators = array();
+
+    /**
+     * @var Array
+     */
+    private $differences = array();
+
+    /**
+     * @var Array
+     */
+    private $testAPIs = array();
 
     public function __construct()
     {
@@ -121,7 +119,7 @@ class BAV_CheckAgainstTestAPIs extends BAV
 
         foreach ($backend->getAllBanks() as $bank) {
             try {
-                if ( array_key_exists($bank->getValidationType(), $this->testedValidators)
+                if (array_key_exists($bank->getValidationType(), $this->testedValidators)
                      && ! $bank->getValidator() instanceof BAV_Validator_BankDependent) {
 
                      continue;
@@ -148,7 +146,6 @@ class BAV_CheckAgainstTestAPIs extends BAV
             }
         }
     }
-
 
     private function testAccount(BAV_Bank $bank, $account)
     {
@@ -190,9 +187,6 @@ class BAV_CheckAgainstTestAPIs extends BAV
 
         $this->differences[] = array($bank, $account, $results);
     }
-
-
 }
+
 new BAV_CheckAgainstTestAPIs();
-
-
