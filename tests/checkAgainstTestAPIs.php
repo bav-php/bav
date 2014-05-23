@@ -27,170 +27,166 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
+class BAV_CheckAgainstTestAPIs extends BAV
+{
 
+    const VALID            = 1;
+    const INVALID          = 2;
+    const BANK_NOT_FOUND   = 3;
+    const ERROR            = 4;
 
-class BAV_CheckAgainstTestAPIs extends BAV {
-	
-	
-	const VALID            = 1;
-	const INVALID          = 2;
-	const BANK_NOT_FOUND   = 3;
-	const ERROR            = 4;
+    /**
+     * @var int
+     */
+    #private $firstAccount = 9999999999,
+    private $firstAccount = 999;
 
-	
-	private
-	/**
-	 * @var int
-	 */
-	#$firstAccount = 9999999999,
-	$firstAccount = 999,
-	/**
-	 * @var int
-	 */
-	$lastAccount = 1,
-	/**
-	 * @var Array
-	 */
-	$testedValidators = array(),
-	/**
-	 * @var Array
-	 */
-	$differences = array(),
-	/**
-	 * @var Array
-	 */
-	$testAPIs = array();
-	
-	
-	public function __construct() {
+    /**
+     * @var int
+     */
+    private $lastAccount = 1;
+
+    /**
+     * @var Array
+     */
+    private $testedValidators = array();
+
+    /**
+     * @var Array
+     */
+    private $differences = array();
+
+    /**
+     * @var Array
+     */
+    private $testAPIs = array();
+
+    public function __construct()
+    {
         $ktoblzcheckPath = __DIR__ . "/../tmp/ktoblzcheck/ktoblzcheck-1.21/src";
-	
-		$this->testAPIs[] = new BAV_TestAPI_BAV();
-		$this->testAPIs[] = new BAV_TestAPI_Kontocheck('/etc/blz.lut', 2);
-		$this->testAPIs[] = new BAV_TestAPI_Ktoblzcheck(
+
+        $this->testAPIs[] = new BAV_TestAPI_BAV();
+        $this->testAPIs[] = new BAV_TestAPI_Kontocheck('/etc/blz.lut', 2);
+        $this->testAPIs[] = new BAV_TestAPI_Ktoblzcheck(
             "$ktoblzcheckPath/bankdata/bankdata.txt",
-		    "$ktoblzcheckPath/bin/ktoblzcheck"
+            "$ktoblzcheckPath/bin/ktoblzcheck"
         );
-		
-		
-		#$backend = new BAV_DataBackend_File();
-		$backend = new BAV_DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
-		
-		
-		if (! empty($GLOBALS['argv'][1])) {
+
+
+        #$backend = new BAV_DataBackend_File();
+        $backend = new BAV_DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
+
+
+        if (! empty($GLOBALS['argv'][1])) {
             $nodeNumber = $GLOBALS['argv'][1];
             $nodeCount  = @$GLOBALS['argv'][2];
-            
+
             if ($nodeNumber * $nodeCount == 0 || min($nodeNumber, $nodeCount) < 0) {
-            	trigger_error(
+                trigger_error(
                     'Expect two numeric arguments > 0: $nodeNumber $nodeCount',
-            	    E_USER_ERROR
-            	);
-            	
+                    E_USER_ERROR
+                );
+
             }
-            
+
             if ($nodeNumber > $nodeCount) {
-            	trigger_error(
-            	    'Expect first argument ($nodeNumber) <= second argument ($nodeCount)',
-            	    E_USER_ERROR
-            	);
-            	
+                trigger_error(
+                    'Expect first argument ($nodeNumber) <= second argument ($nodeCount)',
+                    E_USER_ERROR
+                );
+
             }
-			
-		} else {
-			$nodeNumber = 1;
+
+        } else {
+            $nodeNumber = 1;
             $nodeCount  = 1;
-			
-		}
-		
-		$increment = $this->lastAccount > $this->firstAccount ? 1 : -1;
+
+        }
+
+        $increment = $this->lastAccount > $this->firstAccount ? 1 : -1;
         $padLength = strlen(max($this->lastAccount, $this->firstAccount));
-        
-		$count            = ceil(abs($this->lastAccount - $this->firstAccount) / $nodeCount);
-		$firstAccount     = $this->firstAccount + $increment * ($nodeNumber - 1) * ($count + 1);
-		
-		if ($nodeCount == $nodeNumber) {
-			$afterLastAccount = $this->lastAccount + $increment;
-			
-		} else {
-            $afterLastAccount = $firstAccount + $increment * ($count + 1);	
-			
-		}
-		
-		foreach ($backend->getAllBanks() as $bank) {
-			try {
-				if ( array_key_exists($bank->getValidationType(), $this->testedValidators)
-				     && ! $bank->getValidator() instanceof BAV_Validator_BankDependent) {
-				     	
-				     continue;
-				     
-			    }
-			    
-			    for ($account = $firstAccount; $account != $afterLastAccount; $account += $increment) {
-			    	for($pad = strlen($account); $pad <= $padLength; $pad++) {
-	                	$paddedAccount = str_pad($account, $pad, "0", STR_PAD_LEFT);
-				    	$differences = count($this->differences);
-				    	$this->testAccount($bank, $paddedAccount);
-				    	if (count($this->differences) > $differences) {
-				    		break 2;
-				    		
-				    	}
-	                }
-			    }
-				
-				$this->testedValidators[$bank->getValidationType()] = true;
-				
-			} catch (BAV_TestAPIException_Validation_BankNotFound $e) {
-				continue;
-				
-			}
-		}
-	}
-	
-	
-	private function testAccount(BAV_Bank $bank, $account) {
-		$results = array();
-		$resultValues = array();
-		foreach ($this->testAPIs as $key => $testAPI) {
-			$result          = $testAPI->getResult($bank, $account);
-			$results[]       = $result;
-			$resultValues[]  = $result->getResult();
-			
-		}
-		
-		if (count(array_unique($resultValues)) == 1) {
-			return;
-			
-		}
-		
-		
-		$resultTranslation = array(
+
+        $count            = ceil(abs($this->lastAccount - $this->firstAccount) / $nodeCount);
+        $firstAccount     = $this->firstAccount + $increment * ($nodeNumber - 1) * ($count + 1);
+
+        if ($nodeCount == $nodeNumber) {
+            $afterLastAccount = $this->lastAccount + $increment;
+
+        } else {
+            $afterLastAccount = $firstAccount + $increment * ($count + 1);
+
+        }
+
+        foreach ($backend->getAllBanks() as $bank) {
+            try {
+                if (array_key_exists($bank->getValidationType(), $this->testedValidators)
+                     && ! $bank->getValidator() instanceof BAV_Validator_BankDependent) {
+
+                     continue;
+
+                }
+
+                for ($account = $firstAccount; $account != $afterLastAccount; $account += $increment) {
+                    for ($pad = strlen($account); $pad <= $padLength; $pad++) {
+                        $paddedAccount = str_pad($account, $pad, "0", STR_PAD_LEFT);
+                        $differences = count($this->differences);
+                        $this->testAccount($bank, $paddedAccount);
+                        if (count($this->differences) > $differences) {
+                            break 2;
+
+                        }
+                    }
+                }
+
+                $this->testedValidators[$bank->getValidationType()] = true;
+
+            } catch (BAV_TestAPIException_Validation_BankNotFound $e) {
+                continue;
+
+            }
+        }
+    }
+
+    private function testAccount(BAV_Bank $bank, $account)
+    {
+        $results = array();
+        $resultValues = array();
+        foreach ($this->testAPIs as $key => $testAPI) {
+            $result          = $testAPI->getResult($bank, $account);
+            $results[]       = $result;
+            $resultValues[]  = $result->getResult();
+
+        }
+
+        if (count(array_unique($resultValues)) == 1) {
+            return;
+
+        }
+
+
+        $resultTranslation = array(
             BAV_TestAPIResult::VALID   => "valid",
             BAV_TestAPIResult::INVALID => "invalid",
             BAV_TestAPIResult::ERROR   => "error"
-		);
-		
-		echo "{$bank->getBankID()}/{$bank->getValidationType()}\t",
-		     str_pad($account, strlen($this->lastAccount)),     "\t";
-		     
-		foreach ($results as $result) {
-			echo "{$result->getTestAPI()->getName()}: ",
-			     str_pad($resultTranslation[$result->getResult()], 8);
-			if ($result instanceof BAV_TestAPIResult_Error) {
-				echo " {$result->getMessage()}";
-				
-			}
-			echo "\t";
-			
-		}
-		echo "\n";
-		
-		$this->differences[] = array($bank, $account, $results);
-	}
-	
-	
+        );
+
+        echo "{$bank->getBankID()}/{$bank->getValidationType()}\t",
+             str_pad($account, strlen($this->lastAccount)), "\t";
+
+        foreach ($results as $result) {
+            echo "{$result->getTestAPI()->getName()}: ",
+                 str_pad($resultTranslation[$result->getResult()], 8);
+            if ($result instanceof BAV_TestAPIResult_Error) {
+                echo " {$result->getMessage()}";
+
+            }
+            echo "\t";
+
+        }
+        echo "\n";
+
+        $this->differences[] = array($bank, $account, $results);
+    }
 }
+
 new BAV_CheckAgainstTestAPIs();
-
-
-?>

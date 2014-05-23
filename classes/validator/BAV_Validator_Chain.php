@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * This class offers support for algorithmns which uses more algorithmns
  *
@@ -30,15 +27,13 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_Validator_Chain extends BAV_Validator {
+class BAV_Validator_Chain extends BAV_Validator
+{
 
-
-    protected
     /**
      * @var Array a list of validators
      */
-    $validators = array();
-
+    protected $validators = array();
 
     /**
      * Adds a validator to the chain
@@ -47,55 +42,57 @@ class BAV_Validator_Chain extends BAV_Validator {
      *
      * @return void
      */
-    public function addValidator(BAV_Validator $validator) {
+    public function addValidator(BAV_Validator $validator)
+    {
         $this->validators[] = $validator;
     }
-
 
     /**
      * Iterates through the validators.
      *
      * @return bool
      */
-    protected function getResult() {
+    protected function getResult()
+    {
         foreach ($this->validators as $validator) {
             if (! $this->continueValidation($validator)) {
                 return false;
-                
+
             }
             if ($this->useValidator($validator) && $validator->isValid($this->account)) {
                 return true;
-            
+
             }
-        
+
         }
         return false;
     }
+
     /**
      * should not be used
      */
-    final protected function validate() {
+    final protected function validate()
+    {
     }
+
     /**
      * After each successless iteration step this method will be called and
      * should return if the iteration should stop and the account is invalid.
      *
      * @return bool
      */
-    protected function continueValidation(BAV_Validator $validator) {
+    protected function continueValidation(BAV_Validator $validator)
+    {
         return true;
     }
+
     /**
      * Decide if you really want to use this validator
      *
      * @return bool
      */
-    protected function useValidator(BAV_Validator $validator) {
+    protected function useValidator(BAV_Validator $validator)
+    {
         return true;
     }
-    
-
 }
-
-
-?>

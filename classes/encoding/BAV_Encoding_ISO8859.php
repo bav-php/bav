@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * This wrapper supports PHP's built-in functions for the ISO-8859-* encodings.
  *
@@ -29,47 +26,50 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_Encoding_ISO8859 extends BAV_Encoding {
+class BAV_Encoding_ISO8859 extends BAV_Encoding
+{
 
     /**
      * @return bool
      */
-    static public function isSupported($encoding) {
+    public static function isSupported($encoding)
+    {
         return preg_match('~^ISO-8859-([1-9]|1[0-5])$~', $encoding);
     }
+
     /**
      * @return int length of $string
      */
-    public function strlen($string) {
+    public function strlen($string)
+    {
         return strlen($string);
     }
+
     /**
      * @param String $string
      * @param int $offset
      * @param int $length
      * @return String
      */
-    public function substr($string, $offset, $length = null) {
+    public function substr($string, $offset, $length = null)
+    {
         return is_null($length)
              ? substr($string, $offset)
              : substr($string, $offset, $length);
     }
+
     /**
      * @throws BAV_EncodingException
      * @param String $string
      * @param String $from_encoding
      * @return $string the encoded string
      */
-    public function convert($string, $from_encoding) {
+    public function convert($string, $from_encoding)
+    {
         if ($from_encoding == $this->enc) {
             return $string;
-        
+
         }
         throw new BAV_EncodingException();
     }
-
-
 }
-
-
-?>

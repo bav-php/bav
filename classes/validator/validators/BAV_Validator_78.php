@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * Implements 78
  *
@@ -22,23 +19,18 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+class BAV_Validator_78 extends BAV_Validator_00
+{
 
-
-class BAV_Validator_78 extends BAV_Validator_00 {
-
-
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
         $this->setWeights(array(2, 1));
     }
-    
-    
-    public function isValid($account) {
+
+    public function isValid($account)
+    {
         return strlen($account) !== 8 && parent::isValid($account);
     }
-
-
 }
-
-?>

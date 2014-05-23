@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * Implements 11
  *
@@ -22,19 +19,18 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+class BAV_Validator_11 extends BAV_Validator_06
+{
 
-
-class BAV_Validator_11 extends BAV_Validator_06 {
-
-
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
         $this->setWeights(array(2, 3, 4, 5, 6, 7, 8, 9, 10));
     }
-    
-    
-    protected function getResult() {
+
+    protected function getResult()
+    {
         $result = 11 - $this->accumulator % 11;
         switch ($result) {
             case 11:
@@ -46,8 +42,4 @@ class BAV_Validator_11 extends BAV_Validator_06 {
         }
         return (string)$result === $this->getCheckNumber();
     }
-
-
 }
-
-?>

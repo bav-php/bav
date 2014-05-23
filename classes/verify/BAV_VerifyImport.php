@@ -1,14 +1,5 @@
 <?php
 
-
-
-
-
-
-
-
-
-
 /**
  * This class offers methods for importing a verify.ini
  *
@@ -38,51 +29,56 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * BAV_DataBackend
- * 
+ *
  * @package classes
  * @subpackage verify
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_VerifyImport extends BAV {
+class BAV_VerifyImport extends BAV
+{
 
-
-    private
     /**
      * @var Array Numbers which are valid
      */
-    $validNumbers   = array(),
+    private $validNumbers   = array();
+
     /**
      * @var Array Numbers which aren't valid
      */
-    $invalidNumbers = array(),
+    private $invalidNumbers = array();
+
     /**
      * @var BAV_DataBackend
      */
-    $dataBackend;
-
+    private $dataBackend;
 
     /**
      * @param BAV_DataBackend $dataBackend The backend is needed to get the validation algorithm.
      */
-    public function __construct(BAV_DataBackend $dataBackend) {
+    public function __construct(BAV_DataBackend $dataBackend)
+    {
         $this->dataBackend = $dataBackend;
     }
+
     /**
      * @return String
      */
-    private function getFile($file) {
+    private function getFile($file)
+    {
         return is_null($file)
              ? __DIR__.'/../../data/verify.ini'
              : $file;
     }
+
     /**
      * Imports an existing verify.ini.
      *
      * @param string $file
      * @throws BAV_VerifyException
      */
-    public function importVerifyFile($file = NULL) {
+    public function importVerifyFile($file = null)
+    {
         $file   = $this->getFile($file);
         $verify = parse_ini_file($file, true);
         if (! $verify) {
@@ -90,13 +86,15 @@ class BAV_VerifyImport extends BAV {
 
         }
 
-        $this->mergeVerifyArray($verify['valid'],   $this->validNumbers);
+        $this->mergeVerifyArray($verify['valid'], $this->validNumbers);
         $this->mergeVerifyArray($verify['invalid'], $this->invalidNumbers);
     }
+
     /**
      * Merges a string array of an existing verify.ini
      */
-    private function mergeVerifyArray($verifyArray, & $targetArray) {
+    private function mergeVerifyArray($verifyArray, & $targetArray)
+    {
         if (! is_array($verifyArray)) {
             return;
 
@@ -112,6 +110,7 @@ class BAV_VerifyImport extends BAV {
 
         }
     }
+
     /**
      * @param string $bankID
      * @param string $accountID
@@ -119,7 +118,8 @@ class BAV_VerifyImport extends BAV {
      * @throws BAV_DataBackendException_BankNotFound
      * @throws BAV_DataBackendException
      */
-    public function import($bankID, $accountID, $isValid = true) {
+    public function import($bankID, $accountID, $isValid = true)
+    {
         $bankID     = $this->normalize($bankID);
         $accountID  = $this->normalize($accountID);
         $bank       = $this->dataBackend->getBank($bankID);
@@ -134,20 +134,24 @@ class BAV_VerifyImport extends BAV {
 
         }
     }
+
     /**
      * Removes all none numeric characters from $id.
      *
      * @param string $id
      * @return string
      */
-    private function normalize($id) {
+    private function normalize($id)
+    {
         return (string) preg_replace('~\D+~', '', $id);
     }
+
     /**
      * @param string $filePath The file where the arrays are saved (default's to ../../data/verify.ini)
      * @throws BAV_VerifyException_IO
      */
-    public function save($file = null) {
+    public function save($file = null)
+    {
         $file = $this->getFile($file);
         $fp   = fopen($file, 'w');
         if (! is_resource($fp)) {
@@ -156,22 +160,24 @@ class BAV_VerifyImport extends BAV {
         }
         try {
             $this->saveArray($fp, $this->invalidNumbers, 'invalid');
-            $this->saveArray($fp, $this->validNumbers,   'valid');
+            $this->saveArray($fp, $this->validNumbers, 'valid');
             fclose($fp);
-        
+
         } catch (BAV_VerifyException_IO $e) {
             fclose($fp);
             throw $e;
 
         }
     }
+
     /**
      * @param Resource $fp Filepointer
      * @param Array $array Array with bank IDs
      * @param String $name Name of the section
      * @throws BAV_VerifyException_IO
      */
-    private function saveArray($fp, Array $array, $name) {
+    private function saveArray($fp, Array $array, $name)
+    {
         if (! fwrite($fp, "\n\n".'['.$name.']')) {
             throw new BAV_VerifyException_IO();
 
@@ -195,18 +201,15 @@ class BAV_VerifyImport extends BAV {
 
         }
     }
+
     /**
      * @param String $bankID
      * @return String
      * @throws BAV_DataBackendException_BankNotFound
      * @throws BAV_DataBackendException
      */
-    private function bankIDToType($bankID) {
+    private function bankIDToType($bankID)
+    {
         return $this->dataBackend->getBank($bankID)->getValidationType();
     }
-
-
 }
-
-
-?>

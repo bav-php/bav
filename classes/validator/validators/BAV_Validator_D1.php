@@ -1,10 +1,5 @@
 <?php
 
-
-
-
-
-
 /**
  * Copyright (C) 2010  Markus Malkusch <markus@malkusch.de>
  *
@@ -28,14 +23,13 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2010 Markus Malkusch
  */
-class BAV_Validator_D1 extends BAV_Validator {
+class BAV_Validator_D1 extends BAV_Validator
+{
 
-
-    static private
-	/**
-	 * @var Array
-	 */
-	$_transformation = array(
+    /**
+     * @var Array
+     */
+    private static $transformation = array(
         0 => 4363380,
         1 => 4363381,
         2 => 4363382,
@@ -45,60 +39,57 @@ class BAV_Validator_D1 extends BAV_Validator {
         6 => 4363386,
         7 => 4363387,
         9 => 4363389
-	);
+    );
 
-    
-    protected
     /**
      * @var String
      */
-    $transformedAccount = '',
+    protected $transformedAccount = '';
+
     /**
      * @var BAV_Validator_00
      */
-    $validator;
-    
-    
-    public function __construct(BAV_Bank $bank) {
+    protected $validator;
+
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
-        
+
         $this->validator = new BAV_Validator_00($bank);
     }
 
-
-    protected function validate() {
-        $transformationIndex = $this->_getTransformationIndex();
-        if (! array_key_exists($transformationIndex, self::$_transformation)) {
+    protected function validate()
+    {
+        $transformationIndex = $this->getTransformationIndex();
+        if (! array_key_exists($transformationIndex, self::$transformation)) {
             return;
 
         }
-        $transformationPrefix = self::$_transformation[$transformationIndex];
+        $transformationPrefix = self::$transformation[$transformationIndex];
         $this->validator->setNormalizedSize(10 + strlen($transformationPrefix));
-        $this->transformedAccount 
+        $this->transformedAccount
             = $transformationPrefix . substr($this->account, 1);
     }
-    
-    
+
     /**
      * @return bool
      */
-    protected function getResult() {
-        return 
+    protected function getResult()
+    {
+        return
             array_key_exists(
-                $this->_getTransformationIndex(),
-                self::$_transformation
+                $this->getTransformationIndex(),
+                self::$transformation
             )
             &&
             $this->validator->isValid($this->transformedAccount);
     }
 
-
     /**
      * @return int
      */
-    private function _getTransformationIndex() {
+    private function getTransformationIndex()
+    {
         return $this->account{0};
     }
-    
-
 }

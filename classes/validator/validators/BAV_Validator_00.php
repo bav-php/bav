@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * Implements 00
  *
@@ -22,30 +19,26 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+class BAV_Validator_00 extends BAV_Validator_Iteration_Weighted
+{
 
-
-class BAV_Validator_00 extends BAV_Validator_Iteration_Weighted {
-
-
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
-        
+
         $this->setWeights(array(2, 1));
         $this->setDivisor(10);
     }
 
-
-    protected function iterationStep() {
+    protected function iterationStep()
+    {
         $this->accumulator += $this->crossSum($this->number * $this->getWeight());
     }
 
-
-    protected function getResult() {
+    protected function getResult()
+    {
         $result = $this->divisor - ($this->accumulator % $this->divisor);
         $result = ($result == $this->divisor) ? 0 : $result;
         return (string)$result === $this->getCheckNumber();
     }
-
 }
-
-?>

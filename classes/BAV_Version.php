@@ -1,7 +1,5 @@
 <?php
 
-
-
 /**
  * A class for handling versions
  *
@@ -20,142 +18,135 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- * 
- * 
+ *
+ *
  * @package classes
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_Version extends BAV {
+class BAV_Version extends BAV
+{
 
-    
-    static private
     /**
      * @var BAV_Version
      */
-    $phpVersion;
-    
-    
-    private
+    private static $phpVersion;
+
     /**
      * @var array
      */
-    $elements = array(),
+    private $elements = array();
+
     /**
      * @var string
      */
-    $separator = '';
-    
-    
+    private $separator = '';
+
     /**
      * @param string $version
      * @param string $separator
      */
-    public function __construct($version, $separator = '.') {
+    public function __construct($version, $separator = '.')
+    {
         $this->separator = $separator;
         $this->elements  = explode($separator, $version);
     }
-    
-    
+
     /**
      * @return boolean
      */
-    public function isGreater(BAV_Version $version) {
+    public function isGreater(BAV_Version $version)
+    {
         $thoseElements = $version->getElements(count($this->elements));
         $thisElements  = $this->getElements(count($thoseElements));
-        
+
         foreach ($thisElements as $i => $thisElement) {
             if ($thoseElements[$i] !== $thisElement) {
-                return $this->_isGreater($thisElement, $thoseElements[$i]);
-                
+                return $this->isGreater($thisElement, $thoseElements[$i]);
+
             }
-            
+
         }
         return false;
     }
-    
-    
+
     /**
      * @return boolean
      */
-    public function equals(BAV_Version $version) {
+    public function equals(BAV_Version $version)
+    {
         $thoseElements = $version->getElements(count($this->elements));
         $thisElements  = $this->getElements(count($thoseElements));
-        
+
         return $thoseElements == $thisElements;
     }
-    
-    
+
     /**
      * @return boolean
      */
-    public function isLesser(BAV_Version $version) {
+    public function isLesser(BAV_Version $version)
+    {
         return ! $this->equals($version) && ! $this->isGreater($version);
     }
-    
-    
+
     /**
      * @return string
      */
-    public function getString() {
+    public function getString()
+    {
         return implode($this->separator, $this->elements);
     }
-    
-    
+
     /**
      * @return string
      */
-    public function getNormalizedVersion() {
+    public function getNormalizedVersion()
+    {
         $elements = array_merge($this->elements);
         for ($i = count($elements) - 1; $i > 0; $i--) {
             $lastElement = array_pop($elements);
             if ($lastElement !== '0') {
                 $elements[] = $lastElement;
                 break;
-                
+
             }
-            
+
         }
         return implode($this->separator, $elements);
     }
-    
-    
+
     /**
      * @param string $left
      * @param string $right
      * @return boolean
      */
-    private function _isGreater($left, $right) {
+    private function isGreater($left, $right)
+    {
         return $left > $right;
     }
-    
-    
+
     /**
      * @param int $padding
      * @return array
      */
-    private function getElements($padding = null) {
+    private function getElements($padding = null)
+    {
         if (is_null($padding) || count($this->elements) >= $padding) {
             return $this->elements;
-            
+
         }
         return array_pad($this->elements, $padding, '0');
     }
-    
-    
+
     /**
      * @return BAV_Version
      */
-    static public function getPHPVersion() {
+    public static function getPHPVersion()
+    {
         if (empty(self::$phpVersion)) {
             self::$phpVersion = new BAV_Version(phpversion());
-            
+
         }
         return self::$phpVersion;
     }
-
-
 }
-
- 
-?>

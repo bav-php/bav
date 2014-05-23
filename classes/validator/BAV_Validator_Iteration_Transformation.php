@@ -1,7 +1,5 @@
 <?php
 
-
-
 /**
  * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
@@ -25,61 +23,65 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-abstract class BAV_Validator_Iteration_Transformation extends BAV_Validator_Iteration {
+abstract class BAV_Validator_Iteration_Transformation extends BAV_Validator_Iteration
+{
 
-
-    private
     /**
      * @var Array
      */
-    $rowIteration = array(),
+    private $rowIteration = array();
+
     /**
      * @var Array
      */
-    $matrix = array();
-    
-    
+    private $matrix = array();
+
     /**
      * The iteration step
      */
-    protected function iterationStep() {
+    protected function iterationStep()
+    {
         $this->accumulator += $this->getTransformedNumber();
     }
+
     /**
      */
-    public function setMatrix(Array $matrix) {
+    public function setMatrix(Array $matrix)
+    {
         $this->matrix = $matrix;
         if (empty($this->rowIteration)) {
-            for($i = 0; $i < count($matrix); $i++) {
+            for ($i = 0; $i < count($matrix); $i++) {
                 $this->rowIteration[] = $i;
-            
+
             }
-            
+
         }
     }
+
     /**
      */
-    public function setRowIteration(Array $rowIteration) {
+    public function setRowIteration(Array $rowIteration)
+    {
         $this->rowIteration = $rowIteration;
     }
+
     /**
      * @return array
      */
-    protected function getTransformationRow() {
+    protected function getTransformationRow()
+    {
         return $this->matrix[$this->rowIteration[$this->i % count($this->rowIteration)]];
     }
+
     /**
      * @param int $i
      * @return int
      */
-    protected function getTransformedNumber() {
+    protected function getTransformedNumber()
+    {
         $row = $this->getTransformationRow();
         return array_key_exists($this->number, $row)
              ? $row[$this->number]
              : 0;
     }
-
 }
-
-
-?>

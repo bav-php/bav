@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * Implements 67
  *
@@ -22,21 +19,15 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+class BAV_Validator_67 extends BAV_Validator_00
+{
 
-
-class BAV_Validator_67 extends BAV_Validator_00 {
-
-
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
         $this->setWeights(array(2, 1));
         $this->setStart(-4);
         $this->setChecknumberPosition(-3);
     }
-
-
 }
-
-
-?>

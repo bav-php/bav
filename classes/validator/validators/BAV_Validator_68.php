@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 /**
  * implements 68
  *
@@ -29,52 +25,49 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_Validator_68 extends BAV_Validator_Chain {
+class BAV_Validator_68 extends BAV_Validator_Chain
+{
 
-
-    private
     /**
      * @var BAV_Validator_10
      */
-    $validator10;
+    private $validator10;
 
-
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
-        
+
         $this->validator10  = new BAV_Validator_00($bank);
         $this->validator10->setEnd(3);
-        
+
         $this->validators[] = new BAV_Validator_00($bank);
-        
+
         $this->validators[] = new BAV_Validator_00($bank);
         $this->validators[1]->setWeights(array(2, 1, 2, 1, 2, 0, 0, 1));
     }
-    
-    
-    public function isValid($account) {
+
+    public function isValid($account)
+    {
         switch (strlen($account)) {
-        
+
             case 10:
                 return $account{3} == 9 && $this->validator10->isValid($account);
-                
+
             case 9:
                 if ($account >= 400000000 && $account <= 499999999) {
                     return false;
-                
+
                 }
-                
-            case 6: case 7: case 8: case 9:
                 return parent::isValid($account);
-        
+
+            case 6:
+            case 7:
+            case 8:
+                return parent::isValid($account);
+
             default:
                 return false;
-        
+
         }
     }
-
-
 }
-
-
-?>

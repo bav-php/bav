@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 /**
  * Implements 93
  *
@@ -23,40 +19,34 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+class BAV_Validator_93 extends BAV_Validator_Chain
+{
 
-
-class BAV_Validator_93 extends BAV_Validator_Chain {
-
-
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
-        
+
         $this->validators[] = new BAV_Validator_06($bank);
         $this->validators[0]->setWeights(array(2, 3, 4, 5, 6));
         $this->validators[0]->setEnd(4);
-        
+
         $this->validators[] = new BAV_Validator_06($bank);
         $this->validators[1]->setWeights(array(2, 3, 4, 5, 6));
         $this->validators[1]->setEnd(4);
         $this->validators[1]->setDivisor(7);
     }
-    
-    
+
     /**
      * @throws BAV_ValidatorException_OutOfBounds
      * @param int $int
      */
-    protected function normalizeAccount($size) {
+    protected function normalizeAccount($size)
+    {
         parent::normalizeAccount($size);
         if (substr($this->account, 0, 4) !== '0000') {
             $this->account = '0000'.substr($this->account, 0, 6);
-            
+
         }
     }
-
-
 }
-
-
-?>

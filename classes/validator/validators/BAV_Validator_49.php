@@ -1,10 +1,5 @@
 <?php
 
-
-
-
-
-
 /**
  * implements 49
  *
@@ -30,20 +25,16 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_Validator_49 extends BAV_Validator_Chain {
-
+class BAV_Validator_49 extends BAV_Validator_Chain
+{
 
     /**
      */
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
-        
+
         $this->validators[] = new BAV_Validator_00($bank);
         $this->validators[] = new BAV_Validator_01($bank);
     }
-
-
 }
-
-
-?>

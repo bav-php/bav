@@ -26,35 +26,34 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
+class ValidatorTest extends PHPUnit_Framework_TestCase
+{
 
-
-class ValidatorTest extends PHPUnit_Framework_TestCase {
-
-
-    private static
     /**
      * @var BAV_DataBackend
      */
-    $dataBackend,
+    private static $dataBackend;
+
     /**
      * @var array This array contains all names of implemented algorithms as keys.
      */
-    $implementedBanks = array(),
+    private static $implementedBanks = array();
+
     /**
      * @var array all known banks
      */
-    $knownBanks = array();
-
+    private static $knownBanks = array();
 
     /**
      * @throws BAV_FileParserException_IO
      * @throws BAV_FileParserException_FileNotExists
      */
-    protected function setUp() {
-    	if (! empty(self::$dataBackend)) {
-    		return;
-    		
-    	}
+    protected function setUp()
+    {
+        if (! empty(self::$dataBackend)) {
+            return;
+
+        }
         #self::$dataBackend = new BAV_DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
         self::$dataBackend = new BAV_DataBackend_File();
 
@@ -64,18 +63,18 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
 
         }
     }
-    
-    
+
     /**
      * @return Array
      */
-    public function provideBanks() {
-    	$this->setUp();
-    	
-    	$banks = array();
+    public function provideBanks()
+    {
+        $this->setUp();
+
+        $banks = array();
         $files = BAV_ClassFile::getClassFiles(__DIR__.'/../classes/validator/validators/');
         foreach ($files as $class) {
-           if (! preg_match('~^BAV_Validator_([A-Z0-9]{2})$~', $class->getName(), $matchType)) {
+            if (! preg_match('~^BAV_Validator_([A-Z0-9]{2})$~', $class->getName(), $matchType)) {
                 continue;
 
             }
@@ -86,27 +85,26 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
 
             $banks[] = array($bank);
             self::$implementedBanks[$validatorType] = $bank;
-            
+
         }
         return $banks;
     }
-    
-    
+
     /**
      * @return Array
      */
-    public function provideAccountsAndBanksInAllLengths() {
+    public function provideAccountsAndBanksInAllLengths()
+    {
         $providedAccountsAndBanks = array();
         foreach ($this->provideBanks() as $bank) {
             $bank = $bank[0];
             for ($length = 0; $length <= 10; $length++) {
                 $providedAccountsAndBanks[] = array($bank, str_repeat(1, $length));
-                
+
             }
         }
         return $providedAccountsAndBanks;
     }
-
 
     /**
      * This Test runs all validators in order to find parse Errors
@@ -117,17 +115,17 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
      * @throws BAV_ClassFileException_MissingClass
      * @dataProvider provideBanks
      */
-    public function testFindParseErrors(BAV_Bank $bank) {
-    	/**
+    public function testFindParseErrors(BAV_Bank $bank)
+    {
+        /**
          * testing 10 random bank accounts
          */
         for ($i = 0; $i < 10; $i++) {
             $bank->isValid(mt_rand(0, 9999999999));
-    
+
         }
     }
-    
-    
+
     /**
      * 0 - 0000000000 should always be invalid
      *
@@ -136,18 +134,18 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
      * @throws BAV_ClassFileException_MissingClass
      * @dataProvider provideBanks
      */
-    public function testNullIsInvalid(BAV_Bank $bank) {
-    	for ($length = 0; $length <= 10; $length++) {
-    		$account = str_pad("0", $length, "0", STR_PAD_LEFT);
-    		$this->assertFalse(
+    public function testNullIsInvalid(BAV_Bank $bank)
+    {
+        for ($length = 0; $length <= 10; $length++) {
+            $account = str_pad("0", $length, "0", STR_PAD_LEFT);
+            $this->assertFalse(
                 $bank->isValid($account),
                 "{$bank->getBankID()}/{$bank->getValidationType()} $account should be invalid."
             );
-    		
-    	}
+
+        }
     }
-    
-    
+
     /**
      * Short accounts should not raise exception.
      *
@@ -156,74 +154,75 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
      * @throws BAV_ClassFileException_MissingClass
      * @dataProvider provideAccountsAndBanksInAllLengths
      */
-    public function testAccountLength(BAV_Bank $bank, $account) {
+    public function testAccountLength(BAV_Bank $bank, $account)
+    {
         $bank->isValid($account);
     }
-    
-    
+
     /**
      * @return Array
      */
-    public function provideTestAccounts() {
+    public function provideTestAccounts()
+    {
         $verifyArray = parse_ini_file(__DIR__.'/../data/verify.ini', true);
         if (! $verifyArray) {
             throw new RuntimeException("couldn't parse verify.ini.");
-            
+
         }
         return array_merge(
-            $this->getTestAccounts($verifyArray['valid'],   true),
+            $this->getTestAccounts($verifyArray['valid'], true),
             $this->getTestAccounts($verifyArray['invalid'], false)
         );
     }
-    
-    
+
     /**
      * @return Array
      */
-    private function getTestAccounts(Array $testAccounts, $expectedValidation) {
-    	$accounts = array();
+    private function getTestAccounts(Array $testAccounts, $expectedValidation)
+    {
+        $accounts = array();
         foreach ($testAccounts as $typeOrBankID => $tests) {
             $accounts[] = array(
                 $typeOrBankID,
                 preg_split(':\D+:', $tests),
                 $expectedValidation
             );
-            
+
         }
         return $accounts;
     }
-    
-    
+
     /**
      * @dataProvider provideTestAccounts
      */
-    public function testAccount($typeOrBankID, Array $accountIDs, $expectedValidation) {
+    public function testAccount($typeOrBankID, Array $accountIDs, $expectedValidation)
+    {
         if (strlen($typeOrBankID) <= 2) {
             $typeOrBankID = (strlen($typeOrBankID) < 2 ? '0' : '').$typeOrBankID;
             $this->assertArrayHasKey($typeOrBankID, self::$implementedBanks);
             $bank = self::$implementedBanks[$typeOrBankID];
-            
+
             $this->assertEquals($typeOrBankID, $bank->getValidationType());
 
         } else {
-        	try {
+            try {
                 $bank = self::$dataBackend->getBank($typeOrBankID);
-                    
+
             } catch (BAV_DataBackendException_BankNotFound $e) {
                 switch ($e->getBankID()) {
-                    
+
                     case '13051052':
                     case '13051172':
                     case '81053132':
                         $bank = new BAV_Bank(self::$dataBackend, $e->getBankID(), '52');
                         break;
-                            
+
                     case '16052072':
                     case '85055142':
                         $bank = new BAV_Bank(self::$dataBackend, $e->getBankID(), '53');
                         break;
 
-                    case '80053762': 
+                    case '80053762':
                     case '80053772':
                     case '80053782':
                         $bank = new BAV_Bank(self::$dataBackend, $e->getBankID(), 'B6');
@@ -233,13 +232,14 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
                     case '86055462':
                         $bank = new BAV_Bank(self::$dataBackend, $e->getBankID(), 'C0');
                         break;
-                    
-                    default: throw $e;
-                        
+
+                    default:
+                        throw $e;
+
                 }
             }
         }
-        
+
         foreach ($accountIDs as $accountID) {
             $this->assertEquals(
                 $expectedValidation,
@@ -249,6 +249,4 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
 
         }
     }
-
-
 }

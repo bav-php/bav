@@ -1,15 +1,13 @@
 <?php
 
-
-
 /**
  * The BAV_DataBackend is an abstract class which is responsable for the
  * datastructure of the banks. If you want to use a custom datastructure
  * you have to implement these methods:
  *
- * install(), update(), uninstall(), getNewBank(), getAllBanks(), _getMainAgency(),
- * _getAgencies()
- * 
+ * install(), update(), uninstall(), getNewBank(), getAllBanks(), getMainAgency(),
+ * getAgencies()
+ *
  * When you use this class you should create only one object. The BAV_DataBackend
  * is designed to keep all created BAV_Bank objects in an array. So you won't get
  * copies of identical BAV_Bank objects. That means if you call two times the
@@ -38,16 +36,14 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-abstract class BAV_DataBackend extends BAV {
+abstract class BAV_DataBackend extends BAV
+{
 
-
-    protected
     /**
      * @var array All created BAV_Bank objects
      */
-    $instances = array();
-    
-    
+    protected $instances = array();
+
     /**
      * You have to call this method to synchronize you're datastructure to the
      * data of the Bundesbank.
@@ -55,12 +51,14 @@ abstract class BAV_DataBackend extends BAV {
      * @throws BAV_DataBackendException
      */
     abstract public function update();
+
     /**
      * Removes the databackend physically.
      *
      * @throws BAV_DataBackendException
      */
     abstract public function uninstall();
+
     /**
      * Installs the databackend. An implementation of install() should also
      * call update() to synchronize to the Bundebank.
@@ -68,6 +66,7 @@ abstract class BAV_DataBackend extends BAV {
      * @throws BAV_DataBackendException
      */
     abstract public function install();
+
     /**
      * With this method you get the BAV_Bank objects for certain IDs. Note
      * that a call to this method with an identical id will return the same
@@ -78,13 +77,15 @@ abstract class BAV_DataBackend extends BAV {
      * @param string
      * @return BAV_Bank
      */
-    public function getBank($bankID) {
+    public function getBank($bankID)
+    {
         if (! isset($this->instances[$bankID])) {
             $this->instances[$bankID] = $this->getNewBank($bankID);
 
         }
         return $this->instances[$bankID];
     }
+
     /**
      * Perhaps you just want to know if a bank exists.
      *
@@ -92,16 +93,18 @@ abstract class BAV_DataBackend extends BAV {
      * @param String $bankID
      * @return bool
      */
-    public function bankExists($bankID) {
+    public function bankExists($bankID)
+    {
         try {
             $this->getBank($bankID);
             return true;
-            
+
         } catch (BAV_DataBackendException_BankNotFound $e) {
             return false;
-        
+
         }
     }
+
     /**
      * Returns an array with all banks. If you implement this method you should
      * also take care that $instances is used an will be filled correctly in order
@@ -111,6 +114,7 @@ abstract class BAV_DataBackend extends BAV {
      * @return array
      */
     abstract public function getAllBanks();
+
     /**
      * This method will be called by getBank() if getBank() thinks it is necessary to
      * create a new object. You have to return the new object and have not to take care
@@ -123,10 +127,8 @@ abstract class BAV_DataBackend extends BAV {
      * @return BAV_Bank
      */
     abstract protected function getNewBank($bankID);
+
     /**
-     * YOU SHOULD NOT CALL THIS METHOD!
-     * Use BAV_Bank->getMainAgency()
-     * 
      * If you implement this method you should return the appropriate BAV_Agency object. This
      * method is called by BAV_Bank->getMainAgency(), if the BAV_Bank object doesn't know its
      * main agency.
@@ -134,12 +136,11 @@ abstract class BAV_DataBackend extends BAV {
      * @throws BAV_DataBackendException
      * @return BAV_Agency
      * @see BAV_Bank::getMainAgency()
+     * @internal YOU SHOULD NOT CALL THIS METHOD! Use BAV_Bank->getMainAgency()
      */
-    abstract public function _getMainAgency(BAV_Bank $bank);
+    abstract public function getMainAgency(BAV_Bank $bank);
+
     /**
-     * YOU SHOULD NOT CALL THIS METHOD!
-     * Use BAV_Bank->getAgencies()
-     * 
      * If you implement this method you should return an array with the appropriate BAV_Agency
      * objects. This method is called by BAV_Bank->getAgencies(), if the BAV_Bank object doesn't
      * know its agencies. A bank may have no agencies and will return an empty array.
@@ -147,11 +148,7 @@ abstract class BAV_DataBackend extends BAV {
      * @throws BAV_DataBackendException
      * @see BAV_Bank::getAgencies()
      * @return array
+     * @internal YOU SHOULD NOT CALL THIS METHOD! Use BAV_Bank->getMainAgency()
      */
-    abstract public function _getAgencies(BAV_Bank $bank);
-
-
+    abstract public function getAgencies(BAV_Bank $bank);
 }
-
-
-?>

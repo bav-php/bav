@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
@@ -26,32 +23,28 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_AgencyException_UndefinedAttribute extends BAV_AgencyException {
+class BAV_AgencyException_UndefinedAttribute extends BAV_AgencyException
+{
 
-
-    private
     /**
      * @var string
      */
-    $attribute = '';
-    
-    
+    private $attribute = '';
+
     /**
      * @param string $attribute
      */
-    public function __construct(BAV_Agency $agency, $attribute) {
+    public function __construct(BAV_Agency $agency, $attribute)
+    {
         parent::__construct($agency);
         $this->attribute = $attribute;
     }
+
     /**
      * @return string
      */
-    public function getAttribute() {
+    public function getAttribute()
+    {
         return $this->attribute;
     }
-
-
 }
-
-
-?>

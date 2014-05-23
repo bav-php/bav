@@ -1,11 +1,5 @@
 <?php
 
-
-
-
-
-
-
 /**
  * Implements D2
  *
@@ -30,26 +24,20 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2010 Markus Malkusch
  */
-class BAV_Validator_D2 extends BAV_Validator_Chain {
-	
-	
-	protected
-	/**
-	 * @var bool
-	 */
-	$doNormalization = false;
+class BAV_Validator_D2 extends BAV_Validator_Chain
+{
 
+    /**
+     * @var bool
+     */
+    protected $doNormalization = false;
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
         $this->validators[] = new BAV_Validator_95($bank);
         $this->validators[] = new BAV_Validator_00($bank);
         $this->validators[] = new BAV_Validator_68($bank);
     }
-
-
 }
-
-
-?>

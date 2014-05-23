@@ -77,14 +77,17 @@ try {
  */
 try {
     $bank = $databack->getBank(10000000);
+
     /**
      * Hmm, what name does this bank have?
      */
     echo "{$bank->getMainAgency()->getName()} {$bank->getMainAgency()->getCity()}\n";
+
     /**
      * Are there any more agencies?
      */
     print_r($bank->getAgencies());
+
     /**
      * And now we want to see if the account 12345 is valid:
      */
@@ -137,7 +140,7 @@ try {
      */
     $agencies = $databackPDO->getAgencies("SELECT id FROM {$databackPDO->getPrefix()}agency LIMIT 10");
     foreach ($agencies as $agency) {
-       echo "Found agency {$agency->getPostcode()} of bank {$agency->getBank()->getBankID()}\n";
+        echo "Found agency {$agency->getPostcode()} of bank {$agency->getBank()->getBankID()}\n";
 
     }
 
@@ -146,10 +149,11 @@ try {
      * You perform better if you provide all attributes of the agency table. Let's
      * try it and search all banks in munich.
      */
-    $agencies = $databackPDO->getAgencies("
-        SELECT * FROM {$databackPDO->getPrefix()}agency
-        WHERE city='München'
-        GROUP BY bank");
+    $agencies = $databackPDO->getAgencies(
+        "SELECT * FROM {$databackPDO->getPrefix()}agency
+           WHERE city='München'
+           GROUP BY bank"
+    );
     foreach ($agencies as $agency) {
         echo "{$agency->getBank()->getBankID()} ({$agency->getName()}, {$agency->getCity()})\n";
 

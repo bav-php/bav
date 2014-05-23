@@ -1,10 +1,5 @@
 <?php
 
-
-
-
-
-
 /**
  * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
@@ -28,53 +23,49 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_Validator_B9 extends BAV_Validator {
+class BAV_Validator_B9 extends BAV_Validator
+{
 
-
-    protected
     /**
      * @var BAV_Validator
      */
-    $validator,
+    protected $validator;
+
     /**
      * @var BAV_Validator_B9a
      */
-    $mode1,
+    protected $mode1;
+
     /**
      * @var BAV_Validator_B9b
      */
-    $mode2;
+    protected $mode2;
 
-
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
-        
+
         $this->mode1 = new BAV_Validator_B9a($bank);
         $this->mode2 = new BAV_Validator_B9b($bank);
     }
-    
-    
-    protected function validate() {
+
+    protected function validate()
+    {
         if (! preg_match('~^000?[^0]~', $this->account)) {
             $this->validator = null;
             return;
-        
+
         }
         $this->validator = substr($this->account, 0, 3) === '000'
                          ? $this->mode2
                          : $this->mode1;
     }
-    
-    
+
     /**
      * @return bool
      */
-    protected function getResult() {
+    protected function getResult()
+    {
         return ! is_null($this->validator) && $this->validator->isValid($this->account);
     }
-    
-
 }
-
-
-?>

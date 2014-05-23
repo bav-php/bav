@@ -1,7 +1,5 @@
 <?php
 
-
-
 /**
  * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
@@ -25,43 +23,42 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_ClassFileException_MissingClass extends BAV_ClassFileException {
+class BAV_ClassFileException_MissingClass extends BAV_ClassFileException
+{
 
-
-    private
     /**
      * @var string
      */
-    $className = '',
+    private $className = '';
+
     /**
      * @var string
      */
-    $missingClassName = '';
-    
-    
+    private $missingClassName = '';
+
     /**
      * @param string $className
      * @param string $missingClassName
      */
-    public function __construct($className, $missingClassName) {
+    public function __construct($className, $missingClassName)
+    {
         $this->className        = $className;
         $this->missingClassName = $missingClassName;
     }
+
     /**
      * @return string
      */
-    public function getClassName() {
+    public function getClassName()
+    {
         return $this->className;
     }
+
     /**
      * @return string
      */
-    public function getMissingClassName() {
+    public function getMissingClassName()
+    {
         return $this->missingClassName;
     }
-
-
 }
-
-
-?>

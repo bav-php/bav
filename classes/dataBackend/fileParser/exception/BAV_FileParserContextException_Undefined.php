@@ -1,7 +1,5 @@
 <?php
 
-
-
 /**
  * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
@@ -25,10 +23,7 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_FileParserContextException_Undefined extends BAV_FileParserContextException {
-
+class BAV_FileParserContextException_Undefined extends BAV_FileParserContextException
+{
 
 }
-
-
-?>

@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 /**
  * This class is used for debugging purposes. An Object contains the path to the class
  * and can create instances.
@@ -23,43 +19,43 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- * 
- * 
+ *
+ *
  * @package classes
  */
-class BAV_ClassFile extends BAV {
+class BAV_ClassFile extends BAV
+{
 
-
-    private
     /**
      * @var string The path to the class
      */
-    $path = '',
+    private $path = '';
+
     /**
      * @var string the name of the class
      */
-    $name = '',
+    private $name = '';
+
     /**
      * @var BAV_ClassFile the parent class
      */
-    $parent = null,
+    private $parent = null;
+
     /**
      * @var array contains BAV_ClassFile objects which are needed by this class
      */
-    $neededClasses = array(),
+    private $neededClasses = array();
+
     /**
      * @var string The class definition
      */
-    $classDefinition = '';
-    
-    
-    static private
+    private $classDefinition = '';
+
     /**
      * @var array
      */
-    $instances = array();
-    
-    
+    private static $instances = array();
+
     /**
      * The constructor loads the class definition and parses it to initialize
      * {@link $parent} and {@link $neededClasses}.
@@ -67,17 +63,18 @@ class BAV_ClassFile extends BAV {
      * @throws BAV_ClassFileException_MissingClass
      * @param string $path
      */
-    private function  __construct($path) {
-        $this->path          = $path;
-        $this->name          = basename($path, '.php');
-        
-        
+    private function __construct($path)
+    {
+        $this->path = $path;
+        $this->name = basename($path, '.php');
+
+
         /**
          * Load the class definition
          */
         require_once $this->path;
-        
-        
+
+
         /**
          * check parent class
          */
@@ -85,111 +82,116 @@ class BAV_ClassFile extends BAV {
         foreach ($matches[1] as $match) {
             if (! isset($this->neededClasses[$match])) {
                 throw new BAV_ClassFileException_MissingClass($this->name, $match);
-                
+
             }
             $this->parent                  = $this->neededClasses[$match];
             $this->neededClasses['parent'] = $this->parent;
             break;
         }
-        
-        
+
+
         /**
          * check needed classes
          */
         preg_match_all(':new +([a-zA-Z0-9_]+)\(:', $this->getClassDefinition(), $matchesNew);
-        preg_match_all('/([a-zA-Z0-9_]+)::/',      $this->getClassDefinition(), $matchesStatic);
+        preg_match_all('/([a-zA-Z0-9_]+)::/', $this->getClassDefinition(), $matchesStatic);
         foreach (array_merge($matchesNew[1], $matchesStatic[1]) as $match) {
             if (! isset($this->neededClasses[$match])) {
                 throw new BAV_ClassFileException_MissingClass($this->name, $match);
-                
+
             }
         }
     }
+
     /**
      * @throws BAV_ClassFileException_MissingClass
      * @param string $path
      * @return BAV_ClassFile
      */
-    static public function getClassFile($path) {
+    public static function getClassFile($path)
+    {
         if (! isset(self::$instances[$path])) {
             self::$instances[$path] = new self($path);
-        
+
         }
         return self::$instances[$path];
     }
+
     /**
      * @throws BAV_ClassFileException_IO
      * @throws BAV_ClassFileException_MissingClass
      * @param string $dir
      * @return array BAV_ClassFile objects
      */
-    static public function getClassFiles($dir) {
+    public static function getClassFiles($dir)
+    {
         $classFiles = array();
         $dh         = opendir($dir);
         if (! $dh) {
             throw new BAV_ClassFileException_IO();
-        
+
         }
         while (($file = readdir($dh)) !== false) {
             $path = $dir.$file;
             if (is_file($path)) {
                 $classFiles[] = self::getClassFile($path);
-                
+
             }
         }
         closedir($dh);
         return $classFiles;
     }
+
     /**
      * @return BAV a new instance of {@link $name}
      */
-    public function getInstance() {
+    public function getInstance()
+    {
         if (func_num_args() == 0) {
             return new $this->name();
 
         }
         $argStr = '';
         $args   = func_get_args();
-        for($i = 0; $i < func_num_args(); $i++) {
+        for ($i = 0; $i < func_num_args(); $i++) {
             $argStr .= '$args['.$i.'], ';
 
         }
         eval('$instance = new $this->name('.substr($argStr, 0, -2).');');
         return $instance;
     }
+
     /**
      * @throws BAV_ClassFileException_IO
      * @return string
      */
-    public function getClassDefinition() {
+    public function getClassDefinition()
+    {
         if (is_null($this->classDefinition)) {
             $this->classDefinition = '';
             $fp                    = fopen($this->path, 'r');
             if (! $fp) {
                 throw new BAV_ClassFileException_IO();
-                
+
             }
             $this->classDefinition = fread($fp, filesize($this->path));
             fclose($fp);
-            
-            
+
+
             /**
              * delete comments
              */
             $this->classDefinition = preg_replace('_/\*.*\*/_sU', '', $this->classDefinition);
-            
+
         }
         return $this->classDefinition;
     }
+
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
-    
-
-} 
- 
- 
-?>
+}

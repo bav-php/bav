@@ -1,10 +1,5 @@
 <?php
 
-
-
-
-
-
 /**
  * Implements 80
  *
@@ -24,47 +19,41 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+class BAV_Validator_80 extends BAV_Validator_Chain
+{
 
-
-class BAV_Validator_80 extends BAV_Validator_Chain {
-
-
-    private
     /**
      * @var array
      */
-    $defaultValidators = array(),
+    private $defaultValidators = array();
+
     /**
      * @var array
      */
-    $exceptionValidators = array();
+    private $exceptionValidators = array();
 
-
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
         $this->defaultValidators[] = new BAV_Validator_00($bank);
         $this->defaultValidators[0]->setEnd(4);
-        
+
         $this->defaultValidators[] = new BAV_Validator_00($bank);
         $this->defaultValidators[1]->setEnd(4);
         $this->defaultValidators[1]->setDivisor(7);
-        
+
         $this->exceptionValidators = BAV_Validator_51::getExceptionValidators($bank);
     }
-    
-    
+
     /**
      */
-    protected function init($account) {
+    protected function init($account)
+    {
         parent::init($account);
-        
+
         $this->validators = $this->account{2} == 9
                           ? $this->exceptionValidators
                           : $this->defaultValidators;
     }
-
-
 }
-
-?>

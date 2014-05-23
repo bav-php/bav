@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 /**
  * Implements 89
  *
@@ -23,40 +19,33 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+class BAV_Validator_89 extends BAV_Validator_06
+{
 
-
-class BAV_Validator_89 extends BAV_Validator_06 {
-
-
-    private
     /**
      * @var BAV_Validator_10
      */
-    $validator10;
+    private $validator10;
 
-
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
         $this->setWeights(array(2, 3, 4, 5, 6, 7));
         $this->setEnd(3);
-        
+
         $this->validator10 = new BAV_Validator_10($bank);
     }
-    
-    
-    protected function iterationStep() {
+
+    protected function iterationStep()
+    {
         $this->accumulator += $this->crossSum($this->number * $this->getWeight());
     }
-    
-    
-    public function isValid($account) {
+
+    public function isValid($account)
+    {
         $length = strlen(ltrim($account, '0'));
         return (($length == 8 || $length == 9) && $this->validator10->isValid($account))
             || ($length == 7 && parent::isValid($account));
     }
-
-
 }
-
-?>

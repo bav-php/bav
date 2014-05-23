@@ -1,7 +1,5 @@
 <?php
 
-
-
 /**
  * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
@@ -25,29 +23,25 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_DataBackendException_BankNotFound extends BAV_DataBackendException {
+class BAV_DataBackendException_BankNotFound extends BAV_DataBackendException
+{
 
-
-    private
     /**
      * @var string
      */
-    $bankID;
-    
-    
-    public function __construct($bankID) {
+    private $bankID;
+
+    public function __construct($bankID)
+    {
         parent::__construct("bank $bankID not found");
         $this->bankID = $bankID;
     }
+
     /**
      * @return string
      */
-    public function getBankID() {
+    public function getBankID()
+    {
         return $this->bankID;
     }
-
-
 }
-
-
-?>

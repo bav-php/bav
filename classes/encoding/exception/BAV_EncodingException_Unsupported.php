@@ -1,7 +1,5 @@
 <?php
 
-
-
 /**
  * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
@@ -25,30 +23,26 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_EncodingException_Unsupported extends BAV_EncodingException {
+class BAV_EncodingException_Unsupported extends BAV_EncodingException
+{
 
-
-    private
     /**
      * @var String
      */
-    $encoding = '';
-    
-    
-    public function __construct($encoding) {
+    private $encoding = '';
+
+    public function __construct($encoding)
+    {
         parent::__construct();
-        
+
         $this->encoding = $encoding;
     }
+
     /**
      * @return String
      */
-    public function getEncoding() {
+    public function getEncoding()
+    {
         return $this->encoding;
     }
-
-
 }
-
-
-?>

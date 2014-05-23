@@ -1,8 +1,4 @@
-<?php 
-
-
-
-
+<?php
 
 /**
  * BAV is the super class of the Bank Account Validator project.
@@ -31,25 +27,25 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-abstract class BAV {
+abstract class BAV
+{
 
-
-    static protected
     /**
      * @var BAV_Encoding
      */
-    $encoding;
+    protected static $encoding;
 
-
-    static public function classConstructor() {
+    public static function classConstructor()
+    {
         try {
             self::setEncoding('UTF-8');
-            
+
         } catch (BAV_EncodingException_Unsupported $e) {
             self::setEncoding('ISO-8859-15');
-        
+
         }
     }
+
     /**
      * If you want to use another encoding
      *
@@ -57,26 +53,53 @@ abstract class BAV {
      * @param mixed $encoding
      * @see BAV_Encoding
      */
-    static public function setEncoding($encoding) {
+    public static function setEncoding($encoding)
+    {
         self::$encoding = ($encoding instanceof BAV_Encoding)
                         ? $encoding
                         : BAV_Encoding::getInstance($encoding);
     }
+
     /**
      * @return BAV_Version version of BAV
      */
-    static public function get_bav_version() {
+    public static function getVersion()
+    {
         return new BAV_Version('0.28');
     }
+
+    /**
+     * @return BAV_Version version of BAV
+     * @deprecated 0.28
+     * @see getVersion()
+     */
+    public static function get_bav_version()
+    {
+        trigger_error("use getVersion()", E_USER_DEPRECATED);
+        return self::getVersion();
+    }
+
     /**
      * Returns the version of the API. Note that different BAV versions
      * may have the same API version.
      *
      * @return BAV_Version version of BAV's API
      */
-    static public function get_bav_api_version() {
-        return new BAV_Version('2.4');
+    public static function getApiVersion()
+    {
+        return new BAV_Version('2.5');
     }
 
-
+    /**
+     * Returns the version of the API. Note that different BAV versions
+     * may have the same API version.
+     *
+     * @deprecated 0.28
+     * @return BAV_Version version of BAV's API
+     */
+    public static function get_bav_api_version()
+    {
+        trigger_error("use getApiVersion()", E_USER_DEPRECATED);
+        return self::getApiVersion();
+    }
 }

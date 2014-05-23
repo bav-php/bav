@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 /**
  * Implements 77
  *
@@ -23,22 +19,17 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+class BAV_Validator_77 extends BAV_Validator_Chain
+{
 
-
-class BAV_Validator_77 extends BAV_Validator_Chain {
-
-
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
         $this->validators[] = new BAV_Validator_77a($bank);
         $this->validators[0]->setWeights(array(1, 2, 3, 4, 5));
-        
+
         $this->validators[] = new BAV_Validator_77a($bank);
         $this->validators[1]->setWeights(array(5, 4, 3, 4, 5));
     }
-
-
 }
-
-?>

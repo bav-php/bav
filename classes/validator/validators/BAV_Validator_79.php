@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 /**
  * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
@@ -27,59 +23,60 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_Validator_79 extends BAV_Validator {
+class BAV_Validator_79 extends BAV_Validator
+{
 
-
-    private
     /**
      * @var BAV_Validator_00
      */
-    $validator,
+    private $validator;
+
     /**
      * @var BAV_Validator_00
      */
-    $mode1,
+    private $mode1;
+
     /**
      * @var BAV_Validator_00
      */
-    $mode2;
+    private $mode2;
 
-
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
-        
+
         $this->mode1 = new BAV_Validator_00($bank);
         $this->mode2 = new BAV_Validator_00($bank);
         $this->mode2->setStart(-3);
         $this->mode2->setChecknumberPosition(-2);
     }
-    
-    protected function init($account) {
+
+    protected function init($account)
+    {
         parent::init($account);
-        
+
         $this->validator = null;
     }
-    protected function validate() {
+
+    protected function validate()
+    {
         if (array_search($this->account{0}, array(1, 2, 9)) !== false) {
             $this->validator = $this->mode2;
-        
+
         } elseif ($this->account{0} == 0) {
             $this->validator = null;
-        
+
         } else {
             $this->validator = $this->mode1;
-        
+
         }
     }
+
     /**
      * @return bool
      */
-    protected function getResult() {
+    protected function getResult()
+    {
         return ! is_null($this->validator) && $this->validator->isValid($this->account);
     }
-    
-
 }
-
-
-?>

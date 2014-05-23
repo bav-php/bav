@@ -1,14 +1,10 @@
 <?php
 
-
-
-
-
 /**
  * The agency belongs to one bank. Every bank has one main agency and may have
  * some more agencies in different cities. Don't create this object directly.
  * Use BAV_Bank->getMainAgency() or BAV_Bank->getAgencies().
- * 
+ *
  *
  * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
@@ -32,43 +28,48 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_Agency extends BAV {
+class BAV_Agency extends BAV
+{
 
-
-    private
     /**
      * @var int
      */
-    $id = 0,
+    private $id = 0;
+
     /**
      * @var BAV_Bank
      */
-    $bank,
-    /**
-     * @var string
-     */
-    $bic = '',
-    /**
-     * @var string
-     */
-    $city = '',
-    /**
-     * @var string
-     */
-    $pan = '',
-    /**
-     * @var string
-     */
-    $postcode = '',
-    /**
-     * @var string
-     */
-    $shortTerm = '',
-    /**
-     * @var string
-     */
-    $name = '';
+    private $bank;
 
+    /**
+     * @var string
+     */
+    private $bic = '';
+
+    /**
+     * @var string
+     */
+    private $city = '';
+
+    /**
+     * @var string
+     */
+    private $pan = '';
+
+    /**
+     * @var string
+     */
+    private $postcode = '';
+
+    /**
+     * @var string
+     */
+    private $shortTerm = '';
+
+    /**
+     * @var string
+     */
+    private $name = '';
 
     /**
      * Don't create this object directly. Use BAV_Bank->getMainAgency()
@@ -82,7 +83,8 @@ class BAV_Agency extends BAV {
      * @param string $bic might be empty
      * @param string $pan might be empty
      */
-    public function __construct($id, BAV_Bank $bank, $name, $shortTerm, $city, $postcode, $bic = '', $pan = '') {
+    public function __construct($id, BAV_Bank $bank, $name, $shortTerm, $city, $postcode, $bic = '', $pan = '')
+    {
         $this->id           = (int)$id;
         $this->bank         = $bank;
         $this->bic          = $bic;
@@ -92,85 +94,102 @@ class BAV_Agency extends BAV {
         $this->shortTerm    = $shortTerm;
         $this->pan          = $pan;
     }
+
     /**
      * @return bool
      */
-    public function isMainAgency() {
+    public function isMainAgency()
+    {
         return $this->bank->getMainAgency() === $this;
     }
+
     /**
      * @return BAV_Bank
      */
-    public function getBank() {
+    public function getBank()
+    {
         return $this->bank;
     }
+
     /**
      * @return int
      */
-    public function getID() {
+    public function getID()
+    {
         return $this->id;
     }
+
     /**
      * @return string
      */
-    public function getPostcode() {
+    public function getPostcode()
+    {
         return $this->postcode;
     }
+
     /**
      * @return string
      */
-    public function getCity() {
+    public function getCity()
+    {
         return $this->city;
     }
+
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
+
     /**
      * @return string
      */
-    public function getShortTerm() {
+    public function getShortTerm()
+    {
         return $this->shortTerm;
     }
+
     /**
      * @return bool
      */
-    public function hasPAN() {
+    public function hasPAN()
+    {
         return ! empty($this->pan);
     }
+
     /**
      * @return bool
      */
-    public function hasBIC() {
+    public function hasBIC()
+    {
         return ! empty($this->bic);
     }
+
     /**
      * @throws BAV_AgencyException_UndefinedAttribute
      * @return string
      */
-    public function getPAN() {
+    public function getPAN()
+    {
         if (! $this->hasPAN()) {
             throw new BAV_AgencyException_UndefinedAttribute($this, 'pan');
-        
+
         }
         return $this->pan;
     }
+
     /**
      * @throws BAV_AgencyException_UndefinedAttribute
      * @return string
      */
-    public function getBIC() {
+    public function getBIC()
+    {
         if (! $this->hasBIC()) {
             throw new BAV_AgencyException_UndefinedAttribute($this, 'bic');
-        
+
         }
         return $this->bic;
     }
-
-
 }
-
-
-?>

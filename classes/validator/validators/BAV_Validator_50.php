@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * Implements 50
  *
@@ -22,33 +19,27 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+class BAV_Validator_50 extends BAV_Validator_06
+{
 
-
-class BAV_Validator_50 extends BAV_Validator_06 {
-
-
-    public function isValid($account) {
-    	if (parent::isValid($account)) {
+    public function isValid($account)
+    {
+        if (parent::isValid($account)) {
             return true;
-            
+
         }
         $account = ltrim($account, '0') . '000';
         return strlen($account) <= $this->normalizedSize
            &&  parent::isValid($account);
     }
 
-
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
-        
+
         $this->setWeights(array(2, 3, 4, 5, 6, 7));
         $this->setStart(-5);
         $this->setEnd(0);
         $this->setChecknumberPosition(-4);
     }
-
-
 }
-
-
-?>

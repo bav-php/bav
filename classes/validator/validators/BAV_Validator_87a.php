@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 /**
  * Implements 87
  *
@@ -29,15 +25,18 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_Validator_87a extends BAV_Validator {
+class BAV_Validator_87a extends BAV_Validator
+{
 
-   
-    protected function validate() {
+    protected function validate()
+    {
     }
+
      /**
      * @return bool
      */
-    protected function getResult() {
+    protected function getResult()
+    {
         $accountID = $this->account;
         $i      = 0;
         $c2     = 0;
@@ -59,16 +58,16 @@ class BAV_Validator_87a extends BAV_Validator {
 
         $c2 = $i % 2;
 
-        while($i < 10) {
+        while ($i < 10) {
             switch ($konto[$i]) {
                 case 0: $konto[$i] = 5;
-                break;
+                    break;
                 case 1: $konto[$i] = 6;
-                break;
+                    break;
                 case 5: $konto[$i] = 10;
-                break;
+                    break;
                 case 6: $konto[$i] = 1;
-                break;
+                    break;
             }
 
             if ($c2 == $d2) {
@@ -149,9 +148,4 @@ class BAV_Validator_87a extends BAV_Validator {
 
         return false;
     }
-    
-
 }
-
-
-?>

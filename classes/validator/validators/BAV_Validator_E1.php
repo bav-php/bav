@@ -23,24 +23,26 @@
  * https://github.com/jschaedl/Bav/blob/master/library/Bav/Validator/De/SystemE1.php
  */
 
-class BAV_Validator_E1 extends BAV_Validator_Iteration_Weighted {
+class BAV_Validator_E1 extends BAV_Validator_Iteration_Weighted
+{
 
-    static private $subsitutions = array(48, 49, 50, 51, 52, 53, 54, 55, 56, 57);
+    private static $subsitutions = array(48, 49, 50, 51, 52, 53, 54, 55, 56, 57);
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
-        
+
         $this->setWeights(array(1, 2, 3, 4, 5, 6, 11, 10, 9));
         $this->setDivisor(11);
     }
 
-
-    protected function iterationStep() {
+    protected function iterationStep()
+    {
         $this->accumulator += self::$subsitutions[$this->number] * $this->getWeight();
     }
 
-
-    protected function getResult() {
+    protected function getResult()
+    {
         $result = $this->accumulator % $this->divisor;
         if ($result == 10) {
             return false;
@@ -48,7 +50,4 @@ class BAV_Validator_E1 extends BAV_Validator_Iteration_Weighted {
         }
         return (string) $result === $this->getCheckNumber();
     }
-
 }
-
-?>

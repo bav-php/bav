@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 /**
  * Copyright (C) 2007  Markus Malkusch <markus@malkusch.de>
  *
@@ -27,14 +23,13 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2007 Markus Malkusch
  */
-class BAV_Validator_C6 extends BAV_Validator {
-	
-	
-	static private
-	/**
-	 * @var Array
-	 */
-	$transformation = array(
+class BAV_Validator_C6 extends BAV_Validator
+{
+
+    /**
+     * @var Array
+     */
+    private static $transformation = array(
         0 => 4451970,
         1 => 4451981,
         2 => 4451992,
@@ -45,44 +40,41 @@ class BAV_Validator_C6 extends BAV_Validator {
         7 => 5499570,
         8 => 4451994,
         9 => 5499579
-	);
+    );
 
-
-    protected
     /**
      * @var String
      */
-    $transformedAccount = '',
+    protected $transformedAccount = '';
+
     /**
      * @var BAV_Validator_00
      */
-    $validator;
-    
+    protected $validator;
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
-        
+
         $this->validator = new BAV_Validator_00($bank);
     }
-    
-    
-    protected function validate() {
-    	$transformation = array_key_exists($this->account{0}, self::$transformation)
-    	                ? self::$transformation[$this->account{0}]
-    	                : '';
+
+    protected function validate()
+    {
+        $transformation = array_key_exists($this->account{0}, self::$transformation)
+                        ? self::$transformation[$this->account{0}]
+                        : '';
         $this->transformedAccount = $transformation . substr($this->account, 1);
         $this->validator->setNormalizedSize(9 + strlen($transformation));
     }
-    
-    
+
     /**
      * @return bool
      */
-    protected function getResult() {
+    protected function getResult()
+    {
         return in_array($this->account{0}, array_keys(self::$transformation))
              ? $this->validator->isValid($this->transformedAccount)
              : false;
     }
-    
-
 }

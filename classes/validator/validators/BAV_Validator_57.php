@@ -19,54 +19,55 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+class BAV_Validator_57 extends BAV_Validator
+{
 
-
-class BAV_Validator_57 extends BAV_Validator {
-
-
-    private
     /**
      * @var BAV_Validator
      */
-    $validator,
+    private $validator;
+
     /**
      * @var BAV_Validator_09
      */
-    $validator09,
+    private $validator09;
+
     /**
      * @var array
      */
-    $modeMap = array(),
+    private $modeMap = array();
+
     /**
      * @private
      * @var BAV_Validator_00
      */
-    $mode1,
-     /**
+    private $mode1;
+
+    /**
      * @private
      * @var BAV_Validator_00
      */
-    $mode2;
+    private $mode2;
 
-
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
-        
+
         $this->validator09 = new BAV_Validator_09($bank);
-        
+
         $this->mode1 = new BAV_Validator_00($bank);
         $this->mode1->setWeights(array(1, 2));
         $this->mode1->setStart(0);
         $this->mode1->setEnd(-2);
-        
-        
+
+
         $this->mode2 = new BAV_Validator_00($bank);
         $this->mode2->setWeights(array(1, 2, 0, 1, 2, 1, 2, 1, 2, 1));
         $this->mode2->setChecknumberPosition(2);
         $this->mode2->setStart(0);
         $this->mode2->setEnd(-1);
-        
-        
+
+
         $this->modeMap = array(
             51 => 1,
             55 => 1,
@@ -78,7 +79,7 @@ class BAV_Validator_57 extends BAV_Validator {
             88 => 1,
             94 => 1,
             95 => 1,
-            
+
             52 => 2,
             53 => 2,
             54 => 2,
@@ -96,92 +97,91 @@ class BAV_Validator_57 extends BAV_Validator {
             96 => 2,
             97 => 2,
             98 => 2,
-            
+
             40 => 3,
             50 => 3,
             91 => 3,
             99 => 3
         );
     }
-    
-    
-    protected function validate() {
+
+    protected function validate()
+    {
         $this->validator = null;
         switch ($this->getMode()) {
-            case 0: 
+            case 0:
                 $this->validator = null;
                 break;
-                
+
             case 1:
                 switch (substr($this->account, 0, 6)) {
-                    case 777777: case 888888:
+                    case 777777:
+                    case 888888:
                         $this->validator = $this->validator09;
                         break;
-                
+
                     default:
                         $this->validator = $this->mode1;
                         break;
-                
+
                 }
                 break;
-                
+
             case 2:
                 $this->validator = $this->mode2;
                 break;
-                
+
             case 3:
                 $this->validator = $this->validator09;
                 break;
-                
+
             case 4:
                 $pos34 = substr($this->account, 2, 2);
                 $pos79 = substr($this->account, 6, 3);
                 $this->validator = $this->account === '0185125434' || ($pos34 >= 1 && $pos34 <= 12 && $pos79 <= 500)
                                  ? $this->validator09
                                  : null;
-                 break;
+                break;
         }
     }
-    protected function getResult() {
+
+    protected function getResult()
+    {
         return ! is_null($this->validator) && $this->validator->isValid($this->account);
     }
-    
+
     /**
      * @return int
      */
-    private function getMode() {
+    private function getMode()
+    {
         $firstTwo  = substr($this->account, 0, 2);
-        
+
         if ($firstTwo == '00') {
             return 0;
-        
+
         }
-        
+
         if (isset($this->modeMap[$firstTwo])) {
             return $this->modeMap[$firstTwo];
-        
+
         }
 
         if ($firstTwo >= 73 && $firstTwo <= 82) {
             return 1;
-        
+
         } elseif (($firstTwo >= 32 && $firstTwo <= 39)
                || ($firstTwo >= 41 && $firstTwo <= 49)
                || ($firstTwo >= 56 && $firstTwo <= 60)
                || ($firstTwo >= 83 && $firstTwo <= 87)) {
             return 2;
-        
+
         } elseif ($firstTwo >= 1 && $firstTwo <= 31) {
             return 4;
-            
+
         } else {
             throw new LogicException();
-            
+
         }
     }
-
-
 }
-
-
-?>

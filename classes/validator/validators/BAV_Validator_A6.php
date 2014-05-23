@@ -1,10 +1,5 @@
 <?php
 
-
-
-
-
-
 /**
  * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
@@ -28,47 +23,47 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_Validator_A6 extends BAV_Validator {
+class BAV_Validator_A6 extends BAV_Validator
+{
 
-
-    protected
     /**
      * @var BAV_Validator
      */
-    $validator,
+    protected $validator;
+
     /**
      * @var BAV_Validator_00
      */
-    $mode1,
+    protected $mode1;
+
     /**
      * @var BAV_Validator_01
      */
-    $mode2;
+    protected $mode2;
 
-
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
-        
+
         $this->mode1 = new BAV_Validator_00($bank);
         $this->mode1->setWeights(array(2, 1));
-        
+
         $this->mode2 = new BAV_Validator_01($bank);
         $this->mode2->setWeights(array(3, 7, 1));
     }
-    protected function validate() {
+
+    protected function validate()
+    {
         $this->validator = $this->account{1} === '8'
                          ? $this->mode1
                          : $this->mode2;
     }
+
     /**
      * @return bool
      */
-    protected function getResult() {
+    protected function getResult()
+    {
         return $this->validator->isValid($this->account);
     }
-    
-
 }
-
-
-?>

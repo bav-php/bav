@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 /**
  * Copyright (C) 2009  Markus Malkusch <markus@malkusch.de>
  *
@@ -20,61 +16,52 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- * 
+ *
  * @package classes
  * @subpackage verify
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
+class BAV_TestAPIResult extends BAV
+{
 
-
-class BAV_TestAPIResult extends BAV {
-
-	
-	const VALID            = 1;
+    const VALID            = 1;
     const INVALID          = 2;
     const BANK_NOT_FOUND   = 3;
     const ERROR            = 4;
-    
-	
-	private
-	/**
-	 * @var BAV_TestAPI
-	 */
-	$testAPI,
-	/**
-	 * @var int
-	 */
-	$result;
-	
-	
-	/**
-	 * @param BAV_TestAPI $testAPI
-	 * @param int $result
-	 */
-	public function __construct(BAV_TestAPI $testAPI, $result) {
-		$this->testAPI    = $testAPI;
-		$this->result     = $result;
-	}
-	
-	
-	/**
-	 * @return BAV_TestAPI
-	 */
-	public function getTestAPI() {
-		return $this->testAPI;
-	}
-	
-	
+
+    /**
+     * @var BAV_TestAPI
+     */
+    private $testAPI;
+    /**
+     * @var int
+     */
+    private $result;
+
+    /**
+     * @param BAV_TestAPI $testAPI
+     * @param int $result
+     */
+    public function __construct(BAV_TestAPI $testAPI, $result)
+    {
+        $this->testAPI    = $testAPI;
+        $this->result     = $result;
+    }
+
+    /**
+     * @return BAV_TestAPI
+     */
+    public function getTestAPI()
+    {
+        return $this->testAPI;
+    }
+
     /**
      * @return int
      */
-    public function getResult() {
+    public function getResult()
+    {
         return $this->result;
     }
-	
-	
 }
-
-
-?>

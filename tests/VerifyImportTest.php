@@ -28,51 +28,50 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
  * @copyright Copyright (C) 2009 Markus Malkusch
  * @see BAV_VerifyImport
  */
+class VerifyImportTest extends PHPUnit_Framework_TestCase
+{
 
-
-class VerifyImportTest extends PHPUnit_Framework_TestCase {
-
-
-    private
     /**
      * @var array
      */
-    $validationMap = array(),
+    private $validationMap = array();
+
     /**
      * @var array
      */
-    $verifyArray = array(),
+    private $verifyArray = array();
+
     /**
      * @var BAV_DataBackend_File
      */
-    $databack;
-    
-    
-    protected function setUp() {
+    private $databack;
+
+    protected function setUp()
+    {
         $this->databack    = new BAV_DataBackend_File();
         $this->verifyArray = parse_ini_file(__DIR__.'/../data/verify.ini', true);
-        
+
         $this->assertType(
             PHPUnit_Framework_Constraint_IsType::TYPE_ARRAY,
             $this->verifyArray,
             "Could not parse verify.ini"
         );
-        
+
         foreach ($this->databack->getAllBanks() as $bank) {
             $this->validationMap[$bank->getValidationType()] = $bank;
-        
+
         }
     }
-    
-    
-    public function testFileImport() {
+
+    public function testFileImport()
+    {
         $importer = new BAV_VerifyImport($this->databack);
         $importer->importVerifyFile();
         $this->assertImporter($importer);
     }
-    
-    
-    public function testSequentialImport() {
+
+    public function testSequentialImport()
+    {
         $importer       = new BAV_VerifyImport($this->databack);
         $notSupported   = array();
         foreach ($this->verifyArray as $expect => $array) {
@@ -83,71 +82,67 @@ class VerifyImportTest extends PHPUnit_Framework_TestCase {
                     $bankID   = strlen($type) === 2 ? $this->getBank($type)->getBankID() : $type;
                     foreach ($accounts as $account) {
                         $importer->import($bankID, $account, $expect === 'valid' ? true : false);
-    
+
                     }
-                    
+
                 } catch (BAV_DataBackendException_BankNotFound $e) {
                     $notSupported[] = $type;
-                
+
                 }
-                
+
             }
-            
+
         }
         $this->assertImporter($importer, $notSupported);
     }
-    
-    
-    private function assertImporter(BAV_VerifyImport $importer, Array $notSupported = array()) {
+
+    private function assertImporter(BAV_VerifyImport $importer, Array $notSupported = array())
+    {
         $file = tempnam('/tmp', 'BAV');
         $this->assertFileExists($file);
-        
+
         $importer->save($file);
         $checkArray = parse_ini_file($file, true);
         unlink($file);
-        
+
         $this->assertType(
             PHPUnit_Framework_Constraint_IsType::TYPE_ARRAY,
             $checkArray,
             "Could not parse temporary file $file."
         );
-        
+
         foreach ($this->verifyArray as $expect => $array) {
             foreach ($array as $type => $accounts) {
-            	$actualAccounts = @$checkArray[$expect][$type];
-            	unset($checkArray[$expect][$type]);
-            	if (array_search($type, $notSupported) !== false) {
-            		continue;
-            		
-            	}
-            	$this->assertEquals(
-            	    preg_replace('~\D~', '', $accounts),
-            	    preg_replace('~\D~', '', $actualAccounts),
-            	    "[$expect]$type is not equal!"
-            	);
-                
+                $actualAccounts = @$checkArray[$expect][$type];
+                unset($checkArray[$expect][$type]);
+                if (array_search($type, $notSupported) !== false) {
+                    continue;
+
+                }
+                $this->assertEquals(
+                    preg_replace('~\D~', '', $accounts),
+                    preg_replace('~\D~', '', $actualAccounts),
+                    "[$expect]$type is not equal!"
+                );
+
             }
-            
+
         }
-        
+
         $this->assertEquals(0, count($checkArray['valid']));
         $this->assertEquals(0, count($checkArray['invalid']));
     }
-    
-    
+
     /**
      * @param String $validationType
      * @return BAV_Bank
      */
-    private function getBank($validationType) {
+    private function getBank($validationType)
+    {
         if (! isset($this->validationMap[$validationType])) {
             throw new BAV_DataBackendException_BankNotFound($validationType);
-        
+
         }
         return $this->validationMap[$validationType];
     }
-
 }
-
-
-?>

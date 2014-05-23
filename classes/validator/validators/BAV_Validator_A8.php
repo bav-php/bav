@@ -1,11 +1,5 @@
 <?php
 
-
-
-
-
-
-
 /**
  * implements A8
  *
@@ -31,48 +25,43 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_Validator_A8 extends BAV_Validator_Chain {
+class BAV_Validator_A8 extends BAV_Validator_Chain
+{
 
-
-    private
     /**
      * @var array
      */
-    $defaultValidators = array(),
+    private $defaultValidators = array();
+
     /**
      * @var array
      */
-    $exceptionValidators = array();
-    
-    
-    public function __construct(BAV_Bank $bank) {
+    private $exceptionValidators = array();
+
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
-        
+
         $this->defaultValidators[] = new BAV_Validator_06($bank);
         $this->defaultValidators[0]->setEnd(3);
         $this->defaultValidators[0]->setWeights(array(2, 3, 4, 5, 6, 7));
-        
+
         $this->defaultValidators[] = new BAV_Validator_00($bank);
         $this->defaultValidators[1]->setEnd(3);
         $this->defaultValidators[1]->setWeights(array(2, 1));
-        
-        
+
+
         $this->exceptionValidators = BAV_Validator_51::getExceptionValidators($bank);
     }
-    
-    
+
     /**
      */
-    protected function init($account) {
+    protected function init($account)
+    {
         parent::init($account);
-        
+
         $this->validators = $this->account{2} == 9
                           ? $this->exceptionValidators
                           : $this->defaultValidators;
     }
-
-
 }
-
-
-?>

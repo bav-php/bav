@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * This class helps BAV_Databackend_File to know the interval of lines which
  * belongs to a bank.
@@ -30,86 +27,96 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_FileParserContext extends BAV {
+class BAV_FileParserContext extends BAV
+{
 
-
-    private
     /**
      * @var int any line of the context
      */
-    $line = 0,
+    private $line = 0;
+
     /**
      * @var int the first line in the context
      */
-    $start = null,
+    private $start = null;
+
     /**
      * @var int the last line of the context
      */
-    $end = null;
-    
-    
+    private $end = null;
+
     /**
      * @param string $bankID
      * @param int $line
      */
-    public function __construct($line) {
+    public function __construct($line)
+    {
         $this->line   = $line;
     }
+
     /**
      * @return int
      */
-    public function getLine() {
+    public function getLine()
+    {
         return $this->line;
     }
+
     /**
      * @throws BAV_FileParserContextException_Undefined
      * @return int
      */
-    public function getStart() {
+    public function getStart()
+    {
         if (is_null($this->start)) {
             throw new BAV_FileParserContextException_Undefined();
-        
+
         }
         return $this->start;
     }
+
     /**
      * @return bool
      */
-    public function isStartDefined() {
+    public function isStartDefined()
+    {
         return ! is_null($this->start);
     }
+
     /**
      * @throws BAV_FileParserContextException_Undefined
      * @return int
      */
-    public function getEnd() {
+    public function getEnd()
+    {
         if (is_null($this->end)) {
             throw new BAV_FileParserContextException_Undefined();
-        
+
         }
         return $this->end;
     }
+
     /**
      * @return bool
      */
-    public function isEndDefined() {
+    public function isEndDefined()
+    {
         return ! is_null($this->end);
     }
+
     /**
      * @param int $start
      */
-    public function setStart($start) {
+    public function setStart($start)
+    {
         $this->start = $start;
     }
+
     /**
      * @param int $end
      */
-    public function setEnd($end) {
+    public function setEnd($end)
+    {
         $this->end = $end;
     }
-
-
 }
-
-
-?>

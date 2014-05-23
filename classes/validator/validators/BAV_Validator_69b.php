@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * Implements 69b
  *
@@ -22,14 +19,13 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+class BAV_Validator_69b extends BAV_Validator_Iteration_Transformation
+{
 
-
-class BAV_Validator_69b extends BAV_Validator_Iteration_Transformation {
-
-    
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
-        
+
         $this->setMatrix(array(
             array(0,1,5,9,3,7,4,8,2,6),
             array(0,1,7,6,9,8,3,2,5,4),
@@ -37,14 +33,13 @@ class BAV_Validator_69b extends BAV_Validator_Iteration_Transformation {
             array(0,1,2,3,4,5,6,7,8,9)
         ));
     }
+
     /**
      * @return bool
      */
-    protected function getResult() {
+    protected function getResult()
+    {
         $result = (10 - ($this->accumulator % 10)) % 10;
         return (string)$result === $this->getCheckNumber();
     }
-
 }
-
-?>

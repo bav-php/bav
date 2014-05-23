@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 /**
  * Implements D4
  *
@@ -29,42 +25,40 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2010 Markus Malkusch
  */
-class BAV_Validator_D4 extends BAV_Validator {
+class BAV_Validator_D4 extends BAV_Validator
+{
 
-
-    protected
     /**
      * @var String
      */
-    $transformedAccount = '',
+    protected $transformedAccount = '';
+
     /**
      * @var BAV_Validator_00
      */
-    $validator;
-    
+    protected $validator;
+
     const TRANSFORMATION = 428259;
 
-
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
-        
+
         $this->validator = new BAV_Validator_00($bank);
         $this->validator->setNormalizedSize(10 + strlen(self::TRANSFORMATION));
     }
-    
-    
-    protected function validate() {
+
+    protected function validate()
+    {
         $this->transformedAccount = self::TRANSFORMATION.$this->account;
     }
-    
-    
+
     /**
      * @return bool
      */
-    protected function getResult() {
+    protected function getResult()
+    {
         return $this->account{0} != 0
             && $this->validator->isValid($this->transformedAccount);
     }
-    
-
 }

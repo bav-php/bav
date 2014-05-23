@@ -1,10 +1,5 @@
 <?php
 
-
-
-
-
-
 /**
  * Implements C9
  *
@@ -24,20 +19,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+class BAV_Validator_C9 extends BAV_Validator_Chain
+{
 
-
-class BAV_Validator_C9 extends BAV_Validator_Chain {
-
-
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
         $this->validators[] = new BAV_Validator_00($bank);
         $this->validators[] = new BAV_Validator_07($bank);
     }
-
-
 }
-
-
-?>

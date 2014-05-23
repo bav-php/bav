@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * Implements D7
  *
@@ -28,27 +25,25 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2011 Markus Malkusch
  */
-class BAV_Validator_D7 extends BAV_Validator_Iteration_Weighted {
+class BAV_Validator_D7 extends BAV_Validator_Iteration_Weighted
+{
 
-
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
         $this->setWeights(array(2, 1));
         $this->setDivisor(10);
     }
 
-
-    protected function iterationStep() {
+    protected function iterationStep()
+    {
         $this->accumulator += $this->crossSum($this->number * $this->getWeight());
     }
 
-
-    protected function getResult() {
+    protected function getResult()
+    {
         $result = $this->accumulator % $this->divisor;
         return (string)$result === $this->getCheckNumber();
     }
-
 }
-
-?>

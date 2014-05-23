@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * Copyright (C) 2009  Markus Malkusch <markus@malkusch.de>
  *
@@ -19,45 +16,37 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- * 
+ *
  * @package classes
  * @subpackage verify
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
+class BAV_TestAPIResult_Error extends BAV_TestAPIResult
+{
 
+    /**
+     * @var String
+     */
+    private $message = '';
 
-class BAV_TestAPIResult_Error extends BAV_TestAPIResult {
+    /**
+     * @param BAV_TestAPI $testAPI
+     * @param int $result
+     * @param String $message
+     */
+    public function __construct(BAV_TestAPI $testAPI, $result, $message = '')
+    {
+        parent::__construct($testAPI, $result);
 
-	
-	private
-	/**
-	 * @var String
-	 */
-	$message = '';
-	
-	
-	/**
-	 * @param BAV_TestAPI $testAPI
-	 * @param int $result
-	 * @param String $message
-	 */
-	public function __construct(BAV_TestAPI $testAPI, $result, $message = '') {
-		parent::__construct($testAPI, $result);
-		
-		$this->message = $message;
-	}
-	
-	
+        $this->message = $message;
+    }
+
     /**
      * @return String
      */
-    public function getMessage() {
+    public function getMessage()
+    {
         return $this->message;
     }
-	
-	
 }
-
-
-?>

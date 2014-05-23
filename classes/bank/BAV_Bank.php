@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 /**
  * A bank can validate a bank account (BAV_Bank->isValid(String $account)) and
  * has a bank ID, a main agency (BAV_Bank->getMainAgency()) and optionally some
@@ -36,35 +32,38 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_Bank extends BAV {
+class BAV_Bank extends BAV
+{
 
-
-    private
     /**
      * @var string
      */
-    $bankID = '',
+    private $bankID = '';
+
     /**
      * @var string
      */
-    $validationType = '',
+    private $validationType = '';
+
     /**
      * @var BAV_Validator
      */
-    $validator,
+    private $validator;
+
     /**
      * @var BAV_DataBackend
      */
-    $dataBackend,
+    private $dataBackend;
+
     /**
      * @var BAV_Agency
      */
-    $mainAgency,
+    private $mainAgency;
+
     /**
      * @var Array
      */
-    $agencies;
-
+    private $agencies;
 
     /**
      * Do not even think to use new BAV_Bank()!
@@ -73,49 +72,59 @@ class BAV_Bank extends BAV {
      * @param string $bankID
      * @param string $validationType
      */
-    public function __construct(BAV_DataBackend $dataBackend, $bankID, $validationType) {
+    public function __construct(BAV_DataBackend $dataBackend, $bankID, $validationType)
+    {
         $this->dataBackend = $dataBackend;
         $this->bankID = $bankID;
         $this->validationType = $validationType;
     }
+
     /**
      * @return string
      */
-    public function getValidationType() {
+    public function getValidationType()
+    {
         return $this->validationType;
     }
+
     /**
      * @return string
      */
-    public function getBankID() {
+    public function getBankID()
+    {
         return (string) $this->bankID;
     }
+
     /**
      * Every bank has one main agency. This agency is not included in getAgencies().
      *
      * @throws BAV_DataBackendException
      * @return BAV_Agency
      */
-    public function getMainAgency() {
+    public function getMainAgency()
+    {
         if (is_null($this->mainAgency)) {
-            $this->mainAgency = $this->dataBackend->_getMainAgency($this);
-        
+            $this->mainAgency = $this->dataBackend->getMainAgency($this);
+
         }
         return $this->mainAgency;
     }
+
     /**
      * A bank may have more agencies.
      *
      * @throws BAV_DataBackendException
      * @return array
      */
-    public function getAgencies() {
+    public function getAgencies()
+    {
         if (is_null($this->agencies)) {
-            $this->agencies = $this->dataBackend->_getAgencies($this);
-        
+            $this->agencies = $this->dataBackend->getAgencies($this);
+
         }
         return $this->agencies;
     }
+
     /**
      * Use this method to check your bank account.
      *
@@ -123,23 +132,21 @@ class BAV_Bank extends BAV {
      * @param string $account
      * @return bool
      */
-    public function isValid($account) {
+    public function isValid($account)
+    {
         return $this->getValidator()->isValid($account);
     }
+
     /**
      * @throws BAV_ValidatorException_NotExists
      * @return BAV_Validator
      */
-    public function getValidator() {
+    public function getValidator()
+    {
         if (is_null($this->validator)) {
             $this->validator = BAV_Validator::getInstance($this);
-        
+
         }
         return $this->validator;
     }
-
-
 }
-
-
-?>

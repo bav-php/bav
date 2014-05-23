@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * Implements 99
  *
@@ -22,24 +19,19 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+class BAV_Validator_99 extends BAV_Validator_06
+{
 
-
-class BAV_Validator_99 extends BAV_Validator_06 {
-
-
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
         $this->setWeights(array(2, 3, 4, 5, 6, 7));
     }
-    
-    
-    public function isValid($account) {
+
+    public function isValid($account)
+    {
         return parent::isValid($account)
             || $this->isBetween(396000000, 499999999);
     }
-
-
 }
-
-?>
