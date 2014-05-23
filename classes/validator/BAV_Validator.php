@@ -1,11 +1,5 @@
 <?php
 
-
-
-
-
-
-
 /**
  * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
@@ -32,39 +26,42 @@
 abstract class BAV_Validator extends BAV
 {
 
-
-    protected
     /**
      * @var int
      */
-    $normalizedSize = 10,
+    protected $normalizedSize = 10;
+
     /**
      * @var string
      */
-    $account = '',
+    protected $account = '';
+
     /**
      * @var int
      */
-    $checknumberPosition = -1,
+    protected $checknumberPosition = -1;
+
     /**
      * @var int
      */
-    $eserChecknumberOffset = 0,
+    protected $eserChecknumberOffset = 0;
+
     /**
      * @var bool
      */
-    $doNormalization = true,
+    protected $doNormalization = true;
+
     /**
      * @var BAV_Bank
      */
-    $bank;
-
+    protected $bank;
 
     public function __construct(BAV_Bank $bank)
     {
         $this->bank = $bank;
         $this->setChecknumberPosition(-1);
     }
+
     /**
      * @throws BAV_ValidatorException_NotExists
      * @return BAV_Validator
@@ -81,7 +78,6 @@ abstract class BAV_Validator extends BAV
         require_once $file;
         return new $class($bank);
     }
-
 
     /**
      * @param string $account
@@ -100,15 +96,16 @@ abstract class BAV_Validator extends BAV
         }
     }
 
-
     public function setChecknumberPosition($position)
     {
         $this->checknumberPosition = $position;
     }
+
     public function setNormalizedSize($size)
     {
         $this->normalizedSize = $size;
     }
+
     /**
      * @param string $account
      */
@@ -120,12 +117,13 @@ abstract class BAV_Validator extends BAV
 
         }
     }
+
     abstract protected function validate();
+
     /**
      * @return bool
      */
     abstract protected function getResult();
-
 
     /**
      * @return string
@@ -134,6 +132,7 @@ abstract class BAV_Validator extends BAV
     {
         return $this->account{$this->getNormalizedPosition($this->checknumberPosition)};
     }
+
     /**
      * converts negative positions.
      *
@@ -155,7 +154,6 @@ abstract class BAV_Validator extends BAV
         return strlen($this->account) + $pos;
     }
 
-
     /**
      * Some validators need this
      *
@@ -167,13 +165,12 @@ abstract class BAV_Validator extends BAV
         $sum     = 0;
         $str_int = (string) $int;
         for ($i = 0; $i < strlen($str_int); $i++) {
-          //$sum = bcadd($str_int{$i}, $sum);
-          $sum += $str_int{$i};
+            //$sum = bcadd($str_int{$i}, $sum);
+            $sum += $str_int{$i};
 
         }
         return $sum;
     }
-
 
     /**
      * @throws BAV_ValidatorException_OutOfBounds
@@ -188,6 +185,7 @@ abstract class BAV_Validator extends BAV
         }
         $this->account = str_repeat('0', $size - strlen($account)) . $account;
     }
+
     /**
      * @throws BAV_ValidatorException_ESER
      * @return string
@@ -218,6 +216,7 @@ abstract class BAV_Validator extends BAV
 
         return $eser;
     }
+
     /**
      * @throws BAV_ValidatorException_ESER
      * @return string
@@ -248,14 +247,17 @@ abstract class BAV_Validator extends BAV
         $eser = $blzPart0.$t.$blzPart1.$accountPart0.$p.$accountTail;
         return $eser;
     }
+
     protected function getEserChecknumberPosition()
     {
         return $this->getNormalizedPosition($this->checknumberPosition + $this->eserChecknumberOffset);
     }
+
     protected function getEserChecknumber()
     {
         return $this->account{$this->getEserChecknumberPosition()};
     }
+
     protected function isBetween($a, $b)
     {
         $account = (int) ltrim($this->account, '0');
@@ -264,7 +266,4 @@ abstract class BAV_Validator extends BAV
              ? $account >= $a && $account <= $b
              : $account >= $b && $account <= $a;
     }
-
 }
-
-
