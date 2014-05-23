@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * This class offers support for algorithmns which uses more algorithmns
  *
@@ -33,13 +30,10 @@
 class BAV_Validator_Chain extends BAV_Validator
 {
 
-
-    protected
     /**
      * @var Array a list of validators
      */
-    $validators = array();
-
+    protected $validators = array();
 
     /**
      * Adds a validator to the chain
@@ -52,7 +46,6 @@ class BAV_Validator_Chain extends BAV_Validator
     {
         $this->validators[] = $validator;
     }
-
 
     /**
      * Iterates through the validators.
@@ -74,12 +67,14 @@ class BAV_Validator_Chain extends BAV_Validator
         }
         return false;
     }
+
     /**
      * should not be used
      */
     final protected function validate()
     {
     }
+
     /**
      * After each successless iteration step this method will be called and
      * should return if the iteration should stop and the account is invalid.
@@ -90,6 +85,7 @@ class BAV_Validator_Chain extends BAV_Validator
     {
         return true;
     }
+
     /**
      * Decide if you really want to use this validator
      *
@@ -99,8 +95,4 @@ class BAV_Validator_Chain extends BAV_Validator
     {
         return true;
     }
-
-
 }
-
-
