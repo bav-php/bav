@@ -1,18 +1,5 @@
 <?php
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**
  * It uses the huge file from the Bundesbank and uses a binary search to find a row.
  * This is the easiest way to use BAV. BAV can work as a standalone application without
@@ -39,20 +26,17 @@
 class BAV_DataBackend_File extends BAV_DataBackend
 {
 
-
     const DOWNLOAD_URI = "http://www.bundesbank.de/Redaktion/DE/Standardartikel/Aufgaben/Unbarer_Zahlungsverkehr/bankleitzahlen_download.html";
 
-
-    private
     /**
      * @var array
      */
-    $contextCache = array(),
+    private $contextCache = array();
+
     /**
      * @var BAV_FileParser
      */
-    $parser;
-
+    private $parser;
 
     /**
      * @param String $file The data source
@@ -61,7 +45,6 @@ class BAV_DataBackend_File extends BAV_DataBackend
     {
         $this->parser = new BAV_FileParser($file);
     }
-    
     
     /**
      * For the file of March 8th 2010 (blz_20100308.txt)
@@ -113,7 +96,6 @@ class BAV_DataBackend_File extends BAV_DataBackend
         $this->safeRename($temp, $file);
     }
     
-    
     /**
      * @see BAV_DataBackend::uninstall()
      * @throws BAV_DataBackendException_IO
@@ -125,6 +107,7 @@ class BAV_DataBackend_File extends BAV_DataBackend
         
         }
     }
+
     /**
      * @see BAV_DataBackend::install()
      * @throws BAV_DataBackendException_IO
@@ -133,6 +116,7 @@ class BAV_DataBackend_File extends BAV_DataBackend
     {
         $this->update();
     }
+
     /**
      * This method works only if your PHP is compiled with cURL.
      * TODO: test this with a proxy
@@ -200,6 +184,7 @@ class BAV_DataBackend_File extends BAV_DataBackend
             switch ($part) {
                 case '..':
                     unset($pathParts[$i-1]);
+                    // fall-through as the current part ("..") should be removed as well.
                     
                 case '.':
                     unset($pathParts[$i]);
@@ -216,9 +201,7 @@ class BAV_DataBackend_File extends BAV_DataBackend
         if (! curl_exec($ch)) {
             fclose($tempH);
             unlink($temp);
-            throw new BAV_DataBackendException_IO(
-                curl_error($ch), curl_errno($ch)
-            );
+            throw new BAV_DataBackendException_IO(curl_error($ch), curl_errno($ch));
         
         }
         fclose($tempH);
@@ -254,7 +237,6 @@ class BAV_DataBackend_File extends BAV_DataBackend
         $this->safeRename($file, $this->parser->getFile());
         chmod($this->parser->getFile(), 0644);
     }
-
 
     /**
      * Renames a file atomically between different filesystems.
@@ -297,7 +279,6 @@ class BAV_DataBackend_File extends BAV_DataBackend
         }
     }
 
-
     /**
      * @throws BAV_DataBackendException_IO
      * @throws BAV_DataBackendException
@@ -327,6 +308,7 @@ class BAV_DataBackend_File extends BAV_DataBackend
         
         }
     }
+
     /**
      * @throws BAV_DataBackendException_IO
      * @throws BAV_DataBackendException_BankNotFound
@@ -344,9 +326,10 @@ class BAV_DataBackend_File extends BAV_DataBackend
              */
             if (isset($this->contextCache[$bankID])) {
                 return $this->findBank(
-                            $bankID,
-                            $this->contextCache[$bankID]->getLine(),
-                            $this->contextCache[$bankID]->getLine());
+                    $bankID,
+                    $this->contextCache[$bankID]->getLine(),
+                    $this->contextCache[$bankID]->getLine()
+                );
         
             } else {
                 return $this->findBank($bankID, 0, $this->parser->getLines());
@@ -358,6 +341,7 @@ class BAV_DataBackend_File extends BAV_DataBackend
         
         }
     }
+
     /**
      * @throws BAV_DataBackendException_BankNotFound
      * @throws BAV_FileParserException_ParseError
@@ -380,7 +364,7 @@ class BAV_DataBackend_File extends BAV_DataBackend
          * This handling is bad, as it may double the work
          */
         if ($blz == '00000000') {
-            try { 
+            try {
                 return $this->findBank($bankID, $offset, $line - 1);
                 
             } catch (BAV_DataBackendException_BankNotFound $e) {
@@ -389,7 +373,7 @@ class BAV_DataBackend_File extends BAV_DataBackend
             }
             
         } elseif (! isset($this->contextCache[$blz])) {
-           $this->contextCache[$blz] = new BAV_FileParserContext($line);
+            $this->contextCache[$blz] = new BAV_FileParserContext($line);
 
         }
         
@@ -404,6 +388,7 @@ class BAV_DataBackend_File extends BAV_DataBackend
         
         }
     }
+
     /**
      * @see BAV_DataBackend::getMainAgency()
      * @throws BAV_DataBackendException
@@ -435,6 +420,7 @@ class BAV_DataBackend_File extends BAV_DataBackend
             
         }
     }
+
     /**
      * @see BAV_DataBackend::getAgencies()
      * @throws BAV_DataBackendException_IO
@@ -466,7 +452,6 @@ class BAV_DataBackend_File extends BAV_DataBackend
             
         }
     }
-    
     
     /**
      * @return BAV_FileParserContext
@@ -507,7 +492,6 @@ class BAV_DataBackend_File extends BAV_DataBackend
         return $context;
     }
     
-    
     /**
      * @throws BAV_DataBackendException_IO
      * @return String a writable directory for temporary files
@@ -524,11 +508,11 @@ class BAV_DataBackend_File extends BAV_DataBackend
         );
         
         foreach ($tmpDirs as $tmpDir) {
-        	if ($tmpDir && is_writable($tmpDir)) {
-        		return realpath($tmpDir);
-        		
-        	}
-        	
+            if ($tmpDir && is_writable($tmpDir)) {
+                return realpath($tmpDir);
+                
+            }
+            
         }
         
         $tempfile = tempnam(uniqid(mt_rand(), true), '');
@@ -540,6 +524,4 @@ class BAV_DataBackend_File extends BAV_DataBackend
         
         throw new BAV_DataBackendException_IO();
     }
-    
-
 }
