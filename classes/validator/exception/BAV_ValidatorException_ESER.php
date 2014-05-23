@@ -1,7 +1,5 @@
 <?php
 
-
-
 /**
  * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
@@ -28,7 +26,4 @@
 class BAV_ValidatorException_ESER extends BAV_ValidatorException
 {
 
-
 }
-
-

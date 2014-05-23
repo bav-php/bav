@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
@@ -29,18 +26,16 @@
 class BAV_ValidatorException_NotExists extends BAV_ValidatorException
 {
 
-
-    private
     /**
      * @var BAV_Bank
      */
-    $bank;
-
+    private $bank;
 
     public function __construct(BAV_Bank $bank)
     {
         $this->bank = $bank;
     }
+
     /**
      * @return BAV_Bank
      */
@@ -48,8 +43,4 @@ class BAV_ValidatorException_NotExists extends BAV_ValidatorException
     {
         return $this->bank;
     }
-
-
 }
-
-
