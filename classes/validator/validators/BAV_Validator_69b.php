@@ -28,7 +28,8 @@ class BAV_Validator_69b extends BAV_Validator_Iteration_Transformation
 {
 
     
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
         
         $this->setMatrix(array(
@@ -41,7 +42,8 @@ class BAV_Validator_69b extends BAV_Validator_Iteration_Transformation
     /**
      * @return bool
      */
-    protected function getResult() {
+    protected function getResult()
+    {
         $result = (10 - ($this->accumulator % 10)) % 10;
         return (string)$result === $this->getCheckNumber();
     }

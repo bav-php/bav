@@ -28,14 +28,16 @@ class BAV_Validator_21 extends BAV_Validator_00
 {
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
         $this->setWeights(array(2, 1));
     }
     
     
-    protected function getResult() {
+    protected function getResult()
+    {
         for ($result = $this->accumulator; $result >= 10; $result = $this->crossSum($result));
         $result = 10 - $result;
         return (string)$result === $this->getCheckNumber();

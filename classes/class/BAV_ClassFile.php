@@ -68,7 +68,8 @@ class BAV_ClassFile extends BAV
      * @throws BAV_ClassFileException_MissingClass
      * @param string $path
      */
-    private function  __construct($path) {
+    private function  __construct($path)
+    {
         $this->path          = $path;
         $this->name          = basename($path, '.php');
         
@@ -111,7 +112,8 @@ class BAV_ClassFile extends BAV
      * @param string $path
      * @return BAV_ClassFile
      */
-    public static function getClassFile($path) {
+    public static function getClassFile($path)
+    {
         if (! isset(self::$instances[$path])) {
             self::$instances[$path] = new self($path);
         
@@ -124,7 +126,8 @@ class BAV_ClassFile extends BAV
      * @param string $dir
      * @return array BAV_ClassFile objects
      */
-    public static function getClassFiles($dir) {
+    public static function getClassFiles($dir)
+    {
         $classFiles = array();
         $dh         = opendir($dir);
         if (! $dh) {
@@ -144,7 +147,8 @@ class BAV_ClassFile extends BAV
     /**
      * @return BAV a new instance of {@link $name}
      */
-    public function getInstance() {
+    public function getInstance()
+    {
         if (func_num_args() == 0) {
             return new $this->name();
 
@@ -162,7 +166,8 @@ class BAV_ClassFile extends BAV
      * @throws BAV_ClassFileException_IO
      * @return string
      */
-    public function getClassDefinition() {
+    public function getClassDefinition()
+    {
         if (is_null($this->classDefinition)) {
             $this->classDefinition = '';
             $fp                    = fopen($this->path, 'r');
@@ -185,7 +190,8 @@ class BAV_ClassFile extends BAV
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
     

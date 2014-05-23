@@ -28,14 +28,16 @@ class BAV_Validator_41 extends BAV_Validator_00
 {
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
         $this->setWeights(array(2, 1));
     }
     
     
-    protected function init($account) {
+    protected function init($account)
+    {
         parent::init($account);
         
         if ($this->account{3} == 9) {

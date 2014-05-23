@@ -51,7 +51,8 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      * @throws BAV_FileParserException_IO
      * @throws BAV_FileParserException_FileNotExists
      */
-    protected function setUp() {
+    protected function setUp()
+    {
     	if (! empty(self::$dataBackend)) {
     		return;
     		
@@ -70,7 +71,8 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     /**
      * @return Array
      */
-    public function provideBanks() {
+    public function provideBanks()
+    {
     	$this->setUp();
     	
     	$banks = array();
@@ -96,7 +98,8 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     /**
      * @return Array
      */
-    public function provideAccountsAndBanksInAllLengths() {
+    public function provideAccountsAndBanksInAllLengths()
+    {
         $providedAccountsAndBanks = array();
         foreach ($this->provideBanks() as $bank) {
             $bank = $bank[0];
@@ -118,7 +121,8 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      * @throws BAV_ClassFileException_MissingClass
      * @dataProvider provideBanks
      */
-    public function testFindParseErrors(BAV_Bank $bank) {
+    public function testFindParseErrors(BAV_Bank $bank)
+    {
     	/**
          * testing 10 random bank accounts
          */
@@ -137,7 +141,8 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      * @throws BAV_ClassFileException_MissingClass
      * @dataProvider provideBanks
      */
-    public function testNullIsInvalid(BAV_Bank $bank) {
+    public function testNullIsInvalid(BAV_Bank $bank)
+    {
     	for ($length = 0; $length <= 10; $length++) {
     		$account = str_pad("0", $length, "0", STR_PAD_LEFT);
     		$this->assertFalse(
@@ -157,7 +162,8 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      * @throws BAV_ClassFileException_MissingClass
      * @dataProvider provideAccountsAndBanksInAllLengths
      */
-    public function testAccountLength(BAV_Bank $bank, $account) {
+    public function testAccountLength(BAV_Bank $bank, $account)
+    {
         $bank->isValid($account);
     }
     
@@ -165,7 +171,8 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     /**
      * @return Array
      */
-    public function provideTestAccounts() {
+    public function provideTestAccounts()
+    {
         $verifyArray = parse_ini_file(__DIR__.'/../data/verify.ini', true);
         if (! $verifyArray) {
             throw new RuntimeException("couldn't parse verify.ini.");
@@ -181,7 +188,8 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     /**
      * @return Array
      */
-    private function getTestAccounts(Array $testAccounts, $expectedValidation) {
+    private function getTestAccounts(Array $testAccounts, $expectedValidation)
+    {
     	$accounts = array();
         foreach ($testAccounts as $typeOrBankID => $tests) {
             $accounts[] = array(
@@ -198,7 +206,8 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider provideTestAccounts
      */
-    public function testAccount($typeOrBankID, Array $accountIDs, $expectedValidation) {
+    public function testAccount($typeOrBankID, Array $accountIDs, $expectedValidation)
+    {
         if (strlen($typeOrBankID) <= 2) {
             $typeOrBankID = (strlen($typeOrBankID) < 2 ? '0' : '').$typeOrBankID;
             $this->assertArrayHasKey($typeOrBankID, self::$implementedBanks);

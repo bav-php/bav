@@ -35,7 +35,8 @@ class BAV_Encoding_MB extends BAV_Encoding
     /**
      * @return bool
      */
-    public static function isSupported($encoding) {
+    public static function isSupported($encoding)
+    {
         return function_exists("mb_list_encodings")
             && in_array($encoding, mb_list_encodings());
     }
@@ -43,7 +44,8 @@ class BAV_Encoding_MB extends BAV_Encoding
      * @throws BAV_EncodingException_Unsupported
      * @param String $encoding
      */
-    public function __construct($encoding = 'UTF-8') {
+    public function __construct($encoding = 'UTF-8')
+    {
         parent::__construct($encoding);
 
         mb_internal_encoding($encoding);
@@ -51,7 +53,8 @@ class BAV_Encoding_MB extends BAV_Encoding
     /**
      * @return int length of $string
      */
-    public function strlen($string) {
+    public function strlen($string)
+    {
         return mb_strlen($string);
     }
     /**
@@ -60,7 +63,8 @@ class BAV_Encoding_MB extends BAV_Encoding
      * @param int $length
      * @return String
      */
-    public function substr($string, $offset, $length = null) {
+    public function substr($string, $offset, $length = null)
+    {
         return is_null($length)
              ? mb_substr($string, $offset)
              : mb_substr($string, $offset, $length);
@@ -70,7 +74,8 @@ class BAV_Encoding_MB extends BAV_Encoding
      * @param String $from_encoding
      * @return $string the encoded string
      */
-    public function convert($string, $from_encoding) {
+    public function convert($string, $from_encoding)
+    {
         return mb_convert_encoding($string, $this->enc, $from_encoding);
     }
 

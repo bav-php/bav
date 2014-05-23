@@ -28,14 +28,16 @@ class BAV_Validator_11 extends BAV_Validator_06
 {
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
         $this->setWeights(array(2, 3, 4, 5, 6, 7, 8, 9, 10));
     }
     
     
-    protected function getResult() {
+    protected function getResult()
+    {
         $result = 11 - $this->accumulator % 11;
         switch ($result) {
             case 11:

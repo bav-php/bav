@@ -28,7 +28,8 @@ class BAV_Validator_62 extends BAV_Validator_Iteration_Weighted
 {
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
         
         $this->setWeights(array(2, 1));
@@ -40,12 +41,14 @@ class BAV_Validator_62 extends BAV_Validator_Iteration_Weighted
 
 
 
-    protected function iterationStep() {
+    protected function iterationStep()
+    {
         $this->accumulator += $this->crossSum($this->number * $this->getWeight());
     }
 
 
-    protected function getResult() {
+    protected function getResult()
+    {
         $result = (10 - ($this->accumulator % 10)) % 10;
         return (string)$result === $this->getCheckNumber();
     }

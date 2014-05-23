@@ -47,7 +47,8 @@ class BAV_Validator_B2 extends BAV_Validator
     $mode2;
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
         
         $this->mode1 = new BAV_Validator_02($bank);
@@ -56,7 +57,8 @@ class BAV_Validator_B2 extends BAV_Validator
         $this->mode2 = new BAV_Validator_00($bank);
         $this->mode2->setWeights(array(2, 1));
     }
-    protected function validate() {
+    protected function validate()
+    {
         $this->validator = $this->account{0} <= 7
                          ? $this->mode1
                          : $this->mode2;
@@ -64,7 +66,8 @@ class BAV_Validator_B2 extends BAV_Validator
     /**
      * @return bool
      */
-    protected function getResult() {
+    protected function getResult()
+    {
         return $this->validator->isValid($this->account);
     }
     

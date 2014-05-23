@@ -39,13 +39,15 @@ class BAV_FileParserException_FileNotExists extends BAV_FileParserException
     /**
      * @param string $file
      */
-    public function __construct($parsedFile) {
+    public function __construct($parsedFile)
+    {
         $this->parsedFile = $parsedFile;
     }
     /**
      * @return string
      */
-    public function getParsedFile() {
+    public function getParsedFile()
+    {
         return $this->parsedFile;
     }
 

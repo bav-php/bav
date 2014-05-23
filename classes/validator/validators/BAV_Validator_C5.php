@@ -57,7 +57,8 @@ class BAV_Validator_C5 extends BAV_Validator
     $mode4;
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
         
         $this->mode1 = new BAV_Validator_75($bank);
@@ -65,7 +66,8 @@ class BAV_Validator_C5 extends BAV_Validator
         $this->mode3 = new BAV_Validator_00($bank);
         $this->mode4 = new BAV_Validator_09($bank);
     }
-    protected function validate() {
+    protected function validate()
+    {
         $account = ltrim($this->account, '0');
         $length  = strlen($account);
         
@@ -109,7 +111,8 @@ class BAV_Validator_C5 extends BAV_Validator
     /**
      * @return bool
      */
-    protected function getResult() {
+    protected function getResult()
+    {
         return ! is_null($this->validator) && $this->validator->isValid($this->account);
     }
     

@@ -74,7 +74,8 @@ class BAV_Bank extends BAV
      * @param string $bankID
      * @param string $validationType
      */
-    public function __construct(BAV_DataBackend $dataBackend, $bankID, $validationType) {
+    public function __construct(BAV_DataBackend $dataBackend, $bankID, $validationType)
+    {
         $this->dataBackend = $dataBackend;
         $this->bankID = $bankID;
         $this->validationType = $validationType;
@@ -82,13 +83,15 @@ class BAV_Bank extends BAV
     /**
      * @return string
      */
-    public function getValidationType() {
+    public function getValidationType()
+    {
         return $this->validationType;
     }
     /**
      * @return string
      */
-    public function getBankID() {
+    public function getBankID()
+    {
         return (string) $this->bankID;
     }
     /**
@@ -97,7 +100,8 @@ class BAV_Bank extends BAV
      * @throws BAV_DataBackendException
      * @return BAV_Agency
      */
-    public function getMainAgency() {
+    public function getMainAgency()
+    {
         if (is_null($this->mainAgency)) {
             $this->mainAgency = $this->dataBackend->_getMainAgency($this);
         
@@ -110,7 +114,8 @@ class BAV_Bank extends BAV
      * @throws BAV_DataBackendException
      * @return array
      */
-    public function getAgencies() {
+    public function getAgencies()
+    {
         if (is_null($this->agencies)) {
             $this->agencies = $this->dataBackend->_getAgencies($this);
         
@@ -124,14 +129,16 @@ class BAV_Bank extends BAV
      * @param string $account
      * @return bool
      */
-    public function isValid($account) {
+    public function isValid($account)
+    {
         return $this->getValidator()->isValid($account);
     }
     /**
      * @throws BAV_ValidatorException_NotExists
      * @return BAV_Validator
      */
-    public function getValidator() {
+    public function getValidator()
+    {
         if (is_null($this->validator)) {
             $this->validator = BAV_Validator::getInstance($this);
         

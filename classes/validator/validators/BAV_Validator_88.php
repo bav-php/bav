@@ -28,7 +28,8 @@ class BAV_Validator_88 extends BAV_Validator_06
 {
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
         $this->setWeights(array(2, 3, 4, 5, 6, 7, 8));
@@ -36,7 +37,8 @@ class BAV_Validator_88 extends BAV_Validator_06
     }
     
     
-    protected function init($account) {
+    protected function init($account)
+    {
         parent::init($account);
         
         $this->setEnd($this->account{2} == 9 ? 2: 3);

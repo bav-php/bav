@@ -33,12 +33,14 @@ class BAV_Validator_87a extends BAV_Validator
 {
 
    
-    protected function validate() {
+    protected function validate()
+    {
     }
      /**
      * @return bool
      */
-    protected function getResult() {
+    protected function getResult()
+    {
         $accountID = $this->account;
         $i      = 0;
         $c2     = 0;

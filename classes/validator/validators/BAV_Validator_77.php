@@ -29,7 +29,8 @@ class BAV_Validator_77 extends BAV_Validator_Chain
 {
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
         $this->validators[] = new BAV_Validator_77a($bank);

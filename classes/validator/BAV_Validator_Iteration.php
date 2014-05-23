@@ -59,7 +59,8 @@ abstract class BAV_Validator_Iteration extends BAV_Validator
     $end = 0;
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
         
         $this->setStart(-2);
@@ -68,24 +69,28 @@ abstract class BAV_Validator_Iteration extends BAV_Validator
     /**
      * @param int $start
      */
-    public function setStart($start) {
+    public function setStart($start)
+    {
         $this->start = $start;
     }
     /**
      * @param int $end
      */
-    public function setEnd($end) {
+    public function setEnd($end)
+    {
         $this->end = $end;
     }
     /**
      * @param string $account
      */
-    protected function init($account) {
+    protected function init($account)
+    {
         parent::init($account);
 
         $this->accumulator  = 0;
     }
-    protected function validate() {
+    protected function validate()
+    {
         $start  = $this->getNormalizedPosition($this->start);
         $end    = $this->getNormalizedPosition($this->end);
         $length = abs($end - $start) + 1;

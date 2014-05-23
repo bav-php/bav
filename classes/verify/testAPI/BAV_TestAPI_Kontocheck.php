@@ -46,7 +46,8 @@ class BAV_TestAPI_Kontocheck extends BAV_TestAPI
 	 * @param int $lutVersion
 	 * @throws BAV_TestAPIException
 	 */
-	public function __construct($lutFile, $lutVersion) {
+	public function __construct($lutFile, $lutVersion)
+    {
 		parent::__construct();
 		
 		$this->setName("kc");
@@ -66,7 +67,8 @@ class BAV_TestAPI_Kontocheck extends BAV_TestAPI
 	 * @throws BAV_TestAPIException_Validation_NotInitialized
 	 * @throws BAV_TestAPIException_Validation_BankNotFound
 	 */
-	protected function isValid(BAV_Bank $bank, $account) {
+	protected function isValid(BAV_Bank $bank, $account)
+    {
 		$isValid = kto_check_blz($bank->getBankID(), $account);
 		
 		switch ($isValid) {

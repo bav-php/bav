@@ -60,7 +60,8 @@ abstract class BAV_Validator extends BAV
     $bank;
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         $this->bank = $bank;
         $this->setChecknumberPosition(-1);
     }
@@ -68,7 +69,8 @@ abstract class BAV_Validator extends BAV
      * @throws BAV_ValidatorException_NotExists
      * @return BAV_Validator
      */
-    public static function getInstance(BAV_Bank $bank) {
+    public static function getInstance(BAV_Bank $bank)
+    {
         $type  = trim(strtoupper($bank->getValidationType()));
         $class = "BAV_Validator_$type";
         $file  = __DIR__."/validators/$class.php";
@@ -85,7 +87,8 @@ abstract class BAV_Validator extends BAV
      * @param string $account
      * @return bool
      */
-    public function isValid($account) {
+    public function isValid($account)
+    {
     	try {
             $this->init($account);
             $this->validate();
@@ -98,16 +101,19 @@ abstract class BAV_Validator extends BAV
     }
     
     
-    public function setChecknumberPosition($position) {
+    public function setChecknumberPosition($position)
+    {
         $this->checknumberPosition = $position;
     }
-    public function setNormalizedSize($size) {
+    public function setNormalizedSize($size)
+    {
         $this->normalizedSize = $size;
     }
     /**
      * @param string $account
      */
-    protected function init($account) {
+    protected function init($account)
+    {
         $this->account = $account;
         if ($this->doNormalization) {
             $this->normalizeAccount($this->normalizedSize);
@@ -124,7 +130,8 @@ abstract class BAV_Validator extends BAV
     /**
      * @return string
      */
-    protected function getChecknumber() {
+    protected function getChecknumber()
+    {
         return $this->account{$this->getNormalizedPosition($this->checknumberPosition)};
     }
     /**
@@ -134,7 +141,8 @@ abstract class BAV_Validator extends BAV
      * @return int
      * @throws BAV_ValidatorException_OutOfBounds
      */
-    protected function getNormalizedPosition($pos) {
+    protected function getNormalizedPosition($pos)
+    {
     	if ($pos >= strlen($this->account) || $pos < -strlen($this->account)) {
     		throw new BAV_ValidatorException_OutOfBounds("Cannot access offset $pos in String $this->account");
     		
@@ -154,7 +162,8 @@ abstract class BAV_Validator extends BAV
      * @param int $int
      * @return int
      */
-    protected function crossSum($int) {
+    protected function crossSum($int)
+    {
         $sum     = 0;
         $str_int = (string) $int;
         for ($i = 0; $i < strlen($str_int); $i++) {
@@ -170,7 +179,8 @@ abstract class BAV_Validator extends BAV
      * @throws BAV_ValidatorException_OutOfBounds
      * @param int $int
      */
-    protected function normalizeAccount($size) {
+    protected function normalizeAccount($size)
+    {
         $account = (string) $this->account;
         if (strlen($account) > $size) {
             throw new BAV_ValidatorException_OutOfBounds("Can't normalize $account to size $size.");
@@ -182,7 +192,8 @@ abstract class BAV_Validator extends BAV
      * @throws BAV_ValidatorException_ESER
      * @return string
      */
-    protected function getESER8() {
+    protected function getESER8()
+    {
         $account = ltrim($this->account, '0');
     
         if (strlen($account) != 8) {
@@ -211,7 +222,8 @@ abstract class BAV_Validator extends BAV
      * @throws BAV_ValidatorException_ESER
      * @return string
      */
-    protected function getESER9() {
+    protected function getESER9()
+    {
         $bankID  = $this->bank->getBankID();
         $account = ltrim($this->account, '0');
 
@@ -236,13 +248,16 @@ abstract class BAV_Validator extends BAV
         $eser = $blzPart0.$t.$blzPart1.$accountPart0.$p.$accountTail;
         return $eser;
     }
-    protected function getEserChecknumberPosition() {
+    protected function getEserChecknumberPosition()
+    {
         return $this->getNormalizedPosition($this->checknumberPosition + $this->eserChecknumberOffset);
     }
-    protected function getEserChecknumber() {
+    protected function getEserChecknumber()
+    {
         return $this->account{$this->getEserChecknumberPosition()};
     }
-    protected function isBetween($a, $b) {
+    protected function isBetween($a, $b)
+    {
         $account = (int) ltrim($this->account, '0');
         
         return $a < $b

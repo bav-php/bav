@@ -40,7 +40,8 @@ class BAV_Validator_68 extends BAV_Validator_Chain
     $validator10;
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
         
         $this->validator10  = new BAV_Validator_00($bank);
@@ -53,7 +54,8 @@ class BAV_Validator_68 extends BAV_Validator_Chain
     }
     
     
-    public function isValid($account) {
+    public function isValid($account)
+    {
         switch (strlen($account)) {
         
             case 10:

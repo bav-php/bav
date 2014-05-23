@@ -41,7 +41,8 @@ class BackendTest extends PHPUnit_Framework_TestCase
     /**
      * Defines the reference backend
      */
-    public static function classConstructor() {
+    public static function classConstructor()
+    {
         self::$referenceBackend = new BAV_DataBackend_File();
     }
     
@@ -49,7 +50,8 @@ class BackendTest extends PHPUnit_Framework_TestCase
     /**
      * @return Array The tested backends
      */
-    public function provideBackends() {
+    public function provideBackends()
+    {
         return array(
             array(new BAV_DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'))),
             array(new BAV_DataBackend_File())
@@ -59,7 +61,8 @@ class BackendTest extends PHPUnit_Framework_TestCase
     
     /**
      */
-    public function provideInstallationBackends() {
+    public function provideInstallationBackends()
+    {
         return array(
             array(new BAV_DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'), 'bavtest_')),
             array(new BAV_DataBackend_File(tempnam(BAV_DataBackend_File::getTempdir(), 'bavtest')))
@@ -70,7 +73,8 @@ class BackendTest extends PHPUnit_Framework_TestCase
     /**
      * @return Array
      */
-    public function provideBanks() {
+    public function provideBanks()
+    {
     	$banks = array();
     	foreach($this->provideBackends() as $backendArray) {
     		$backend = $backendArray[0];
@@ -87,7 +91,8 @@ class BackendTest extends PHPUnit_Framework_TestCase
     /**
      * @return Array
      */
-    public function provideAgencies() {
+    public function provideAgencies()
+    {
         $agencies = array();
         foreach($this->provideBanks() as $banks) {
             $referenceBank = $banks[0];
@@ -115,7 +120,8 @@ class BackendTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider provideInstallationBackends
      */
-    public function testInstallation(BAV_DataBackend $backend) {
+    public function testInstallation(BAV_DataBackend $backend)
+    {
     	$backend->install();
     	$backend->update();
     	$backend->uninstall();
@@ -125,7 +131,8 @@ class BackendTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider provideInstallationBackends
      */
-    public function testInstallationIsComplete(BAV_DataBackend $backend) {
+    public function testInstallationIsComplete(BAV_DataBackend $backend)
+    {
         $this->markTestIncomplete();
         //TODO test if the installation process fills all banks
     }
@@ -137,7 +144,8 @@ class BackendTest extends PHPUnit_Framework_TestCase
      * 
      * @dataProvider provideBackends
      */
-    public function testSingleInstances(BAV_DataBackend $backend) {
+    public function testSingleInstances(BAV_DataBackend $backend)
+    {
         foreach (self::$referenceBackend->getAllBanks() as $refBank) {
         	$this->assertTrue(
         	   $backend->getBank($refBank->getBankID()) === $backend->getBank($refBank->getBankID()),
@@ -150,7 +158,8 @@ class BackendTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider provideBackends
      */
-    public function testGetAllBanks(BAV_DataBackend $backend) {
+    public function testGetAllBanks(BAV_DataBackend $backend)
+    {
     	$this->assertEquals(
             count(self::$referenceBackend->getAllBanks()),
             count($backend->getAllBanks())
@@ -161,7 +170,8 @@ class BackendTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider provideBanks
      */
-    public function testBanks(BAV_Bank $referenceBank, BAV_Bank $testedBank) {
+    public function testBanks(BAV_Bank $referenceBank, BAV_Bank $testedBank)
+    {
         $this->assertEquals(
             $referenceBank->getValidationType(),
             $testedBank->getValidationType()
@@ -182,12 +192,14 @@ class BackendTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider provideAgencies
      */
-    public function testAgencies(BAV_Agency $referenceAgency, BAV_Agency $testedAgency) {
+    public function testAgencies(BAV_Agency $referenceAgency, BAV_Agency $testedAgency)
+    {
     	$this->assertEqualAgency($referenceAgency, $testedAgency);
     }
     
     
-    private function assertEqualAgency(BAV_Agency $a, BAV_Agency $b) {
+    private function assertEqualAgency(BAV_Agency $a, BAV_Agency $b)
+    {
     	$this->assertTrue($a->getBank()->getBankID() === $b->getBank()->getBankID());
         $this->assertTrue($a->getID()                === $b->getID());
         $this->assertTrue($a->getPostcode()          === $b->getPostcode());

@@ -52,7 +52,8 @@ class BAV_Version extends BAV
      * @param string $version
      * @param string $separator
      */
-    public function __construct($version, $separator = '.') {
+    public function __construct($version, $separator = '.')
+    {
         $this->separator = $separator;
         $this->elements  = explode($separator, $version);
     }
@@ -61,7 +62,8 @@ class BAV_Version extends BAV
     /**
      * @return boolean
      */
-    public function isGreater(BAV_Version $version) {
+    public function isGreater(BAV_Version $version)
+    {
         $thoseElements = $version->getElements(count($this->elements));
         $thisElements  = $this->getElements(count($thoseElements));
         
@@ -79,7 +81,8 @@ class BAV_Version extends BAV
     /**
      * @return boolean
      */
-    public function equals(BAV_Version $version) {
+    public function equals(BAV_Version $version)
+    {
         $thoseElements = $version->getElements(count($this->elements));
         $thisElements  = $this->getElements(count($thoseElements));
         
@@ -90,7 +93,8 @@ class BAV_Version extends BAV
     /**
      * @return boolean
      */
-    public function isLesser(BAV_Version $version) {
+    public function isLesser(BAV_Version $version)
+    {
         return ! $this->equals($version) && ! $this->isGreater($version);
     }
     
@@ -98,7 +102,8 @@ class BAV_Version extends BAV
     /**
      * @return string
      */
-    public function getString() {
+    public function getString()
+    {
         return implode($this->separator, $this->elements);
     }
     
@@ -106,7 +111,8 @@ class BAV_Version extends BAV
     /**
      * @return string
      */
-    public function getNormalizedVersion() {
+    public function getNormalizedVersion()
+    {
         $elements = array_merge($this->elements);
         for ($i = count($elements) - 1; $i > 0; $i--) {
             $lastElement = array_pop($elements);
@@ -126,7 +132,8 @@ class BAV_Version extends BAV
      * @param string $right
      * @return boolean
      */
-    private function _isGreater($left, $right) {
+    private function _isGreater($left, $right)
+    {
         return $left > $right;
     }
     
@@ -135,7 +142,8 @@ class BAV_Version extends BAV
      * @param int $padding
      * @return array
      */
-    private function getElements($padding = null) {
+    private function getElements($padding = null)
+    {
         if (is_null($padding) || count($this->elements) >= $padding) {
             return $this->elements;
             
@@ -147,7 +155,8 @@ class BAV_Version extends BAV
     /**
      * @return BAV_Version
      */
-    public static function getPHPVersion() {
+    public static function getPHPVersion()
+    {
         if (empty(self::$phpVersion)) {
             self::$phpVersion = new BAV_Version(phpversion());
             

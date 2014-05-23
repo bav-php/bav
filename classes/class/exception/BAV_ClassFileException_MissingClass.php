@@ -44,20 +44,23 @@ class BAV_ClassFileException_MissingClass extends BAV_ClassFileException
      * @param string $className
      * @param string $missingClassName
      */
-    public function __construct($className, $missingClassName) {
+    public function __construct($className, $missingClassName)
+    {
         $this->className        = $className;
         $this->missingClassName = $missingClassName;
     }
     /**
      * @return string
      */
-    public function getClassName() {
+    public function getClassName()
+    {
         return $this->className;
     }
     /**
      * @return string
      */
-    public function getMissingClassName() {
+    public function getMissingClassName()
+    {
         return $this->missingClassName;
     }
 

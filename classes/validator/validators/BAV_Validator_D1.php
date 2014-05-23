@@ -60,14 +60,16 @@ class BAV_Validator_D1 extends BAV_Validator
     $validator;
     
     
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
         
         $this->validator = new BAV_Validator_00($bank);
     }
 
 
-    protected function validate() {
+    protected function validate()
+    {
         $transformationIndex = $this->_getTransformationIndex();
         if (! array_key_exists($transformationIndex, self::$_transformation)) {
             return;
@@ -83,7 +85,8 @@ class BAV_Validator_D1 extends BAV_Validator
     /**
      * @return bool
      */
-    protected function getResult() {
+    protected function getResult()
+    {
         return 
             array_key_exists(
                 $this->_getTransformationIndex(),
@@ -97,7 +100,8 @@ class BAV_Validator_D1 extends BAV_Validator
     /**
      * @return int
      */
-    private function _getTransformationIndex() {
+    private function _getTransformationIndex()
+    {
         return $this->account{0};
     }
     

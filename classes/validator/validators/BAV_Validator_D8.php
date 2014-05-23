@@ -40,14 +40,16 @@ class BAV_Validator_D8 extends BAV_Validator
     $_validator;
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
         
         $this->_validator = new BAV_Validator_00($bank);
     }
 
 
-    protected function validate() {
+    protected function validate()
+    {
 
     }
     
@@ -55,7 +57,8 @@ class BAV_Validator_D8 extends BAV_Validator
     /**
      * @return bool
      */
-    protected function getResult() {
+    protected function getResult()
+    {
         if ($this->account{0} != 0) {
             return $this->_validator->isValid($this->account);
 

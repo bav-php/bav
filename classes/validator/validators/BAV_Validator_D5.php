@@ -47,7 +47,8 @@ class BAV_Validator_D5 extends BAV_Validator
      */
     $_validatorChain;
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
         $this->_validator1 = new BAV_Validator_06($bank);
@@ -76,7 +77,8 @@ class BAV_Validator_D5 extends BAV_Validator
      *
      * @return bool
      */
-    protected function getResult() {
+    protected function getResult()
+    {
         return $this->_validator->isValid($this->account);
     }
 
@@ -86,7 +88,8 @@ class BAV_Validator_D5 extends BAV_Validator
      *
      * @return void
      */
-    protected function validate() {
+    protected function validate()
+    {
         $this->_validator
             = substr($this->account, 2, 2) == 99
             ? $this->_validator1

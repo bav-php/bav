@@ -48,7 +48,8 @@ class BAV_Validator_Chain extends BAV_Validator
      *
      * @return void
      */
-    public function addValidator(BAV_Validator $validator) {
+    public function addValidator(BAV_Validator $validator)
+    {
         $this->validators[] = $validator;
     }
 
@@ -58,7 +59,8 @@ class BAV_Validator_Chain extends BAV_Validator
      *
      * @return bool
      */
-    protected function getResult() {
+    protected function getResult()
+    {
         foreach ($this->validators as $validator) {
             if (! $this->continueValidation($validator)) {
                 return false;
@@ -75,7 +77,8 @@ class BAV_Validator_Chain extends BAV_Validator
     /**
      * should not be used
      */
-    final protected function validate() {
+    final protected function validate()
+    {
     }
     /**
      * After each successless iteration step this method will be called and
@@ -83,7 +86,8 @@ class BAV_Validator_Chain extends BAV_Validator
      *
      * @return bool
      */
-    protected function continueValidation(BAV_Validator $validator) {
+    protected function continueValidation(BAV_Validator $validator)
+    {
         return true;
     }
     /**
@@ -91,7 +95,8 @@ class BAV_Validator_Chain extends BAV_Validator
      *
      * @return bool
      */
-    protected function useValidator(BAV_Validator $validator) {
+    protected function useValidator(BAV_Validator $validator)
+    {
         return true;
     }
     

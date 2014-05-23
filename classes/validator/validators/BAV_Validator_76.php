@@ -28,7 +28,8 @@ class BAV_Validator_76 extends BAV_Validator_Iteration_Weighted
 {
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
         
         $this->setChecknumberPosition(-3);
@@ -37,7 +38,8 @@ class BAV_Validator_76 extends BAV_Validator_Iteration_Weighted
     }
     
     
-    public function isValid($account) {
+    public function isValid($account)
+    {
     	if (parent::isValid($account)) {
             return true;
             
@@ -48,17 +50,20 @@ class BAV_Validator_76 extends BAV_Validator_Iteration_Weighted
     }
     
     
-    protected function getWeight() {
+    protected function getWeight()
+    {
         return $this->i + 2;
     }
 
 
-    protected function iterationStep() {
+    protected function iterationStep()
+    {
         $this->accumulator += $this->number * $this->getWeight();
     }
 
 
-    protected function getResult() {
+    protected function getResult()
+    {
         $result = $this->accumulator % 11;
         return array_search((int)$this->account{0}, array(0, 4, 6, 7, 8, 9)) !== false
             && $result != 10

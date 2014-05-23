@@ -57,7 +57,8 @@ class BAV_DataBackend_File extends BAV_DataBackend
     /**
      * @param String $file The data source
      */
-    public function __construct($file = null) {
+    public function __construct($file = null)
+    {
         $this->parser = new BAV_FileParser($file);
     }
     
@@ -73,7 +74,8 @@ class BAV_DataBackend_File extends BAV_DataBackend
      * @param String $file
      * @throws BAV_DataBackendException_IO
      */
-    private function sortFile($file) {
+    private function sortFile($file)
+    {
         //read the unordered bank file
         $lines = file($file);
         if (! is_array($lines) || empty($lines)) {
@@ -116,7 +118,8 @@ class BAV_DataBackend_File extends BAV_DataBackend
      * @see BAV_DataBackend::uninstall()
      * @throws BAV_DataBackendException_IO
      */
-    public function uninstall() {
+    public function uninstall()
+    {
         if (! unlink($this->parser->getFile())) {
             throw new BAV_DataBackendException_IO();
         
@@ -126,7 +129,8 @@ class BAV_DataBackend_File extends BAV_DataBackend
      * @see BAV_DataBackend::install()
      * @throws BAV_DataBackendException_IO
      */
-    public function install() {
+    public function install()
+    {
         $this->update();
     }
     /**
@@ -136,7 +140,8 @@ class BAV_DataBackend_File extends BAV_DataBackend
      * @see BAV_DataBackend::update()
      * @throws BAV_DataBackendException_IO
      */
-    public function update() {
+    public function update()
+    {
         $ch = curl_init(self::DOWNLOAD_URI);
         if (! is_resource($ch)) {
             throw new BAV_DataBackendException_IO();
@@ -258,7 +263,8 @@ class BAV_DataBackend_File extends BAV_DataBackend
      * @param String $destination path of the destination
      * @throws BAV_DataBackendException_IO
      */
-    private function safeRename($source, $destination) {
+    private function safeRename($source, $destination)
+    {
         $isRenamed = @rename($source, $destination);
         if ($isRenamed) {
             return;
@@ -298,7 +304,8 @@ class BAV_DataBackend_File extends BAV_DataBackend
      * @return array
      * @see BAV_DataBackend::getAllBanks()
      */
-    public function getAllBanks() {
+    public function getAllBanks()
+    {
         try {
             for ($i = 0; $i < $this->parser->getLines(); $i++) {
                 if (isset($this->instances[$this->parser->getBankID($i)])) {
@@ -327,7 +334,8 @@ class BAV_DataBackend_File extends BAV_DataBackend
      * @see BAV_DataBackend::getNewBank()
      * @return BAV_Bank
      */
-    public function getNewBank($bankID) {
+    public function getNewBank($bankID)
+    {
         try {
             $this->parser->rewind();
             /**
@@ -359,7 +367,8 @@ class BAV_DataBackend_File extends BAV_DataBackend
      * @param int $length the line count
      * @return BAV_Bank
      */
-    private function findBank($bankID, $offset, $end) {
+    private function findBank($bankID, $offset, $end)
+    {
         if ($end - $offset < 0) {
             throw new BAV_DataBackendException_BankNotFound($bankID);
         
@@ -401,7 +410,8 @@ class BAV_DataBackend_File extends BAV_DataBackend
      * @throws BAV_DataBackendException_NoMainAgency
      * @return BAV_Agency
      */
-    public function _getMainAgency(BAV_Bank $bank) {
+    public function _getMainAgency(BAV_Bank $bank)
+    {
         try {
             $context = $this->defineContextInterval($bank->getBankID());
             for ($line = $context->getStart(); $line <= $context->getEnd(); $line++) {
@@ -431,7 +441,8 @@ class BAV_DataBackend_File extends BAV_DataBackend
      * @throws BAV_DataBackendException
      * @return array
      */
-    public function _getAgencies(BAV_Bank $bank) {
+    public function _getAgencies(BAV_Bank $bank)
+    {
         try {
             $context = $this->defineContextInterval($bank->getBankID());
             $agencies = array();
@@ -460,7 +471,8 @@ class BAV_DataBackend_File extends BAV_DataBackend
     /**
      * @return BAV_FileParserContext
      */
-    private function defineContextInterval($bankID) {
+    private function defineContextInterval($bankID)
+    {
         if (! isset($this->contextCache[$bankID])) {
             throw new LogicException("The contextCache object should exist!");
 
@@ -500,7 +512,8 @@ class BAV_DataBackend_File extends BAV_DataBackend
      * @throws BAV_DataBackendException_IO
      * @return String a writable directory for temporary files
      */
-    public static function getTempdir() {
+    public static function getTempdir()
+    {
         $tmpDirs = array(
             function_exists('sys_get_temp_dir') ? sys_get_temp_dir() : false,
             empty($_ENV['TMP'])    ? false : $_ENV['TMP'],

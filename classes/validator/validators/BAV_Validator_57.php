@@ -50,7 +50,8 @@ class BAV_Validator_57 extends BAV_Validator
     $mode2;
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
         
         $this->validator09 = new BAV_Validator_09($bank);
@@ -106,7 +107,8 @@ class BAV_Validator_57 extends BAV_Validator
     }
     
     
-    protected function validate() {
+    protected function validate()
+    {
         $this->validator = null;
         switch ($this->getMode()) {
             case 0: 
@@ -143,14 +145,16 @@ class BAV_Validator_57 extends BAV_Validator
                  break;
         }
     }
-    protected function getResult() {
+    protected function getResult()
+    {
         return ! is_null($this->validator) && $this->validator->isValid($this->account);
     }
     
     /**
      * @return int
      */
-    private function getMode() {
+    private function getMode()
+    {
         $firstTwo  = substr($this->account, 0, 2);
         
         if ($firstTwo == '00') {

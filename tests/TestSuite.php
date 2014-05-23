@@ -36,7 +36,8 @@ class TestSuite extends PHPUnit_Framework_TestSuite
 	/**
 	 * @return TestSuite
 	 */
-    public static function suite() {
+    public static function suite()
+    {
         $suite = new self();
         
         $suite->addTestSuite('AgencyQueryTest');

@@ -42,12 +42,14 @@ class BAV_Validator_D0 extends BAV_Validator
     $validator;
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
     }
     
     
-    protected function validate() {
+    protected function validate()
+    {
         $this->validator = substr($this->account, 0, 2) !== self::SWITCH_PREFIX
                          ? new BAV_Validator_20($this->bank)
                          : new BAV_Validator_09($this->bank);
@@ -57,7 +59,8 @@ class BAV_Validator_D0 extends BAV_Validator
     /**
      * @return bool
      */
-    protected function getResult() {
+    protected function getResult()
+    {
         return $this->validator->isValid($this->account);
     }
     

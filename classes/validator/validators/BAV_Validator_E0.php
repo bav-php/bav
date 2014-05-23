@@ -27,7 +27,8 @@ class BAV_Validator_E0 extends BAV_Validator_00
 {
 
 
-    protected function validate() {
+    protected function validate()
+    {
         parent::validate();
         $this->accumulator += 7;
     }

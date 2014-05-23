@@ -66,13 +66,15 @@ class BAV_VerifyImport extends BAV
     /**
      * @param BAV_DataBackend $dataBackend The backend is needed to get the validation algorithm.
      */
-    public function __construct(BAV_DataBackend $dataBackend) {
+    public function __construct(BAV_DataBackend $dataBackend)
+    {
         $this->dataBackend = $dataBackend;
     }
     /**
      * @return String
      */
-    private function getFile($file) {
+    private function getFile($file)
+    {
         return is_null($file)
              ? __DIR__.'/../../data/verify.ini'
              : $file;
@@ -83,7 +85,8 @@ class BAV_VerifyImport extends BAV
      * @param string $file
      * @throws BAV_VerifyException
      */
-    public function importVerifyFile($file = NULL) {
+    public function importVerifyFile($file = NULL)
+    {
         $file   = $this->getFile($file);
         $verify = parse_ini_file($file, true);
         if (! $verify) {
@@ -97,7 +100,8 @@ class BAV_VerifyImport extends BAV
     /**
      * Merges a string array of an existing verify.ini
      */
-    private function mergeVerifyArray($verifyArray, & $targetArray) {
+    private function mergeVerifyArray($verifyArray, & $targetArray)
+    {
         if (! is_array($verifyArray)) {
             return;
 
@@ -120,7 +124,8 @@ class BAV_VerifyImport extends BAV
      * @throws BAV_DataBackendException_BankNotFound
      * @throws BAV_DataBackendException
      */
-    public function import($bankID, $accountID, $isValid = true) {
+    public function import($bankID, $accountID, $isValid = true)
+    {
         $bankID     = $this->normalize($bankID);
         $accountID  = $this->normalize($accountID);
         $bank       = $this->dataBackend->getBank($bankID);
@@ -141,14 +146,16 @@ class BAV_VerifyImport extends BAV
      * @param string $id
      * @return string
      */
-    private function normalize($id) {
+    private function normalize($id)
+    {
         return (string) preg_replace('~\D+~', '', $id);
     }
     /**
      * @param string $filePath The file where the arrays are saved (default's to ../../data/verify.ini)
      * @throws BAV_VerifyException_IO
      */
-    public function save($file = null) {
+    public function save($file = null)
+    {
         $file = $this->getFile($file);
         $fp   = fopen($file, 'w');
         if (! is_resource($fp)) {
@@ -172,7 +179,8 @@ class BAV_VerifyImport extends BAV
      * @param String $name Name of the section
      * @throws BAV_VerifyException_IO
      */
-    private function saveArray($fp, Array $array, $name) {
+    private function saveArray($fp, Array $array, $name)
+    {
         if (! fwrite($fp, "\n\n".'['.$name.']')) {
             throw new BAV_VerifyException_IO();
 
@@ -202,7 +210,8 @@ class BAV_VerifyImport extends BAV
      * @throws BAV_DataBackendException_BankNotFound
      * @throws BAV_DataBackendException
      */
-    private function bankIDToType($bankID) {
+    private function bankIDToType($bankID)
+    {
         return $this->dataBackend->getBank($bankID)->getValidationType();
     }
 

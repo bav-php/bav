@@ -19,7 +19,8 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase
     $pdo;
     
     
-    public static function classConstructor() {
+    public static function classConstructor()
+    {
         self::$pdo = new PDO('mysql:host=localhost;dbname=test', 'test');
         self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
@@ -85,7 +86,8 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase
     /**
      * @return Array
      */
-    public function provideParsedLines() {
+    public function provideParsedLines()
+    {
     	$parser = new BAV_FileParser();
     	$lines  = array();
     	
@@ -104,7 +106,8 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider provideParsedLines
      */
-    public function testParser($blz, $type) {
+    public function testParser($blz, $type)
+    {
         $this->assertRegExp('~^\d{8}$~',        $blz);
         $this->assertRegExp('~^[\dA-Z]\d$~',    $type);
     }
@@ -113,7 +116,8 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase
     /**
      * Every bankID should have exact one validator
      */
-    public function testValidatorCount() {
+    public function testValidatorCount()
+    {
         $statement = self::$pdo->query("
             SELECT blz FROM bank GROUP BY blz HAVING count(DISTINCT validator) != 1
         ");
@@ -127,7 +131,8 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase
     /**
      * Every bankID should have exact one mainAgency
      */
-    public function testMainAgency () {
+    public function testMainAgency ()
+    {
         $statement = self::$pdo->query("SELECT blz FROM bank GROUP BY blz HAVING SUM(isMain) != 1");
         $this->assertFalse(
             $statement->fetch(),
@@ -136,7 +141,8 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase
     }
     
     
-    public function testBLZDatatype () {
+    public function testBLZDatatype ()
+    {
         $statement = self::$pdo->query("SELECT blz FROM bank WHERE blz LIKE '0%'");
         $this->assertFalse(
             $statement->fetch(),

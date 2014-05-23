@@ -47,7 +47,8 @@ abstract class BAV_Encoding extends BAV
      * @throws BAV_EncodingException_Unsupported
      * @param String $encoding
      */
-    public function __construct($encoding = 'UTF-8') {
+    public function __construct($encoding = 'UTF-8')
+    {
         if (! $this->isSupported($encoding)) {
             throw new BAV_EncodingException_Unsupported($encoding);
         
@@ -76,7 +77,8 @@ abstract class BAV_Encoding extends BAV
      * @param String
      * @return bool
      */
-    public static function isSupported($encoding) {
+    public static function isSupported($encoding)
+    {
         return false;
     }
     /**
@@ -84,7 +86,8 @@ abstract class BAV_Encoding extends BAV
      * @param String $encoding
      * @return BAV_Encoding
      */
-    public static function getInstance($encoding) {
+    public static function getInstance($encoding)
+    {
         if (BAV_Encoding_Iconv::isSupported($encoding)) {
             return new BAV_Encoding_Iconv($encoding);
         

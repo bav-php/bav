@@ -50,7 +50,8 @@ abstract class BAV_TestAPI extends BAV
     abstract protected function isValid(BAV_Bank $bank, $account);
     
 	
-	public function __construct() {
+	public function __construct()
+    {
 		$this->setName(get_class($this));
 	}
 	
@@ -58,7 +59,8 @@ abstract class BAV_TestAPI extends BAV
 	/**
 	 * @param string $name
 	 */
-	protected function setName($name) {
+	protected function setName($name)
+    {
 		$this->name = $name;	
 	}
 	
@@ -66,7 +68,8 @@ abstract class BAV_TestAPI extends BAV
 	 * @param int $account
 	 * @return BAV_TestAPIResult
 	 */
-    public function getResult(BAV_Bank $bank, $account) {
+    public function getResult(BAV_Bank $bank, $account)
+    {
         try {
             $result = $this->isValid($bank, $account)
                     ? BAV_TestAPIResult::VALID
@@ -87,7 +90,8 @@ abstract class BAV_TestAPI extends BAV
 	/**
 	 * @return String
 	 */
-	public function getName() {
+	public function getName()
+    {
 		return $this->name;
 	}
 	

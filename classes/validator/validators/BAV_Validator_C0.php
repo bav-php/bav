@@ -31,7 +31,8 @@ class BAV_Validator_C0 extends BAV_Validator_Chain implements BAV_Validator_Bank
 {
   
   
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
         $this->validators[] = new BAV_Validator_52($bank);
@@ -42,7 +43,8 @@ class BAV_Validator_C0 extends BAV_Validator_Chain implements BAV_Validator_Bank
     }
     
     
-    public function useValidator(BAV_Validator $validator) {
+    public function useValidator(BAV_Validator $validator)
+    {
         return $validator !== $this->validators[0]
             || preg_match('~^00[^0]~', $this->account);
     }

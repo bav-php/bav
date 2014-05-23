@@ -39,7 +39,8 @@ class BAV_Validator_97 extends BAV_Validator
     $result = 0;
 
     
-    protected function validate() {
+    protected function validate()
+    {
         $account = (int) ltrim(substr($this->account, 0, -1), '0');
         $this->result = $account - (int)($account / 11) * 11;
     
@@ -47,7 +48,8 @@ class BAV_Validator_97 extends BAV_Validator
     /**
      * @return bool
      */
-    protected function getResult() {
+    protected function getResult()
+    {
         return strlen(ltrim($this->account, '0')) >= 5
             && $this->result === (int) $this->getChecknumber();
     }

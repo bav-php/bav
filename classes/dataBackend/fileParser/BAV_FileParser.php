@@ -83,7 +83,8 @@ class BAV_FileParser extends BAV
     /**
      * @param String $file The data source
      */
-    public function __construct($file = null) {
+    public function __construct($file = null)
+    {
         $this->file = is_null($file)
                     ? __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "data" . DIRECTORY_SEPARATOR . "banklist.txt"
                     : $file;
@@ -92,7 +93,8 @@ class BAV_FileParser extends BAV
      * @throws BAV_FileParserException_IO
      * @throws BAV_FileParserException_FileNotExists
      */
-    private function init() {
+    private function init()
+    {
         if (is_resource($this->fp)) {
             return;
         
@@ -132,7 +134,8 @@ class BAV_FileParser extends BAV
      * @throws BAV_FileParserException_FileNotExists
      * @return int
      */
-    public function getLines() {
+    public function getLines()
+    {
         $this->init();
         return $this->lines;
     }
@@ -140,7 +143,8 @@ class BAV_FileParser extends BAV
      * @throws BAV_FileParserException_IO
      * @throws BAV_FileParserException_FileNotExists
      */
-    public function rewind() {
+    public function rewind()
+    {
         if (fseek($this->getFileHandle(), 0) === -1) {
             throw new BAV_FileParserException_IO();
         
@@ -152,7 +156,8 @@ class BAV_FileParser extends BAV
      * @param int $line
      * @param int $offset
      */
-    public function seekLine($line, $offset = 0) {
+    public function seekLine($line, $offset = 0)
+    {
         if (fseek($this->getFileHandle(), $line * $this->lineLength + $offset) === -1) {
             throw new BAV_FileParserException_IO();
         
@@ -164,7 +169,8 @@ class BAV_FileParser extends BAV
      * @param int $line
      * @return string
      */
-    public function readLine($line) {
+    public function readLine($line)
+    {
         $this->seekLine($line);
         return self::$encoding->convert(fread($this->getFileHandle(), $this->lineLength), self::FILE_ENCODING);
     }
@@ -174,7 +180,8 @@ class BAV_FileParser extends BAV
      * @param int $line
      * @return string
      */
-    public function getBankID($line) {
+    public function getBankID($line)
+    {
         $this->seekLine($line, self::BANKID_OFFSET);
         return self::$encoding->convert(fread($this->getFileHandle(), self::BANKID_LENGTH), self::FILE_ENCODING);
     }
@@ -183,7 +190,8 @@ class BAV_FileParser extends BAV
      * @throws BAV_FileParserException_IO
      * @return resource
      */
-    public function getFileHandle() {
+    public function getFileHandle()
+    {
         $this->init();
         return $this->fp;
     }
@@ -192,13 +200,15 @@ class BAV_FileParser extends BAV
      * @throws BAV_FileParserException_IO
      * @return int
      */
-    public function getLineLength() {
+    public function getLineLength()
+    {
         $this->init();
         return $this->lineLength;
     }
     /**
      */
-    public function __destruct() {
+    public function __destruct()
+    {
         if (is_resource($this->fp)) {
             fclose($this->fp);
 
@@ -209,7 +219,8 @@ class BAV_FileParser extends BAV
      * @param string $line
      * @return BAV_Bank
      */
-    public function getBank(BAV_DataBackend $dataBackend, $line) {
+    public function getBank(BAV_DataBackend $dataBackend, $line)
+    {
         if (self::$encoding->strlen($line) < self::TYPE_OFFSET + self::TYPE_LENGTH) {
             throw new BAV_FileParserException_ParseError("Invalid line length in Line $line.");
         
@@ -223,7 +234,8 @@ class BAV_FileParser extends BAV
      * @param string $line
      * @return BAV_Agency
      */
-    public function getAgency(BAV_Bank $bank, $line) {
+    public function getAgency(BAV_Bank $bank, $line)
+    {
         if (self::$encoding->strlen($line) < self::ID_OFFSET + self::ID_LENGTH) {
             throw new BAV_FileParserException_ParseError("Invalid line length.");
         
@@ -242,7 +254,8 @@ class BAV_FileParser extends BAV
      * @param string $line
      * @return bool
      */
-    public function isMainAgency($line) {
+    public function isMainAgency($line)
+    {
         if (self::$encoding->strlen($line) < self::TYPE_OFFSET + self::TYPE_LENGTH) {
             throw new BAV_FileParserException_ParseError("Invalid line length.");
         
@@ -252,7 +265,8 @@ class BAV_FileParser extends BAV
     /**
      * @return string
      */
-    public function getFile() {
+    public function getFile()
+    {
         return $this->file;
     }
     

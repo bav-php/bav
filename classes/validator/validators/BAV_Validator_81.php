@@ -41,7 +41,8 @@ class BAV_Validator_81 extends BAV_Validator_Chain
     $exceptionValidators = array();
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
         $this->defaultValidators[] = new BAV_Validator_32($bank);
@@ -53,7 +54,8 @@ class BAV_Validator_81 extends BAV_Validator_Chain
     
     /**
      */
-    protected function init($account) {
+    protected function init($account)
+    {
         parent::init($account);
         
         $this->validators = $this->account{2} == 9

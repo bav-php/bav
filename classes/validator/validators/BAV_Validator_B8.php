@@ -37,7 +37,8 @@ class BAV_Validator_B8 extends BAV_Validator_Chain
     $_validator9;
   
   
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
         $this->validators[] = new BAV_Validator_20($bank);
@@ -54,7 +55,8 @@ class BAV_Validator_B8 extends BAV_Validator_Chain
      *
      * @return bool
      */
-    protected function useValidator(BAV_Validator $validator) {
+    protected function useValidator(BAV_Validator $validator)
+    {
         if ($validator !== $this->_validator9) {
             return true;
 

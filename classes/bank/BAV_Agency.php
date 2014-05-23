@@ -83,7 +83,8 @@ class BAV_Agency extends BAV
      * @param string $bic might be empty
      * @param string $pan might be empty
      */
-    public function __construct($id, BAV_Bank $bank, $name, $shortTerm, $city, $postcode, $bic = '', $pan = '') {
+    public function __construct($id, BAV_Bank $bank, $name, $shortTerm, $city, $postcode, $bic = '', $pan = '')
+    {
         $this->id           = (int)$id;
         $this->bank         = $bank;
         $this->bic          = $bic;
@@ -96,62 +97,72 @@ class BAV_Agency extends BAV
     /**
      * @return bool
      */
-    public function isMainAgency() {
+    public function isMainAgency()
+    {
         return $this->bank->getMainAgency() === $this;
     }
     /**
      * @return BAV_Bank
      */
-    public function getBank() {
+    public function getBank()
+    {
         return $this->bank;
     }
     /**
      * @return int
      */
-    public function getID() {
+    public function getID()
+    {
         return $this->id;
     }
     /**
      * @return string
      */
-    public function getPostcode() {
+    public function getPostcode()
+    {
         return $this->postcode;
     }
     /**
      * @return string
      */
-    public function getCity() {
+    public function getCity()
+    {
         return $this->city;
     }
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
     /**
      * @return string
      */
-    public function getShortTerm() {
+    public function getShortTerm()
+    {
         return $this->shortTerm;
     }
     /**
      * @return bool
      */
-    public function hasPAN() {
+    public function hasPAN()
+    {
         return ! empty($this->pan);
     }
     /**
      * @return bool
      */
-    public function hasBIC() {
+    public function hasBIC()
+    {
         return ! empty($this->bic);
     }
     /**
      * @throws BAV_AgencyException_UndefinedAttribute
      * @return string
      */
-    public function getPAN() {
+    public function getPAN()
+    {
         if (! $this->hasPAN()) {
             throw new BAV_AgencyException_UndefinedAttribute($this, 'pan');
         
@@ -162,7 +173,8 @@ class BAV_Agency extends BAV
      * @throws BAV_AgencyException_UndefinedAttribute
      * @return string
      */
-    public function getBIC() {
+    public function getBIC()
+    {
         if (! $this->hasBIC()) {
             throw new BAV_AgencyException_UndefinedAttribute($this, 'bic');
         

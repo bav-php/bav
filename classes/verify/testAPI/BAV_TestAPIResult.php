@@ -53,7 +53,8 @@ class BAV_TestAPIResult extends BAV
 	 * @param BAV_TestAPI $testAPI
 	 * @param int $result
 	 */
-	public function __construct(BAV_TestAPI $testAPI, $result) {
+	public function __construct(BAV_TestAPI $testAPI, $result)
+    {
 		$this->testAPI    = $testAPI;
 		$this->result     = $result;
 	}
@@ -62,7 +63,8 @@ class BAV_TestAPIResult extends BAV
 	/**
 	 * @return BAV_TestAPI
 	 */
-	public function getTestAPI() {
+	public function getTestAPI()
+    {
 		return $this->testAPI;
 	}
 	
@@ -70,7 +72,8 @@ class BAV_TestAPIResult extends BAV
     /**
      * @return int
      */
-    public function getResult() {
+    public function getResult()
+    {
         return $this->result;
     }
 	

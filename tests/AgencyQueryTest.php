@@ -39,26 +39,30 @@ class AgencyQueryTest extends PHPUnit_Framework_TestCase
 
     /**
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->backend = new BAV_DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
     }
     
     
-    public function testOnlyID() {
+    public function testOnlyID()
+    {
         $agencies = $this->backend->getAgencies(
             'SELECT id FROM bav_agency LIMIT 100');
         $this->assertAgencies($agencies, 100);
     }
     
     
-    public function testIDAndBank() {
+    public function testIDAndBank()
+    {
         $agencies = $this->backend->getAgencies(
             'SELECT id, bank FROM bav_agency LIMIT 100');
         $this->assertAgencies($agencies, 100);
     }
     
     
-    public function testNoBank() {
+    public function testNoBank()
+    {
         $agencies = $this->backend->getAgencies(
             'SELECT id, name, postcode, city, shortTerm, pan, bic FROM bav_agency LIMIT 100');
         $this->assertAgencies($agencies, 100);
@@ -68,14 +72,16 @@ class AgencyQueryTest extends PHPUnit_Framework_TestCase
     /**
      * @expectedException BAV_DataBackendException_IO_MissingAttributes
      */
-    public function testNoID() {
+    public function testNoID()
+    {
         $result = $this->backend->getAgencies(
             'SELECT name, postcode, city, shortTerm, pan, bic, bank FROM bav_agency LIMIT 1'
         );
     }
     
     
-    private function assertAgencies(Array $agencies, $count) {
+    private function assertAgencies(Array $agencies, $count)
+    {
     	$this->assertEquals($count, count($agencies));
     	
         foreach ($agencies as $agency) {

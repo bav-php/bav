@@ -32,7 +32,8 @@ class BAV_TestAPI_BAV extends BAV_TestAPI
 {
 	
 	
-    public function __construct() {
+    public function __construct()
+    {
     	parent::__construct();
     	
     	$this->setName("bav");
@@ -45,7 +46,8 @@ class BAV_TestAPI_BAV extends BAV_TestAPI
 	 * @return bool
 	 * @throws BAV_TestAPIException_Validation_BankNotFound
 	 */
-	protected function isValid(BAV_Bank $bank, $account) {
+	protected function isValid(BAV_Bank $bank, $account)
+    {
 		try {
             return $bank->isValid($account);
 		  

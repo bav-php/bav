@@ -30,7 +30,8 @@ class BAV_Validator_96 extends BAV_Validator_Chain
 {
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
         
@@ -42,7 +43,8 @@ class BAV_Validator_96 extends BAV_Validator_Chain
     }
     
     
-    public function isValid($account) {
+    public function isValid($account)
+    {
         return parent::isValid($account)
             || $this->isBetween(1300000, 99399999);
     }

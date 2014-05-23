@@ -37,14 +37,16 @@ class BAV_Encoding_Iconv extends BAV_Encoding
     /**
      * @return bool
      */
-    public static function isSupported($encoding) {
+    public static function isSupported($encoding)
+    {
         return function_exists("iconv_set_encoding");
     }
     /**
      * @throws BAV_EncodingException_Unsupported
      * @param String $encoding
      */
-    public function __construct($encoding = 'UTF-8') {
+    public function __construct($encoding = 'UTF-8')
+    {
         parent::__construct($encoding);
 
         iconv_set_encoding("internal_encoding", $encoding);
@@ -52,7 +54,8 @@ class BAV_Encoding_Iconv extends BAV_Encoding
     /**
      * @return int length of $string
      */
-    public function strlen($string) {
+    public function strlen($string)
+    {
         return iconv_strlen($string);
     }
     /**
@@ -61,7 +64,8 @@ class BAV_Encoding_Iconv extends BAV_Encoding
      * @param int $length
      * @return String
      */
-    public function substr($string, $offset, $length = null) {
+    public function substr($string, $offset, $length = null)
+    {
         return is_null($length)
              ? iconv_substr($string, $offset)
              : iconv_substr($string, $offset, $length);
@@ -72,7 +76,8 @@ class BAV_Encoding_Iconv extends BAV_Encoding
      * @param String $from_encoding
      * @return $string the encoded string
      */
-    public function convert($string, $from_encoding) {
+    public function convert($string, $from_encoding)
+    {
         $encoded = iconv($from_encoding, $this->enc, $string);
         if ($encoded === false) {
             throw new BAV_EncodingException();

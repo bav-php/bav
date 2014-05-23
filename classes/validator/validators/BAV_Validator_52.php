@@ -42,7 +42,8 @@ class BAV_Validator_52 extends BAV_Validator_Iteration_Weighted implements BAV_V
     $checknumberWeight = 0;
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
         
         $this->setWeights(array(2, 4, 8, 5, 10, 9, 7, 3, 6, 1, 2, 4));
@@ -54,7 +55,8 @@ class BAV_Validator_52 extends BAV_Validator_Iteration_Weighted implements BAV_V
     }
     
     
-    public function isValid($account) {
+    public function isValid($account)
+    {
         try {
             return strlen($account) == 10 && $account{0} == 9
                  ? $this->validator20->isValid($account)
@@ -67,7 +69,8 @@ class BAV_Validator_52 extends BAV_Validator_Iteration_Weighted implements BAV_V
     }
 
 
-    protected function iterationStep() {
+    protected function iterationStep()
+    {
         if ($this->position == $this->getEserChecknumberPosition()) {
             $this->checknumberWeight = $this->getWeight();
         
@@ -78,12 +81,14 @@ class BAV_Validator_52 extends BAV_Validator_Iteration_Weighted implements BAV_V
     }
     
     
-    protected function normalizeAccount($size) {
+    protected function normalizeAccount($size)
+    {
         $this->account = $this->getEser8();
     }
 
 
-    protected function getResult() {
+    protected function getResult()
+    {
         return 10 === ($this->accumulator % 11 + $this->checknumberWeight * $this->getEserChecknumber()) % 11;
     }
 

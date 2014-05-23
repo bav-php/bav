@@ -53,20 +53,23 @@ class BAV_FileParserContext extends BAV
      * @param string $bankID
      * @param int $line
      */
-    public function __construct($line) {
+    public function __construct($line)
+    {
         $this->line   = $line;
     }
     /**
      * @return int
      */
-    public function getLine() {
+    public function getLine()
+    {
         return $this->line;
     }
     /**
      * @throws BAV_FileParserContextException_Undefined
      * @return int
      */
-    public function getStart() {
+    public function getStart()
+    {
         if (is_null($this->start)) {
             throw new BAV_FileParserContextException_Undefined();
         
@@ -76,14 +79,16 @@ class BAV_FileParserContext extends BAV
     /**
      * @return bool
      */
-    public function isStartDefined() {
+    public function isStartDefined()
+    {
         return ! is_null($this->start);
     }
     /**
      * @throws BAV_FileParserContextException_Undefined
      * @return int
      */
-    public function getEnd() {
+    public function getEnd()
+    {
         if (is_null($this->end)) {
             throw new BAV_FileParserContextException_Undefined();
         
@@ -93,19 +98,22 @@ class BAV_FileParserContext extends BAV
     /**
      * @return bool
      */
-    public function isEndDefined() {
+    public function isEndDefined()
+    {
         return ! is_null($this->end);
     }
     /**
      * @param int $start
      */
-    public function setStart($start) {
+    public function setStart($start)
+    {
         $this->start = $start;
     }
     /**
      * @param int $end
      */
-    public function setEnd($end) {
+    public function setEnd($end)
+    {
         $this->end = $end;
     }
 

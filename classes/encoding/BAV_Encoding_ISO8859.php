@@ -35,13 +35,15 @@ class BAV_Encoding_ISO8859 extends BAV_Encoding
     /**
      * @return bool
      */
-    public static function isSupported($encoding) {
+    public static function isSupported($encoding)
+    {
         return preg_match('~^ISO-8859-([1-9]|1[0-5])$~', $encoding);
     }
     /**
      * @return int length of $string
      */
-    public function strlen($string) {
+    public function strlen($string)
+    {
         return strlen($string);
     }
     /**
@@ -50,7 +52,8 @@ class BAV_Encoding_ISO8859 extends BAV_Encoding
      * @param int $length
      * @return String
      */
-    public function substr($string, $offset, $length = null) {
+    public function substr($string, $offset, $length = null)
+    {
         return is_null($length)
              ? substr($string, $offset)
              : substr($string, $offset, $length);
@@ -61,7 +64,8 @@ class BAV_Encoding_ISO8859 extends BAV_Encoding
      * @param String $from_encoding
      * @return $string the encoded string
      */
-    public function convert($string, $from_encoding) {
+    public function convert($string, $from_encoding)
+    {
         if ($from_encoding == $this->enc) {
             return $string;
         

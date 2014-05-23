@@ -28,12 +28,14 @@ class BAV_Validator_09 extends BAV_Validator
 {
 
 
-    protected function validate() {
+    protected function validate()
+    {
     }
     /**
      * @return bool
      */
-    protected function getResult() {
+    protected function getResult()
+    {
         return true;
     }
 

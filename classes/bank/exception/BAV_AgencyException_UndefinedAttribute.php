@@ -40,14 +40,16 @@ class BAV_AgencyException_UndefinedAttribute extends BAV_AgencyException
     /**
      * @param string $attribute
      */
-    public function __construct(BAV_Agency $agency, $attribute) {
+    public function __construct(BAV_Agency $agency, $attribute)
+    {
         parent::__construct($agency);
         $this->attribute = $attribute;
     }
     /**
      * @return string
      */
-    public function getAttribute() {
+    public function getAttribute()
+    {
         return $this->attribute;
     }
 

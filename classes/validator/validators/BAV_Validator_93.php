@@ -29,7 +29,8 @@ class BAV_Validator_93 extends BAV_Validator_Chain
 {
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
         
@@ -48,7 +49,8 @@ class BAV_Validator_93 extends BAV_Validator_Chain
      * @throws BAV_ValidatorException_OutOfBounds
      * @param int $int
      */
-    protected function normalizeAccount($size) {
+    protected function normalizeAccount($size)
+    {
         parent::normalizeAccount($size);
         if (substr($this->account, 0, 4) !== '0000') {
             $this->account = '0000'.substr($this->account, 0, 6);

@@ -37,13 +37,15 @@ class BAV_ValidatorException_NotExists extends BAV_ValidatorException
     $bank;
     
     
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         $this->bank = $bank;
     }
     /**
      * @return BAV_Bank
      */
-    public function getBank() {
+    public function getBank()
+    {
         return $this->bank;
     }
 

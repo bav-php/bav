@@ -28,19 +28,22 @@ class BAV_Validator_74 extends BAV_Validator_00
 {
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
         $this->setWeights(array(2, 1));
     }
     
     
-    public function isValid($account) {
+    public function isValid($account)
+    {
         return strlen($account) >= 2 && parent::isValid($account);
     }
     
     
-    protected function getResult() {
+    protected function getResult()
+    {
         if (parent::getResult()) {
             return true;
         

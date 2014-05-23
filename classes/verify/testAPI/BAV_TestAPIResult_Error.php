@@ -43,7 +43,8 @@ class BAV_TestAPIResult_Error extends BAV_TestAPIResult
 	 * @param int $result
 	 * @param String $message
 	 */
-	public function __construct(BAV_TestAPI $testAPI, $result, $message = '') {
+	public function __construct(BAV_TestAPI $testAPI, $result, $message = '')
+    {
 		parent::__construct($testAPI, $result);
 		
 		$this->message = $message;
@@ -53,7 +54,8 @@ class BAV_TestAPIResult_Error extends BAV_TestAPIResult
     /**
      * @return String
      */
-    public function getMessage() {
+    public function getMessage()
+    {
         return $this->message;
     }
 	

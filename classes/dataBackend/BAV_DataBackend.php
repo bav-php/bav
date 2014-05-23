@@ -79,7 +79,8 @@ abstract class BAV_DataBackend extends BAV
      * @param string
      * @return BAV_Bank
      */
-    public function getBank($bankID) {
+    public function getBank($bankID)
+    {
         if (! isset($this->instances[$bankID])) {
             $this->instances[$bankID] = $this->getNewBank($bankID);
 
@@ -93,7 +94,8 @@ abstract class BAV_DataBackend extends BAV
      * @param String $bankID
      * @return bool
      */
-    public function bankExists($bankID) {
+    public function bankExists($bankID)
+    {
         try {
             $this->getBank($bankID);
             return true;

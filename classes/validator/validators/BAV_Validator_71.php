@@ -28,7 +28,8 @@ class BAV_Validator_71 extends BAV_Validator_Iteration_Weighted
 {
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
         
         $this->setWeights(array(6, 5, 4, 3, 2, 1));
@@ -37,12 +38,14 @@ class BAV_Validator_71 extends BAV_Validator_Iteration_Weighted
     }
 
 
-    protected function iterationStep() {
+    protected function iterationStep()
+    {
         $this->accumulator += $this->number * $this->getWeight();
     }
 
 
-    protected function getResult() {
+    protected function getResult()
+    {
         $result = 11 - ($this->accumulator % 11);
         $result = $result >= 10
                 ? 11 - $result

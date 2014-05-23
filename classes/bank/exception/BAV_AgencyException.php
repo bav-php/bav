@@ -36,13 +36,15 @@ class BAV_AgencyException extends RuntimeException
     $agency;
     
     
-    public function __construct(BAV_Agency $agency) {
+    public function __construct(BAV_Agency $agency)
+    {
         $this->agency = $agency;
     }
     /**
      * @return BAV_Agency
      */
-    public function getAgency() {
+    public function getAgency()
+    {
         return $this->agency;
     }
 

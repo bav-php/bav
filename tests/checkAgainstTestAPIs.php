@@ -63,7 +63,8 @@ class BAV_CheckAgainstTestAPIs extends BAV
 	$testAPIs = array();
 	
 	
-	public function __construct() {
+	public function __construct()
+    {
         $ktoblzcheckPath = __DIR__ . "/../tmp/ktoblzcheck/ktoblzcheck-1.21/src";
 	
 		$this->testAPIs[] = new BAV_TestAPI_BAV();
@@ -149,7 +150,8 @@ class BAV_CheckAgainstTestAPIs extends BAV
 	}
 	
 	
-	private function testAccount(BAV_Bank $bank, $account) {
+	private function testAccount(BAV_Bank $bank, $account)
+    {
 		$results = array();
 		$resultValues = array();
 		foreach ($this->testAPIs as $key => $testAPI) {

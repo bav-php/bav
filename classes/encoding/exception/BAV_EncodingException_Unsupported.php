@@ -36,7 +36,8 @@ class BAV_EncodingException_Unsupported extends BAV_EncodingException
     $encoding = '';
     
     
-    public function __construct($encoding) {
+    public function __construct($encoding)
+    {
         parent::__construct();
         
         $this->encoding = $encoding;
@@ -44,7 +45,8 @@ class BAV_EncodingException_Unsupported extends BAV_EncodingException
     /**
      * @return String
      */
-    public function getEncoding() {
+    public function getEncoding()
+    {
         return $this->encoding;
     }
 

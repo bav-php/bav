@@ -60,14 +60,16 @@ class BAV_Validator_C6 extends BAV_Validator
     $validator;
     
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
         
         $this->validator = new BAV_Validator_00($bank);
     }
     
     
-    protected function validate() {
+    protected function validate()
+    {
     	$transformation = array_key_exists($this->account{0}, self::$transformation)
     	                ? self::$transformation[$this->account{0}]
     	                : '';
@@ -79,7 +81,8 @@ class BAV_Validator_C6 extends BAV_Validator
     /**
      * @return bool
      */
-    protected function getResult() {
+    protected function getResult()
+    {
         return in_array($this->account{0}, array_keys(self::$transformation))
              ? $this->validator->isValid($this->transformedAccount)
              : false;

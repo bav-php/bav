@@ -54,7 +54,8 @@ class CrossProjectTest extends PHPUnit_Framework_TestCase
 	/**
 	 * @return Array
 	 */
-	protected function setUp() {
+	protected function setUp()
+    {
         $ktoblzcheckPath = __DIR__ . "/../tmp/ktoblzcheck/ktoblzcheck-1.21/src";
 	   
 		$this->testAPIs = array(
@@ -71,7 +72,8 @@ class CrossProjectTest extends PHPUnit_Framework_TestCase
 	/**
 	 * @return Array
 	 */
-	public function provideBanks() {
+	public function provideBanks()
+    {
 		$banks   = array();
 		$backend = new BAV_DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
 		foreach ($backend->getAllBanks() as $bank) {
@@ -85,7 +87,8 @@ class CrossProjectTest extends PHPUnit_Framework_TestCase
 	/**
 	 * @dataProvider provideBanks
 	 */
-	public function testCrossProjects(BAV_Bank $bank) {
+	public function testCrossProjects(BAV_Bank $bank)
+    {
         try {
 			$isSkip = $bank->getValidator() instanceof BAV_Validator_BankDependent
 			        ? array_key_exists($bank->getValidationType(), $this->failedBankDependentValidators)
@@ -119,7 +122,8 @@ class CrossProjectTest extends PHPUnit_Framework_TestCase
 	}
 	
 	
-	private function assertSameResult(BAV_Bank $bank, $account) {
+	private function assertSameResult(BAV_Bank $bank, $account)
+    {
 		$results = array();
 		$resultValues = array();
 		foreach ($this->testAPIs as $key => $testAPI) {
@@ -143,7 +147,8 @@ class CrossProjectTest extends PHPUnit_Framework_TestCase
 	 * @param array $results
 	 * @return String
 	 */
-	private function getErrorMessage(BAV_Bank $bank, $account, Array $results) {
+	private function getErrorMessage(BAV_Bank $bank, $account, Array $results)
+    {
 		$resultTranslation = array(
             BAV_TestAPIResult::VALID   => "valid",
             BAV_TestAPIResult::INVALID => "invalid",

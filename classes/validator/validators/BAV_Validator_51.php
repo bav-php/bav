@@ -50,7 +50,8 @@ class BAV_Validator_51 extends BAV_Validator_Chain
     $validatorD;
     
     
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
         
         $this->defaultValidators[0] = new BAV_Validator_06($this->bank);
@@ -79,7 +80,8 @@ class BAV_Validator_51 extends BAV_Validator_Chain
     /**
      * @return array
      */
-    public static function getExceptionValidators(BAV_Bank $bank) {
+    public static function getExceptionValidators(BAV_Bank $bank)
+    {
         $exceptionValidators = array();
         $exceptionValidators[] = new BAV_Validator_51x($bank);
         $exceptionValidators[] = new BAV_Validator_51x($bank);
@@ -93,7 +95,8 @@ class BAV_Validator_51 extends BAV_Validator_Chain
 
     /**
      */
-    protected function init($account) {
+    protected function init($account)
+    {
         parent::init($account);
         
         $this->validators = $this->account{2} == 9
@@ -102,7 +105,8 @@ class BAV_Validator_51 extends BAV_Validator_Chain
     }
     
     
-    protected function continueValidation(BAV_Validator $validator) {
+    protected function continueValidation(BAV_Validator $validator)
+    {
         if ($validator !== $this->validatorD) {
             return true;
         

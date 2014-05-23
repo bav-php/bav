@@ -28,14 +28,16 @@ class BAV_Validator_70 extends BAV_Validator_06
 {
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
         $this->setWeights(array(2, 3, 4, 5, 6, 7));
     }
 
 
-    protected function iterationStep() {
+    protected function iterationStep()
+    {
         if ($this->position <= 2 && ($this->account{3} == 5 || substr($this->account, 3, 2) == 69)) {
             return;
         

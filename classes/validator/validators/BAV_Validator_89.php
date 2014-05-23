@@ -36,7 +36,8 @@ class BAV_Validator_89 extends BAV_Validator_06
     $validator10;
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
         $this->setWeights(array(2, 3, 4, 5, 6, 7));
@@ -46,12 +47,14 @@ class BAV_Validator_89 extends BAV_Validator_06
     }
     
     
-    protected function iterationStep() {
+    protected function iterationStep()
+    {
         $this->accumulator += $this->crossSum($this->number * $this->getWeight());
     }
     
     
-    public function isValid($account) {
+    public function isValid($account)
+    {
         $length = strlen(ltrim($account, '0'));
         return (($length == 8 || $length == 9) && $this->validator10->isValid($account))
             || ($length == 7 && parent::isValid($account));

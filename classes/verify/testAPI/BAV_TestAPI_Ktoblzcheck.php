@@ -57,7 +57,8 @@ class BAV_TestAPI_Ktoblzcheck extends BAV_TestAPI
 	 * @param String $binary
 	 * @throws BAV_TestAPIException
 	 */
-	public function __construct($bankdata, $binary = null) {
+	public function __construct($bankdata, $binary = null)
+    {
 		parent::__construct();
 		
 		$this->setName("ktoblzcheck");
@@ -74,7 +75,8 @@ class BAV_TestAPI_Ktoblzcheck extends BAV_TestAPI
 	 * @throws BAV_TestAPIException_Validation_NotInitialized
 	 * @throws BAV_TestAPIException_Validation_BankNotFound
 	 */
-	protected function isValid(BAV_Bank $bank, $account) {
+	protected function isValid(BAV_Bank $bank, $account)
+    {
         exec(
             "$this->binary --file=$this->bankdata {$bank->getBankID()} $account",
             $out,

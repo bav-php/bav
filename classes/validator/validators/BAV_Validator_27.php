@@ -36,7 +36,8 @@ class BAV_Validator_27 extends BAV_Validator_Iteration_Transformation
     $validator00;
     
     
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
         
         $this->validator00 = new BAV_Validator_00($bank);
@@ -52,7 +53,8 @@ class BAV_Validator_27 extends BAV_Validator_Iteration_Transformation
      * @param string $account
      * @return bool
      */
-    public function isValid($account) {
+    public function isValid($account)
+    {
         return (int) $account <= 999999999
              ? $this->validator00->isValid($account)
              : parent::isValid($account);
@@ -60,7 +62,8 @@ class BAV_Validator_27 extends BAV_Validator_Iteration_Transformation
     /**
      * @return bool
      */
-    protected function getResult() {
+    protected function getResult()
+    {
         $result = (10 - ($this->accumulator % 10)) % 10;
         return (string)$result === $this->getCheckNumber();
     }

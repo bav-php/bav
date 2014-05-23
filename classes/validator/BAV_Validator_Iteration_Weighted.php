@@ -45,7 +45,8 @@ abstract class BAV_Validator_Iteration_Weighted extends BAV_Validator_Iteration
     
     /**
      */
-    public function setWeights(Array $weights) {
+    public function setWeights(Array $weights)
+    {
         $this->weights = $weights;
     }
     
@@ -53,7 +54,8 @@ abstract class BAV_Validator_Iteration_Weighted extends BAV_Validator_Iteration
     /**
      * @param int $divisor
      */
-    public function setDivisor($divisor) {
+    public function setDivisor($divisor)
+    {
         $this->divisor = $divisor;
     }
     
@@ -61,7 +63,8 @@ abstract class BAV_Validator_Iteration_Weighted extends BAV_Validator_Iteration
     /**
      * @return int
      */
-    protected function getWeight() {
+    protected function getWeight()
+    {
         return $this->weights[$this->i % count($this->weights)];
     }
 

@@ -28,7 +28,8 @@ class BAV_Validator_30 extends BAV_Validator_00
 {
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
         $this->setWeights(array(2, 0, 0, 0, 0, 1, 2, 1, 2));
@@ -37,7 +38,8 @@ class BAV_Validator_30 extends BAV_Validator_00
     }
     
     
-    protected function iterationStep() {
+    protected function iterationStep()
+    {
         $this->accumulator += $this->number * $this->getWeight();
     }
 

@@ -43,12 +43,14 @@ abstract class BAV_Validator_Iteration_Transformation extends BAV_Validator_Iter
     /**
      * The iteration step
      */
-    protected function iterationStep() {
+    protected function iterationStep()
+    {
         $this->accumulator += $this->getTransformedNumber();
     }
     /**
      */
-    public function setMatrix(Array $matrix) {
+    public function setMatrix(Array $matrix)
+    {
         $this->matrix = $matrix;
         if (empty($this->rowIteration)) {
             for($i = 0; $i < count($matrix); $i++) {
@@ -60,20 +62,23 @@ abstract class BAV_Validator_Iteration_Transformation extends BAV_Validator_Iter
     }
     /**
      */
-    public function setRowIteration(Array $rowIteration) {
+    public function setRowIteration(Array $rowIteration)
+    {
         $this->rowIteration = $rowIteration;
     }
     /**
      * @return array
      */
-    protected function getTransformationRow() {
+    protected function getTransformationRow()
+    {
         return $this->matrix[$this->rowIteration[$this->i % count($this->rowIteration)]];
     }
     /**
      * @param int $i
      * @return int
      */
-    protected function getTransformedNumber() {
+    protected function getTransformedNumber()
+    {
         $row = $this->getTransformationRow();
         return array_key_exists($this->number, $row)
              ? $row[$this->number]

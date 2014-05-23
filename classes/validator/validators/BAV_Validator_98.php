@@ -30,7 +30,8 @@ class BAV_Validator_98 extends BAV_Validator_Chain
 {
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
         

@@ -27,7 +27,8 @@ class BAV_Validator_53 extends BAV_Validator_52
 {
 
 
-    protected function normalizeAccount($size) {
+    protected function normalizeAccount($size)
+    {
         $this->account = $this->getEser9();
     }
     

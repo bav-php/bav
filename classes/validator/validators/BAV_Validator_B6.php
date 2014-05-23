@@ -48,7 +48,8 @@ class BAV_Validator_B6 extends BAV_Validator implements BAV_Validator_BankDepend
     $mode2;
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
         
         $this->mode1 = new BAV_Validator_20($bank);
@@ -57,7 +58,8 @@ class BAV_Validator_B6 extends BAV_Validator implements BAV_Validator_BankDepend
         $this->mode2 = new BAV_Validator_53($bank);
         $this->mode2->setWeights(array(2, 4, 8, 5, 10, 9, 7, 3, 6, 1, 2, 4));
     }
-    protected function validate() {
+    protected function validate()
+    {
         if ($this->account{0} !== '0' || preg_match("/^0269[1-9]/", $this->account)) {
             $this->validator = $this->mode1;
 
@@ -68,7 +70,8 @@ class BAV_Validator_B6 extends BAV_Validator implements BAV_Validator_BankDepend
     /**
      * @return bool
      */
-    protected function getResult() {
+    protected function getResult()
+    {
         return $this->validator->isValid($this->account, '0');
     }
     

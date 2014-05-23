@@ -46,7 +46,8 @@ class BAV_Validator_D4 extends BAV_Validator
     const TRANSFORMATION = 428259;
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
         
         $this->validator = new BAV_Validator_00($bank);
@@ -54,7 +55,8 @@ class BAV_Validator_D4 extends BAV_Validator
     }
     
     
-    protected function validate() {
+    protected function validate()
+    {
         $this->transformedAccount = self::TRANSFORMATION.$this->account;
     }
     
@@ -62,7 +64,8 @@ class BAV_Validator_D4 extends BAV_Validator
     /**
      * @return bool
      */
-    protected function getResult() {
+    protected function getResult()
+    {
         return $this->account{0} != 0
             && $this->validator->isValid($this->transformedAccount);
     }

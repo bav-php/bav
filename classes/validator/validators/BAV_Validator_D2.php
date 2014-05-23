@@ -41,7 +41,8 @@ class BAV_Validator_D2 extends BAV_Validator_Chain
 	$doNormalization = false;
 
 
-    public function __construct(BAV_Bank $bank) {
+    public function __construct(BAV_Bank $bank)
+    {
         parent::__construct($bank);
 
         $this->validators[] = new BAV_Validator_95($bank);

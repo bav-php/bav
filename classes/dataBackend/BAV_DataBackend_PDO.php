@@ -79,7 +79,8 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
     /**
      * @param String $prefix the prefix of the table names. Default is 'bav_'.
      */
-    public function __construct(PDO $pdo, $prefix = 'bav_') {
+    public function __construct(PDO $pdo, $prefix = 'bav_')
+    {
         $this->pdo    = $pdo;
         $this->prefix = $prefix;
 
@@ -90,7 +91,8 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
     /**
      * @return string
      */
-    public function getPrefix() {
+    public function getPrefix()
+    {
         return $this->prefix;
     }
 
@@ -109,7 +111,8 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
      * @throws BAV_DataBackendException
      * @return array
      */
-    public function getAgencies($sql) {
+    public function getAgencies($sql)
+    {
         try {
             $this->prepareStatements();
             $agencies = array();
@@ -157,7 +160,8 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
     /**
      * @throws PDOException
      */
-    private function prepareStatements() {
+    private function prepareStatements()
+    {
         if (! is_null($this->selectBank)) {
             return;
         }
@@ -186,7 +190,8 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
      * @see BAV_DataBackend::update()
      * @throws BAV_DataBackendException
      */
-    public function update() {
+    public function update()
+    {
         $useTA = false;
         try {
             $fileBackend = new BAV_DataBackend_File(tempnam(BAV_DataBackend_File::getTempdir(), 'bav'));
@@ -270,7 +275,8 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
      * @see BAV_DataBackend::install()
      * @throws BAV_DataBackendException_IO
      */
-    public function install() {
+    public function install()
+    {
         try {
         	$createOptions = '';
         	switch ($this->pdo->getAttribute(PDO::ATTR_DRIVER_NAME)) {
@@ -318,7 +324,8 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
      * @see BAV_DataBackend::uninstall()
      * @throws BAV_DataBackendException_IO
      */
-    public function uninstall() {
+    public function uninstall()
+    {
         try {
             $this->pdo->exec("DROP TABLE {$this->prefix}bank");
             $this->pdo->exec("DROP TABLE {$this->prefix}agency");
@@ -335,7 +342,8 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
      * @throws BAV_DataBackendException
      * @return array
      */
-    public function getAllBanks() {
+    public function getAllBanks()
+    {
         try {
             foreach ($this->pdo->query("SELECT id, validator FROM {$this->prefix}bank") as $bankResult) {
                 if (isset($this->instances[$bankResult['id']])) {
@@ -364,7 +372,8 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
      * @return BAV_Bank
      * @see BAV_DataBackend::getNewBank()
      */
-    protected function getNewBank($bankID) {
+    protected function getNewBank($bankID)
+    {
         try {
             $this->prepareStatements();
             $this->selectBank->execute(array(':bankID' => $bankID));
@@ -390,14 +399,16 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
     /**
      * @return bool
      */
-    private function isValidBankResult(Array $result) {
+    private function isValidBankResult(Array $result)
+    {
         return array_key_exists('id',           $result)
             && array_key_exists('validator',    $result);
     }
     /**
      * @return bool
      */
-    private function isValidAgencyResult(Array $result) {
+    private function isValidAgencyResult(Array $result)
+    {
         return array_key_exists('id',           $result)
             && array_key_exists('name',         $result)
             && array_key_exists('shortTerm',    $result)
@@ -410,7 +421,8 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
      * @return BAV_Bank
      * @throws BAV_DataBackendException_IO_MissingAttributes
      */
-    private function getBankObject(Array $fetchedResult) {
+    private function getBankObject(Array $fetchedResult)
+    {
         if (! $this->isValidBankResult($fetchedResult)) {
             throw new BAV_DataBackendException_IO_MissingAttributes();
 
@@ -421,7 +433,8 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
      * @return BAV_Agency
      * @throws BAV_DataBackendException_IO_MissingAttributes
      */
-    private function getAgencyObject(BAV_Bank $bank, Array $fetchedResult) {
+    private function getAgencyObject(BAV_Bank $bank, Array $fetchedResult)
+    {
         if (! $this->isValidAgencyResult($fetchedResult)) {
             throw new BAV_DataBackendException_IO_MissingAttributes();
 
@@ -445,7 +458,8 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
      * @return BAV_Agency
      * @see BAV_DataBackend::_getMainAgency()
      */
-    public function _getMainAgency(BAV_Bank $bank) {
+    public function _getMainAgency(BAV_Bank $bank)
+    {
         try {
             $this->prepareStatements();
             $this->selectMainAgency->execute(array(":bankID" => $bank->getBankID()));
@@ -472,7 +486,8 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
      * @return array
      * @see BAV_DataBackend::_getAgencies()
      */
-    public function _getAgencies(BAV_Bank $bank) {
+    public function _getAgencies(BAV_Bank $bank)
+    {
         try {
             $this->prepareStatements();
             $agencies = array();
