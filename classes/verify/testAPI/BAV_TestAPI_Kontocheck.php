@@ -1,11 +1,5 @@
 <?php
 
-
-
-
-
-
-
 /**
  * The API for  Michael Plugge's kontocheck.
  *
@@ -33,13 +27,11 @@
 class BAV_TestAPI_Kontocheck extends BAV_TestAPI
 {
 
-
     const NOT_INITIALIZED = -40;
     const BANK_NOT_FOUND  = -4;
     const INVALID_NULL    = -12;
     const INVALID_KTO     = -3;
     const INVALID_FALSE   =  0;
-
 
     /**
      * @param String $lutFile
@@ -57,7 +49,6 @@ class BAV_TestAPI_Kontocheck extends BAV_TestAPI
 
         }
     }
-
 
     /**
      * @param int $bank
@@ -93,8 +84,4 @@ class BAV_TestAPI_Kontocheck extends BAV_TestAPI
 
         }
     }
-
-
 }
-
-
