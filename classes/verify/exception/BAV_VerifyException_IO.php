@@ -1,6 +1,4 @@
 <?php
-BAV_Autoload::add('BAV_VerifyException.php');
-
 
 /**
  * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
@@ -28,7 +26,4 @@ BAV_Autoload::add('BAV_VerifyException.php');
 class BAV_VerifyException_IO extends BAV_VerifyException
 {
 
-
 }
-
-
