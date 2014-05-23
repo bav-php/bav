@@ -1,14 +1,5 @@
 <?php
 
-
-
-
-
-
-
-
-
-
 /**
  * This class offers methods for importing a verify.ini
  *
@@ -47,21 +38,20 @@
 class BAV_VerifyImport extends BAV
 {
 
-
-    private
     /**
      * @var Array Numbers which are valid
      */
-    $validNumbers   = array(),
+    private $validNumbers   = array();
+
     /**
      * @var Array Numbers which aren't valid
      */
-    $invalidNumbers = array(),
+    private $invalidNumbers = array();
+
     /**
      * @var BAV_DataBackend
      */
-    $dataBackend;
-
+    private $dataBackend;
 
     /**
      * @param BAV_DataBackend $dataBackend The backend is needed to get the validation algorithm.
@@ -70,6 +60,7 @@ class BAV_VerifyImport extends BAV
     {
         $this->dataBackend = $dataBackend;
     }
+
     /**
      * @return String
      */
@@ -79,13 +70,14 @@ class BAV_VerifyImport extends BAV
              ? __DIR__.'/../../data/verify.ini'
              : $file;
     }
+
     /**
      * Imports an existing verify.ini.
      *
      * @param string $file
      * @throws BAV_VerifyException
      */
-    public function importVerifyFile($file = NULL)
+    public function importVerifyFile($file = null)
     {
         $file   = $this->getFile($file);
         $verify = parse_ini_file($file, true);
@@ -97,6 +89,7 @@ class BAV_VerifyImport extends BAV
         $this->mergeVerifyArray($verify['valid'], $this->validNumbers);
         $this->mergeVerifyArray($verify['invalid'], $this->invalidNumbers);
     }
+
     /**
      * Merges a string array of an existing verify.ini
      */
@@ -117,6 +110,7 @@ class BAV_VerifyImport extends BAV
 
         }
     }
+
     /**
      * @param string $bankID
      * @param string $accountID
@@ -140,6 +134,7 @@ class BAV_VerifyImport extends BAV
 
         }
     }
+
     /**
      * Removes all none numeric characters from $id.
      *
@@ -150,6 +145,7 @@ class BAV_VerifyImport extends BAV
     {
         return (string) preg_replace('~\D+~', '', $id);
     }
+
     /**
      * @param string $filePath The file where the arrays are saved (default's to ../../data/verify.ini)
      * @throws BAV_VerifyException_IO
@@ -173,6 +169,7 @@ class BAV_VerifyImport extends BAV
 
         }
     }
+
     /**
      * @param Resource $fp Filepointer
      * @param Array $array Array with bank IDs
@@ -204,6 +201,7 @@ class BAV_VerifyImport extends BAV
 
         }
     }
+
     /**
      * @param String $bankID
      * @return String
@@ -214,8 +212,4 @@ class BAV_VerifyImport extends BAV
     {
         return $this->dataBackend->getBank($bankID)->getValidationType();
     }
-
-
 }
-
-
