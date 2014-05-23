@@ -1,11 +1,5 @@
 <?php
 
-
-
-
-
-
-
 /**
  * The API for ktoblzcheck
  *
@@ -33,24 +27,20 @@
 class BAV_TestAPI_Ktoblzcheck extends BAV_TestAPI
 {
 
-
     const BINARY            = "ktoblzcheck";
     const VALID             = 0;
     const INVALID           = 2;
     const BANK_NOT_FOUND    = 3;
 
-
-
-    private
     /**
      * @var String
      */
-    $binary = '',
+    private $binary = '';
+
     /**
      * @var String
      */
-    $bankdata = '';
-
+    private $bankdata = '';
 
     /**
      * @param String $bankdata
@@ -66,7 +56,6 @@ class BAV_TestAPI_Ktoblzcheck extends BAV_TestAPI
         $this->bankdata = realpath($bankdata);
         $this->binary   = is_null($binary) ? self::BINARY : realpath($binary);
     }
-
 
     /**
      * @param int $account
@@ -99,8 +88,4 @@ class BAV_TestAPI_Ktoblzcheck extends BAV_TestAPI
 
         }
     }
-
-
 }
-
-
