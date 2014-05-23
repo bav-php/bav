@@ -1,7 +1,5 @@
 <?php
 
-
-
 /**
  * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
@@ -28,18 +26,16 @@
 class BAV_AgencyException extends RuntimeException
 {
 
-
-    private
     /**
      * @var BAV_Agency
      */
-    $agency;
-    
+    private $agency;
     
     public function __construct(BAV_Agency $agency)
     {
         $this->agency = $agency;
     }
+
     /**
      * @return BAV_Agency
      */
@@ -47,8 +43,4 @@ class BAV_AgencyException extends RuntimeException
     {
         return $this->agency;
     }
-
-
 }
-
-
