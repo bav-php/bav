@@ -155,7 +155,7 @@ class BAV_ClassFile extends BAV
         }
         $argStr = '';
         $args   = func_get_args();
-        for($i = 0; $i < func_num_args(); $i++) {
+        for ($i = 0; $i < func_num_args(); $i++) {
             $argStr .= '$args['.$i.'], ';
 
         }

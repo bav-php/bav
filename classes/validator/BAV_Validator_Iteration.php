@@ -99,7 +99,7 @@ abstract class BAV_Validator_Iteration extends BAV_Validator
         $stepping       = (($end - $start < 0) ? -1 : +1);
         
         
-        for($this->i = 0; $this->i < $length; $this->i++) {
+        for ($this->i = 0; $this->i < $length; $this->i++) {
             $this->number = (int)$this->account{$this->position};
             $this->iterationStep();
             $this->position += $stepping;

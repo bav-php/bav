@@ -129,7 +129,7 @@ class BAV_CheckAgainstTestAPIs extends BAV
 			    }
 			    
 			    for ($account = $firstAccount; $account != $afterLastAccount; $account += $increment) {
-			    	for($pad = strlen($account); $pad <= $padLength; $pad++) {
+			    	for ($pad = strlen($account); $pad <= $padLength; $pad++) {
 	                	$paddedAccount = str_pad($account, $pad, "0", STR_PAD_LEFT);
 				    	$differences = count($this->differences);
 				    	$this->testAccount($bank, $paddedAccount);

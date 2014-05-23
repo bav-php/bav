@@ -53,7 +53,7 @@ abstract class BAV_Validator_Iteration_Transformation extends BAV_Validator_Iter
     {
         $this->matrix = $matrix;
         if (empty($this->rowIteration)) {
-            for($i = 0; $i < count($matrix); $i++) {
+            for ($i = 0; $i < count($matrix); $i++) {
                 $this->rowIteration[] = $i;
             
             }

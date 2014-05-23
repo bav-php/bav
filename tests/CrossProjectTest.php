@@ -100,7 +100,7 @@ class CrossProjectTest extends PHPUnit_Framework_TestCase
 	        }
 
 		    for ($account = $this->lastAccount; $account >= 0; $account--) {
-	            for($pad = strlen($account); $pad <= strlen($this->lastAccount); $pad++) {
+	            for ($pad = strlen($account); $pad <= strlen($this->lastAccount); $pad++) {
 	                $paddedAccount = str_pad($account, $pad, "0", STR_PAD_LEFT);
 			    	$this->assertSameResult($bank, $paddedAccount);
 			    	
