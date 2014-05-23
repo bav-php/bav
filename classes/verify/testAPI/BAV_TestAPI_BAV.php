@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 /**
  * The API for BAV itself.
  *
@@ -31,14 +27,12 @@
 class BAV_TestAPI_BAV extends BAV_TestAPI
 {
 
-
     public function __construct()
     {
         parent::__construct();
 
         $this->setName("bav");
     }
-
 
     /**
      * @param int $bankCode
@@ -57,8 +51,4 @@ class BAV_TestAPI_BAV extends BAV_TestAPI
 
         }
     }
-
-
 }
-
-
