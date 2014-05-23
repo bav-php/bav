@@ -1,7 +1,5 @@
 <?php
 
-
-
 /**
  * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
@@ -28,20 +26,15 @@
 abstract class BAV_Validator_Iteration_Weighted extends BAV_Validator_Iteration
 {
 
-
-    protected
     /**
      * @var int
      */
-    $divisor = 0;
+    protected $divisor = 0;
 
-
-    private
     /**
      * @var Array an array of rotating weights
      */
-    $weights = array();
-
+    private $weights = array();
 
     /**
      */
@@ -49,7 +42,6 @@ abstract class BAV_Validator_Iteration_Weighted extends BAV_Validator_Iteration
     {
         $this->weights = $weights;
     }
-
 
     /**
      * @param int $divisor
@@ -59,7 +51,6 @@ abstract class BAV_Validator_Iteration_Weighted extends BAV_Validator_Iteration
         $this->divisor = $divisor;
     }
 
-
     /**
      * @return int
      */
@@ -67,8 +58,4 @@ abstract class BAV_Validator_Iteration_Weighted extends BAV_Validator_Iteration
     {
         return $this->weights[$this->i % count($this->weights)];
     }
-
-
 }
-
-
