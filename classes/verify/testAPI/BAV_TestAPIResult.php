@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 /**
  * Copyright (C) 2009  Markus Malkusch <markus@malkusch.de>
  *
@@ -26,28 +22,22 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
-
-
 class BAV_TestAPIResult extends BAV
 {
-
 
     const VALID            = 1;
     const INVALID          = 2;
     const BANK_NOT_FOUND   = 3;
     const ERROR            = 4;
 
-
-    private
     /**
      * @var BAV_TestAPI
      */
-    $testAPI,
+    private $testAPI;
     /**
      * @var int
      */
-    $result;
-
+    private $result;
 
     /**
      * @param BAV_TestAPI $testAPI
@@ -59,7 +49,6 @@ class BAV_TestAPIResult extends BAV
         $this->result     = $result;
     }
 
-
     /**
      * @return BAV_TestAPI
      */
@@ -68,7 +57,6 @@ class BAV_TestAPIResult extends BAV
         return $this->testAPI;
     }
 
-
     /**
      * @return int
      */
@@ -76,8 +64,4 @@ class BAV_TestAPIResult extends BAV
     {
         return $this->result;
     }
-
-
 }
-
-
