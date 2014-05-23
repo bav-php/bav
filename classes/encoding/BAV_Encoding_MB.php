@@ -1,7 +1,5 @@
 <?php
 
-
-
 /**
  * Wrapper for the Multibyte String Functions. If you use this wrapper
  * PHP must be compiled with these functions.
@@ -40,6 +38,7 @@ class BAV_Encoding_MB extends BAV_Encoding
         return function_exists("mb_list_encodings")
             && in_array($encoding, mb_list_encodings());
     }
+
     /**
      * @throws BAV_EncodingException_Unsupported
      * @param String $encoding
@@ -50,6 +49,7 @@ class BAV_Encoding_MB extends BAV_Encoding
 
         mb_internal_encoding($encoding);
     }
+
     /**
      * @return int length of $string
      */
@@ -57,6 +57,7 @@ class BAV_Encoding_MB extends BAV_Encoding
     {
         return mb_strlen($string);
     }
+
     /**
      * @param String $string
      * @param int $offset
@@ -69,6 +70,7 @@ class BAV_Encoding_MB extends BAV_Encoding
              ? mb_substr($string, $offset)
              : mb_substr($string, $offset, $length);
     }
+
     /**
      * @param String $string
      * @param String $from_encoding
@@ -78,8 +80,4 @@ class BAV_Encoding_MB extends BAV_Encoding
     {
         return mb_convert_encoding($string, $this->enc, $from_encoding);
     }
-
-
 }
-
-
