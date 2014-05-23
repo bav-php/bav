@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
@@ -29,5 +28,3 @@ class BAV_ClassFileException extends RuntimeException
 
 
 }
-
-
