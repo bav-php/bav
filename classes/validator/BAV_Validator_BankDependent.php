@@ -25,8 +25,7 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
-interface BAV_Validator_BankDependent {
+interface BAV_Validator_BankDependent
+{
 
 }
-
-
