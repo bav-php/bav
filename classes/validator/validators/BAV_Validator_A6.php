@@ -75,4 +75,3 @@ class BAV_Validator_A6 extends BAV_Validator
 }
 
 
-?>

@@ -60,4 +60,3 @@ class BAV_Validator_97 extends BAV_Validator
 }
 
 
-?>

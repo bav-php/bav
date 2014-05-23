@@ -30,4 +30,3 @@ interface BAV_Validator_BankDependent {
 }
 
 
-?>

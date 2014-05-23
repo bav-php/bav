@@ -90,4 +90,3 @@ class BAV_Encoding_Iconv extends BAV_Encoding
 }
 
 
-?>

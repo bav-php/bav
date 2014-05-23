@@ -62,4 +62,3 @@ class BAV_TestAPI_BAV extends BAV_TestAPI
 }
 
 
-?>

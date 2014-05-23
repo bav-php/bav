@@ -54,4 +54,3 @@ class BAV_EncodingException_Unsupported extends BAV_EncodingException
 }
 
 
-?>

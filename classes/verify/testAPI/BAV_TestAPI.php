@@ -99,4 +99,3 @@ abstract class BAV_TestAPI extends BAV
 }
 
 
-?>

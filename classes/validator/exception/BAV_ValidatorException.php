@@ -31,4 +31,3 @@ class BAV_ValidatorException extends RuntimeException
 }
 
 
-?>

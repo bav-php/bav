@@ -150,4 +150,3 @@ class BAV_Bank extends BAV
 }
 
 
-?>

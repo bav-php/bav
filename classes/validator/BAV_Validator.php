@@ -268,4 +268,3 @@ abstract class BAV_Validator extends BAV
 }
 
 
-?>

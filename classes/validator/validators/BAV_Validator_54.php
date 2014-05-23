@@ -51,4 +51,3 @@ class BAV_Validator_54 extends BAV_Validator_Iteration_Weighted
 
 }
 
-?>

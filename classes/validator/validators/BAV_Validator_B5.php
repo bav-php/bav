@@ -56,4 +56,3 @@ class BAV_Validator_B5 extends BAV_Validator_Chain
 }
 
 
-?>

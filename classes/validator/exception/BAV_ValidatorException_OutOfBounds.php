@@ -32,4 +32,3 @@ class BAV_ValidatorException_OutOfBounds extends BAV_ValidatorException
 }
 
 
-?>

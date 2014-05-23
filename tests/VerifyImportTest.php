@@ -156,4 +156,3 @@ class VerifyImportTest extends PHPUnit_Framework_TestCase
 }
 
 
-?>

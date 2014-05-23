@@ -104,4 +104,3 @@ class BAV_TestAPI_Ktoblzcheck extends BAV_TestAPI
 }
 
 
-?>

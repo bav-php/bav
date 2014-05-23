@@ -31,4 +31,3 @@ class BAV_VerifyException extends RuntimeException
 }
 
 
-?>

@@ -57,4 +57,3 @@ class BAV_AgencyException_UndefinedAttribute extends BAV_AgencyException
 }
 
 
-?>

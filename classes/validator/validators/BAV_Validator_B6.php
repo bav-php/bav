@@ -79,4 +79,3 @@ class BAV_Validator_B6 extends BAV_Validator implements BAV_Validator_BankDepend
 }
 
 
-?>

@@ -70,4 +70,3 @@ class BAV_Validator_A4 extends BAV_Validator_Chain
 }
 
 
-?>

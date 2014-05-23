@@ -74,4 +74,3 @@ class BAV_Validator_87 extends BAV_Validator_Chain
 }
 
 
-?>

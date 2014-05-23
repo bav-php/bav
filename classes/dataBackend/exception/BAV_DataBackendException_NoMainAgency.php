@@ -55,4 +55,3 @@ class BAV_DataBackendException_NoMainAgency extends BAV_DataBackendException
 }
 
 
-?>

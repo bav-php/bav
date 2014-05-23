@@ -107,4 +107,3 @@ abstract class BAV_Encoding extends BAV
 }
 
 
-?>

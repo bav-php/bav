@@ -32,4 +32,3 @@ class BAV_ValidatorException_ESER extends BAV_ValidatorException
 }
 
 
-?>

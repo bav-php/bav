@@ -31,4 +31,3 @@ class BAV_FileParserContextException extends RuntimeException
 }
 
 
-?>

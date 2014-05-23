@@ -31,4 +31,3 @@ class BAV_TestAPIException_Validation_NotInitialized extends BAV_TestAPIExceptio
 }
 
 
-?>

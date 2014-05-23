@@ -199,4 +199,3 @@ class BAV_ClassFile extends BAV
 } 
  
  
-?>

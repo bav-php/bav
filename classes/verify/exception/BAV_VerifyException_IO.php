@@ -32,4 +32,3 @@ class BAV_VerifyException_IO extends BAV_VerifyException
 }
 
 
-?>

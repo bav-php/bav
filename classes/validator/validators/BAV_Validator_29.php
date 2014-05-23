@@ -50,4 +50,3 @@ class BAV_Validator_29 extends BAV_Validator_Iteration_Transformation
 
 }
 
-?>

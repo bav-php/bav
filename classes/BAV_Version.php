@@ -168,4 +168,3 @@ class BAV_Version extends BAV
 }
 
  
-?>

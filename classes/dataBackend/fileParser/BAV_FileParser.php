@@ -273,4 +273,3 @@ class BAV_FileParser extends BAV
 
 }
 
-?>

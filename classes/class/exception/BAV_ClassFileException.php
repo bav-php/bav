@@ -31,4 +31,3 @@ class BAV_ClassFileException extends RuntimeException
 }
 
 
-?>

@@ -31,4 +31,3 @@ class BAV_TestAPIException_Validation extends BAV_TestAPIException
 }
 
 
-?>

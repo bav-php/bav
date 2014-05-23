@@ -78,4 +78,3 @@ class BAV_Validator_A8 extends BAV_Validator_Chain
 }
 
 
-?>

@@ -88,4 +88,3 @@ abstract class BAV_Validator_Iteration_Transformation extends BAV_Validator_Iter
 }
 
 
-?>

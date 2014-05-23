@@ -72,4 +72,3 @@ abstract class BAV_Validator_Iteration_Weighted extends BAV_Validator_Iteration
 }
 
 
-?>

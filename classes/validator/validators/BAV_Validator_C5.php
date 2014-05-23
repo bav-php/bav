@@ -120,4 +120,4 @@ class BAV_Validator_C5 extends BAV_Validator
 }
 
 
-?>
+

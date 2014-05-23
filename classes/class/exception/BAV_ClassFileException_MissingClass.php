@@ -68,4 +68,3 @@ class BAV_ClassFileException_MissingClass extends BAV_ClassFileException
 }
 
 
-?>

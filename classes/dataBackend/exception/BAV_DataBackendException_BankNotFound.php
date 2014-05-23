@@ -53,4 +53,3 @@ class BAV_DataBackendException_BankNotFound extends BAV_DataBackendException
 }
 
 
-?>

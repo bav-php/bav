@@ -186,4 +186,3 @@ class BAV_Agency extends BAV
 }
 
 
-?>

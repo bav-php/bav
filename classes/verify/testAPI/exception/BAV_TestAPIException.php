@@ -29,4 +29,3 @@ class BAV_TestAPIException extends RuntimeException
 }
 
 
-?>

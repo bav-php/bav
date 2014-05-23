@@ -32,4 +32,3 @@ class BAV_DataBackendException_IO_MissingAttributes extends BAV_DataBackendExcep
 }
 
 
-?>

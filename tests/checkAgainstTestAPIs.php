@@ -196,4 +196,3 @@ class BAV_CheckAgainstTestAPIs extends BAV
 new BAV_CheckAgainstTestAPIs();
 
 
-?>

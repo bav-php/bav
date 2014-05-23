@@ -31,4 +31,3 @@ class BAV_DataBackendException extends RuntimeException
 }
 
 
-?>

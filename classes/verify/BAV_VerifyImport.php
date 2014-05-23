@@ -219,4 +219,3 @@ class BAV_VerifyImport extends BAV
 }
 
 
-?>

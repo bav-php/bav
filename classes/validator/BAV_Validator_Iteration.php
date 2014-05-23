@@ -117,4 +117,3 @@ abstract class BAV_Validator_Iteration extends BAV_Validator
 }
 
 
-?>

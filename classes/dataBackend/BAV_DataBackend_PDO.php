@@ -516,4 +516,3 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
 }
 
 
-?>

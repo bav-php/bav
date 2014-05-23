@@ -45,4 +45,3 @@ class BAV_Validator_C2 extends BAV_Validator_Chain
 }
 
 
-?>

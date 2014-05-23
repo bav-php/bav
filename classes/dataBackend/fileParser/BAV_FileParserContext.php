@@ -121,4 +121,3 @@ class BAV_FileParserContext extends BAV
 }
 
 
-?>

@@ -32,4 +32,3 @@ class BAV_ClassFileException_IO extends BAV_ClassFileException
 }
 
 
-?>

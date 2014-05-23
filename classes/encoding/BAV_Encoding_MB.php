@@ -83,4 +83,3 @@ class BAV_Encoding_MB extends BAV_Encoding
 }
 
 
-?>

@@ -98,4 +98,3 @@ class BAV_TestAPI_Kontocheck extends BAV_TestAPI
 }
 
 
-?>
