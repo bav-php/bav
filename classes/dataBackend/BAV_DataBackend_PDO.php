@@ -1,15 +1,5 @@
 <?php
 
-
-
-
-
-
-
-
-
-
-
 /**
  * Use any DBS as backend. In addition to the BAV_DataBackend methods you
  * may use getAgencies($sql) which returns an array of BAV_Agency objects.
@@ -40,41 +30,45 @@
 class BAV_DataBackend_PDO extends BAV_DataBackend
 {
 
-
-    private
     /**
      * @var array
      */
-    $agencies = array(),
+    private $agencies = array();
+
     /**
      * @var PDOStatement
      */
-    $selectBank,
+    private $selectBank;
+
     /**
      * @var PDOStatement
      */
-    $selectMainAgency,
+    private $selectMainAgency;
+
     /**
      * @var PDOStatement
      */
-    $selectAgencies,
+    private $selectAgencies;
+
     /**
      * @var PDOStatement
      */
-    $selectAgency,
+    private $selectAgency;
+
     /**
      * @var PDOStatement
      */
-    $selectAgencysBank,
+    private $selectAgencysBank;
+
     /**
      * @var PDO
      */
-    $pdo,
+    private $pdo;
+
     /**
      * @var string
      */
-    $prefix = '';
-
+    private $prefix = '';
 
     /**
      * @param String $prefix the prefix of the table names. Default is 'bav_'.
@@ -87,7 +81,6 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-
     /**
      * @return string
      */
@@ -95,7 +88,6 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
     {
         return $this->prefix;
     }
-
 
     /**
      * You may use an arbitrary SQL statement to receive BAV_Agency objects.
@@ -156,7 +148,6 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
         }
     }
     
-    
     /**
      * @throws PDOException
      */
@@ -173,18 +164,21 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
         $this->selectMainAgency = $this->pdo->prepare(
             "SELECT $agencyAttributes FROM {$this->prefix}bank b
                 INNER JOIN {$this->prefix}agency a ON b.mainAgency = a.id
-                WHERE b.id = :bankID");
+                WHERE b.id = :bankID"
+        );
         $this->selectAgencies = $this->pdo->prepare(
             "SELECT $agencyAttributes FROM {$this->prefix}agency a
-                WHERE bank = :bankID AND id != :mainAgency");
+                WHERE bank = :bankID AND id != :mainAgency"
+        );
         $this->selectAgency = $this->pdo->prepare(
             "SELECT $agencyAttributes, bank FROM {$this->prefix}agency a
-                WHERE id = :agency");
+                WHERE id = :agency"
+        );
         $this->selectAgencysBank = $this->pdo->prepare(
             "SELECT bank FROM {$this->prefix}agency
-                WHERE id = :agency");
+                WHERE id = :agency"
+        );
     }
-
 
     /**
      * @see BAV_DataBackend::update()
@@ -200,11 +194,13 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
             $insertBank     = $this->pdo->prepare(
                 "INSERT INTO {$this->prefix}bank
                     (id, validator, mainAgency)
-                    VALUES(:bankID, :validator, :mainAgency)");
+                    VALUES(:bankID, :validator, :mainAgency)"
+            );
             $insertAgency   = $this->pdo->prepare(
                 "INSERT INTO {$this->prefix}agency
                     (id, name, postcode, city, shortTerm, pan, bic, bank)
-                    VALUES (:id, :name, :postcode, :city, :shortTerm, :pan, :bic, :bank)");
+                    VALUES (:id, :name, :postcode, :city, :shortTerm, :pan, :bic, :bank)"
+            );
             try {
                 $this->pdo->beginTransaction();
                 $useTA = true;
@@ -238,10 +234,10 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
                         ));
                     
                     }
-                } catch(BAV_DataBackendException_NoMainAgency $e) {
-                       trigger_error(
+                } catch (BAV_DataBackendException_NoMainAgency $e) {
+                    trigger_error(
                         "Skipping bank {$e->getBank()->getBankID()} without any main agency."
-                       );
+                    );
                     
                 }
             }
@@ -270,7 +266,6 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
         }
     }
 
-
     /**
      * @see BAV_DataBackend::install()
      * @throws BAV_DataBackendException_IO
@@ -286,20 +281,17 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
                     break;
                     
             }
-            $this->pdo->exec("
-            
-                CREATE TABLE {$this->prefix}bank(
+            $this->pdo->exec(
+                "CREATE TABLE {$this->prefix}bank(
                     id          int primary key,
                     validator   char(2) NOT NULL,
                     mainAgency  int NOT NULL
                     
                     /* FOREIGN KEY (mainAgency) REFERENCES {$this->prefix}agency(id) */
-                )$createOptions
-            
-            ");
-            $this->pdo->exec("
-            
-                CREATE TABLE {$this->prefix}agency(
+                )$createOptions"
+            );
+            $this->pdo->exec(
+                "CREATE TABLE {$this->prefix}agency(
                     id          int primary key,
                     name        varchar(".BAV_FileParser::NAME_LENGTH.")        NOT NULL,
                     postcode    varchar(".BAV_FileParser::POSTCODE_LENGTH.")    NOT NULL,
@@ -310,9 +302,8 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
                     bic         varchar(".BAV_FileParser::BIC_LENGTH.")         NULL,
                     
                     FOREIGN KEY (bank) REFERENCES {$this->prefix}bank(id)
-                )$createOptions
-            
-            ");
+                )$createOptions"
+            );
             $this->update();
         
         } catch (PDOException $e) {
@@ -320,6 +311,7 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
         
         }
     }
+
     /**
      * @see BAV_DataBackend::uninstall()
      * @throws BAV_DataBackendException_IO
@@ -335,7 +327,6 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
         
         }
     }
-    
 
     /**
      * @see BAV_DataBackend::getAllBanks()
@@ -365,6 +356,7 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
 
         }
     }
+
     /**
      * @throws BAV_DataBackendException
      * @throws BAV_DataBackendException_BankNotFound
@@ -396,6 +388,7 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
 
         }
     }
+
     /**
      * @return bool
      */
@@ -404,6 +397,7 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
         return array_key_exists('id', $result)
             && array_key_exists('validator', $result);
     }
+
     /**
      * @return bool
      */
@@ -417,6 +411,7 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
             && array_key_exists('bic', $result)
             && array_key_exists('pan', $result);
     }
+
     /**
      * @return BAV_Bank
      * @throws BAV_DataBackendException_IO_MissingAttributes
@@ -429,6 +424,7 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
         }
         return new BAV_Bank($this, $fetchedResult['id'], $fetchedResult['validator']);
     }
+
     /**
      * @return BAV_Agency
      * @throws BAV_DataBackendException_IO_MissingAttributes
@@ -448,11 +444,13 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
                 $fetchedResult['city'],
                 $fetchedResult['postcode'],
                 $fetchedResult['bic'],
-                $fetchedResult['pan']);
+                $fetchedResult['pan']
+            );
 
         }
         return $this->agencies[$fetchedResult['id']];
     }
+
     /**
      * @throws BAV_DataBackendException
      * @return BAV_Agency
@@ -481,6 +479,7 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
 
         }
     }
+
     /**
      * @throws BAV_DataBackendException
      * @return array
@@ -511,8 +510,4 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
 
         }
     }
-
-
 }
-
-
