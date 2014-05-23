@@ -179,7 +179,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
             
         }
         return array_merge(
-            $this->getTestAccounts($verifyArray['valid'],   true),
+            $this->getTestAccounts($verifyArray['valid'], true),
             $this->getTestAccounts($verifyArray['invalid'], false)
         );
     }

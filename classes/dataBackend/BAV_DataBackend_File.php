@@ -209,7 +209,7 @@ class BAV_DataBackend_File extends BAV_DataBackend
         }
         $path = implode('/', $pathParts);
         $urlParts = parse_url(self::DOWNLOAD_URI);
-        $url = sprintf("%s://%s%s", $urlParts["scheme"],  $urlParts["host"], $path);
+        $url = sprintf("%s://%s%s", $urlParts["scheme"], $urlParts["host"], $path);
         
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_FILE, $tempH);

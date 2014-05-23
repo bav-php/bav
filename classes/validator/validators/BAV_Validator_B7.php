@@ -38,7 +38,7 @@ class BAV_Validator_B7 extends BAV_Validator_01
     
     protected function getResult()
     {
-        return ($this->isBetween(1000000,   5999999) || $this->isBetween(700000000, 899999999))
+        return ($this->isBetween(1000000, 5999999) || $this->isBetween(700000000, 899999999))
              ? parent::getResult()
              : true;
     }

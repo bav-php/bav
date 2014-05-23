@@ -94,7 +94,7 @@ class BAV_VerifyImport extends BAV
 
         }
 
-        $this->mergeVerifyArray($verify['valid'],   $this->validNumbers);
+        $this->mergeVerifyArray($verify['valid'], $this->validNumbers);
         $this->mergeVerifyArray($verify['invalid'], $this->invalidNumbers);
     }
     /**
@@ -164,7 +164,7 @@ class BAV_VerifyImport extends BAV
         }
         try {
             $this->saveArray($fp, $this->invalidNumbers, 'invalid');
-            $this->saveArray($fp, $this->validNumbers,   'valid');
+            $this->saveArray($fp, $this->validNumbers, 'valid');
             fclose($fp);
         
         } catch (BAV_VerifyException_IO $e) {

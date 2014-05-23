@@ -53,16 +53,16 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase
             INSERT INTO bank
                    ( id,  blz,  isMain,  name,  plz,  city,  shortterm,  pan,  bic,  validator)
             VALUES (:id, :blz, :isMain, :name, :plz, :city, :shortTerm, :pan, :bic, :validator)");
-        $insert->bindParam(':id',         $id);
-        $insert->bindParam(':blz',        $blz);
-        $insert->bindParam(':isMain',     $isMain);
-        $insert->bindParam(':name',       $name);
-        $insert->bindParam(':plz',        $plz);
-        $insert->bindParam(':city',       $city);
-        $insert->bindParam(':shortTerm',  $shortTerm);
-        $insert->bindParam(':pan',        $pan);
-        $insert->bindParam(':bic',        $bic);
-        $insert->bindParam(':validator',  $validator);
+        $insert->bindParam(':id', $id);
+        $insert->bindParam(':blz', $blz);
+        $insert->bindParam(':isMain', $isMain);
+        $insert->bindParam(':name', $name);
+        $insert->bindParam(':plz', $plz);
+        $insert->bindParam(':city', $city);
+        $insert->bindParam(':shortTerm', $shortTerm);
+        $insert->bindParam(':pan', $pan);
+        $insert->bindParam(':bic', $bic);
+        $insert->bindParam(':validator', $validator);
         
         while ($line = fgets($fp)) {
             $blz        = substr($line, 0, 8);
@@ -108,8 +108,8 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase
      */
     public function testParser($blz, $type)
     {
-        $this->assertRegExp('~^\d{8}$~',        $blz);
-        $this->assertRegExp('~^[\dA-Z]\d$~',    $type);
+        $this->assertRegExp('~^\d{8}$~', $blz);
+        $this->assertRegExp('~^[\dA-Z]\d$~', $type);
     }
     
     

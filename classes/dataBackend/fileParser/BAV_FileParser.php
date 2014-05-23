@@ -225,8 +225,8 @@ class BAV_FileParser extends BAV
             throw new BAV_FileParserException_ParseError("Invalid line length in Line $line.");
         
         }
-        $type   = self::$encoding->substr($line, self::TYPE_OFFSET,      self::TYPE_LENGTH);
-        $bankID = self::$encoding->substr($line, self::BANKID_OFFSET,    self::BANKID_LENGTH);
+        $type   = self::$encoding->substr($line, self::TYPE_OFFSET, self::TYPE_LENGTH);
+        $bankID = self::$encoding->substr($line, self::BANKID_OFFSET, self::BANKID_LENGTH);
         return new BAV_Bank($dataBackend, $bankID, $type);
     }
     /**

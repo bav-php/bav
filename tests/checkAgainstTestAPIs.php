@@ -174,7 +174,7 @@ class BAV_CheckAgainstTestAPIs extends BAV
 		);
 		
 		echo "{$bank->getBankID()}/{$bank->getValidationType()}\t",
-		     str_pad($account, strlen($this->lastAccount)),     "\t";
+		     str_pad($account, strlen($this->lastAccount)), "\t";
 		     
 		foreach ($results as $result) {
 			echo "{$result->getTestAPI()->getName()}: ",

@@ -401,21 +401,21 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
      */
     private function isValidBankResult(Array $result)
     {
-        return array_key_exists('id',           $result)
-            && array_key_exists('validator',    $result);
+        return array_key_exists('id', $result)
+            && array_key_exists('validator', $result);
     }
     /**
      * @return bool
      */
     private function isValidAgencyResult(Array $result)
     {
-        return array_key_exists('id',           $result)
-            && array_key_exists('name',         $result)
-            && array_key_exists('shortTerm',    $result)
-            && array_key_exists('city',         $result)
-            && array_key_exists('postcode',     $result)
-            && array_key_exists('bic',          $result)
-            && array_key_exists('pan',          $result);
+        return array_key_exists('id', $result)
+            && array_key_exists('name', $result)
+            && array_key_exists('shortTerm', $result)
+            && array_key_exists('city', $result)
+            && array_key_exists('postcode', $result)
+            && array_key_exists('bic', $result)
+            && array_key_exists('pan', $result);
     }
     /**
      * @return BAV_Bank

@@ -99,7 +99,7 @@ class BAV_ClassFile extends BAV
          * check needed classes
          */
         preg_match_all(':new +([a-zA-Z0-9_]+)\(:', $this->getClassDefinition(), $matchesNew);
-        preg_match_all('/([a-zA-Z0-9_]+)::/',      $this->getClassDefinition(), $matchesStatic);
+        preg_match_all('/([a-zA-Z0-9_]+)::/', $this->getClassDefinition(), $matchesStatic);
         foreach (array_merge($matchesNew[1], $matchesStatic[1]) as $match) {
             if (! isset($this->neededClasses[$match])) {
                 throw new BAV_ClassFileException_MissingClass($this->name, $match);
