@@ -405,12 +405,12 @@ class BAV_DataBackend_File extends BAV_DataBackend
         }
     }
     /**
-     * @see BAV_DataBackend::_getMainAgency()
+     * @see BAV_DataBackend::getMainAgency()
      * @throws BAV_DataBackendException
      * @throws BAV_DataBackendException_NoMainAgency
      * @return BAV_Agency
      */
-    public function _getMainAgency(BAV_Bank $bank)
+    public function getMainAgency(BAV_Bank $bank)
     {
         try {
             $context = $this->defineContextInterval($bank->getBankID());
@@ -436,12 +436,12 @@ class BAV_DataBackend_File extends BAV_DataBackend
         }
     }
     /**
-     * @see BAV_DataBackend::_getAgencies()
+     * @see BAV_DataBackend::getAgencies()
      * @throws BAV_DataBackendException_IO
      * @throws BAV_DataBackendException
      * @return array
      */
-    public function _getAgencies(BAV_Bank $bank)
+    public function getAgencies(BAV_Bank $bank)
     {
         try {
             $context = $this->defineContextInterval($bank->getBankID());

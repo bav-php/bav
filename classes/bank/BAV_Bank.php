@@ -104,7 +104,7 @@ class BAV_Bank extends BAV
     public function getMainAgency()
     {
         if (is_null($this->mainAgency)) {
-            $this->mainAgency = $this->dataBackend->_getMainAgency($this);
+            $this->mainAgency = $this->dataBackend->getMainAgency($this);
         
         }
         return $this->mainAgency;
@@ -119,7 +119,7 @@ class BAV_Bank extends BAV
     public function getAgencies()
     {
         if (is_null($this->agencies)) {
-            $this->agencies = $this->dataBackend->_getAgencies($this);
+            $this->agencies = $this->dataBackend->getAgencies($this);
         
         }
         return $this->agencies;
