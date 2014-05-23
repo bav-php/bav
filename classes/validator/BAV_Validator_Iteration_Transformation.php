@@ -1,7 +1,5 @@
 <?php
 
-
-
 /**
  * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
@@ -28,17 +26,15 @@
 abstract class BAV_Validator_Iteration_Transformation extends BAV_Validator_Iteration
 {
 
-
-    private
     /**
      * @var Array
      */
-    $rowIteration = array(),
+    private $rowIteration = array();
+
     /**
      * @var Array
      */
-    $matrix = array();
-
+    private $matrix = array();
 
     /**
      * The iteration step
@@ -47,6 +43,7 @@ abstract class BAV_Validator_Iteration_Transformation extends BAV_Validator_Iter
     {
         $this->accumulator += $this->getTransformedNumber();
     }
+
     /**
      */
     public function setMatrix(Array $matrix)
@@ -60,12 +57,14 @@ abstract class BAV_Validator_Iteration_Transformation extends BAV_Validator_Iter
 
         }
     }
+
     /**
      */
     public function setRowIteration(Array $rowIteration)
     {
         $this->rowIteration = $rowIteration;
     }
+
     /**
      * @return array
      */
@@ -73,6 +72,7 @@ abstract class BAV_Validator_Iteration_Transformation extends BAV_Validator_Iter
     {
         return $this->matrix[$this->rowIteration[$this->i % count($this->rowIteration)]];
     }
+
     /**
      * @param int $i
      * @return int
@@ -84,7 +84,4 @@ abstract class BAV_Validator_Iteration_Transformation extends BAV_Validator_Iter
              ? $row[$this->number]
              : 0;
     }
-
 }
-
-
