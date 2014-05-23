@@ -246,6 +246,7 @@ class BAV_DataBackend_File extends BAV_DataBackend {
         }
 
         $this->safeRename($file, $this->parser->getFile());
+        chmod($this->parser->getFile(), 0644);
     }
 
 
