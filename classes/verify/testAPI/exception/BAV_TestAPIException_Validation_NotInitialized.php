@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * Copyright (C) 2009  Markus Malkusch <markus@malkusch.de>
  *
@@ -27,7 +26,4 @@
 class BAV_TestAPIException_Validation_NotInitialized extends BAV_TestAPIException_Validation
 {
 
-
 }
-
-

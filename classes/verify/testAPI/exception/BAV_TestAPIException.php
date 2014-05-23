@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (C) 2009  Markus Malkusch <markus@malkusch.de>
  *
@@ -25,7 +26,4 @@
 class BAV_TestAPIException extends RuntimeException
 {
 
-
 }
-
-
