@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * This class helps BAV_Databackend_File to know the interval of lines which
  * belongs to a bank.
@@ -33,21 +30,20 @@
 class BAV_FileParserContext extends BAV
 {
 
-
-    private
     /**
      * @var int any line of the context
      */
-    $line = 0,
+    private $line = 0;
+
     /**
      * @var int the first line in the context
      */
-    $start = null,
+    private $start = null;
+
     /**
      * @var int the last line of the context
      */
-    $end = null;
-
+    private $end = null;
 
     /**
      * @param string $bankID
@@ -57,6 +53,7 @@ class BAV_FileParserContext extends BAV
     {
         $this->line   = $line;
     }
+
     /**
      * @return int
      */
@@ -64,6 +61,7 @@ class BAV_FileParserContext extends BAV
     {
         return $this->line;
     }
+
     /**
      * @throws BAV_FileParserContextException_Undefined
      * @return int
@@ -76,6 +74,7 @@ class BAV_FileParserContext extends BAV
         }
         return $this->start;
     }
+
     /**
      * @return bool
      */
@@ -83,6 +82,7 @@ class BAV_FileParserContext extends BAV
     {
         return ! is_null($this->start);
     }
+
     /**
      * @throws BAV_FileParserContextException_Undefined
      * @return int
@@ -95,6 +95,7 @@ class BAV_FileParserContext extends BAV
         }
         return $this->end;
     }
+
     /**
      * @return bool
      */
@@ -102,6 +103,7 @@ class BAV_FileParserContext extends BAV
     {
         return ! is_null($this->end);
     }
+
     /**
      * @param int $start
      */
@@ -109,6 +111,7 @@ class BAV_FileParserContext extends BAV
     {
         $this->start = $start;
     }
+
     /**
      * @param int $end
      */
@@ -116,8 +119,4 @@ class BAV_FileParserContext extends BAV
     {
         $this->end = $end;
     }
-
-
 }
-
-
