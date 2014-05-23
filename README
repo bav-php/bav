@@ -124,7 +124,7 @@ Helping BAV
     mention the validation alogrithm (BAV_Bank->getValidationType()), the
     account id and the expected result.
 
-    There exists also the script scripts/verifyImport.php. You can use this to
+    There exists also the script bin/verifyImport.php. You can use this to
     import your bank accounts to a data/verify.ini and check them with
     test/checkValidators.php. See the comments in verifyImport.php for more
     details on usage. If there are errors you can send your verify.ini to
