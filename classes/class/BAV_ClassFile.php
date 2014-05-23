@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 /**
  * This class is used for debugging purposes. An Object contains the path to the class
  * and can create instances.
@@ -30,36 +26,35 @@
 class BAV_ClassFile extends BAV
 {
 
-
-    private
     /**
      * @var string The path to the class
      */
-    $path = '',
+    private $path = '';
+
     /**
      * @var string the name of the class
      */
-    $name = '',
+    private $name = '';
+
     /**
      * @var BAV_ClassFile the parent class
      */
-    $parent = null,
+    private $parent = null;
+
     /**
      * @var array contains BAV_ClassFile objects which are needed by this class
      */
-    $neededClasses = array(),
+    private $neededClasses = array();
+
     /**
      * @var string The class definition
      */
-    $classDefinition = '';
+    private $classDefinition = '';
     
-    
-    private static
     /**
      * @var array
      */
-    $instances = array();
-    
+    private static $instances = array();
     
     /**
      * The constructor loads the class definition and parses it to initialize
@@ -68,10 +63,10 @@ class BAV_ClassFile extends BAV
      * @throws BAV_ClassFileException_MissingClass
      * @param string $path
      */
-    private function  __construct($path)
+    private function __construct($path)
     {
-        $this->path          = $path;
-        $this->name          = basename($path, '.php');
+        $this->path = $path;
+        $this->name = basename($path, '.php');
         
         
         /**
@@ -107,6 +102,7 @@ class BAV_ClassFile extends BAV
             }
         }
     }
+
     /**
      * @throws BAV_ClassFileException_MissingClass
      * @param string $path
@@ -120,6 +116,7 @@ class BAV_ClassFile extends BAV
         }
         return self::$instances[$path];
     }
+
     /**
      * @throws BAV_ClassFileException_IO
      * @throws BAV_ClassFileException_MissingClass
@@ -144,6 +141,7 @@ class BAV_ClassFile extends BAV
         closedir($dh);
         return $classFiles;
     }
+
     /**
      * @return BAV a new instance of {@link $name}
      */
@@ -162,6 +160,7 @@ class BAV_ClassFile extends BAV
         eval('$instance = new $this->name('.substr($argStr, 0, -2).');');
         return $instance;
     }
+
     /**
      * @throws BAV_ClassFileException_IO
      * @return string
@@ -187,6 +186,7 @@ class BAV_ClassFile extends BAV
         }
         return $this->classDefinition;
     }
+
     /**
      * @return string
      */
@@ -194,8 +194,4 @@ class BAV_ClassFile extends BAV
     {
         return $this->name;
     }
-    
-
-} 
- 
- 
+}
