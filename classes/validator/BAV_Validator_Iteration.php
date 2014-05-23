@@ -1,7 +1,5 @@
 <?php
 
-
-
 /**
  * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
@@ -28,36 +26,35 @@
 abstract class BAV_Validator_Iteration extends BAV_Validator
 {
 
+    /**
+     * @var int
+     */
+    protected $i = 0;
 
-    protected
     /**
      * @var int
      */
-    $i = 0,
+    protected $position = 0;
+
     /**
      * @var int
      */
-    $position = 0,
-    /**
-     * @var int
-     */
-    $number = 0,
+    protected $number = 0;
+
     /**
      * @var int an accumulator for the iteration
      */
-    $accumulator = 0;
+    protected $accumulator = 0;
 
-
-    private
     /**
      * @var int The inclusive beginning point of the iteration
      */
-    $start = -2,
+    private $start = -2;
+
     /**
      * @var int The inclusive ending point of the iteration
      */
-    $end = 0;
-
+    private $end = 0;
 
     public function __construct(BAV_Bank $bank)
     {
@@ -66,6 +63,7 @@ abstract class BAV_Validator_Iteration extends BAV_Validator
         $this->setStart(-2);
         $this->setEnd(0);
     }
+
     /**
      * @param int $start
      */
@@ -73,6 +71,7 @@ abstract class BAV_Validator_Iteration extends BAV_Validator
     {
         $this->start = $start;
     }
+
     /**
      * @param int $end
      */
@@ -80,6 +79,7 @@ abstract class BAV_Validator_Iteration extends BAV_Validator
     {
         $this->end = $end;
     }
+
     /**
      * @param string $account
      */
@@ -89,6 +89,7 @@ abstract class BAV_Validator_Iteration extends BAV_Validator
 
         $this->accumulator  = 0;
     }
+
     protected function validate()
     {
         $start  = $this->getNormalizedPosition($this->start);
@@ -106,14 +107,11 @@ abstract class BAV_Validator_Iteration extends BAV_Validator
 
         }
     }
+
     /**
      * The iteration step
      *
      * @param int $i
      */
     abstract protected function iterationStep();
-
-
 }
-
-
