@@ -29,24 +29,20 @@
 class BAV_Version extends BAV
 {
 
-    
-    private static
     /**
      * @var BAV_Version
      */
-    $phpVersion;
+    private static $phpVersion;
     
-    
-    private
     /**
      * @var array
      */
-    $elements = array(),
+    private $elements = array();
+
     /**
      * @var string
      */
-    $separator = '';
-    
+    private $separator = '';
     
     /**
      * @param string $version
@@ -58,7 +54,6 @@ class BAV_Version extends BAV
         $this->elements  = explode($separator, $version);
     }
     
-    
     /**
      * @return boolean
      */
@@ -69,14 +64,13 @@ class BAV_Version extends BAV
         
         foreach ($thisElements as $i => $thisElement) {
             if ($thoseElements[$i] !== $thisElement) {
-                return $this->_isGreater($thisElement, $thoseElements[$i]);
+                return $this->isGreater($thisElement, $thoseElements[$i]);
                 
             }
             
         }
         return false;
     }
-    
     
     /**
      * @return boolean
@@ -89,7 +83,6 @@ class BAV_Version extends BAV
         return $thoseElements == $thisElements;
     }
     
-    
     /**
      * @return boolean
      */
@@ -98,7 +91,6 @@ class BAV_Version extends BAV
         return ! $this->equals($version) && ! $this->isGreater($version);
     }
     
-    
     /**
      * @return string
      */
@@ -106,7 +98,6 @@ class BAV_Version extends BAV
     {
         return implode($this->separator, $this->elements);
     }
-    
     
     /**
      * @return string
@@ -126,17 +117,15 @@ class BAV_Version extends BAV
         return implode($this->separator, $elements);
     }
     
-    
     /**
      * @param string $left
      * @param string $right
      * @return boolean
      */
-    private function _isGreater($left, $right)
+    private function isGreater($left, $right)
     {
         return $left > $right;
     }
-    
     
     /**
      * @param int $padding
@@ -151,7 +140,6 @@ class BAV_Version extends BAV
         return array_pad($this->elements, $padding, '0');
     }
     
-    
     /**
      * @return BAV_Version
      */
@@ -163,8 +151,4 @@ class BAV_Version extends BAV
         }
         return self::$phpVersion;
     }
-
-
 }
-
- 
