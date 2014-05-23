@@ -1,12 +1,5 @@
 <?php
 
-
-
-
-
-
-
-
 /**
  * This class provides methods for any encoded strings
  *
@@ -36,12 +29,10 @@
 abstract class BAV_Encoding extends BAV
 {
 
-
-    protected
     /**
      *  @var String
      */
-    $enc = 'UTF-8';
+    protected $enc = 'UTF-8';
 
     /**
      * @throws BAV_EncodingException_Unsupported
@@ -55,10 +46,12 @@ abstract class BAV_Encoding extends BAV
         }
         $this->enc = $encoding;
     }
+
     /**
      * @return int length of $string
      */
     abstract public function strlen($string);
+
     /**
      * @param String $string
      * @param int $offset
@@ -66,6 +59,7 @@ abstract class BAV_Encoding extends BAV
      * @return String
      */
     abstract public function substr($string, $offset, $length = null);
+
     /**
      * @throws BAV_EncodingException
      * @param String $string
@@ -73,6 +67,7 @@ abstract class BAV_Encoding extends BAV
      * @return $string the encoded string
      */
     abstract public function convert($string, $from_encoding);
+
     /**
      * @param String
      * @return bool
@@ -81,6 +76,7 @@ abstract class BAV_Encoding extends BAV
     {
         return false;
     }
+
     /**
      * @throws BAV_EncodingException_Unsupported
      * @param String $encoding
@@ -102,8 +98,4 @@ abstract class BAV_Encoding extends BAV
 
         }
     }
-
-
 }
-
-
