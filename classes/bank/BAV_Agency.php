@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 /**
  * The agency belongs to one bank. Every bank has one main agency and may have
  * some more agencies in different cities. Don't create this object directly.
@@ -35,41 +31,45 @@
 class BAV_Agency extends BAV
 {
 
-
-    private
     /**
      * @var int
      */
-    $id = 0,
+    private $id = 0;
+
     /**
      * @var BAV_Bank
      */
-    $bank,
-    /**
-     * @var string
-     */
-    $bic = '',
-    /**
-     * @var string
-     */
-    $city = '',
-    /**
-     * @var string
-     */
-    $pan = '',
-    /**
-     * @var string
-     */
-    $postcode = '',
-    /**
-     * @var string
-     */
-    $shortTerm = '',
-    /**
-     * @var string
-     */
-    $name = '';
+    private $bank;
 
+    /**
+     * @var string
+     */
+    private $bic = '';
+
+    /**
+     * @var string
+     */
+    private $city = '';
+
+    /**
+     * @var string
+     */
+    private $pan = '';
+
+    /**
+     * @var string
+     */
+    private $postcode = '';
+
+    /**
+     * @var string
+     */
+    private $shortTerm = '';
+
+    /**
+     * @var string
+     */
+    private $name = '';
 
     /**
      * Don't create this object directly. Use BAV_Bank->getMainAgency()
@@ -94,6 +94,7 @@ class BAV_Agency extends BAV
         $this->shortTerm    = $shortTerm;
         $this->pan          = $pan;
     }
+
     /**
      * @return bool
      */
@@ -101,6 +102,7 @@ class BAV_Agency extends BAV
     {
         return $this->bank->getMainAgency() === $this;
     }
+
     /**
      * @return BAV_Bank
      */
@@ -108,6 +110,7 @@ class BAV_Agency extends BAV
     {
         return $this->bank;
     }
+
     /**
      * @return int
      */
@@ -115,6 +118,7 @@ class BAV_Agency extends BAV
     {
         return $this->id;
     }
+
     /**
      * @return string
      */
@@ -122,6 +126,7 @@ class BAV_Agency extends BAV
     {
         return $this->postcode;
     }
+
     /**
      * @return string
      */
@@ -129,6 +134,7 @@ class BAV_Agency extends BAV
     {
         return $this->city;
     }
+
     /**
      * @return string
      */
@@ -136,6 +142,7 @@ class BAV_Agency extends BAV
     {
         return $this->name;
     }
+
     /**
      * @return string
      */
@@ -143,6 +150,7 @@ class BAV_Agency extends BAV
     {
         return $this->shortTerm;
     }
+
     /**
      * @return bool
      */
@@ -150,6 +158,7 @@ class BAV_Agency extends BAV
     {
         return ! empty($this->pan);
     }
+
     /**
      * @return bool
      */
@@ -157,6 +166,7 @@ class BAV_Agency extends BAV
     {
         return ! empty($this->bic);
     }
+
     /**
      * @throws BAV_AgencyException_UndefinedAttribute
      * @return string
@@ -169,6 +179,7 @@ class BAV_Agency extends BAV
         }
         return $this->pan;
     }
+
     /**
      * @throws BAV_AgencyException_UndefinedAttribute
      * @return string
@@ -181,8 +192,4 @@ class BAV_Agency extends BAV
         }
         return $this->bic;
     }
-
-
 }
-
-
