@@ -27,7 +27,7 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2007 Markus Malkusch
  */
-class BAV_Validator_C6 extends BAV_Validator 
+class BAV_Validator_C6 extends BAV_Validator
 {
 	
 	

@@ -25,7 +25,7 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2010 Markus Malkusch
  */
-class BAV_DataBackendException_NoMainAgency extends BAV_DataBackendException 
+class BAV_DataBackendException_NoMainAgency extends BAV_DataBackendException
 {
 
 

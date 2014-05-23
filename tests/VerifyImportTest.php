@@ -30,7 +30,7 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
  */
 
 
-class VerifyImportTest extends PHPUnit_Framework_TestCase 
+class VerifyImportTest extends PHPUnit_Framework_TestCase
 {
 
 

@@ -24,7 +24,7 @@
  */
 
 
-class BAV_Validator_69b extends BAV_Validator_Iteration_Transformation 
+class BAV_Validator_69b extends BAV_Validator_Iteration_Transformation
 {
 
     

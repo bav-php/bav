@@ -28,7 +28,7 @@
  */
 
 
-class BAV_TestAPIResult extends BAV 
+class BAV_TestAPIResult extends BAV
 {
 
 	

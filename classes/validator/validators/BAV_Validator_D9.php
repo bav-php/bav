@@ -30,7 +30,7 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2012 Markus Malkusch
  */
-class BAV_Validator_D9 extends BAV_Validator_Chain 
+class BAV_Validator_D9 extends BAV_Validator_Chain
 {
 
 

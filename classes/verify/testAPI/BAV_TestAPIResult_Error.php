@@ -27,7 +27,7 @@
  */
 
 
-class BAV_TestAPIResult_Error extends BAV_TestAPIResult 
+class BAV_TestAPIResult_Error extends BAV_TestAPIResult
 {
 
 	

@@ -27,7 +27,7 @@
  */
 
 
-class BAV_Validator_C0 extends BAV_Validator_Chain implements BAV_Validator_BankDependent 
+class BAV_Validator_C0 extends BAV_Validator_Chain implements BAV_Validator_BankDependent
 {
   
   

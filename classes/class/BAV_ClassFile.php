@@ -27,7 +27,7 @@
  * 
  * @package classes
  */
-class BAV_ClassFile extends BAV 
+class BAV_ClassFile extends BAV
 {
 
 

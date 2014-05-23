@@ -27,7 +27,7 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
  */
 
 
-class CrossProjectTest extends PHPUnit_Framework_TestCase 
+class CrossProjectTest extends PHPUnit_Framework_TestCase
 {
 	
 	

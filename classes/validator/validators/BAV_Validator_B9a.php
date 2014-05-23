@@ -24,7 +24,7 @@
  */
 
 
-class BAV_Validator_B9a extends BAV_Validator_Iteration_Weighted 
+class BAV_Validator_B9a extends BAV_Validator_Iteration_Weighted
 {
 
 

@@ -25,7 +25,7 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_ClassFileException_MissingClass extends BAV_ClassFileException 
+class BAV_ClassFileException_MissingClass extends BAV_ClassFileException
 {
 
 

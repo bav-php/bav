@@ -23,7 +23,7 @@
  */
 
 
-class BAV_Validator_53 extends BAV_Validator_52 
+class BAV_Validator_53 extends BAV_Validator_52
 {
 
 

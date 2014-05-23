@@ -27,7 +27,7 @@
  */
 
 
-class BAV_Validator_52 extends BAV_Validator_Iteration_Weighted implements BAV_Validator_BankDependent 
+class BAV_Validator_52 extends BAV_Validator_Iteration_Weighted implements BAV_Validator_BankDependent
 {
 
 

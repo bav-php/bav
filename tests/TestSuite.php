@@ -29,7 +29,7 @@ require_once __DIR__ . '/ValidatorTest.php';
 require_once __DIR__ . '/VerifyImportTest.php';
 
 
-class TestSuite extends PHPUnit_Framework_TestSuite 
+class TestSuite extends PHPUnit_Framework_TestSuite
 {
 	
 	

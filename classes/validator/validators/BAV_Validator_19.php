@@ -24,7 +24,7 @@
  */
 
 
-class BAV_Validator_19 extends BAV_Validator_06 
+class BAV_Validator_19 extends BAV_Validator_06
 {
 
 

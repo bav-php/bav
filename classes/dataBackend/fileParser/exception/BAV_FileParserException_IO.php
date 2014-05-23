@@ -25,7 +25,7 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_FileParserException_IO extends BAV_FileParserException 
+class BAV_FileParserException_IO extends BAV_FileParserException
 {
 
 

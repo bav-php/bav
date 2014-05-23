@@ -37,7 +37,7 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_DataBackend_PDO extends BAV_DataBackend 
+class BAV_DataBackend_PDO extends BAV_DataBackend
 {
 
 

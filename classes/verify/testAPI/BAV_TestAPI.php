@@ -31,7 +31,7 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
-abstract class BAV_TestAPI extends BAV 
+abstract class BAV_TestAPI extends BAV
 {
 	
 	
