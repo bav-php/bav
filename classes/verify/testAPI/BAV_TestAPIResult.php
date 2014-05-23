@@ -28,7 +28,8 @@
  */
 
 
-class BAV_TestAPIResult extends BAV {
+class BAV_TestAPIResult extends BAV 
+{
 
 	
 	const VALID            = 1;

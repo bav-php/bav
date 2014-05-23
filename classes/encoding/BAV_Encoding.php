@@ -33,7 +33,8 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-abstract class BAV_Encoding extends BAV {
+abstract class BAV_Encoding extends BAV 
+{
 
 
     protected

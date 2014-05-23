@@ -36,7 +36,8 @@
  * 
  * @FIXME BAV_DataBackend_File is broken as Bundesbank appends new Banks at the end of the file
  */
-class BAV_DataBackend_File extends BAV_DataBackend {
+class BAV_DataBackend_File extends BAV_DataBackend 
+{
 
 
     const DOWNLOAD_URI = "http://www.bundesbank.de/Redaktion/DE/Standardartikel/Aufgaben/Unbarer_Zahlungsverkehr/bankleitzahlen_download.html";

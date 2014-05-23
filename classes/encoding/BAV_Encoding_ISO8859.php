@@ -29,7 +29,8 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_Encoding_ISO8859 extends BAV_Encoding {
+class BAV_Encoding_ISO8859 extends BAV_Encoding 
+{
 
     /**
      * @return bool

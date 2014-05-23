@@ -24,7 +24,8 @@
  */
 
 
-class BAV_Validator_50 extends BAV_Validator_06 {
+class BAV_Validator_50 extends BAV_Validator_06 
+{
 
 
     public function isValid($account) {

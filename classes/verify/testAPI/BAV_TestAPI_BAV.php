@@ -28,7 +28,8 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
-class BAV_TestAPI_BAV extends BAV_TestAPI {
+class BAV_TestAPI_BAV extends BAV_TestAPI 
+{
 	
 	
     public function __construct() {

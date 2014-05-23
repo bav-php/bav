@@ -27,7 +27,8 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
  */
 
 
-class AgencyQueryTest extends PHPUnit_Framework_TestCase {
+class AgencyQueryTest extends PHPUnit_Framework_TestCase 
+{
 
 
     /**

@@ -34,7 +34,8 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_FileParser extends BAV {
+class BAV_FileParser extends BAV 
+{
 
     
     const FILE_ENCODING     = 'ISO-8859-15';

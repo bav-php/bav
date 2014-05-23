@@ -27,7 +27,8 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
 
-class BackendTest extends PHPUnit_Framework_TestCase {
+class BackendTest extends PHPUnit_Framework_TestCase 
+{
 
 
     private static

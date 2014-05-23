@@ -30,7 +30,8 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
-class BAV_TestAPI_Ktoblzcheck extends BAV_TestAPI {
+class BAV_TestAPI_Ktoblzcheck extends BAV_TestAPI 
+{
 
 
     const BINARY            = "ktoblzcheck";

@@ -28,7 +28,8 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2008 Markus Malkusch
  */
-class BAV_Validator_D0 extends BAV_Validator {
+class BAV_Validator_D0 extends BAV_Validator 
+{
 
 
     const SWITCH_PREFIX = '57';

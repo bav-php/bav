@@ -22,7 +22,8 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
-class BAV_TestAPIException extends RuntimeException {
+class BAV_TestAPIException extends RuntimeException 
+{
 
 
 }

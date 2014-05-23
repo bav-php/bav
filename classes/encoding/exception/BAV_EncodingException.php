@@ -24,7 +24,8 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_EncodingException extends RuntimeException {
+class BAV_EncodingException extends RuntimeException 
+{
 
 
 }

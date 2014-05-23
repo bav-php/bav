@@ -25,7 +25,8 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-abstract class BAV_Validator_Iteration extends BAV_Validator {
+abstract class BAV_Validator_Iteration extends BAV_Validator 
+{
 
 
     protected

@@ -25,7 +25,8 @@ BAV_Autoload::add('BAV_VerifyException.php');
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_VerifyException_IO extends BAV_VerifyException {
+class BAV_VerifyException_IO extends BAV_VerifyException 
+{
 
 
 }

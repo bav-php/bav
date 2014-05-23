@@ -23,7 +23,8 @@
  * https://github.com/jschaedl/Bav/blob/master/library/Bav/Validator/De/SystemE1.php
  */
 
-class BAV_Validator_E1 extends BAV_Validator_Iteration_Weighted {
+class BAV_Validator_E1 extends BAV_Validator_Iteration_Weighted 
+{
 
     static private $subsitutions = array(48, 49, 50, 51, 52, 53, 54, 55, 56, 57);
 

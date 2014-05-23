@@ -8,7 +8,8 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
 
 
 DataConstraintTest::classConstructor();
-class DataConstraintTest extends PHPUnit_Framework_TestCase {
+class DataConstraintTest extends PHPUnit_Framework_TestCase 
+{
 
 
     private static

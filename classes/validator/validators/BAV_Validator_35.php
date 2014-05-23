@@ -24,7 +24,8 @@
  */
 
 
-class BAV_Validator_35 extends BAV_Validator_Iteration_Weighted {
+class BAV_Validator_35 extends BAV_Validator_Iteration_Weighted 
+{
 
 
     public function __construct(BAV_Bank $bank) {

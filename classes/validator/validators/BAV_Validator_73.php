@@ -26,7 +26,8 @@
  */
 
 
-class BAV_Validator_73 extends BAV_Validator_Chain {
+class BAV_Validator_73 extends BAV_Validator_Chain 
+{
 
 
     private

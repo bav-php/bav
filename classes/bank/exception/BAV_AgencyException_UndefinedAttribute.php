@@ -26,7 +26,8 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_AgencyException_UndefinedAttribute extends BAV_AgencyException {
+class BAV_AgencyException_UndefinedAttribute extends BAV_AgencyException 
+{
 
 
     private

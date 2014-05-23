@@ -28,7 +28,8 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2011 Markus Malkusch
  */
-class BAV_Validator_D7 extends BAV_Validator_Iteration_Weighted {
+class BAV_Validator_D7 extends BAV_Validator_Iteration_Weighted 
+{
 
 
     public function __construct(BAV_Bank $bank) {

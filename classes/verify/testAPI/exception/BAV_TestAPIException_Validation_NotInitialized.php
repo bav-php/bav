@@ -24,7 +24,8 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
-class BAV_TestAPIException_Validation_NotInitialized extends BAV_TestAPIException_Validation {
+class BAV_TestAPIException_Validation_NotInitialized extends BAV_TestAPIException_Validation 
+{
 
 
 }

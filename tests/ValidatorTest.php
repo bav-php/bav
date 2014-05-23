@@ -28,7 +28,8 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
  */
 
 
-class ValidatorTest extends PHPUnit_Framework_TestCase {
+class ValidatorTest extends PHPUnit_Framework_TestCase 
+{
 
 
     private static

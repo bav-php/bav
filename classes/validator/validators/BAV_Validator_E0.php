@@ -23,7 +23,8 @@
  */
 
 
-class BAV_Validator_E0 extends BAV_Validator_00 {
+class BAV_Validator_E0 extends BAV_Validator_00 
+{
 
 
     protected function validate() {

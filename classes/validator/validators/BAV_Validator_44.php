@@ -24,7 +24,8 @@
  */
 
 
-class BAV_Validator_44 extends BAV_Validator_33 {
+class BAV_Validator_44 extends BAV_Validator_33 
+{
 
 
     public function __construct(BAV_Bank $bank) {

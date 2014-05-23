@@ -29,7 +29,8 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_Validator_B6 extends BAV_Validator implements BAV_Validator_BankDependent {
+class BAV_Validator_B6 extends BAV_Validator implements BAV_Validator_BankDependent 
+{
 
 
     protected

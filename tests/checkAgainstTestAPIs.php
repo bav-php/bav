@@ -29,7 +29,8 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
  */
 
 
-class BAV_CheckAgainstTestAPIs extends BAV {
+class BAV_CheckAgainstTestAPIs extends BAV 
+{
 	
 	
 	const VALID            = 1;

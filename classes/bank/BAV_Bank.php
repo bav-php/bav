@@ -36,7 +36,8 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_Bank extends BAV {
+class BAV_Bank extends BAV 
+{
 
 
     private

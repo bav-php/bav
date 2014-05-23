@@ -28,7 +28,8 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class BAV_Validator_B2 extends BAV_Validator {
+class BAV_Validator_B2 extends BAV_Validator 
+{
 
 
     protected
