@@ -1,7 +1,5 @@
 <?php
 
-
-
 /**
  * Copyright (C) 2010  Markus Malkusch <markus@malkusch.de>
  *
@@ -28,20 +26,16 @@
 class BAV_DataBackendException_NoMainAgency extends BAV_DataBackendException
 {
 
-
-    private
     /**
      * @var BAV_Bank
      */
-    $bank;
-    
+    private $bank;
     
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct("bank {$bank->getBankID()} has no main agency.");
         $this->bank = $bank;
     }
-    
     
     /**
      * @return BAV_Bank
@@ -50,8 +44,4 @@ class BAV_DataBackendException_NoMainAgency extends BAV_DataBackendException
     {
         return $this->bank;
     }
-
-
 }
-
-
