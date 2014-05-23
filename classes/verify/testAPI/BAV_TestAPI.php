@@ -1,11 +1,5 @@
 <?php
 
-
-
-
-
-
-
 /**
  * This abstract class defines the API for using other validation
  * projects. It's useful to test other projects agains each other.
@@ -34,13 +28,10 @@
 abstract class BAV_TestAPI extends BAV
 {
 
-
-    private
     /**
      * @var String
      */
-    $name = '';
-
+    private $name = '';
 
     /**
      * @param int $account
@@ -49,12 +40,10 @@ abstract class BAV_TestAPI extends BAV
      */
     abstract protected function isValid(BAV_Bank $bank, $account);
 
-
     public function __construct()
     {
         $this->setName(get_class($this));
     }
-
 
     /**
      * @param string $name
@@ -86,7 +75,6 @@ abstract class BAV_TestAPI extends BAV
         }
     }
 
-
     /**
      * @return String
      */
@@ -94,8 +82,4 @@ abstract class BAV_TestAPI extends BAV
     {
         return $this->name;
     }
-
-
 }
-
-
