@@ -196,7 +196,7 @@ class BAV_DataBackend_File extends BAV_DataBackend
             
         }
         $pathParts = explode('/', $path);
-        foreach($pathParts as $i => $part) {
+        foreach ($pathParts as $i => $part) {
             switch ($part) {
                 case '..':
                     unset($pathParts[$i-1]);

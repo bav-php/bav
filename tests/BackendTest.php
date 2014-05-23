@@ -76,7 +76,7 @@ class BackendTest extends PHPUnit_Framework_TestCase
     public function provideBanks()
     {
     	$banks = array();
-    	foreach($this->provideBackends() as $backendArray) {
+    	foreach ($this->provideBackends() as $backendArray) {
     		$backend = $backendArray[0];
     		foreach (self::$referenceBackend->getAllBanks() as $bank) {
     			$comparedBank = $backend->getBank($bank->getBankID());
@@ -94,7 +94,7 @@ class BackendTest extends PHPUnit_Framework_TestCase
     public function provideAgencies()
     {
         $agencies = array();
-        foreach($this->provideBanks() as $banks) {
+        foreach ($this->provideBanks() as $banks) {
             $referenceBank = $banks[0];
             $testedBank    = $banks[1];
             
