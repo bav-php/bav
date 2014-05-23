@@ -1,7 +1,5 @@
 <?php
 
-
-
 /**
  * A class for handling versions
  *
