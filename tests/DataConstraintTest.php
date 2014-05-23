@@ -88,18 +88,18 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase
      */
     public function provideParsedLines()
     {
-    	$parser = new BAV_FileParser();
-    	$lines  = array();
-    	
-    	for ($i = 0; $i < $parser->getLines(); $i++) {
+        $parser = new BAV_FileParser();
+        $lines  = array();
+        
+        for ($i = 0; $i < $parser->getLines(); $i++) {
             $line = $parser->readLine($i);
             $blz  = mb_substr($line, 0, 8, 'UTF-8');
             $type = mb_substr($line, BAV_FileParser::TYPE_OFFSET, BAV_FileParser::TYPE_LENGTH, 'UTF-8');
             
             $lines[] = array($blz, $type);
-    	}
-    	
-    	return $lines;
+        }
+        
+        return $lines;
     }
     
     

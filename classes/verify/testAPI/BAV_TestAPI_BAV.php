@@ -30,35 +30,35 @@
  */
 class BAV_TestAPI_BAV extends BAV_TestAPI
 {
-	
-	
+    
+    
     public function __construct()
     {
-    	parent::__construct();
-    	
-    	$this->setName("bav");
+        parent::__construct();
+        
+        $this->setName("bav");
     }
-	
-	
-	/**
-	 * @param int $bankCode
-	 * @param int $account
-	 * @return bool
-	 * @throws BAV_TestAPIException_Validation_BankNotFound
-	 */
-	protected function isValid(BAV_Bank $bank, $account)
+    
+    
+    /**
+     * @param int $bankCode
+     * @param int $account
+     * @return bool
+     * @throws BAV_TestAPIException_Validation_BankNotFound
+     */
+    protected function isValid(BAV_Bank $bank, $account)
     {
-		try {
+        try {
             return $bank->isValid($account);
-		  
-		} catch (Exception $e) {
+          
+        } catch (Exception $e) {
             echo $e->getMessage(), "\n", $e->getTraceAsString();
             exit(1);
             
-		}
-	}
-	
-	
+        }
+    }
+    
+    
 }
 
 

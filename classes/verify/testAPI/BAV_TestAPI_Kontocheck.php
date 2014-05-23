@@ -32,51 +32,51 @@
  */
 class BAV_TestAPI_Kontocheck extends BAV_TestAPI
 {
-	
-	
-	const NOT_INITIALIZED = -40;
-	const BANK_NOT_FOUND  = -4;
-	const INVALID_NULL    = -12;
-	const INVALID_KTO     = -3;
-	const INVALID_FALSE   =  0;
-	
-	
-	/**
-	 * @param String $lutFile
-	 * @param int $lutVersion
-	 * @throws BAV_TestAPIException
-	 */
-	public function __construct($lutFile, $lutVersion)
+    
+    
+    const NOT_INITIALIZED = -40;
+    const BANK_NOT_FOUND  = -4;
+    const INVALID_NULL    = -12;
+    const INVALID_KTO     = -3;
+    const INVALID_FALSE   =  0;
+    
+    
+    /**
+     * @param String $lutFile
+     * @param int $lutVersion
+     * @throws BAV_TestAPIException
+     */
+    public function __construct($lutFile, $lutVersion)
     {
-		parent::__construct();
-		
-		$this->setName("kc");
-		
-		if (! lut_init($lutFile, $lutVersion)) {
-			throw new BAV_TestAPIException("Could not initialize LUT.");
-			
-		}
-	}
-	
-	
-	/**
-	 * @param int $bank
-	 * @param int $account
-	 * @return bool
-	 * @throws BAV_TestAPIException_Validation
-	 * @throws BAV_TestAPIException_Validation_NotInitialized
-	 * @throws BAV_TestAPIException_Validation_BankNotFound
-	 */
-	protected function isValid(BAV_Bank $bank, $account)
+        parent::__construct();
+        
+        $this->setName("kc");
+        
+        if (! lut_init($lutFile, $lutVersion)) {
+            throw new BAV_TestAPIException("Could not initialize LUT.");
+            
+        }
+    }
+    
+    
+    /**
+     * @param int $bank
+     * @param int $account
+     * @return bool
+     * @throws BAV_TestAPIException_Validation
+     * @throws BAV_TestAPIException_Validation_NotInitialized
+     * @throws BAV_TestAPIException_Validation_BankNotFound
+     */
+    protected function isValid(BAV_Bank $bank, $account)
     {
-		$isValid = kto_check_blz($bank->getBankID(), $account);
-		
-		switch ($isValid) {
-			
-			case self::NOT_INITIALIZED:
-				throw new BAV_TestAPIException_Validation_NotInitialized("LUT not initialized");
-			
-			case self::BANK_NOT_FOUND:
+        $isValid = kto_check_blz($bank->getBankID(), $account);
+        
+        switch ($isValid) {
+            
+            case self::NOT_INITIALIZED:
+                throw new BAV_TestAPIException_Validation_NotInitialized("LUT not initialized");
+            
+            case self::BANK_NOT_FOUND:
                 throw new BAV_TestAPIException_Validation_BankNotFound($bank->getBankID());
                 
             case self::INVALID_NULL:
@@ -85,16 +85,16 @@ class BAV_TestAPI_Kontocheck extends BAV_TestAPI
                 return false;
                 
             default:
-            	if ($isValid < 0) {
-            		throw new BAV_TestAPIException_Validation("unknown code $isValid");
-            		
-            	}
-            	return true;
-			
-		}
-	}
-	
-	
+                if ($isValid < 0) {
+                    throw new BAV_TestAPIException_Validation("unknown code $isValid");
+                    
+                }
+                return true;
+            
+        }
+    }
+    
+    
 }
 
 

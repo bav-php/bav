@@ -31,44 +31,44 @@
 class BAV_TestAPIResult extends BAV
 {
 
-	
-	const VALID            = 1;
+    
+    const VALID            = 1;
     const INVALID          = 2;
     const BANK_NOT_FOUND   = 3;
     const ERROR            = 4;
     
-	
-	private
-	/**
-	 * @var BAV_TestAPI
-	 */
-	$testAPI,
-	/**
-	 * @var int
-	 */
-	$result;
-	
-	
-	/**
-	 * @param BAV_TestAPI $testAPI
-	 * @param int $result
-	 */
-	public function __construct(BAV_TestAPI $testAPI, $result)
+    
+    private
+    /**
+     * @var BAV_TestAPI
+     */
+    $testAPI,
+    /**
+     * @var int
+     */
+    $result;
+    
+    
+    /**
+     * @param BAV_TestAPI $testAPI
+     * @param int $result
+     */
+    public function __construct(BAV_TestAPI $testAPI, $result)
     {
-		$this->testAPI    = $testAPI;
-		$this->result     = $result;
-	}
-	
-	
-	/**
-	 * @return BAV_TestAPI
-	 */
-	public function getTestAPI()
+        $this->testAPI    = $testAPI;
+        $this->result     = $result;
+    }
+    
+    
+    /**
+     * @return BAV_TestAPI
+     */
+    public function getTestAPI()
     {
-		return $this->testAPI;
-	}
-	
-	
+        return $this->testAPI;
+    }
+    
+    
     /**
      * @return int
      */
@@ -76,8 +76,8 @@ class BAV_TestAPIResult extends BAV
     {
         return $this->result;
     }
-	
-	
+    
+    
 }
 
 

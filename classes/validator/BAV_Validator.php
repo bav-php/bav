@@ -89,15 +89,15 @@ abstract class BAV_Validator extends BAV
      */
     public function isValid($account)
     {
-    	try {
+        try {
             $this->init($account);
             $this->validate();
             return ltrim($account, "0") != "" && $this->getResult();
             
-    	} catch (BAV_ValidatorException_OutOfBounds $e) {
-    		return false;
-    		
-    	}
+        } catch (BAV_ValidatorException_OutOfBounds $e) {
+            return false;
+            
+        }
     }
     
     
@@ -143,11 +143,11 @@ abstract class BAV_Validator extends BAV
      */
     protected function getNormalizedPosition($pos)
     {
-    	if ($pos >= strlen($this->account) || $pos < -strlen($this->account)) {
-    		throw new BAV_ValidatorException_OutOfBounds("Cannot access offset $pos in String $this->account");
-    		
-    	}
-    	
+        if ($pos >= strlen($this->account) || $pos < -strlen($this->account)) {
+            throw new BAV_ValidatorException_OutOfBounds("Cannot access offset $pos in String $this->account");
+            
+        }
+        
         if ($pos >= 0) {
             return $pos;
 

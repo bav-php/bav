@@ -40,42 +40,42 @@ class BAV_TestAPI_Ktoblzcheck extends BAV_TestAPI
     const BANK_NOT_FOUND    = 3;
     
 
-	
-	private
-	/**
+    
+    private
+    /**
      * @var String
      */
-	$binary = '',
-	/**
-	 * @var String
-	 */
-	$bankdata = '';
-	
-	
-	/**
-	 * @param String $bankdata
-	 * @param String $binary
-	 * @throws BAV_TestAPIException
-	 */
-	public function __construct($bankdata, $binary = null)
+    $binary = '',
+    /**
+     * @var String
+     */
+    $bankdata = '';
+    
+    
+    /**
+     * @param String $bankdata
+     * @param String $binary
+     * @throws BAV_TestAPIException
+     */
+    public function __construct($bankdata, $binary = null)
     {
-		parent::__construct();
-		
-		$this->setName("ktoblzcheck");
-		
-		$this->bankdata = realpath($bankdata);
-		$this->binary   = is_null($binary) ? self::BINARY : realpath($binary);
-	}
-	
-	
-	/**
-	 * @param int $account
-	 * @return bool
-	 * @throws BAV_TestAPIException_Validation
-	 * @throws BAV_TestAPIException_Validation_NotInitialized
-	 * @throws BAV_TestAPIException_Validation_BankNotFound
-	 */
-	protected function isValid(BAV_Bank $bank, $account)
+        parent::__construct();
+        
+        $this->setName("ktoblzcheck");
+        
+        $this->bankdata = realpath($bankdata);
+        $this->binary   = is_null($binary) ? self::BINARY : realpath($binary);
+    }
+    
+    
+    /**
+     * @param int $account
+     * @return bool
+     * @throws BAV_TestAPIException_Validation
+     * @throws BAV_TestAPIException_Validation_NotInitialized
+     * @throws BAV_TestAPIException_Validation_BankNotFound
+     */
+    protected function isValid(BAV_Bank $bank, $account)
     {
         exec(
             "$this->binary --file=$this->bankdata {$bank->getBankID()} $account",
@@ -98,9 +98,9 @@ class BAV_TestAPI_Ktoblzcheck extends BAV_TestAPI
                 throw new BAV_TestAPIException_Validation("unknown code $result: " . implode("\n", $out));
         
         }
-	}
-	
-	
+    }
+    
+    
 }
 
 

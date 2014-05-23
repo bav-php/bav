@@ -38,9 +38,9 @@ class BAV_Validator_16 extends BAV_Validator_06
     
     protected function getResult()
     {
-     	return $this->accumulator % 11 === 1
-     		 ? $this->getChecknumber() === $this->account{$this->getNormalizedPosition($this->checknumberPosition) - 1}
-     		 : parent::getResult();
+         return $this->accumulator % 11 === 1
+              ? $this->getChecknumber() === $this->account{$this->getNormalizedPosition($this->checknumberPosition) - 1}
+              : parent::getResult();
     }
 
 

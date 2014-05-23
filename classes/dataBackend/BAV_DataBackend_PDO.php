@@ -217,33 +217,33 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
             $this->pdo->exec("DELETE FROM {$this->prefix}bank");
             
             foreach ($fileBackend->getAllBanks() as $bank) {
-            	try {
-	                $insertBank->execute(array(
-	                    ":bankID"       => $bank->getBankID(),
-	                    ":validator"    => $bank->getValidationType(),
-	                    ":mainAgency"   => $bank->getMainAgency()->getID(),
-	                ));
-	                $agencies   = $bank->getAgencies();
-	                $agencies[] = $bank->getMainAgency();
-	                foreach ($agencies as $agency) {
-	                    $insertAgency->execute(array(
-	                        ":id"           => $agency->getID(),
-	                        ":name"         => $agency->getName(),
-	                        ":postcode"     => $agency->getPostcode(),
-	                        ":city"         => $agency->getCity(),
-	                        ":shortTerm"    => $agency->getShortTerm(),
-	                        ":bank"         => $bank->getBankID(),
-	                        ":pan"          => $agency->hasPAN() ? $agency->getPAN() : null,
-	                        ":bic"          => $agency->hasBIC() ? $agency->getBIC() : null
-	                    ));
-	                
-	                }
-            	} catch(BAV_DataBackendException_NoMainAgency $e) {
-            	   	trigger_error(
+                try {
+                    $insertBank->execute(array(
+                        ":bankID"       => $bank->getBankID(),
+                        ":validator"    => $bank->getValidationType(),
+                        ":mainAgency"   => $bank->getMainAgency()->getID(),
+                    ));
+                    $agencies   = $bank->getAgencies();
+                    $agencies[] = $bank->getMainAgency();
+                    foreach ($agencies as $agency) {
+                        $insertAgency->execute(array(
+                            ":id"           => $agency->getID(),
+                            ":name"         => $agency->getName(),
+                            ":postcode"     => $agency->getPostcode(),
+                            ":city"         => $agency->getCity(),
+                            ":shortTerm"    => $agency->getShortTerm(),
+                            ":bank"         => $bank->getBankID(),
+                            ":pan"          => $agency->hasPAN() ? $agency->getPAN() : null,
+                            ":bic"          => $agency->hasBIC() ? $agency->getBIC() : null
+                        ));
+                    
+                    }
+                } catch(BAV_DataBackendException_NoMainAgency $e) {
+                       trigger_error(
                         "Skipping bank {$e->getBank()->getBankID()} without any main agency."
-               	    );
-            		
-            	}
+                       );
+                    
+                }
             }
             if ($useTA) {
                 $this->pdo->commit();
@@ -278,14 +278,14 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
     public function install()
     {
         try {
-        	$createOptions = '';
-        	switch ($this->pdo->getAttribute(PDO::ATTR_DRIVER_NAME)) {
-        		
-        		case 'mysql':
-        			$createOptions .= " engine=InnoDB";
-        			break;
-        			
-        	}
+            $createOptions = '';
+            switch ($this->pdo->getAttribute(PDO::ATTR_DRIVER_NAME)) {
+                
+                case 'mysql':
+                    $createOptions .= " engine=InnoDB";
+                    break;
+                    
+            }
             $this->pdo->exec("
             
                 CREATE TABLE {$this->prefix}bank(

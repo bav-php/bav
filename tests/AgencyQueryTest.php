@@ -82,11 +82,11 @@ class AgencyQueryTest extends PHPUnit_Framework_TestCase
     
     private function assertAgencies(Array $agencies, $count)
     {
-    	$this->assertEquals($count, count($agencies));
-    	
+        $this->assertEquals($count, count($agencies));
+        
         foreach ($agencies as $agency) {
             if ($agency->isMainAgency()) {
-            	$this->assertTrue(
+                $this->assertTrue(
                     $agency->getBank()->getMainAgency() === $agency,
                     "Inconsistent Main Agency"
                 );
@@ -98,10 +98,10 @@ class AgencyQueryTest extends PHPUnit_Framework_TestCase
             } else {
                 $includedCount = 0;
                 foreach ($agency->getBank()->getAgencies() as $banksAgency) {
-                	$this->assertTrue(
-                	    $banksAgency->getBank() === $agency->getBank(),
-                	    "Inconsistent bank"
-                	);
+                    $this->assertTrue(
+                        $banksAgency->getBank() === $agency->getBank(),
+                        "Inconsistent bank"
+                    );
                     if ($banksAgency === $agency) {
                         $includedCount++;
 

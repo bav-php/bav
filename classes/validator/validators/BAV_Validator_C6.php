@@ -29,13 +29,13 @@
  */
 class BAV_Validator_C6 extends BAV_Validator
 {
-	
-	
-	private static
-	/**
-	 * @var Array
-	 */
-	$transformation = array(
+    
+    
+    private static
+    /**
+     * @var Array
+     */
+    $transformation = array(
         0 => 4451970,
         1 => 4451981,
         2 => 4451992,
@@ -46,7 +46,7 @@ class BAV_Validator_C6 extends BAV_Validator
         7 => 5499570,
         8 => 4451994,
         9 => 5499579
-	);
+    );
 
 
     protected
@@ -70,9 +70,9 @@ class BAV_Validator_C6 extends BAV_Validator
     
     protected function validate()
     {
-    	$transformation = array_key_exists($this->account{0}, self::$transformation)
-    	                ? self::$transformation[$this->account{0}]
-    	                : '';
+        $transformation = array_key_exists($this->account{0}, self::$transformation)
+                        ? self::$transformation[$this->account{0}]
+                        : '';
         $this->transformedAccount = $transformation . substr($this->account, 1);
         $this->validator->setNormalizedSize(9 + strlen($transformation));
     }

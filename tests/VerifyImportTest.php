@@ -119,17 +119,17 @@ class VerifyImportTest extends PHPUnit_Framework_TestCase
         
         foreach ($this->verifyArray as $expect => $array) {
             foreach ($array as $type => $accounts) {
-            	$actualAccounts = @$checkArray[$expect][$type];
-            	unset($checkArray[$expect][$type]);
-            	if (array_search($type, $notSupported) !== false) {
-            		continue;
-            		
-            	}
-            	$this->assertEquals(
-            	    preg_replace('~\D~', '', $accounts),
-            	    preg_replace('~\D~', '', $actualAccounts),
-            	    "[$expect]$type is not equal!"
-            	);
+                $actualAccounts = @$checkArray[$expect][$type];
+                unset($checkArray[$expect][$type]);
+                if (array_search($type, $notSupported) !== false) {
+                    continue;
+                    
+                }
+                $this->assertEquals(
+                    preg_replace('~\D~', '', $accounts),
+                    preg_replace('~\D~', '', $actualAccounts),
+                    "[$expect]$type is not equal!"
+                );
                 
             }
             

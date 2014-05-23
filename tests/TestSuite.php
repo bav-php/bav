@@ -31,11 +31,11 @@ require_once __DIR__ . '/VerifyImportTest.php';
 
 class TestSuite extends PHPUnit_Framework_TestSuite
 {
-	
-	
-	/**
-	 * @return TestSuite
-	 */
+    
+    
+    /**
+     * @return TestSuite
+     */
     public static function suite()
     {
         $suite = new self();
@@ -48,8 +48,8 @@ class TestSuite extends PHPUnit_Framework_TestSuite
         
         return $suite;
     }
-	
-	
+    
+    
 }
 
 

@@ -40,7 +40,7 @@ class BAV_Validator_24 extends BAV_Validator_Iteration_Weighted
     
     protected function init($account)
     {
-    	parent::init($account);
+        parent::init($account);
         
         $this->account = preg_replace('~^([3456]|9..)?0*~', '', $this->account);
     }

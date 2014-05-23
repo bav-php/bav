@@ -45,13 +45,13 @@ class BAV_Validator_13 extends BAV_Validator_00
      */
     public function isValid($account)
     {
-    	if (parent::isValid($account)) {
-    		return true;
-    		
-    	}
-    	$account = ltrim($account, '0') . '00';
-    	return strlen($account) <= $this->normalizedSize
-    	   &&  parent::isValid($account);
+        if (parent::isValid($account)) {
+            return true;
+            
+        }
+        $account = ltrim($account, '0') . '00';
+        return strlen($account) <= $this->normalizedSize
+           &&  parent::isValid($account);
     }
 
 

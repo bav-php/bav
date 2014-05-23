@@ -33,10 +33,10 @@ class BAV_Validator_D1 extends BAV_Validator
 
 
     private static
-	/**
-	 * @var Array
-	 */
-	$_transformation = array(
+    /**
+     * @var Array
+     */
+    $_transformation = array(
         0 => 4363380,
         1 => 4363381,
         2 => 4363382,
@@ -46,7 +46,7 @@ class BAV_Validator_D1 extends BAV_Validator
         6 => 4363386,
         7 => 4363387,
         9 => 4363389
-	);
+    );
 
     
     protected

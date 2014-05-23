@@ -33,41 +33,41 @@
  */
 abstract class BAV_TestAPI extends BAV
 {
-	
-	
-	private
-	/**
-	 * @var String
-	 */
-	$name = '';
-	
-	
-	/**
+    
+    
+    private
+    /**
+     * @var String
+     */
+    $name = '';
+    
+    
+    /**
      * @param int $account
      * @return bool
      * @throws BAV_TestAPIException_Validation
      */
     abstract protected function isValid(BAV_Bank $bank, $account);
     
-	
-	public function __construct()
+    
+    public function __construct()
     {
-		$this->setName(get_class($this));
-	}
-	
-	
-	/**
-	 * @param string $name
-	 */
-	protected function setName($name)
+        $this->setName(get_class($this));
+    }
+    
+    
+    /**
+     * @param string $name
+     */
+    protected function setName($name)
     {
-		$this->name = $name;	
-	}
-	
-	/**
-	 * @param int $account
-	 * @return BAV_TestAPIResult
-	 */
+        $this->name = $name;    
+    }
+    
+    /**
+     * @param int $account
+     * @return BAV_TestAPIResult
+     */
     public function getResult(BAV_Bank $bank, $account)
     {
         try {
@@ -85,17 +85,17 @@ abstract class BAV_TestAPI extends BAV
          
         }
     }
-	
-	
-	/**
-	 * @return String
-	 */
-	public function getName()
+    
+    
+    /**
+     * @return String
+     */
+    public function getName()
     {
-		return $this->name;
-	}
-	
-	
+        return $this->name;
+    }
+    
+    
 }
 
 

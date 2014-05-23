@@ -75,16 +75,16 @@ class BackendTest extends PHPUnit_Framework_TestCase
      */
     public function provideBanks()
     {
-    	$banks = array();
-    	foreach ($this->provideBackends() as $backendArray) {
-    		$backend = $backendArray[0];
-    		foreach (self::$referenceBackend->getAllBanks() as $bank) {
-    			$comparedBank = $backend->getBank($bank->getBankID());
-    			$banks[] = array($bank, $comparedBank);
-    			
-    		}
-    	}
-    	return $banks;
+        $banks = array();
+        foreach ($this->provideBackends() as $backendArray) {
+            $backend = $backendArray[0];
+            foreach (self::$referenceBackend->getAllBanks() as $bank) {
+                $comparedBank = $backend->getBank($bank->getBankID());
+                $banks[] = array($bank, $comparedBank);
+                
+            }
+        }
+        return $banks;
     }
     
     
@@ -100,18 +100,18 @@ class BackendTest extends PHPUnit_Framework_TestCase
             
             $referenceAgencies = array();
             foreach ($referenceBank->getAgencies() as $agency) {
-            	$referenceAgencies[$agency->getID()] = $agency;
-            	
+                $referenceAgencies[$agency->getID()] = $agency;
+                
             }
         
             foreach ($testedBank->getAgencies() as $agency) {
-            	$agencies[] = array(
-            	    $referenceAgencies[$agency->getID()],
-            	    $agency
-            	);
+                $agencies[] = array(
+                    $referenceAgencies[$agency->getID()],
+                    $agency
+                );
                 
             }
-        	
+            
         }
         return $agencies;
     }
@@ -122,9 +122,9 @@ class BackendTest extends PHPUnit_Framework_TestCase
      */
     public function testInstallation(BAV_DataBackend $backend)
     {
-    	$backend->install();
-    	$backend->update();
-    	$backend->uninstall();
+        $backend->install();
+        $backend->update();
+        $backend->uninstall();
     }
     
     
@@ -147,10 +147,10 @@ class BackendTest extends PHPUnit_Framework_TestCase
     public function testSingleInstances(BAV_DataBackend $backend)
     {
         foreach (self::$referenceBackend->getAllBanks() as $refBank) {
-        	$this->assertTrue(
-        	   $backend->getBank($refBank->getBankID()) === $backend->getBank($refBank->getBankID()),
-        	   "Different objects for bank {$refBank->getBankID()}"
-        	);
+            $this->assertTrue(
+               $backend->getBank($refBank->getBankID()) === $backend->getBank($refBank->getBankID()),
+               "Different objects for bank {$refBank->getBankID()}"
+            );
         }
     }
     
@@ -160,7 +160,7 @@ class BackendTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAllBanks(BAV_DataBackend $backend)
     {
-    	$this->assertEquals(
+        $this->assertEquals(
             count(self::$referenceBackend->getAllBanks()),
             count($backend->getAllBanks())
         );
@@ -181,7 +181,7 @@ class BackendTest extends PHPUnit_Framework_TestCase
             $referenceBank->getMainAgency(),
             $testedBank->getMainAgency()
         );
-    	
+        
         $this->assertEquals(
             count($referenceBank->getAgencies()),
             count($testedBank->getAgencies())
@@ -194,13 +194,13 @@ class BackendTest extends PHPUnit_Framework_TestCase
      */
     public function testAgencies(BAV_Agency $referenceAgency, BAV_Agency $testedAgency)
     {
-    	$this->assertEqualAgency($referenceAgency, $testedAgency);
+        $this->assertEqualAgency($referenceAgency, $testedAgency);
     }
     
     
     private function assertEqualAgency(BAV_Agency $a, BAV_Agency $b)
     {
-    	$this->assertTrue($a->getBank()->getBankID() === $b->getBank()->getBankID());
+        $this->assertTrue($a->getBank()->getBankID() === $b->getBank()->getBankID());
         $this->assertTrue($a->getID()                === $b->getID());
         $this->assertTrue($a->getPostcode()          === $b->getPostcode());
         $this->assertTrue($a->getCity()              === $b->getCity());
@@ -209,12 +209,12 @@ class BackendTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($a->hasPAN()               === $b->hasPAN());
         $this->assertTrue($a->hasBIC()               === $b->hasBIC());
         if ($a->hasPAN()) {
-        	$this->assertTrue($a->getPAN() === $b->getPAN());
-        	
+            $this->assertTrue($a->getPAN() === $b->getPAN());
+            
         }
         if ($a->hasBIC()) {
-        	$this->assertTrue($a->getBIC() === $b->getBIC());
-        	
+            $this->assertTrue($a->getBIC() === $b->getBIC());
+            
         }
     }
 

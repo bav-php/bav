@@ -32,13 +32,13 @@
  */
 class BAV_Validator_D2 extends BAV_Validator_Chain
 {
-	
-	
-	protected
-	/**
-	 * @var bool
-	 */
-	$doNormalization = false;
+    
+    
+    protected
+    /**
+     * @var bool
+     */
+    $doNormalization = false;
 
 
     public function __construct(BAV_Bank $bank)

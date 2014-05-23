@@ -26,7 +26,7 @@
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
 interface BAV_Validator_BankDependent {
-	
+    
 }
 
 

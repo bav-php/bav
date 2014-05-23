@@ -53,10 +53,10 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-    	if (! empty(self::$dataBackend)) {
-    		return;
-    		
-    	}
+        if (! empty(self::$dataBackend)) {
+            return;
+            
+        }
         #self::$dataBackend = new BAV_DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
         self::$dataBackend = new BAV_DataBackend_File();
 
@@ -73,9 +73,9 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      */
     public function provideBanks()
     {
-    	$this->setUp();
-    	
-    	$banks = array();
+        $this->setUp();
+        
+        $banks = array();
         $files = BAV_ClassFile::getClassFiles(__DIR__.'/../classes/validator/validators/');
         foreach ($files as $class) {
            if (! preg_match('~^BAV_Validator_([A-Z0-9]{2})$~', $class->getName(), $matchType)) {
@@ -123,7 +123,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      */
     public function testFindParseErrors(BAV_Bank $bank)
     {
-    	/**
+        /**
          * testing 10 random bank accounts
          */
         for ($i = 0; $i < 10; $i++) {
@@ -143,14 +143,14 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      */
     public function testNullIsInvalid(BAV_Bank $bank)
     {
-    	for ($length = 0; $length <= 10; $length++) {
-    		$account = str_pad("0", $length, "0", STR_PAD_LEFT);
-    		$this->assertFalse(
+        for ($length = 0; $length <= 10; $length++) {
+            $account = str_pad("0", $length, "0", STR_PAD_LEFT);
+            $this->assertFalse(
                 $bank->isValid($account),
                 "{$bank->getBankID()}/{$bank->getValidationType()} $account should be invalid."
             );
-    		
-    	}
+            
+        }
     }
     
     
@@ -190,7 +190,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      */
     private function getTestAccounts(Array $testAccounts, $expectedValidation)
     {
-    	$accounts = array();
+        $accounts = array();
         foreach ($testAccounts as $typeOrBankID => $tests) {
             $accounts[] = array(
                 $typeOrBankID,
@@ -216,7 +216,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
             $this->assertEquals($typeOrBankID, $bank->getValidationType());
 
         } else {
-        	try {
+            try {
                 $bank = self::$dataBackend->getBank($typeOrBankID);
                     
             } catch (BAV_DataBackendException_BankNotFound $e) {
