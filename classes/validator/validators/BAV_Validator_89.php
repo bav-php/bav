@@ -42,17 +42,17 @@ class BAV_Validator_89 extends BAV_Validator_06
 
         $this->setWeights(array(2, 3, 4, 5, 6, 7));
         $this->setEnd(3);
-        
+
         $this->validator10 = new BAV_Validator_10($bank);
     }
-    
-    
+
+
     protected function iterationStep()
     {
         $this->accumulator += $this->crossSum($this->number * $this->getWeight());
     }
-    
-    
+
+
     public function isValid($account)
     {
         $length = strlen(ltrim($account, '0'));

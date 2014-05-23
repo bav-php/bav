@@ -25,7 +25,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- * 
+ *
  * @package classes
  * @subpackage verify
  * @author Markus Malkusch <markus@malkusch.de>
@@ -33,37 +33,37 @@
  */
 abstract class BAV_TestAPI extends BAV
 {
-    
-    
+
+
     private
     /**
      * @var String
      */
     $name = '';
-    
-    
+
+
     /**
      * @param int $account
      * @return bool
      * @throws BAV_TestAPIException_Validation
      */
     abstract protected function isValid(BAV_Bank $bank, $account);
-    
-    
+
+
     public function __construct()
     {
         $this->setName(get_class($this));
     }
-    
-    
+
+
     /**
      * @param string $name
      */
     protected function setName($name)
     {
-        $this->name = $name;    
+        $this->name = $name;
     }
-    
+
     /**
      * @param int $account
      * @return BAV_TestAPIResult
@@ -75,18 +75,18 @@ abstract class BAV_TestAPI extends BAV
                     ? BAV_TestAPIResult::VALID
                     : BAV_TestAPIResult::INVALID;
             return new BAV_TestAPIResult($this, $result);
-         
+
         } catch (Exception $e) {
             return new BAV_TestAPIResult_Error(
                 $this,
                 BAV_TestAPIResult::ERROR,
                 $e->getMessage()
             );
-         
+
         }
     }
-    
-    
+
+
     /**
      * @return String
      */
@@ -94,8 +94,8 @@ abstract class BAV_TestAPI extends BAV
     {
         return $this->name;
     }
-    
-    
+
+
 }
 
 

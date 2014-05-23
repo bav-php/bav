@@ -29,8 +29,8 @@
 
 class BAV_Validator_A4 extends BAV_Validator_Chain
 {
-  
-  
+
+
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
@@ -38,17 +38,17 @@ class BAV_Validator_A4 extends BAV_Validator_Chain
         $this->validators[] = new BAV_Validator_06($bank);
         $this->validators[0]->setWeights(array(2, 3, 4, 5, 6, 7, 0, 0, 0));
         $this->validators[0]->setEnd(3);
-        
+
         $this->validators[] = new BAV_Validator_A4b($bank);
-        
+
         $this->validators[] = new BAV_Validator_06($bank);
         $this->validators[2]->setWeights(array(2, 3, 4, 5, 6, 0, 0, 0, 0));
         $this->validators[2]->setEnd(4);
-        
+
         $this->validators[] = new BAV_Validator_93($bank);
     }
-    
-    
+
+
     /**
      * Decide if you really want to use this validator
      *
@@ -59,10 +59,10 @@ class BAV_Validator_A4 extends BAV_Validator_Chain
         if (substr($this->account, 2, 2) == '99') {
             return $validator === $this->validators[2]
                 || $validator === $this->validators[3];
-        
+
         } else {
             return  $validator !== $this->validators[2];
-            
+
         }
     }
 

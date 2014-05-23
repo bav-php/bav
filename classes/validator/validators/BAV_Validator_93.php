@@ -33,18 +33,18 @@ class BAV_Validator_93 extends BAV_Validator_Chain
     {
         parent::__construct($bank);
 
-        
+
         $this->validators[] = new BAV_Validator_06($bank);
         $this->validators[0]->setWeights(array(2, 3, 4, 5, 6));
         $this->validators[0]->setEnd(4);
-        
+
         $this->validators[] = new BAV_Validator_06($bank);
         $this->validators[1]->setWeights(array(2, 3, 4, 5, 6));
         $this->validators[1]->setEnd(4);
         $this->validators[1]->setDivisor(7);
     }
-    
-    
+
+
     /**
      * @throws BAV_ValidatorException_OutOfBounds
      * @param int $int
@@ -54,7 +54,7 @@ class BAV_Validator_93 extends BAV_Validator_Chain
         parent::normalizeAccount($size);
         if (substr($this->account, 0, 4) !== '0000') {
             $this->account = '0000'.substr($this->account, 0, 6);
-            
+
         }
     }
 

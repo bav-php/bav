@@ -53,32 +53,32 @@ class BAV_Validator_83 extends BAV_Validator_Chain
         $this->defaultValidators[] = new BAV_Validator_32($bank);
         $this->defaultValidators[0]->setWeights(array(2, 3, 4, 5, 6, 7));
         $this->defaultValidators[0]->setEnd(3);
-        
+
         $this->defaultValidators[] = new BAV_Validator_33($bank);
         $this->defaultValidators[1]->setWeights(array(2, 3, 4, 5, 6));
         $this->defaultValidators[1]->setEnd(4);
-        
+
         $this->modeC = new BAV_Validator_33($bank);
         $this->defaultValidators[] = $this->modeC;
         $this->defaultValidators[2]->setWeights(array(2, 3, 4, 5, 6));
         $this->defaultValidators[2]->setEnd(4);
         $this->defaultValidators[2]->setDivisor(7);
-        
+
         $this->exceptionValidators[] = new BAV_Validator_83x($bank);
     }
-    
-    
+
+
     /**
      */
     protected function init($account)
     {
         parent::init($account);
-        
+
         $this->validators = substr($this->account, 2, 2) == 99
                           ? $this->exceptionValidators
                           : $this->defaultValidators;
     }
-    
+
     protected function continueValidation(BAV_Validator $validator)
     {
         return $validator !== $this->modeC || $this->account{9} < 7;

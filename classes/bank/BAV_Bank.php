@@ -105,7 +105,7 @@ class BAV_Bank extends BAV
     {
         if (is_null($this->mainAgency)) {
             $this->mainAgency = $this->dataBackend->getMainAgency($this);
-        
+
         }
         return $this->mainAgency;
     }
@@ -120,7 +120,7 @@ class BAV_Bank extends BAV
     {
         if (is_null($this->agencies)) {
             $this->agencies = $this->dataBackend->getAgencies($this);
-        
+
         }
         return $this->agencies;
     }
@@ -145,7 +145,7 @@ class BAV_Bank extends BAV
     {
         if (is_null($this->validator)) {
             $this->validator = BAV_Validator::getInstance($this);
-        
+
         }
         return $this->validator;
     }

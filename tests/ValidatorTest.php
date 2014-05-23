@@ -55,7 +55,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     {
         if (! empty(self::$dataBackend)) {
             return;
-            
+
         }
         #self::$dataBackend = new BAV_DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
         self::$dataBackend = new BAV_DataBackend_File();
@@ -66,15 +66,15 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
 
         }
     }
-    
-    
+
+
     /**
      * @return Array
      */
     public function provideBanks()
     {
         $this->setUp();
-        
+
         $banks = array();
         $files = BAV_ClassFile::getClassFiles(__DIR__.'/../classes/validator/validators/');
         foreach ($files as $class) {
@@ -89,12 +89,12 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
 
             $banks[] = array($bank);
             self::$implementedBanks[$validatorType] = $bank;
-            
+
         }
         return $banks;
     }
-    
-    
+
+
     /**
      * @return Array
      */
@@ -105,7 +105,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
             $bank = $bank[0];
             for ($length = 0; $length <= 10; $length++) {
                 $providedAccountsAndBanks[] = array($bank, str_repeat(1, $length));
-                
+
             }
         }
         return $providedAccountsAndBanks;
@@ -128,11 +128,11 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
          */
         for ($i = 0; $i < 10; $i++) {
             $bank->isValid(mt_rand(0, 9999999999));
-    
+
         }
     }
-    
-    
+
+
     /**
      * 0 - 0000000000 should always be invalid
      *
@@ -149,11 +149,11 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
                 $bank->isValid($account),
                 "{$bank->getBankID()}/{$bank->getValidationType()} $account should be invalid."
             );
-            
+
         }
     }
-    
-    
+
+
     /**
      * Short accounts should not raise exception.
      *
@@ -166,8 +166,8 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     {
         $bank->isValid($account);
     }
-    
-    
+
+
     /**
      * @return Array
      */
@@ -176,15 +176,15 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $verifyArray = parse_ini_file(__DIR__.'/../data/verify.ini', true);
         if (! $verifyArray) {
             throw new RuntimeException("couldn't parse verify.ini.");
-            
+
         }
         return array_merge(
             $this->getTestAccounts($verifyArray['valid'], true),
             $this->getTestAccounts($verifyArray['invalid'], false)
         );
     }
-    
-    
+
+
     /**
      * @return Array
      */
@@ -197,12 +197,12 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
                 preg_split(':\D+:', $tests),
                 $expectedValidation
             );
-            
+
         }
         return $accounts;
     }
-    
-    
+
+
     /**
      * @dataProvider provideTestAccounts
      */
@@ -212,28 +212,28 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
             $typeOrBankID = (strlen($typeOrBankID) < 2 ? '0' : '').$typeOrBankID;
             $this->assertArrayHasKey($typeOrBankID, self::$implementedBanks);
             $bank = self::$implementedBanks[$typeOrBankID];
-            
+
             $this->assertEquals($typeOrBankID, $bank->getValidationType());
 
         } else {
             try {
                 $bank = self::$dataBackend->getBank($typeOrBankID);
-                    
+
             } catch (BAV_DataBackendException_BankNotFound $e) {
                 switch ($e->getBankID()) {
-                    
+
                     case '13051052':
                     case '13051172':
                     case '81053132':
                         $bank = new BAV_Bank(self::$dataBackend, $e->getBankID(), '52');
                         break;
-                            
+
                     case '16052072':
                     case '85055142':
                         $bank = new BAV_Bank(self::$dataBackend, $e->getBankID(), '53');
                         break;
 
-                    case '80053762': 
+                    case '80053762':
                     case '80053772':
                     case '80053782':
                         $bank = new BAV_Bank(self::$dataBackend, $e->getBankID(), 'B6');
@@ -243,13 +243,13 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
                     case '86055462':
                         $bank = new BAV_Bank(self::$dataBackend, $e->getBankID(), 'C0');
                         break;
-                    
+
                     default: throw $e;
-                        
+
                 }
             }
         }
-        
+
         foreach ($accountIDs as $accountID) {
             $this->assertEquals(
                 $expectedValidation,

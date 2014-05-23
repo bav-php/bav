@@ -34,18 +34,18 @@ class BAV_Validator_41 extends BAV_Validator_00
 
         $this->setWeights(array(2, 1));
     }
-    
-    
+
+
     protected function init($account)
     {
         parent::init($account);
-        
+
         if ($this->account{3} == 9) {
             $this->setEnd(3);
-        
+
         } else {
             $this->setEnd(0);
-        
+
         }
     }
 

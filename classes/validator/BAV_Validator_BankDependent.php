@@ -2,7 +2,7 @@
 
 /**
  * This interfaces marks validators which depend on the bank.
- * 
+ *
  * Copyright (C) 2009  Markus Malkusch <markus@malkusch.de>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -26,7 +26,7 @@
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
 interface BAV_Validator_BankDependent {
-    
+
 }
 
 

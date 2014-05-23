@@ -34,8 +34,8 @@ class BAV_Validator_A1 extends BAV_Validator_00
 
         $this->setWeights(array(2, 1, 2, 1, 2, 1, 2, 0, 0));
     }
-    
-    
+
+
     protected function getResult()
     {
         $length = strlen(ltrim($this->account, '0'));

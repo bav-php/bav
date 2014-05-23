@@ -30,7 +30,7 @@ class BAV_AgencyException_UndefinedAttribute extends BAV_AgencyException
      * @var string
      */
     private $attribute = '';
-    
+
     /**
      * @param string $attribute
      */

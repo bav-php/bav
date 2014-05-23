@@ -43,7 +43,7 @@ class BAV_Validator_D8 extends BAV_Validator
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
-        
+
         $this->_validator = new BAV_Validator_00($bank);
     }
 
@@ -52,8 +52,8 @@ class BAV_Validator_D8 extends BAV_Validator
     {
 
     }
-    
-    
+
+
     /**
      * @return bool
      */
@@ -66,6 +66,6 @@ class BAV_Validator_D8 extends BAV_Validator
         $set = (int) substr($this->account, 0, 3);
         return $set >= 1 && $set <= 9;
     }
-    
+
 
 }

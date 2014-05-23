@@ -31,7 +31,7 @@ class BAV_Validator_44 extends BAV_Validator_33
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
-        
+
         $this->setWeights(array(2, 4, 8, 5, 10, 0, 0, 0, 0));
     }
 

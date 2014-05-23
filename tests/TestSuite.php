@@ -31,25 +31,25 @@ require_once __DIR__ . '/VerifyImportTest.php';
 
 class TestSuite extends PHPUnit_Framework_TestSuite
 {
-    
-    
+
+
     /**
      * @return TestSuite
      */
     public static function suite()
     {
         $suite = new self();
-        
+
         $suite->addTestSuite('AgencyQueryTest');
         $suite->addTestSuite('DataConstraintTest');
         $suite->addTestSuite('ValidatorTest');
         $suite->addTestSuite('VerifyImportTest');
         $suite->addTestSuite('BackendTest');
-        
+
         return $suite;
     }
-    
-    
+
+
 }
 
 

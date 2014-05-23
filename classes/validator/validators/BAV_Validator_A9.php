@@ -28,15 +28,15 @@
 
 class BAV_Validator_A9 extends BAV_Validator_Chain
 {
-  
-  
+
+
   public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
 
         $this->validators[] = new BAV_Validator_01($bank);
         $this->validators[0]->setWeights(array(3, 7, 1));
-        
+
         $this->validators[] = new BAV_Validator_06($bank);
         $this->validators[1]->setWeights(array(2, 3, 4, 5, 6, 7));
     }

@@ -18,8 +18,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- * 
- * 
+ *
+ *
  * @package classes
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
@@ -31,7 +31,7 @@ class BAV_Version extends BAV
      * @var BAV_Version
      */
     private static $phpVersion;
-    
+
     /**
      * @var array
      */
@@ -41,7 +41,7 @@ class BAV_Version extends BAV
      * @var string
      */
     private $separator = '';
-    
+
     /**
      * @param string $version
      * @param string $separator
@@ -51,7 +51,7 @@ class BAV_Version extends BAV
         $this->separator = $separator;
         $this->elements  = explode($separator, $version);
     }
-    
+
     /**
      * @return boolean
      */
@@ -59,17 +59,17 @@ class BAV_Version extends BAV
     {
         $thoseElements = $version->getElements(count($this->elements));
         $thisElements  = $this->getElements(count($thoseElements));
-        
+
         foreach ($thisElements as $i => $thisElement) {
             if ($thoseElements[$i] !== $thisElement) {
                 return $this->isGreater($thisElement, $thoseElements[$i]);
-                
+
             }
-            
+
         }
         return false;
     }
-    
+
     /**
      * @return boolean
      */
@@ -77,10 +77,10 @@ class BAV_Version extends BAV
     {
         $thoseElements = $version->getElements(count($this->elements));
         $thisElements  = $this->getElements(count($thoseElements));
-        
+
         return $thoseElements == $thisElements;
     }
-    
+
     /**
      * @return boolean
      */
@@ -88,7 +88,7 @@ class BAV_Version extends BAV
     {
         return ! $this->equals($version) && ! $this->isGreater($version);
     }
-    
+
     /**
      * @return string
      */
@@ -96,7 +96,7 @@ class BAV_Version extends BAV
     {
         return implode($this->separator, $this->elements);
     }
-    
+
     /**
      * @return string
      */
@@ -108,13 +108,13 @@ class BAV_Version extends BAV
             if ($lastElement !== '0') {
                 $elements[] = $lastElement;
                 break;
-                
+
             }
-            
+
         }
         return implode($this->separator, $elements);
     }
-    
+
     /**
      * @param string $left
      * @param string $right
@@ -124,7 +124,7 @@ class BAV_Version extends BAV
     {
         return $left > $right;
     }
-    
+
     /**
      * @param int $padding
      * @return array
@@ -133,11 +133,11 @@ class BAV_Version extends BAV
     {
         if (is_null($padding) || count($this->elements) >= $padding) {
             return $this->elements;
-            
+
         }
         return array_pad($this->elements, $padding, '0');
     }
-    
+
     /**
      * @return BAV_Version
      */
@@ -145,7 +145,7 @@ class BAV_Version extends BAV
     {
         if (empty(self::$phpVersion)) {
             self::$phpVersion = new BAV_Version(phpversion());
-            
+
         }
         return self::$phpVersion;
     }

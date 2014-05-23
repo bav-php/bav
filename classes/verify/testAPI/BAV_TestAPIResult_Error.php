@@ -19,7 +19,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- * 
+ *
  * @package classes
  * @subpackage verify
  * @author Markus Malkusch <markus@malkusch.de>
@@ -30,14 +30,14 @@
 class BAV_TestAPIResult_Error extends BAV_TestAPIResult
 {
 
-    
+
     private
     /**
      * @var String
      */
     $message = '';
-    
-    
+
+
     /**
      * @param BAV_TestAPI $testAPI
      * @param int $result
@@ -46,11 +46,11 @@ class BAV_TestAPIResult_Error extends BAV_TestAPIResult
     public function __construct(BAV_TestAPI $testAPI, $result, $message = '')
     {
         parent::__construct($testAPI, $result);
-        
+
         $this->message = $message;
     }
-    
-    
+
+
     /**
      * @return String
      */
@@ -58,8 +58,8 @@ class BAV_TestAPIResult_Error extends BAV_TestAPIResult
     {
         return $this->message;
     }
-    
-    
+
+
 }
 
 

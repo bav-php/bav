@@ -30,7 +30,7 @@ class BAV_DataBackendException_BankNotFound extends BAV_DataBackendException
      * @var string
      */
     private $bankID;
-    
+
     public function __construct($bankID)
     {
         parent::__construct("bank $bankID not found");

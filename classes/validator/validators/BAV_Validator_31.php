@@ -31,7 +31,7 @@ class BAV_Validator_31 extends BAV_Validator_Iteration_Weighted
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
-        
+
         $this->setWeights(array(9, 8, 7, 6, 5, 4, 3, 2, 1));
     }
 
@@ -47,10 +47,10 @@ class BAV_Validator_31 extends BAV_Validator_Iteration_Weighted
         $result = $this->accumulator % 11;
         if ($result == 11) {
             $result = 0;
-            
+
         } elseif ($result == 10) {
             return false;
-        
+
         }
         return (string)$result === $this->getCheckNumber();
     }

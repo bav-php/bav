@@ -50,25 +50,25 @@ class BAV_Validator_B9 extends BAV_Validator
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
-        
+
         $this->mode1 = new BAV_Validator_B9a($bank);
         $this->mode2 = new BAV_Validator_B9b($bank);
     }
-    
-    
+
+
     protected function validate()
     {
         if (! preg_match('~^000?[^0]~', $this->account)) {
             $this->validator = null;
             return;
-        
+
         }
         $this->validator = substr($this->account, 0, 3) === '000'
                          ? $this->mode2
                          : $this->mode1;
     }
-    
-    
+
+
     /**
      * @return bool
      */
@@ -76,7 +76,7 @@ class BAV_Validator_B9 extends BAV_Validator
     {
         return ! is_null($this->validator) && $this->validator->isValid($this->account);
     }
-    
+
 
 }
 

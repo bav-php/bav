@@ -36,26 +36,26 @@ class BAV_Validator_75 extends BAV_Validator_00
         $this->setStart(4);
         $this->setEnd(-2);
     }
-    
-    
+
+
     public function isValid($account)
     {
         $account = ltrim($account, '0');
         $length  = strlen($account);
-        
+
         if ($length < 6 || $length > 9) {
             return false;
-        
+
         }
         if ($length == 9) {
             if ($account{0} == 9) {
                 $account = substr($account, 1, 6);
-            
+
             } else {
                 $account = substr($account, 0, 6);
-            
+
             }
-        
+
         }
         return parent::isValid($account);
     }

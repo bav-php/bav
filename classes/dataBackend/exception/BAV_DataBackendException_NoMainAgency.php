@@ -30,13 +30,13 @@ class BAV_DataBackendException_NoMainAgency extends BAV_DataBackendException
      * @var BAV_Bank
      */
     private $bank;
-    
+
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct("bank {$bank->getBankID()} has no main agency.");
         $this->bank = $bank;
     }
-    
+
     /**
      * @return BAV_Bank
      */

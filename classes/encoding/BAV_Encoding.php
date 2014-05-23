@@ -51,7 +51,7 @@ abstract class BAV_Encoding extends BAV
     {
         if (! $this->isSupported($encoding)) {
             throw new BAV_EncodingException_Unsupported($encoding);
-        
+
         }
         $this->enc = $encoding;
     }
@@ -90,13 +90,13 @@ abstract class BAV_Encoding extends BAV
     {
         if (BAV_Encoding_Iconv::isSupported($encoding)) {
             return new BAV_Encoding_Iconv($encoding);
-        
+
         } elseif (BAV_Encoding_MB::isSupported($encoding)) {
             return new BAV_Encoding_MB($encoding);
-        
+
         } elseif (BAV_Encoding_ISO8859::isSupported($encoding)) {
             return new BAV_Encoding_ISO8859($encoding);
-        
+
         } else {
             throw new BAV_EncodingException_Unsupported($encoding);
 

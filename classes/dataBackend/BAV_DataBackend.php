@@ -7,7 +7,7 @@
  *
  * install(), update(), uninstall(), getNewBank(), getAllBanks(), getMainAgency(),
  * getAgencies()
- * 
+ *
  * When you use this class you should create only one object. The BAV_DataBackend
  * is designed to keep all created BAV_Bank objects in an array. So you won't get
  * copies of identical BAV_Bank objects. That means if you call two times the
@@ -43,7 +43,7 @@ abstract class BAV_DataBackend extends BAV
      * @var array All created BAV_Bank objects
      */
     protected $instances = array();
-    
+
     /**
      * You have to call this method to synchronize you're datastructure to the
      * data of the Bundesbank.
@@ -98,10 +98,10 @@ abstract class BAV_DataBackend extends BAV
         try {
             $this->getBank($bankID);
             return true;
-            
+
         } catch (BAV_DataBackendException_BankNotFound $e) {
             return false;
-        
+
         }
     }
 

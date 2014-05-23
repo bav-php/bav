@@ -36,18 +36,18 @@ class BAV_Validator_65 extends BAV_Validator_00
         $this->setStart(0);
         $this->setChecknumberPosition(7);
     }
-    
-    
+
+
     protected function init($account)
     {
         parent::init($account);
-        
+
         if ($this->account{8} == 9) {
             $this->setEnd(-1);
-        
+
         } else {
             $this->setEnd(6);
-            
+
         }
     }
 

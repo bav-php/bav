@@ -47,8 +47,8 @@ class BAV_FileParserContext extends BAV
      * @var int the last line of the context
      */
     $end = null;
-    
-    
+
+
     /**
      * @param string $bankID
      * @param int $line
@@ -72,7 +72,7 @@ class BAV_FileParserContext extends BAV
     {
         if (is_null($this->start)) {
             throw new BAV_FileParserContextException_Undefined();
-        
+
         }
         return $this->start;
     }
@@ -91,7 +91,7 @@ class BAV_FileParserContext extends BAV
     {
         if (is_null($this->end)) {
             throw new BAV_FileParserContextException_Undefined();
-        
+
         }
         return $this->end;
     }

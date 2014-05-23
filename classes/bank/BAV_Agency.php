@@ -4,7 +4,7 @@
  * The agency belongs to one bank. Every bank has one main agency and may have
  * some more agencies in different cities. Don't create this object directly.
  * Use BAV_Bank->getMainAgency() or BAV_Bank->getAgencies().
- * 
+ *
  *
  * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
@@ -175,7 +175,7 @@ class BAV_Agency extends BAV
     {
         if (! $this->hasPAN()) {
             throw new BAV_AgencyException_UndefinedAttribute($this, 'pan');
-        
+
         }
         return $this->pan;
     }
@@ -188,7 +188,7 @@ class BAV_Agency extends BAV
     {
         if (! $this->hasBIC()) {
             throw new BAV_AgencyException_UndefinedAttribute($this, 'bic');
-        
+
         }
         return $this->bic;
     }

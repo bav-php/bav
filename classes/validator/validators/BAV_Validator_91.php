@@ -38,12 +38,12 @@ class BAV_Validator_91 extends BAV_Validator_Chain
             $this->validators[$i]->setChecknumberPosition(6);
             $this->validators[$i]->setStart(5);
         }
-        
+
         $this->validators[0]->setWeights(array(2, 3, 4, 5, 6, 7));
         $this->validators[1]->setWeights(array(7, 6, 5, 4, 3, 2));
         $this->validators[2]->setWeights(array(2, 3, 4, 0, 5, 6, 7, 8, 9, 10));
         $this->validators[3]->setWeights(array(2, 4, 8, 5, 10, 9));
-        
+
         $this->validators[2]->setStart(-1);
     }
 

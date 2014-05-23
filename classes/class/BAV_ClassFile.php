@@ -19,8 +19,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- * 
- * 
+ *
+ *
  * @package classes
  */
 class BAV_ClassFile extends BAV
@@ -50,12 +50,12 @@ class BAV_ClassFile extends BAV
      * @var string The class definition
      */
     private $classDefinition = '';
-    
+
     /**
      * @var array
      */
     private static $instances = array();
-    
+
     /**
      * The constructor loads the class definition and parses it to initialize
      * {@link $parent} and {@link $neededClasses}.
@@ -67,14 +67,14 @@ class BAV_ClassFile extends BAV
     {
         $this->path = $path;
         $this->name = basename($path, '.php');
-        
-        
+
+
         /**
          * Load the class definition
          */
         require_once $this->path;
-        
-        
+
+
         /**
          * check parent class
          */
@@ -82,14 +82,14 @@ class BAV_ClassFile extends BAV
         foreach ($matches[1] as $match) {
             if (! isset($this->neededClasses[$match])) {
                 throw new BAV_ClassFileException_MissingClass($this->name, $match);
-                
+
             }
             $this->parent                  = $this->neededClasses[$match];
             $this->neededClasses['parent'] = $this->parent;
             break;
         }
-        
-        
+
+
         /**
          * check needed classes
          */
@@ -98,7 +98,7 @@ class BAV_ClassFile extends BAV
         foreach (array_merge($matchesNew[1], $matchesStatic[1]) as $match) {
             if (! isset($this->neededClasses[$match])) {
                 throw new BAV_ClassFileException_MissingClass($this->name, $match);
-                
+
             }
         }
     }
@@ -112,7 +112,7 @@ class BAV_ClassFile extends BAV
     {
         if (! isset(self::$instances[$path])) {
             self::$instances[$path] = new self($path);
-        
+
         }
         return self::$instances[$path];
     }
@@ -129,13 +129,13 @@ class BAV_ClassFile extends BAV
         $dh         = opendir($dir);
         if (! $dh) {
             throw new BAV_ClassFileException_IO();
-        
+
         }
         while (($file = readdir($dh)) !== false) {
             $path = $dir.$file;
             if (is_file($path)) {
                 $classFiles[] = self::getClassFile($path);
-                
+
             }
         }
         closedir($dh);
@@ -172,17 +172,17 @@ class BAV_ClassFile extends BAV
             $fp                    = fopen($this->path, 'r');
             if (! $fp) {
                 throw new BAV_ClassFileException_IO();
-                
+
             }
             $this->classDefinition = fread($fp, filesize($this->path));
             fclose($fp);
-            
-            
+
+
             /**
              * delete comments
              */
             $this->classDefinition = preg_replace('_/\*.*\*/_sU', '', $this->classDefinition);
-            
+
         }
         return $this->classDefinition;
     }

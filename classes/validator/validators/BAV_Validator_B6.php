@@ -51,10 +51,10 @@ class BAV_Validator_B6 extends BAV_Validator implements BAV_Validator_BankDepend
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
-        
+
         $this->mode1 = new BAV_Validator_20($bank);
         $this->mode1->setWeights(array(2, 3, 4, 5, 6, 7, 8, 9, 3));
-        
+
         $this->mode2 = new BAV_Validator_53($bank);
         $this->mode2->setWeights(array(2, 4, 8, 5, 10, 9, 7, 3, 6, 1, 2, 4));
     }
@@ -74,7 +74,7 @@ class BAV_Validator_B6 extends BAV_Validator implements BAV_Validator_BankDepend
     {
         return $this->validator->isValid($this->account, '0');
     }
-    
+
 
 }
 

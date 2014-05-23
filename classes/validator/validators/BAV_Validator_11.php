@@ -34,8 +34,8 @@ class BAV_Validator_11 extends BAV_Validator_06
 
         $this->setWeights(array(2, 3, 4, 5, 6, 7, 8, 9, 10));
     }
-    
-    
+
+
     protected function getResult()
     {
         $result = 11 - $this->accumulator % 11;

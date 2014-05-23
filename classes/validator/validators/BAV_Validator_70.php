@@ -40,7 +40,7 @@ class BAV_Validator_70 extends BAV_Validator_06
     {
         if ($this->position <= 2 && ($this->account{3} == 5 || substr($this->account, 3, 2) == 69)) {
             return;
-        
+
         }
         parent::iterationStep();
     }

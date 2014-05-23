@@ -34,12 +34,12 @@ class BAV_EncodingException_Unsupported extends BAV_EncodingException
      * @var String
      */
     $encoding = '';
-    
-    
+
+
     public function __construct($encoding)
     {
         parent::__construct();
-        
+
         $this->encoding = $encoding;
     }
     /**

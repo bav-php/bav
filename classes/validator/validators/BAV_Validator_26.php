@@ -37,12 +37,12 @@ class BAV_Validator_26 extends BAV_Validator_06
         $this->setEnd(0);
         $this->setChecknumberPosition(7);
     }
-    
-    
+
+
     protected function init($account)
     {
         parent::init($account);
-        
+
         if (substr($this->account, 0, 2) === '00') {
             $this->account = substr($this->account, 2).'00';
 

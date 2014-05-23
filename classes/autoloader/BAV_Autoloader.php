@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * include the real autoloader 
+ * include the real autoloader
  */
 require_once __DIR__ . "/../../autoloader/autoloader.php";
 
@@ -11,14 +11,14 @@ BAV_Autoloader::triggerDeprecationWarning();
 
 /**
  * Deprecated Autoloader
- * 
+ *
  * This autoloader was removed.
  *
  * @deprecated 0.27
  */
 class BAV_Autoloader
 {
-    
+
     public static function triggerDeprecationWarning()
     {
         trigger_error(
@@ -31,12 +31,12 @@ class BAV_Autoloader
     {
         self::triggerDeprecationWarning();
     }
-    
+
     public function loadDirectly()
     {
         self::triggerDeprecationWarning();
     }
-    
+
     public function loadDeferred()
     {
         self::triggerDeprecationWarning();
@@ -56,7 +56,7 @@ class BAV_Autoloader
     {
         self::triggerDeprecationWarning();
     }
-    
+
     public function getPath($className)
     {
         self::triggerDeprecationWarning();

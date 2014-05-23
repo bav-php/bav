@@ -29,8 +29,8 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
 
 class CrossProjectTest extends PHPUnit_Framework_TestCase
 {
-    
-    
+
+
     private
     /**
      * @var int
@@ -49,15 +49,15 @@ class CrossProjectTest extends PHPUnit_Framework_TestCase
      * @var Array
      */
     $testAPIs = array();
-    
-    
+
+
     /**
      * @return Array
      */
     protected function setUp()
     {
         $ktoblzcheckPath = __DIR__ . "/../tmp/ktoblzcheck/ktoblzcheck-1.21/src";
-       
+
         $this->testAPIs = array(
             new BAV_TestAPI_BAV(),
             new BAV_TestAPI_Kontocheck('/etc/blz.lut2', 2),
@@ -67,8 +67,8 @@ class CrossProjectTest extends PHPUnit_Framework_TestCase
             )
         );
     }
-    
-    
+
+
     /**
      * @return Array
      */
@@ -78,12 +78,12 @@ class CrossProjectTest extends PHPUnit_Framework_TestCase
         $backend = new BAV_DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
         foreach ($backend->getAllBanks() as $bank) {
             $banks[] = array($bank);
-            
+
         }
         return $banks;
     }
-    
-    
+
+
     /**
      * @dataProvider provideBanks
      */
@@ -93,35 +93,35 @@ class CrossProjectTest extends PHPUnit_Framework_TestCase
             $isSkip = $bank->getValidator() instanceof BAV_Validator_BankDependent
                     ? array_key_exists($bank->getValidationType(), $this->failedBankDependentValidators)
                     : array_key_exists($bank->getValidationType(), $this->testedValidators);
-                    
+
             if ($isSkip) {
                 return;
-                         
+
             }
 
             for ($account = $this->lastAccount; $account >= 0; $account--) {
                 for ($pad = strlen($account); $pad <= strlen($this->lastAccount); $pad++) {
                     $paddedAccount = str_pad($account, $pad, "0", STR_PAD_LEFT);
                     $this->assertSameResult($bank, $paddedAccount);
-                    
+
                 }
             }
-            
+
         } catch (BAV_TestAPIException_Validation_BankNotFound $e) {
             return;
-            
+
         } catch (Exception $e) {
             if ($bank instanceof BAV_Validator_BankDependent) {
                 $this->failedBankDependentValidators[$bank->getValidationType()] = true;
-                
+
             }
-            throw $e;           
-           
+            throw $e;
+
         }
         $this->testedValidators[$bank->getValidationType()] = true;
     }
-    
-    
+
+
     private function assertSameResult(BAV_Bank $bank, $account)
     {
         $results = array();
@@ -130,17 +130,17 @@ class CrossProjectTest extends PHPUnit_Framework_TestCase
             $result          = $testAPI->getResult($bank, $account);
             $results[]       = $result;
             $resultValues[]  = $result->getResult();
-            
+
         }
-        
+
         $this->assertEquals(
             1,
             count(array_unique($resultValues)),
             $this->getErrorMessage($bank, $account, $results)
         );
     }
-    
-    
+
+
     /**
      * @param BAV_Bank $bank
      * @param String $account
@@ -154,25 +154,25 @@ class CrossProjectTest extends PHPUnit_Framework_TestCase
             BAV_TestAPIResult::INVALID => "invalid",
             BAV_TestAPIResult::ERROR   => "error"
         );
-        
+
         $message = "{$bank->getBankID()}/{$bank->getValidationType()}\t"
                  . str_pad($account, strlen($this->lastAccount)) . "\t";
-             
+
         foreach ($results as $result) {
             $message .= "{$result->getTestAPI()->getName()}: "
                      .  str_pad($resultTranslation[$result->getResult()], 8);
             if ($result instanceof BAV_TestAPIResult_Error) {
                 $message .= " {$result->getMessage()}";
-                
+
             }
             $message .= "\t";
-            
+
         }
-        
+
         return $message;
     }
-    
-    
+
+
 }
 
 

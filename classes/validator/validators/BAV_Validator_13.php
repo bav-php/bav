@@ -31,14 +31,14 @@ class BAV_Validator_13 extends BAV_Validator_00
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
-        
+
         $this->setWeights(array(2, 1));
         $this->setStart(6);
         $this->setEnd(1);
         $this->setChecknumberPosition(7);
     }
-    
-    
+
+
     /**
      * @param string $account
      * @return bool
@@ -47,7 +47,7 @@ class BAV_Validator_13 extends BAV_Validator_00
     {
         if (parent::isValid($account)) {
             return true;
-            
+
         }
         $account = ltrim($account, '0') . '00';
         return strlen($account) <= $this->normalizedSize

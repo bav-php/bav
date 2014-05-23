@@ -20,7 +20,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- * 
+ *
  * @package classes
  * @subpackage verify
  * @author Markus Malkusch <markus@malkusch.de>
@@ -31,13 +31,13 @@
 class BAV_TestAPIResult extends BAV
 {
 
-    
+
     const VALID            = 1;
     const INVALID          = 2;
     const BANK_NOT_FOUND   = 3;
     const ERROR            = 4;
-    
-    
+
+
     private
     /**
      * @var BAV_TestAPI
@@ -47,8 +47,8 @@ class BAV_TestAPIResult extends BAV
      * @var int
      */
     $result;
-    
-    
+
+
     /**
      * @param BAV_TestAPI $testAPI
      * @param int $result
@@ -58,8 +58,8 @@ class BAV_TestAPIResult extends BAV
         $this->testAPI    = $testAPI;
         $this->result     = $result;
     }
-    
-    
+
+
     /**
      * @return BAV_TestAPI
      */
@@ -67,8 +67,8 @@ class BAV_TestAPIResult extends BAV
     {
         return $this->testAPI;
     }
-    
-    
+
+
     /**
      * @return int
      */
@@ -76,8 +76,8 @@ class BAV_TestAPIResult extends BAV
     {
         return $this->result;
     }
-    
-    
+
+
 }
 
 

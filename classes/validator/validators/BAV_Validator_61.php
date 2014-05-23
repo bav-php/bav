@@ -31,7 +31,7 @@ class BAV_Validator_61 extends BAV_Validator_Iteration_Weighted
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
-        
+
         $this->setChecknumberPosition(-3);
         $this->setStart(0);
     }
@@ -40,16 +40,16 @@ class BAV_Validator_61 extends BAV_Validator_Iteration_Weighted
     public function init($account)
     {
         parent::init($account);
-        
-        
+
+
         if ($this->account{8} == 8) {
             $this->setWeights(array(2, 1, 2, 1, 2, 1, 2, 0, 1, 2));
             $this->setEnd(-1);
-        
+
         } else {
             $this->setWeights(array(2, 1));
             $this->setEnd(-4);
-            
+
         }
     }
 

@@ -34,8 +34,8 @@ class BAV_Validator_B7 extends BAV_Validator_01
 
         $this->setWeights(array(3, 7, 1));
     }
-    
-    
+
+
     protected function getResult()
     {
         return ($this->isBetween(1000000, 5999999) || $this->isBetween(700000000, 899999999))

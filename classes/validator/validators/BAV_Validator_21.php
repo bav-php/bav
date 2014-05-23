@@ -34,8 +34,8 @@ class BAV_Validator_21 extends BAV_Validator_00
 
         $this->setWeights(array(2, 1));
     }
-    
-    
+
+
     protected function getResult()
     {
         for ($result = $this->accumulator; $result >= 10; $result = $this->crossSum($result));

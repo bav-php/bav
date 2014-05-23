@@ -29,20 +29,20 @@
 
 class BAV_Validator_C0 extends BAV_Validator_Chain implements BAV_Validator_BankDependent
 {
-  
-  
+
+
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
 
         $this->validators[] = new BAV_Validator_52($bank);
         $this->validators[0]->setWeights(array(2, 4, 8, 5, 10, 9, 7, 3, 6, 1, 2, 4));
-        
+
         $this->validators[] = new BAV_Validator_20($bank);
         $this->validators[1]->setWeights(array(2, 3, 4, 5, 6, 7, 8, 9, 3));
     }
-    
-    
+
+
     public function useValidator(BAV_Validator $validator)
     {
         return $validator !== $this->validators[0]

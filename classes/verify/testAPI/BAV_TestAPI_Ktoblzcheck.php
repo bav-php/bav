@@ -24,7 +24,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- * 
+ *
  * @package classes
  * @subpackage verify
  * @author Markus Malkusch <markus@malkusch.de>
@@ -38,9 +38,9 @@ class BAV_TestAPI_Ktoblzcheck extends BAV_TestAPI
     const VALID             = 0;
     const INVALID           = 2;
     const BANK_NOT_FOUND    = 3;
-    
 
-    
+
+
     private
     /**
      * @var String
@@ -50,8 +50,8 @@ class BAV_TestAPI_Ktoblzcheck extends BAV_TestAPI
      * @var String
      */
     $bankdata = '';
-    
-    
+
+
     /**
      * @param String $bankdata
      * @param String $binary
@@ -60,14 +60,14 @@ class BAV_TestAPI_Ktoblzcheck extends BAV_TestAPI
     public function __construct($bankdata, $binary = null)
     {
         parent::__construct();
-        
+
         $this->setName("ktoblzcheck");
-        
+
         $this->bankdata = realpath($bankdata);
         $this->binary   = is_null($binary) ? self::BINARY : realpath($binary);
     }
-    
-    
+
+
     /**
      * @param int $account
      * @return bool
@@ -82,25 +82,25 @@ class BAV_TestAPI_Ktoblzcheck extends BAV_TestAPI
             $out,
             $result
         );
-        
+
         switch ($result) {
-        
+
             case self::VALID:
                 return true;
-                
+
             case self::INVALID:
                 return false;
-                
+
             case self::BANK_NOT_FOUND:
-                throw new BAV_TestAPIException_Validation_BankNotFound("Bank not found: {$bank->getBankID()}");                
-            
+                throw new BAV_TestAPIException_Validation_BankNotFound("Bank not found: {$bank->getBankID()}");
+
             default:
                 throw new BAV_TestAPIException_Validation("unknown code $result: " . implode("\n", $out));
-        
+
         }
     }
-    
-    
+
+
 }
 
 

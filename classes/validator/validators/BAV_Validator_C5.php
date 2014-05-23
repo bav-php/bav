@@ -60,7 +60,7 @@ class BAV_Validator_C5 extends BAV_Validator
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
-        
+
         $this->mode1 = new BAV_Validator_75($bank);
         $this->mode2 = new BAV_Validator_29($bank);
         $this->mode3 = new BAV_Validator_00($bank);
@@ -70,27 +70,27 @@ class BAV_Validator_C5 extends BAV_Validator
     {
         $account = ltrim($this->account, '0');
         $length  = strlen($account);
-        
+
         switch ($length) {
-            
+
             case 6:
             case 9:
                 if ($account{0} < 9) {
                     $this->validator = $this->mode1;
                 }
                 break;
-                
+
             case 8:
                 if ($account{0} >= 3 && $account{0} <= 5) {
                     $this->validator = $this->mode4;
-                    
+
                 }
                 break;
-                
+
             case 10:
                 if ($account{0} == 1 || $account{0} >= 4 && $account{0} <= 6 || $account{0} == 9) {
                     $this->validator = $this->mode2;
-                
+
                 } elseif ($account{0} == 3) {
                     $this->validator = $this->mode3;
 
@@ -98,11 +98,11 @@ class BAV_Validator_C5 extends BAV_Validator
                     $circle = substr($account, 0, 2);
                     if ($circle == 70 || $circle == 85) {
                         $this->validator = $this->mode4;
-                        
+
                     }
                 }
                 break;
-            
+
             default:
                 $this->validator = null;
                 break;
@@ -115,7 +115,7 @@ class BAV_Validator_C5 extends BAV_Validator
     {
         return ! is_null($this->validator) && $this->validator->isValid($this->account);
     }
-    
+
 
 }
 

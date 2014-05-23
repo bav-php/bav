@@ -38,7 +38,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * BAV_DataBackend
- * 
+ *
  * @package classes
  * @subpackage verify
  * @author Markus Malkusch <markus@malkusch.de>
@@ -166,7 +166,7 @@ class BAV_VerifyImport extends BAV
             $this->saveArray($fp, $this->invalidNumbers, 'invalid');
             $this->saveArray($fp, $this->validNumbers, 'valid');
             fclose($fp);
-        
+
         } catch (BAV_VerifyException_IO $e) {
             fclose($fp);
             throw $e;

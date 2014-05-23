@@ -31,7 +31,7 @@ class BAV_Validator_C1b extends BAV_Validator_Iteration_Weighted
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
-        
+
         $this->setWeights(array(1, 2));
         $this->setStart(0);
         $this->setEnd(-2);

@@ -34,8 +34,8 @@ class BAV_Validator_08 extends BAV_Validator_00
 
         $this->setWeights(array(2, 1));
     }
-    
-    
+
+
     protected function getResult()
     {
         return ((int)$this->account<= 60000)

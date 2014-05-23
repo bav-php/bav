@@ -22,7 +22,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- * 
+ *
  * @package classes
  * @subpackage verify
  * @author Markus Malkusch <markus@malkusch.de>
@@ -30,16 +30,16 @@
  */
 class BAV_TestAPI_BAV extends BAV_TestAPI
 {
-    
-    
+
+
     public function __construct()
     {
         parent::__construct();
-        
+
         $this->setName("bav");
     }
-    
-    
+
+
     /**
      * @param int $bankCode
      * @param int $account
@@ -50,15 +50,15 @@ class BAV_TestAPI_BAV extends BAV_TestAPI
     {
         try {
             return $bank->isValid($account);
-          
+
         } catch (Exception $e) {
             echo $e->getMessage(), "\n", $e->getTraceAsString();
             exit(1);
-            
+
         }
     }
-    
-    
+
+
 }
 
 

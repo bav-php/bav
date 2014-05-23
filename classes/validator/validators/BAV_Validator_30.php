@@ -36,8 +36,8 @@ class BAV_Validator_30 extends BAV_Validator_00
         $this->setStart(0);
         $this->setEnd(-2);
     }
-    
-    
+
+
     protected function iterationStep()
     {
         $this->accumulator += $this->number * $this->getWeight();

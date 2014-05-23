@@ -34,23 +34,23 @@ abstract class BAV_Validator_Iteration_Weighted extends BAV_Validator_Iteration
      * @var int
      */
     $divisor = 0;
-    
-    
+
+
     private
     /**
      * @var Array an array of rotating weights
      */
     $weights = array();
-    
-    
+
+
     /**
      */
     public function setWeights(Array $weights)
     {
         $this->weights = $weights;
     }
-    
-    
+
+
     /**
      * @param int $divisor
      */
@@ -58,8 +58,8 @@ abstract class BAV_Validator_Iteration_Weighted extends BAV_Validator_Iteration
     {
         $this->divisor = $divisor;
     }
-    
-    
+
+
     /**
      * @return int
      */

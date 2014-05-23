@@ -50,10 +50,10 @@ class BAV_Validator_C3 extends BAV_Validator
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
-        
+
         $this->mode1 = new BAV_Validator_00($bank);
         $this->mode1->setWeights(array(2, 1));
-        
+
         $this->mode2 = new BAV_Validator_58($bank);
         $this->mode2->setWeights(array(2, 3, 4, 5, 6, 0, 0, 0, 0));
     }
@@ -70,7 +70,7 @@ class BAV_Validator_C3 extends BAV_Validator
     {
         return $this->validator->isValid($this->account);
     }
-    
+
 
 }
 

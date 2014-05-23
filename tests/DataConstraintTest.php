@@ -2,7 +2,7 @@
 /**
  * This scripts checks if the banklist.txt fits into our model.
  */
- 
+
 require_once __DIR__ . "/../autoloader/autoloader.php";
 
 
@@ -17,13 +17,13 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase
      * @var PDO
      */
     $pdo;
-    
-    
+
+
     public static function classConstructor()
     {
         self::$pdo = new PDO('mysql:host=localhost;dbname=test', 'test');
         self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        
+
         self::$pdo->exec("DROP TABLE IF EXISTS bank");
         self::$pdo->exec("CREATE TEMPORARY TABLE bank (
             id int primary key,
@@ -42,13 +42,13 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase
             index(pan),
             index(bic)
         ) engine=MEMORY");
-   
+
         $fp = fopen(__DIR__ . '/../data/banklist.txt', 'r');
         if (! is_resource($fp)) {
             throw new RuntimeException('I/O-Error');
-        
+
         }
-        
+
         $insert = self::$pdo->prepare("
             INSERT INTO bank
                    ( id,  blz,  isMain,  name,  plz,  city,  shortterm,  pan,  bic,  validator)
@@ -63,7 +63,7 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase
         $insert->bindParam(':pan', $pan);
         $insert->bindParam(':bic', $bic);
         $insert->bindParam(':validator', $validator);
-        
+
         while ($line = fgets($fp)) {
             $blz        = substr($line, 0, 8);
             $isMain     = ($line{8} === '1') ? 1 : 0;
@@ -75,14 +75,14 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase
             $bic        = trim(substr($line, 139, 11));
             $validator  = substr($line, 150, 2);
             $id         = substr($line, 152, 6);
-        
+
             $insert->execute();
-        
+
         }
         fclose($fp);
     }
-    
-    
+
+
     /**
      * @return Array
      */
@@ -90,19 +90,19 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase
     {
         $parser = new BAV_FileParser();
         $lines  = array();
-        
+
         for ($i = 0; $i < $parser->getLines(); $i++) {
             $line = $parser->readLine($i);
             $blz  = mb_substr($line, 0, 8, 'UTF-8');
             $type = mb_substr($line, BAV_FileParser::TYPE_OFFSET, BAV_FileParser::TYPE_LENGTH, 'UTF-8');
-            
+
             $lines[] = array($blz, $type);
         }
-        
+
         return $lines;
     }
-    
-    
+
+
     /**
      * @dataProvider provideParsedLines
      */
@@ -111,8 +111,8 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase
         $this->assertRegExp('~^\d{8}$~', $blz);
         $this->assertRegExp('~^[\dA-Z]\d$~', $type);
     }
-    
-    
+
+
     /**
      * Every bankID should have exact one validator
      */
@@ -126,8 +126,8 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase
             "bankID <-> validator is not n:1!"
         );
     }
-    
-    
+
+
     /**
      * Every bankID should have exact one mainAgency
      */
@@ -139,8 +139,8 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase
             "Every bankID should have exact one mainAgency."
         );
     }
-    
-    
+
+
     public function testBLZDatatype ()
     {
         $statement = self::$pdo->query("SELECT blz FROM bank WHERE blz LIKE '0%'");

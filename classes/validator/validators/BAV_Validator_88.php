@@ -33,14 +33,14 @@ class BAV_Validator_88 extends BAV_Validator_06
         parent::__construct($bank);
 
         $this->setWeights(array(2, 3, 4, 5, 6, 7, 8));
-        
+
     }
-    
-    
+
+
     protected function init($account)
     {
         parent::init($account);
-        
+
         $this->setEnd($this->account{2} == 9 ? 2: 3);
     }
 

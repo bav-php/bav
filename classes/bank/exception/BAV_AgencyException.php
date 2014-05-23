@@ -30,7 +30,7 @@ class BAV_AgencyException extends RuntimeException
      * @var BAV_Agency
      */
     private $agency;
-    
+
     public function __construct(BAV_Agency $agency)
     {
         $this->agency = $agency;

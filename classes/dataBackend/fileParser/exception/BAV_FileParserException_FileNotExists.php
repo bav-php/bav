@@ -34,8 +34,8 @@ class BAV_FileParserException_FileNotExists extends BAV_FileParserException
      * @var string
      */
     $parsedFile = '';
-    
-    
+
+
     /**
      * @param string $file
      */

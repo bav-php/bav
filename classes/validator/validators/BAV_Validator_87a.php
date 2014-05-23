@@ -32,7 +32,7 @@
 class BAV_Validator_87a extends BAV_Validator
 {
 
-   
+
     protected function validate()
     {
     }
@@ -152,7 +152,7 @@ class BAV_Validator_87a extends BAV_Validator
 
         return false;
     }
-    
+
 
 }
 

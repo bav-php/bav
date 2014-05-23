@@ -45,8 +45,8 @@ class BackendTest extends PHPUnit_Framework_TestCase
     {
         self::$referenceBackend = new BAV_DataBackend_File();
     }
-    
-    
+
+
     /**
      * @return Array The tested backends
      */
@@ -57,8 +57,8 @@ class BackendTest extends PHPUnit_Framework_TestCase
             array(new BAV_DataBackend_File())
         );
     }
-    
-    
+
+
     /**
      */
     public function provideInstallationBackends()
@@ -68,8 +68,8 @@ class BackendTest extends PHPUnit_Framework_TestCase
             array(new BAV_DataBackend_File(tempnam(BAV_DataBackend_File::getTempdir(), 'bavtest')))
         );
     }
-    
-    
+
+
     /**
      * @return Array
      */
@@ -81,13 +81,13 @@ class BackendTest extends PHPUnit_Framework_TestCase
             foreach (self::$referenceBackend->getAllBanks() as $bank) {
                 $comparedBank = $backend->getBank($bank->getBankID());
                 $banks[] = array($bank, $comparedBank);
-                
+
             }
         }
         return $banks;
     }
-    
-    
+
+
     /**
      * @return Array
      */
@@ -97,26 +97,26 @@ class BackendTest extends PHPUnit_Framework_TestCase
         foreach ($this->provideBanks() as $banks) {
             $referenceBank = $banks[0];
             $testedBank    = $banks[1];
-            
+
             $referenceAgencies = array();
             foreach ($referenceBank->getAgencies() as $agency) {
                 $referenceAgencies[$agency->getID()] = $agency;
-                
+
             }
-        
+
             foreach ($testedBank->getAgencies() as $agency) {
                 $agencies[] = array(
                     $referenceAgencies[$agency->getID()],
                     $agency
                 );
-                
+
             }
-            
+
         }
         return $agencies;
     }
-    
-    
+
+
     /**
      * @dataProvider provideInstallationBackends
      */
@@ -126,8 +126,8 @@ class BackendTest extends PHPUnit_Framework_TestCase
         $backend->update();
         $backend->uninstall();
     }
-    
-    
+
+
     /**
      * @dataProvider provideInstallationBackends
      */
@@ -136,12 +136,12 @@ class BackendTest extends PHPUnit_Framework_TestCase
         $this->markTestIncomplete();
         //TODO test if the installation process fills all banks
     }
-    
-    
+
+
     /**
      * Testet, dass ein erneutes $backend->getBank($id) das selbe
-     * Objekt zurückliefert. 
-     * 
+     * Objekt zurückliefert.
+     *
      * @dataProvider provideBackends
      */
     public function testSingleInstances(BAV_DataBackend $backend)
@@ -153,8 +153,8 @@ class BackendTest extends PHPUnit_Framework_TestCase
             );
         }
     }
-    
-    
+
+
     /**
      * @dataProvider provideBackends
      */
@@ -165,8 +165,8 @@ class BackendTest extends PHPUnit_Framework_TestCase
             count($backend->getAllBanks())
         );
     }
-    
-    
+
+
     /**
      * @dataProvider provideBanks
      */
@@ -176,19 +176,19 @@ class BackendTest extends PHPUnit_Framework_TestCase
             $referenceBank->getValidationType(),
             $testedBank->getValidationType()
         );
-        
+
         $this->assertEqualAgency(
             $referenceBank->getMainAgency(),
             $testedBank->getMainAgency()
         );
-        
+
         $this->assertEquals(
             count($referenceBank->getAgencies()),
             count($testedBank->getAgencies())
         );
     }
-    
-    
+
+
     /**
      * @dataProvider provideAgencies
      */
@@ -196,8 +196,8 @@ class BackendTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEqualAgency($referenceAgency, $testedAgency);
     }
-    
-    
+
+
     private function assertEqualAgency(BAV_Agency $a, BAV_Agency $b)
     {
         $this->assertTrue($a->getBank()->getBankID() === $b->getBank()->getBankID());
@@ -210,11 +210,11 @@ class BackendTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($a->hasBIC()               === $b->hasBIC());
         if ($a->hasPAN()) {
             $this->assertTrue($a->getPAN() === $b->getPAN());
-            
+
         }
         if ($a->hasBIC()) {
             $this->assertTrue($a->getBIC() === $b->getBIC());
-            
+
         }
     }
 

@@ -81,8 +81,8 @@ abstract class BAV_Validator extends BAV
         require_once $file;
         return new $class($bank);
     }
-    
-    
+
+
     /**
      * @param string $account
      * @return bool
@@ -93,14 +93,14 @@ abstract class BAV_Validator extends BAV
             $this->init($account);
             $this->validate();
             return ltrim($account, "0") != "" && $this->getResult();
-            
+
         } catch (BAV_ValidatorException_OutOfBounds $e) {
             return false;
-            
+
         }
     }
-    
-    
+
+
     public function setChecknumberPosition($position)
     {
         $this->checknumberPosition = $position;
@@ -117,7 +117,7 @@ abstract class BAV_Validator extends BAV
         $this->account = $account;
         if ($this->doNormalization) {
             $this->normalizeAccount($this->normalizedSize);
-            
+
         }
     }
     abstract protected function validate();
@@ -125,8 +125,8 @@ abstract class BAV_Validator extends BAV
      * @return bool
      */
     abstract protected function getResult();
-    
-    
+
+
     /**
      * @return string
      */
@@ -145,17 +145,17 @@ abstract class BAV_Validator extends BAV
     {
         if ($pos >= strlen($this->account) || $pos < -strlen($this->account)) {
             throw new BAV_ValidatorException_OutOfBounds("Cannot access offset $pos in String $this->account");
-            
+
         }
-        
+
         if ($pos >= 0) {
             return $pos;
 
         }
         return strlen($this->account) + $pos;
     }
-    
-    
+
+
     /**
      * Some validators need this
      *
@@ -173,8 +173,8 @@ abstract class BAV_Validator extends BAV
         }
         return $sum;
     }
-    
-    
+
+
     /**
      * @throws BAV_ValidatorException_OutOfBounds
      * @param int $int
@@ -195,7 +195,7 @@ abstract class BAV_Validator extends BAV
     protected function getESER8()
     {
         $account = ltrim($this->account, '0');
-    
+
         if (strlen($account) != 8) {
             throw new BAV_ValidatorException_ESER();
 
@@ -206,9 +206,9 @@ abstract class BAV_Validator extends BAV
 
         }
         $blzPart = ltrim(substr($bankID, 4), '0');
-        
+
         $this->eserChecknumberOffset = -(4 - strlen($blzPart));
-        
+
         if (empty($blzPart)) {
             throw new BAV_ValidatorException_ESER();
 
@@ -259,7 +259,7 @@ abstract class BAV_Validator extends BAV
     protected function isBetween($a, $b)
     {
         $account = (int) ltrim($this->account, '0');
-        
+
         return $a < $b
              ? $account >= $a && $account <= $b
              : $account >= $b && $account <= $a;

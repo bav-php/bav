@@ -32,7 +32,7 @@ class BAV_Validator_50 extends BAV_Validator_06
     {
         if (parent::isValid($account)) {
             return true;
-            
+
         }
         $account = ltrim($account, '0') . '000';
         return strlen($account) <= $this->normalizedSize
@@ -43,7 +43,7 @@ class BAV_Validator_50 extends BAV_Validator_06
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
-        
+
         $this->setWeights(array(2, 3, 4, 5, 6, 7));
         $this->setStart(-5);
         $this->setEnd(0);

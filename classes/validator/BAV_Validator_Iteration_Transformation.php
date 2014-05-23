@@ -38,8 +38,8 @@ abstract class BAV_Validator_Iteration_Transformation extends BAV_Validator_Iter
      * @var Array
      */
     $matrix = array();
-    
-    
+
+
     /**
      * The iteration step
      */
@@ -55,9 +55,9 @@ abstract class BAV_Validator_Iteration_Transformation extends BAV_Validator_Iter
         if (empty($this->rowIteration)) {
             for ($i = 0; $i < count($matrix); $i++) {
                 $this->rowIteration[] = $i;
-            
+
             }
-            
+
         }
     }
     /**

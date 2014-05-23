@@ -34,11 +34,11 @@ class BAV_Validator_98 extends BAV_Validator_Chain
     {
         parent::__construct($bank);
 
-        
+
         $this->validators[] = new BAV_Validator_01($bank);
         $this->validators[0]->setWeights(array(3, 1, 7));
         $this->validators[0]->setEnd(2);
-        
+
         $this->validators[] = new BAV_Validator_32($bank);
     }
 

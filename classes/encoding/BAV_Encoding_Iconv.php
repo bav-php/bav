@@ -81,7 +81,7 @@ class BAV_Encoding_Iconv extends BAV_Encoding
         $encoded = iconv($from_encoding, $this->enc, $string);
         if ($encoded === false) {
             throw new BAV_EncodingException();
-        
+
         }
         return $encoded;
     }

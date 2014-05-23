@@ -34,14 +34,14 @@ class BAV_Validator_27 extends BAV_Validator_Iteration_Transformation
      * @var BAV_Validator_00
      */
     $validator00;
-    
-    
+
+
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
-        
+
         $this->validator00 = new BAV_Validator_00($bank);
-        
+
         $this->setMatrix(array(
             array(0,1,5,9,3,7,4,8,2,6),
             array(0,1,7,6,9,8,3,2,5,4),

@@ -35,7 +35,7 @@ class BAV_Validator_77 extends BAV_Validator_Chain
 
         $this->validators[] = new BAV_Validator_77a($bank);
         $this->validators[0]->setWeights(array(1, 2, 3, 4, 5));
-        
+
         $this->validators[] = new BAV_Validator_77a($bank);
         $this->validators[1]->setWeights(array(5, 4, 3, 4, 5));
     }

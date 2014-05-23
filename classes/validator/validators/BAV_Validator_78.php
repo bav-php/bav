@@ -34,8 +34,8 @@ class BAV_Validator_78 extends BAV_Validator_00
 
         $this->setWeights(array(2, 1));
     }
-    
-    
+
+
     public function isValid($account)
     {
         return strlen($account) !== 8 && parent::isValid($account);

@@ -68,7 +68,7 @@ class BAV_Encoding_ISO8859 extends BAV_Encoding
     {
         if ($from_encoding == $this->enc) {
             return $string;
-        
+
         }
         throw new BAV_EncodingException();
     }

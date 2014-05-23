@@ -46,8 +46,8 @@ abstract class BAV_Validator_Iteration extends BAV_Validator
      * @var int an accumulator for the iteration
      */
     $accumulator = 0;
-    
-    
+
+
     private
     /**
      * @var int The inclusive beginning point of the iteration
@@ -62,7 +62,7 @@ abstract class BAV_Validator_Iteration extends BAV_Validator
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
-        
+
         $this->setStart(-2);
         $this->setEnd(0);
     }
@@ -94,11 +94,11 @@ abstract class BAV_Validator_Iteration extends BAV_Validator
         $start  = $this->getNormalizedPosition($this->start);
         $end    = $this->getNormalizedPosition($this->end);
         $length = abs($end - $start) + 1;
-        
+
         $this->position = $start;
         $stepping       = (($end - $start < 0) ? -1 : +1);
-        
-        
+
+
         for ($this->i = 0; $this->i < $length; $this->i++) {
             $this->number = (int)$this->account{$this->position};
             $this->iterationStep();

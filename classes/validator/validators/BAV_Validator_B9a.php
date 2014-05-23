@@ -31,7 +31,7 @@ class BAV_Validator_B9a extends BAV_Validator_Iteration_Weighted
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
-        
+
         $this->setWeights(array(1, 3, 2));
         $this->setEnd(2);
     }
@@ -48,12 +48,12 @@ class BAV_Validator_B9a extends BAV_Validator_Iteration_Weighted
         $result = $this->accumulator % 10;
         if ((string) $result === $this->getCheckNumber()) {
             return true;
-            
+
         }
         $result += 5;
         if ($result >= 10) {
             $result -= 10;
-        
+
         }
         return (string) $result === $this->getCheckNumber();
     }

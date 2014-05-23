@@ -31,11 +31,11 @@ class BAV_Validator_77a extends BAV_Validator_Iteration_Weighted
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
-        
+
         $this->setStart(-1);
         $this->setEnd(5);
     }
-    
+
 
     protected function iterationStep()
     {

@@ -31,23 +31,23 @@ class BAV_Validator_63 extends BAV_Validator_Iteration_Weighted
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
-        
+
         $this->setWeights(array(2, 1));
         $this->setChecknumberPosition(7);
         $this->setStart(6);
         $this->setEnd(1);
     }
 
-    
+
     public function isValid($account)
     {
         if (parent::isValid($account)) {
             return true;
-        
+
         }
         if (substr($this->account, 0, 3) !== '000') {
             return false;
-        
+
         }
         return parent::isValid(ltrim($account.'00', '0'));
     }

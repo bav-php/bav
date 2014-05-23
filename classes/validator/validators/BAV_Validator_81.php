@@ -47,17 +47,17 @@ class BAV_Validator_81 extends BAV_Validator_Chain
 
         $this->defaultValidators[] = new BAV_Validator_32($bank);
         $this->defaultValidators[0]->setWeights(array(2, 3, 4, 5, 6, 7));
-        
+
         $this->exceptionValidators = BAV_Validator_51::getExceptionValidators($bank);
     }
-    
-    
+
+
     /**
      */
     protected function init($account)
     {
         parent::init($account);
-        
+
         $this->validators = $this->account{2} == 9
                           ? $this->exceptionValidators
                           : $this->defaultValidators;

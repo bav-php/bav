@@ -35,7 +35,7 @@ class BAV_ClassFileException_MissingClass extends BAV_ClassFileException
      * @var string
      */
     private $missingClassName = '';
-    
+
     /**
      * @param string $className
      * @param string $missingClassName

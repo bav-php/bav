@@ -31,17 +31,17 @@ class BAV_Validator_24 extends BAV_Validator_Iteration_Weighted
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
-        
+
         $this->setWeights(array(1, 2, 3));
         $this->setStart(0);
         $this->setEnd(-2);
     }
-    
-    
+
+
     protected function init($account)
     {
         parent::init($account);
-        
+
         $this->account = preg_replace('~^([3456]|9..)?0*~', '', $this->account);
     }
 

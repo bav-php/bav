@@ -28,15 +28,15 @@
 
 class BAV_Validator_B5 extends BAV_Validator_Chain
 {
-  
-  
+
+
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
 
         $this->validators[] = new BAV_Validator_01($bank);
         $this->validators[0]->setWeights(array(7, 3, 1));
-        
+
         $this->validators[] = new BAV_Validator_00($bank);
         $this->validators[1]->setWeights(array(2, 1));
     }
@@ -47,7 +47,7 @@ class BAV_Validator_B5 extends BAV_Validator_Chain
     {
         if ($validator === $this->validators[1]) {
             return $this->account{0} < 8;
-        
+
         }
         return true;
     }

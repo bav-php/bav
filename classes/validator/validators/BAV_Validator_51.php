@@ -48,25 +48,25 @@ class BAV_Validator_51 extends BAV_Validator_Chain
      * @var BAV_Validator_33
      */
     $validatorD;
-    
-    
+
+
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
-        
+
         $this->defaultValidators[0] = new BAV_Validator_06($this->bank);
         $this->defaultValidators[0]->setWeights(array(2, 3, 4, 5, 6, 7));
         $this->defaultValidators[0]->setEnd(3);
-        
+
         $this->defaultValidators[1] = new BAV_Validator_33($this->bank);
         $this->defaultValidators[1]->setWeights(array(2, 3, 4, 5, 6));
         $this->defaultValidators[1]->setEnd(4);
-        
+
         $this->defaultValidators[2] = new BAV_Validator_00($this->bank);
         $this->defaultValidators[2]->setWeights(array(2, 1));
         $this->defaultValidators[2]->setEnd(3);
         $this->defaultValidators[2]->setDivisor(10);
-        
+
         $this->validatorD = new BAV_Validator_33($this->bank);
         $this->defaultValidators[3] = $this->validatorD;
         $this->defaultValidators[3]->setWeights(array(2, 3, 4, 5, 6));
@@ -75,8 +75,8 @@ class BAV_Validator_51 extends BAV_Validator_Chain
 
         $this->exceptionValidators = self::getExceptionValidators($bank);
     }
-    
-    
+
+
     /**
      * @return array
      */
@@ -85,10 +85,10 @@ class BAV_Validator_51 extends BAV_Validator_Chain
         $exceptionValidators = array();
         $exceptionValidators[] = new BAV_Validator_51x($bank);
         $exceptionValidators[] = new BAV_Validator_51x($bank);
-            
+
         $exceptionValidators[1]->setWeights(array(2, 3, 4, 5, 6, 7, 8, 9, 10));
         $exceptionValidators[1]->setEnd(0);
-        
+
         return $exceptionValidators;
     }
 
@@ -98,26 +98,26 @@ class BAV_Validator_51 extends BAV_Validator_Chain
     protected function init($account)
     {
         parent::init($account);
-        
+
         $this->validators = $this->account{2} == 9
                           ? $this->exceptionValidators
                           : $this->defaultValidators;
     }
-    
-    
+
+
     protected function continueValidation(BAV_Validator $validator)
     {
         if ($validator !== $this->validatorD) {
             return true;
-        
+
         }
         switch ($this->account{9}) {
             case 7: case 8: case 9:
                 return false;
-        
+
             default:
                 return true;
-        
+
         }
     }
 

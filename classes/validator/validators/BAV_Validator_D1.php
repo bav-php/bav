@@ -48,7 +48,7 @@ class BAV_Validator_D1 extends BAV_Validator
         9 => 4363389
     );
 
-    
+
     protected
     /**
      * @var String
@@ -58,12 +58,12 @@ class BAV_Validator_D1 extends BAV_Validator
      * @var BAV_Validator_00
      */
     $validator;
-    
-    
+
+
     public function __construct(BAV_Bank $bank)
     {
         parent::__construct($bank);
-        
+
         $this->validator = new BAV_Validator_00($bank);
     }
 
@@ -77,17 +77,17 @@ class BAV_Validator_D1 extends BAV_Validator
         }
         $transformationPrefix = self::$_transformation[$transformationIndex];
         $this->validator->setNormalizedSize(10 + strlen($transformationPrefix));
-        $this->transformedAccount 
+        $this->transformedAccount
             = $transformationPrefix . substr($this->account, 1);
     }
-    
-    
+
+
     /**
      * @return bool
      */
     protected function getResult()
     {
-        return 
+        return
             array_key_exists(
                 $this->_getTransformationIndex(),
                 self::$_transformation
@@ -104,6 +104,6 @@ class BAV_Validator_D1 extends BAV_Validator
     {
         return $this->account{0};
     }
-    
+
 
 }

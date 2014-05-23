@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * BAV is the super class of the Bank Account Validator project.
@@ -39,10 +39,10 @@ abstract class BAV
     {
         try {
             self::setEncoding('UTF-8');
-            
+
         } catch (BAV_EncodingException_Unsupported $e) {
             self::setEncoding('ISO-8859-15');
-        
+
         }
     }
 
