@@ -1,9 +1,5 @@
 <?php 
 
-
-
-
-
 /**
  * BAV is the super class of the Bank Account Validator project.
  * Every class will inherit this. The main purpose of this class is
@@ -34,13 +30,10 @@
 abstract class BAV
 {
 
-
-    protected static
     /**
      * @var BAV_Encoding
      */
-    $encoding;
-
+    protected static $encoding;
 
     public static function classConstructor()
     {
@@ -52,6 +45,7 @@ abstract class BAV
         
         }
     }
+
     /**
      * If you want to use another encoding
      *
@@ -65,23 +59,47 @@ abstract class BAV
                         ? $encoding
                         : BAV_Encoding::getInstance($encoding);
     }
+
     /**
      * @return BAV_Version version of BAV
      */
-    public static function get_bav_version()
+    public static function getVersion()
     {
         return new BAV_Version('0.28');
     }
+
+    /**
+     * @return BAV_Version version of BAV
+     * @deprecated 0.28
+     * @see getVersion()
+     */
+    public static function get_bav_version()
+    {
+        trigger_error("use getVersion()", E_USER_DEPRECATED);
+        return self::getVersion();
+    }
+
     /**
      * Returns the version of the API. Note that different BAV versions
      * may have the same API version.
      *
      * @return BAV_Version version of BAV's API
      */
-    public static function get_bav_api_version()
+    public static function getApiVersion()
     {
-        return new BAV_Version('2.4');
+        return new BAV_Version('2.5');
     }
 
-
+    /**
+     * Returns the version of the API. Note that different BAV versions
+     * may have the same API version.
+     *
+     * @deprecated 0.28
+     * @return BAV_Version version of BAV's API
+     */
+    public static function get_bav_api_version()
+    {
+        trigger_error("use getApiVersion()", E_USER_DEPRECATED);
+        return self::getApiVersion();
+    }
 }
