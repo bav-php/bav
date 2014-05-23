@@ -1,3 +1,10 @@
+Version 0.28 - not yet released
+-------------------------------
+    - added Composer support
+
+    - added scripts for installing and updating the bundesbank file.
+
+
 Version 0.27 - May 22, 2014
 ---------------------------
     - replaced the autoloader with http://php-autoloader.malkusch.de
