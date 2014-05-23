@@ -1,7 +1,5 @@
 <?php
 
-
-
 /**
  * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
@@ -28,13 +26,10 @@
 class BAV_FileParserException_FileNotExists extends BAV_FileParserException
 {
 
-
-    private
     /**
      * @var string
      */
-    $parsedFile = '';
-
+    private $parsedFile = '';
 
     /**
      * @param string $file
@@ -43,6 +38,7 @@ class BAV_FileParserException_FileNotExists extends BAV_FileParserException
     {
         $this->parsedFile = $parsedFile;
     }
+
     /**
      * @return string
      */
@@ -50,8 +46,4 @@ class BAV_FileParserException_FileNotExists extends BAV_FileParserException
     {
         return $this->parsedFile;
     }
-
-
 }
-
-
