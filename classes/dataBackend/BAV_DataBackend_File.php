@@ -422,12 +422,12 @@ class BAV_DataBackend_File extends BAV_DataBackend
     }
 
     /**
-     * @see BAV_DataBackend::getAgencies()
+     * @see BAV_DataBackend::getAgenciesForBank()
      * @throws BAV_DataBackendException_IO
      * @throws BAV_DataBackendException
      * @return array
      */
-    public function getAgencies(BAV_Bank $bank)
+    public function getAgenciesForBank(BAV_Bank $bank)
     {
         try {
             $context = $this->defineContextInterval($bank->getBankID());

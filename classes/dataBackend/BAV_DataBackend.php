@@ -6,7 +6,7 @@
  * you have to implement these methods:
  *
  * install(), update(), uninstall(), getNewBank(), getAllBanks(), getMainAgency(),
- * getAgencies()
+ * getAgenciesForBank()
  *
  * When you use this class you should create only one object. The BAV_DataBackend
  * is designed to keep all created BAV_Bank objects in an array. So you won't get
@@ -150,5 +150,5 @@ abstract class BAV_DataBackend extends BAV
      * @return array
      * @internal YOU SHOULD NOT CALL THIS METHOD! Use BAV_Bank->getMainAgency()
      */
-    abstract public function getAgencies(BAV_Bank $bank);
+    abstract public function getAgenciesForBank(BAV_Bank $bank);
 }

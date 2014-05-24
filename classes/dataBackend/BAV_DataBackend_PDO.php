@@ -483,9 +483,9 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
     /**
      * @throws BAV_DataBackendException
      * @return array
-     * @see BAV_DataBackend::getAgencies()
+     * @see BAV_DataBackend::getAgenciesForBank()
      */
-    public function getAgencies(BAV_Bank $bank)
+    public function getAgenciesForBank(BAV_Bank $bank)
     {
         try {
             $this->prepareStatements();
