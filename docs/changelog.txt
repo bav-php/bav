@@ -4,6 +4,9 @@ Version 0.28 - not yet released
 
     - added scripts for installing and updating the bundesbank file.
 
+    - The methods _getMainAgency() and _getAgencies() in BAV_DataBackend
+      became deprecated. 
+
 
 Version 0.27 - May 22, 2014
 ---------------------------
