@@ -133,6 +133,7 @@ abstract class BAV_DataBackend extends BAV
      * method is called by BAV_Bank->getMainAgency(), if the BAV_Bank object doesn't know its
      * main agency.
      *
+     * @todo remove _getMainAgency() and make getMainAgency() abstract.
      * @throws BAV_DataBackendException
      * @return BAV_Agency
      * @see BAV_Bank::getMainAgency()
@@ -161,6 +162,7 @@ abstract class BAV_DataBackend extends BAV
      * objects. This method is called by BAV_Bank->getAgencies(), if the BAV_Bank object doesn't
      * know its agencies. A bank may have no agencies and will return an empty array.
      *
+     * @todo remove _getAgencies() and make getAgenciesForBank() abstract.
      * @throws BAV_DataBackendException
      * @see BAV_Bank::getAgencies()
      * @return array
