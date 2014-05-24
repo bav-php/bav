@@ -2,7 +2,6 @@
 
 require_once __DIR__ . "/../autoloader/autoloader.php";
 
-
 /**
  * A test for BAV_VerifyImport.
  *
@@ -51,8 +50,8 @@ class VerifyImportTest extends PHPUnit_Framework_TestCase
         $this->databack    = new BAV_DataBackend_File();
         $this->verifyArray = parse_ini_file(__DIR__.'/../data/verify.ini', true);
 
-        $this->assertType(
-            PHPUnit_Framework_Constraint_IsType::TYPE_ARRAY,
+        $this->assertInternalType(
+            "array",
             $this->verifyArray,
             "Could not parse verify.ini"
         );
@@ -105,8 +104,8 @@ class VerifyImportTest extends PHPUnit_Framework_TestCase
         $checkArray = parse_ini_file($file, true);
         unlink($file);
 
-        $this->assertType(
-            PHPUnit_Framework_Constraint_IsType::TYPE_ARRAY,
+        $this->assertInternalType(
+            "array",
             $checkArray,
             "Could not parse temporary file $file."
         );
