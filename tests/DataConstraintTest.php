@@ -1,12 +1,10 @@
 <?php
-/**
- * This scripts checks if the banklist.txt fits into our model.
- */
 
 require_once __DIR__ . "/../autoloader/autoloader.php";
 
-
-DataConstraintTest::classConstructor();
+/**
+ * Test if the banklist.txt fits into the model.
+ */
 class DataConstraintTest extends PHPUnit_Framework_TestCase
 {
 
@@ -15,8 +13,9 @@ class DataConstraintTest extends PHPUnit_Framework_TestCase
      */
     private static $pdo;
 
-    public static function classConstructor()
+    public static function setUpBeforeClass()
     {
+
         self::$pdo = new PDO('mysql:host=localhost;dbname=test', 'test');
         self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
