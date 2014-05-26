@@ -1,5 +1,5 @@
-Version 0.28 - not yet released
--------------------------------
+Version 0.28 - May 26, 2014
+---------------------------
     - added Composer support
 
     - added scripts for installing and updating the bundesbank file.

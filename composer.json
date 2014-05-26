@@ -13,10 +13,6 @@
             "role": "Developer"
         }
     ],
-    "support": {
-        "issues": "https://github.com/malkusch/bav/issues",
-        "source": "https://github.com/malkusch/bav"
-    },
     "autoload": {
         "files": ["autoloader/autoloader.php"]
     },
@@ -40,4 +36,3 @@
 	    "bin/bav-install.php"
     ]
 }
-
