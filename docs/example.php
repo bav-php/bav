@@ -28,6 +28,11 @@
  * @see BAV_Agency
  */
 
+/**
+ * Namespace comes slowly. In a future release you'll find all classes
+ * in the namespace malkusch\bav.
+ */
+use malkusch\bav\ConfigurationRegistry;
 
 /**
  * We need to require the autoloader
@@ -36,21 +41,13 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
 
 
 /**
- * Now we have to decide which data backend we'll use.
- *
- * BAV_DataBackend_File:
- *  $databack = new BAV_DataBackend_File();
- *
- * or BAV_DataBackend_PDO:
- *  $databack = new BAV_DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
- *
- * In this example we take BAV_DataBackend_File:
+ * Inject the configured BAV_DataBackend. Default is BAV_DataBackend_File
  */
-$databack = new BAV_DataBackend_File();
+$databack = ConfigurationRegistry::getConfiguration()->getDatabackend();
 
 
 /**
- * As this is our first time we use it. We have to install the data structure.
+ * If you didn't call bin/bav-install.php you can install the backend programmatically.
  * This should only be called once for installation. For future use you should
  * skip this step.
  */
@@ -64,7 +61,7 @@ try {
 
 /**
  * If you want to update your installed data structure to a new Bundesbank file
- * you have to call update():
+ * you have to call update() or use the script bin/bav-update.php:
  *
  *  $databack->update();
  *

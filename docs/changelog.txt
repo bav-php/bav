@@ -5,7 +5,9 @@ Version 0.28 - not yet released
     - added scripts for installing and updating the bundesbank file.
 
     - The methods _getMainAgency() and _getAgencies() in BAV_DataBackend
-      became deprecated. 
+      became deprecated.
+
+    - added Configuration container for BAV_Encoding and BAV_DataBackend.
 
 
 Version 0.27 - May 22, 2014
@@ -21,6 +23,7 @@ Version 0.27 - May 22, 2014
     - changed Validators: C6, D1, 51, 57, 66, 84, 90, 95
 
     - added validators E0, E1
+
 
 Version 0.26 - June 3, 2012
 ---------------------------
