@@ -527,4 +527,14 @@ class BAV_DataBackend_File extends BAV_DataBackend
         }
         return $time;
     }
+
+    /**
+     * Returns true if the backend was installed.
+     *
+     * @return bool
+     */
+    public function isInstalled()
+    {
+        return file_exists($this->parser->getFile());
+    }
 }

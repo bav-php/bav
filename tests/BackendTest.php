@@ -8,7 +8,6 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
  *
  * @license GPL
  * @author Markus Malkusch <markus@malkusch.de>
- * @copyright Copyright (C) 2009 Markus Malkusch
  */
 class BackendTest extends PHPUnit_Framework_TestCase
 {
@@ -100,6 +99,18 @@ class BackendTest extends PHPUnit_Framework_TestCase
         $backend->install();
         $backend->update();
         $backend->uninstall();
+    }
+
+    /**
+     * @dataProvider provideInstallationBackends
+     */
+    public function testIsInstalled(BAV_DataBackend $backend)
+    {
+        $backend->install();
+        $this->assertTrue($backend->isInstalled());
+
+        $backend->uninstall();
+        $this->assertFalse($backend->isInstalled());
     }
 
     /**

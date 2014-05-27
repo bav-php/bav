@@ -1,6 +1,8 @@
 Version 1.0.0 - not yet released
 --------------------------------
     - added BAV_DataBackend::getLastUpdate()
+    
+    - added BAV_DataBackend::isInstalled()
 
 
 Version 0.28 - May 26, 2014

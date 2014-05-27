@@ -68,6 +68,14 @@ abstract class BAV_DataBackend extends BAV
     abstract public function install();
 
     /**
+     * Returns true if the backend was installed.
+     *
+     * @return bool
+     * @throws BAV_DataBackendException
+     */
+    abstract public function isInstalled();
+
+    /**
      * Returns the timestamp of the last update.
      *
      * @return int timestamp

@@ -46,6 +46,11 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
     private $selectMeta;
 
     /**
+     * @var PDOStatement
+     */
+    private $selectInstalled;
+
+    /**
      * @var PDO
      */
     private $pdo;
@@ -171,6 +176,11 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
         $this->selectMeta = $this->pdo->prepare(
             "SELECT value FROM {$this->prefix}meta
                 WHERE name = :name"
+        );
+        $this->selectInstalled = $this->pdo->prepare(
+            "SELECT CASE WHEN EXISTS(
+                (SELECT * FROM information_schema.tables WHERE table_name='{$this->prefix}meta')
+            ) THEN 1 ELSE 0 END"
         );
     }
 
@@ -555,6 +565,32 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
 
         } catch (PDOException $e) {
             $this->selectMeta->closeCursor();
+            throw new BAV_DataBackendException_IO($e->getMessage(), $e->getCode(), $e);
+
+        }
+    }
+
+    /**
+     * Returns true if the backend was installed.
+     *
+     * @return bool
+     * @throws BAV_DataBackendException
+     */
+    public function isInstalled()
+    {
+        try {
+            $this->prepareStatements();
+            $this->selectInstalled->execute();
+            $result = $this->selectInstalled->fetch();
+            if ($result === false) {
+                throw new BAV_DataBackendException();
+
+            }
+            $this->selectInstalled->closeCursor();
+            return $result[0] == 1;
+
+        } catch (PDOException $e) {
+            $this->selectInstalled->closeCursor();
             throw new BAV_DataBackendException_IO($e->getMessage(), $e->getCode(), $e);
 
         }
