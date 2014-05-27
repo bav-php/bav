@@ -52,7 +52,7 @@ abstract class BAV
      */
     public static function getVersion()
     {
-        return new BAV_Version('0.28');
+        return new BAV_Version('1.0.0');
     }
 
     /**
@@ -74,7 +74,7 @@ abstract class BAV
      */
     public static function getApiVersion()
     {
-        return new BAV_Version('2.5');
+        return new BAV_Version('2.6');
     }
 
     /**

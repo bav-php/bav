@@ -4,28 +4,8 @@
  * Use any DBS as backend. In addition to the BAV_DataBackend methods you
  * may use getAgencies($sql) which returns an array of BAV_Agency objects.
  *
- *
- * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- *
- *
- * @package classes
- * @subpackage dataBackend
  * @author Markus Malkusch <markus@malkusch.de>
- * @copyright Copyright (C) 2006 Markus Malkusch
+ * @license GPL
  */
 class BAV_DataBackend_PDO extends BAV_DataBackend
 {
@@ -61,6 +41,11 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
     private $selectAgencysBank;
 
     /**
+     * @var PDOStatement
+     */
+    private $selectMeta;
+
+    /**
      * @var PDO
      */
     private $pdo;
@@ -69,6 +54,11 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
      * @var string
      */
     private $prefix = '';
+
+    /**
+     * @var string last modification name
+     */
+    const META_MODIFICATION = "lastModified";
 
     /**
      * @param String $prefix the prefix of the table names. Default is 'bav_'.
@@ -178,6 +168,10 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
             "SELECT bank FROM {$this->prefix}agency
                 WHERE id = :agency"
         );
+        $this->selectMeta = $this->pdo->prepare(
+            "SELECT value FROM {$this->prefix}meta
+                WHERE name = :name"
+        );
     }
 
     /**
@@ -241,6 +235,17 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
 
                 }
             }
+
+            // Update modification timestamp
+            $modificationStmt = $this->pdo->prepare(
+                "UPDATE {$this->prefix}meta SET value=:value WHERE name=:name"
+            );
+            $modificationStmt->execute(array(
+                ":name"  => self::META_MODIFICATION,
+                ":value" => time()
+            ));
+
+
             if ($useTA) {
                 $this->pdo->commit();
                 $useTA = false;
@@ -304,6 +309,21 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
                     FOREIGN KEY (bank) REFERENCES {$this->prefix}bank(id)
                 )$createOptions"
             );
+            $this->pdo->exec(
+                "CREATE TABLE {$this->prefix}meta(
+                    name   char(32) NOT NULL primary key,
+                    value  varchar(128)
+                )$createOptions"
+            );
+            $insertMetaStmt = $this->pdo->prepare(
+                "INSERT INTO {$this->prefix}meta
+                    SET name  = :name,
+                        value = :value"
+            );
+            $insertMetaStmt->execute(array(
+                ":name" => self::META_MODIFICATION,
+                ":value" => null
+            ));
             $this->update();
 
         } catch (PDOException $e) {
@@ -319,8 +339,9 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
     public function uninstall()
     {
         try {
-            $this->pdo->exec("DROP TABLE {$this->prefix}bank");
             $this->pdo->exec("DROP TABLE {$this->prefix}agency");
+            $this->pdo->exec("DROP TABLE {$this->prefix}bank");
+            $this->pdo->exec("DROP TABLE {$this->prefix}meta");
 
         } catch (PDOException $e) {
             throw new BAV_DataBackendException_IO();
@@ -507,6 +528,34 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
         } catch (BAV_DataBackendException_IO_MissingAttributes $e) {
             $this->selectAgencies->closeCursor();
             throw new LogicException($e);
+
+        }
+    }
+
+    /**
+     * Returns the timestamp of the last update.
+     *
+     * @return int timestamp
+     * @throws BAV_DataBackendException
+     */
+    public function getLastUpdate()
+    {
+        try {
+            $this->prepareStatements();
+            $this->selectMeta->execute(array(
+                ":name" => self::META_MODIFICATION,
+            ));
+            $result = $this->selectMeta->fetch();
+            if ($result === false) {
+                throw new BAV_DataBackendException();
+
+            }
+            $this->selectMeta->closeCursor();
+            return $result["value"];
+
+        } catch (PDOException $e) {
+            $this->selectMeta->closeCursor();
+            throw new BAV_DataBackendException_IO($e->getMessage(), $e->getCode(), $e);
 
         }
     }

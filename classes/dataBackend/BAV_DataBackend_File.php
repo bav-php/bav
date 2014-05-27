@@ -5,23 +5,8 @@
  * This is the easiest way to use BAV. BAV can work as a standalone application without
  * any DBS.
  *
- * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- *
- * @FIXME BAV_DataBackend_File is broken as Bundesbank appends new Banks at the end of the file
+ * @author Markus Malkusch <markus@malkusch.de>
+ * @license GPL
  */
 class BAV_DataBackend_File extends BAV_DataBackend
 {
@@ -523,5 +508,23 @@ class BAV_DataBackend_File extends BAV_DataBackend
         }
 
         throw new BAV_DataBackendException_IO();
+    }
+
+    /**
+     * Returns the timestamp of the last update.
+     *
+     * @return int timestamp
+     * @throws BAV_DataBackendException
+     */
+    public function getLastUpdate()
+    {
+        $time = filemtime($this->parser->getFile());
+        if ($time === false) {
+            return new BAV_DataBackendException(
+                "Could not read modification time from {$this->parser->getFile()}"
+            );
+
+        }
+        return $time;
     }
 }

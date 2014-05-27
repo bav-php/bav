@@ -68,6 +68,14 @@ abstract class BAV_DataBackend extends BAV
     abstract public function install();
 
     /**
+     * Returns the timestamp of the last update.
+     *
+     * @return int timestamp
+     * @throws BAV_DataBackendException
+     */
+    abstract public function getLastUpdate();
+
+    /**
      * With this method you get the BAV_Bank objects for certain IDs. Note
      * that a call to this method with an identical id will return the same
      * objects.
