@@ -24,7 +24,7 @@ return $configuration;
 
 # Installation and Update
 
-Visit <http://bav.malkusch.de/> and download the latest version or use composer:
+Visit <http://bav.malkusch.de/> and download the latest version or use [Composer](https://getcomposer.org/):
 
 ```json
 {
@@ -42,7 +42,7 @@ PHP's PDO-API to connect with a DBS.
 
 If you use BAV the first time you have to create a `BAV_DataBackend` object
 (PDO or File) and call the method `install()`. In case of PDO it will create
-the tables. `install()` does also call `update()` to snychronize the first time
+the tables. `install()` does also call `update()` to synchronize the first time
 with the Bundesbank.
 You can do this with the script: `bin/bav-install.php`
 
