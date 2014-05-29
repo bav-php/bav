@@ -12,31 +12,60 @@ class Configuration
 {
 
     /**
+     * @var bool
+     */
+    private $automaticInstallation = null;
+
+    /**
      * @var BAV_Encoding
      */
-    protected $encoding;
+    private $encoding;
 
     /**
-     * @var BAV_DataBackend
+     * @var DataBackendContainer
      */
-    protected $dataBackend;
+    private $backendContainer;
 
     /**
-     * Sets the data backend.
+     * Turns automatic installation on or off.
+     * 
+     * If automatic installation is activated. The backend factory will check if it is
+     * installed and if not so install the backend.
+     * 
+     * @see BAV_DataBackend::install()
+     * @param bool $automaticInstallation Set true to turn installation on
      */
-    public function setDataBackend(\BAV_DataBackend $backend)
+    public function setAutomaticInstallation($automaticInstallation)
     {
-        $this->dataBackend = $backend;
+        $this->automaticInstallation = $automaticInstallation;
     }
 
     /**
-     * Returns the data backend.
+     * Returns true if automatic installation is activated.
      *
-     * @return BAV_DataBackend
+     * @return bool
      */
-    public function getDataBackend()
+    public function isAutomaticInstallation()
     {
-        return $this->dataBackend;
+        return $this->automaticInstallation;
+    }
+
+    /**
+     * Sets the data backend container.
+     */
+    public function setDataBackendContainer(DataBackendContainer $backendContainer)
+    {
+        $this->backendContainer = $backendContainer;
+    }
+
+    /**
+     * Returns the data backend factory.
+     *
+     * @return DataBackendContainer
+     */
+    public function getDataBackendContainer()
+    {
+        return $this->backendContainer;
     }
     
     /**

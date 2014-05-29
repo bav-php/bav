@@ -16,38 +16,6 @@ abstract class BAV
 {
 
     /**
-     * @var BAV_Encoding
-     * @deprecated 0.28
-     * @see Configuration::getEncoding()
-     */
-    protected static $encoding;
-
-    public static function classConstructor()
-    {
-        self::$encoding = ConfigurationRegistry::getConfiguration()->getEncoding();
-    }
-
-    /**
-     * If you want to use another encoding
-     *
-     * @throws BAV_EncodingException_Unsupported
-     * @param mixed $encoding
-     * @see BAV_Encoding
-     * @deprecated 0.28
-     * @see Configuration::setEncoding()
-     */
-    public static function setEncoding($encoding)
-    {
-        trigger_error("Use Configuration::setEncoding()", E_USER_DEPRECATED);
-        if (! $encoding instanceof BAV_Encoding) {
-            $encoding = BAV_Encoding::getInstance($encoding);
-
-        }
-        ConfigurationRegistry::getConfiguration()->setEncoding($encoding);
-        self::$encoding = $encoding;
-    }
-
-    /**
      * @return BAV_Version version of BAV
      */
     public static function getVersion()

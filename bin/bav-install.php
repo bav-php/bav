@@ -13,7 +13,7 @@ namespace malkusch\bav;
 require_once __DIR__ . "/../autoloader/autoloader.php";
 
 try {
-    $databack = ConfigurationRegistry::getConfiguration()->getDatabackend();
+    $databack = ConfigurationRegistry::getConfiguration()->getDatabackendContainer()->getDataBackend();
 
     $databack->install();
     echo "Bundesbank file downloaded.\n";

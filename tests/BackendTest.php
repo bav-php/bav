@@ -30,20 +30,50 @@ class BackendTest extends PHPUnit_Framework_TestCase
      */
     public function provideBackends()
     {
+        $pdoBackend = new BAV_DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
+        $this->setupBackend($pdoBackend);
+
+        $fileBackend = new BAV_DataBackend_File();
+        $this->setupBackend($fileBackend);
+
         return array(
-            array(new BAV_DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'))),
-            array(new BAV_DataBackend_File())
+            array($pdoBackend),
+            array($fileBackend)
         );
+    }
+
+    private function setupBackend(BAV_DataBackend $backend)
+    {
+        if ($backend->isInstalled()) {
+            return;
+
+        }
+        $backend->install();
     }
 
     /**
      */
     public function provideInstallationBackends()
     {
+        $pdoBackend = new BAV_DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'), 'bavtest_');
+        $this->setupInstallationBackends($pdoBackend);
+
+        $fileBackend = new BAV_DataBackend_File(tempnam(BAV_DataBackend_File::getTempdir(), 'bavtest'));
+        $this->setupInstallationBackends($fileBackend);
+
         return array(
-            array(new BAV_DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'), 'bavtest_')),
-            array(new BAV_DataBackend_File(tempnam(BAV_DataBackend_File::getTempdir(), 'bavtest')))
+            array($pdoBackend),
+            array($fileBackend)
         );
+    }
+
+    private function setupInstallationBackends(BAV_DataBackend $backend)
+    {
+        if (! $backend->isInstalled()) {
+            return;
+
+        }
+        $backend->uninstall();
     }
 
     /**

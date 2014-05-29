@@ -4,6 +4,9 @@ Version 1.0.0 - not yet released
     
     - added BAV_DataBackend::isInstalled()
 
+    - removed BAV::$encoding, BAV::setEncoding() and BAV::getEncoding()
+
+    - added support for automatic installation
 
 Version 0.28 - May 26, 2014
 ---------------------------

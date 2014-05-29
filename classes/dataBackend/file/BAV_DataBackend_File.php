@@ -535,6 +535,7 @@ class BAV_DataBackend_File extends BAV_DataBackend
      */
     public function isInstalled()
     {
-        return file_exists($this->parser->getFile());
+        return file_exists($this->parser->getFile())
+            && filesize($this->parser->getFile()) > 0;
     }
 }

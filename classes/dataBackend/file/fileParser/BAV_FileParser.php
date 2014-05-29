@@ -1,5 +1,7 @@
 <?php
 
+use malkusch\bav\ConfigurationRegistry;
+
 /**
  * This class is responsable for I/O and formating which helps the BAV_DataBackend_File.
  *
@@ -72,6 +74,11 @@ class BAV_FileParser extends BAV
     private $lineLength = 0;
 
     /**
+     * @var BAV_Encoding
+     */
+    private $encoding;
+
+    /**
      * @param String $file The data source
      */
     public function __construct($file = null)
@@ -80,10 +87,13 @@ class BAV_FileParser extends BAV
             __DIR__ . DIRECTORY_SEPARATOR . ".."
             . DIRECTORY_SEPARATOR . ".."
             . DIRECTORY_SEPARATOR . ".."
+            . DIRECTORY_SEPARATOR . ".."
             . DIRECTORY_SEPARATOR . "data"
             . DIRECTORY_SEPARATOR . "banklist.txt";
 
         $this->file = is_null($file) ? $defaultFile: $file;
+
+        $this->encoding = ConfigurationRegistry::getConfiguration()->getEncoding();
     }
 
     /**
@@ -173,7 +183,7 @@ class BAV_FileParser extends BAV
     public function readLine($line)
     {
         $this->seekLine($line);
-        return self::$encoding->convert(fread($this->getFileHandle(), $this->lineLength), self::FILE_ENCODING);
+        return $this->encoding->convert(fread($this->getFileHandle(), $this->lineLength), self::FILE_ENCODING);
     }
 
     /**
@@ -185,7 +195,7 @@ class BAV_FileParser extends BAV
     public function getBankID($line)
     {
         $this->seekLine($line, self::BANKID_OFFSET);
-        return self::$encoding->convert(fread($this->getFileHandle(), self::BANKID_LENGTH), self::FILE_ENCODING);
+        return $this->encoding->convert(fread($this->getFileHandle(), self::BANKID_LENGTH), self::FILE_ENCODING);
     }
 
     /**
@@ -227,12 +237,12 @@ class BAV_FileParser extends BAV
      */
     public function getBank(BAV_DataBackend $dataBackend, $line)
     {
-        if (self::$encoding->strlen($line) < self::TYPE_OFFSET + self::TYPE_LENGTH) {
+        if ($this->encoding->strlen($line) < self::TYPE_OFFSET + self::TYPE_LENGTH) {
             throw new BAV_FileParserException_ParseError("Invalid line length in Line $line.");
 
         }
-        $type   = self::$encoding->substr($line, self::TYPE_OFFSET, self::TYPE_LENGTH);
-        $bankID = self::$encoding->substr($line, self::BANKID_OFFSET, self::BANKID_LENGTH);
+        $type   = $this->encoding->substr($line, self::TYPE_OFFSET, self::TYPE_LENGTH);
+        $bankID = $this->encoding->substr($line, self::BANKID_OFFSET, self::BANKID_LENGTH);
         return new BAV_Bank($dataBackend, $bankID, $type);
     }
 
@@ -243,17 +253,17 @@ class BAV_FileParser extends BAV
      */
     public function getAgency(BAV_Bank $bank, $line)
     {
-        if (self::$encoding->strlen($line) < self::ID_OFFSET + self::ID_LENGTH) {
+        if ($this->encoding->strlen($line) < self::ID_OFFSET + self::ID_LENGTH) {
             throw new BAV_FileParserException_ParseError("Invalid line length.");
 
         }
-        $id   = trim(self::$encoding->substr($line, self::ID_OFFSET, self::ID_LENGTH));
-        $name = trim(self::$encoding->substr($line, self::NAME_OFFSET, self::NAME_LENGTH));
-        $shortTerm = trim(self::$encoding->substr($line, self::SHORTTERM_OFFSET, self::SHORTTERM_LENGTH));
-        $city = trim(self::$encoding->substr($line, self::CITY_OFFSET, self::CITY_LENGTH));
-        $postcode = self::$encoding->substr($line, self::POSTCODE_OFFSET, self::POSTCODE_LENGTH);
-        $bic = trim(self::$encoding->substr($line, self::BIC_OFFSET, self::BIC_LENGTH));
-        $pan = trim(self::$encoding->substr($line, self::PAN_OFFSET, self::PAN_LENGTH));
+        $id   = trim($this->encoding->substr($line, self::ID_OFFSET, self::ID_LENGTH));
+        $name = trim($this->encoding->substr($line, self::NAME_OFFSET, self::NAME_LENGTH));
+        $shortTerm = trim($this->encoding->substr($line, self::SHORTTERM_OFFSET, self::SHORTTERM_LENGTH));
+        $city = trim($this->encoding->substr($line, self::CITY_OFFSET, self::CITY_LENGTH));
+        $postcode = $this->encoding->substr($line, self::POSTCODE_OFFSET, self::POSTCODE_LENGTH);
+        $bic = trim($this->encoding->substr($line, self::BIC_OFFSET, self::BIC_LENGTH));
+        $pan = trim($this->encoding->substr($line, self::PAN_OFFSET, self::PAN_LENGTH));
         return new BAV_Agency($id, $bank, $name, $shortTerm, $city, $postcode, $bic, $pan);
     }
 
@@ -264,11 +274,11 @@ class BAV_FileParser extends BAV
      */
     public function isMainAgency($line)
     {
-        if (self::$encoding->strlen($line) < self::TYPE_OFFSET + self::TYPE_LENGTH) {
+        if ($this->encoding->strlen($line) < self::TYPE_OFFSET + self::TYPE_LENGTH) {
             throw new BAV_FileParserException_ParseError("Invalid line length.");
 
         }
-        return self::$encoding->substr($line, self::ISMAIN_OFFSET, 1) === '1';
+        return $this->encoding->substr($line, self::ISMAIN_OFFSET, 1) === '1';
     }
 
     /**

@@ -66,9 +66,9 @@ class BAV_DataBackend_PDO extends BAV_DataBackend
     const META_MODIFICATION = "lastModified";
 
     /**
-     * @param String $prefix the prefix of the table names. Default is 'bav_'.
+     * @param String $prefix the prefix of the table names.
      */
-    public function __construct(PDO $pdo, $prefix = 'bav_')
+    public function __construct(PDO $pdo, $prefix = "bav_")
     {
         $this->pdo    = $pdo;
         $this->prefix = $prefix;
