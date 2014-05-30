@@ -7,13 +7,16 @@ php:
 
 env: PDO_DSN="mysql:host=localhost;dbname=bav" PDO_USER=travis
 
+install:
+    - pyrus install pear/PHP_CodeSniffer
+    - phpenv rehash
+
 before_script:
     - composer --prefer-source --dev install
     - mysql -e 'create database bav;'
     - php tests/bin/test-install.php
 
 script:
-    - phpunit tests/ValidatorTest.php
-    - phpunit tests/UpdatePlanTest.php
     - phpunit tests/BAVFacadeTest.php
     - phpunit tests/AgencyQueryTest.php
+    - phpcs --standard=PSR2 classes/ bin/ docs/example.php tests/classes/ tests/bin/
