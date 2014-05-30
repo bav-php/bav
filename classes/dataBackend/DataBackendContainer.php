@@ -3,17 +3,17 @@
 namespace malkusch\bav;
 
 /**
- * Container for BAV_DataBackend objects.
+ * Container for DataBackend objects.
  * 
  * @author Markus Malkusch <markus@malkusch.de>
  * @license GPL
- * @see BAV_DataBackend
+ * @see DataBackend
  */
 abstract class DataBackendContainer
 {
 
     /**
-     * @var BAV_DataBackend
+     * @var DataBackend
      */
     private $backend;
 
@@ -21,7 +21,7 @@ abstract class DataBackendContainer
      * Returns the unconfigured backend which is only created by calling the
      * constructor.
      *
-     * @return BAV_DataBackend
+     * @return DataBackend
      */
     abstract protected function makeDataBackend();
 
@@ -31,8 +31,8 @@ abstract class DataBackendContainer
      * If configured this method would automatically install the backend. I.e. a first
      * call will take some amount of time.
      * 
-     * @return BAV_DataBackend
-     * @throws BAV_DataBackendException
+     * @return DataBackend
+     * @throws DataBackendException
      */
     private function buildDataBackend()
     {
@@ -55,7 +55,7 @@ abstract class DataBackendContainer
     /**
      * Shut down hook for applying the update plan.
      */
-    public function applyUpdatePlan(\BAV_DataBackend $backend)
+    public function applyUpdatePlan(\DataBackend $backend)
     {
         $plan = ConfigurationRegistry::getConfiguration()->getUpdatePlan();
         if ($plan != null && $plan->isOutdated($backend)) {
@@ -71,8 +71,8 @@ abstract class DataBackendContainer
      * some calls might take longer.
      *
      * @see Configuration::setAutomaticInstallation()
-     * @see BAV_DataBackend::install()
-     * @return BAV_DataBackend
+     * @see DataBackend::install()
+     * @return DataBackend
      */
     public function getDataBackend()
     {

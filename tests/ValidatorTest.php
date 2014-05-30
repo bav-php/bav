@@ -30,7 +30,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var BAV_DataBackend
+     * @var DataBackend
      */
     private static $dataBackend;
 
@@ -45,8 +45,8 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     private static $knownBanks = array();
 
     /**
-     * @throws BAV_FileParserException_IO
-     * @throws BAV_FileParserException_FileNotExists
+     * @throws FileParserException_IO
+     * @throws FileParserException_FileNotExists
      */
     protected function setUp()
     {
@@ -54,8 +54,8 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
             return;
 
         }
-        #self::$dataBackend = new BAV_DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
-        self::$dataBackend = new BAV_DataBackend_File();
+        #self::$dataBackend = new DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
+        self::$dataBackend = new DataBackend_File();
 
 
         foreach (self::$dataBackend->getAllBanks() as $bank) {
@@ -72,16 +72,16 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $this->setUp();
 
         $banks = array();
-        $files = BAV_ClassFile::getClassFiles(__DIR__.'/../classes/validator/validators/');
+        $files = ClassFile::getClassFiles(__DIR__.'/../classes/validator/validators/');
         foreach ($files as $class) {
-            if (! preg_match('~^BAV_Validator_([A-Z0-9]{2})$~', $class->getName(), $matchType)) {
+            if (! preg_match('~^Validator_([A-Z0-9]{2})$~', $class->getName(), $matchType)) {
                 continue;
 
             }
             $validatorType = $matchType[1];
             $bank = array_key_exists($validatorType, self::$knownBanks)
                   ? self::$knownBanks[$validatorType]
-                  : new BAV_Bank(self::$dataBackend, 12345678, $validatorType);
+                  : new Bank(self::$dataBackend, 12345678, $validatorType);
 
             $banks[] = array($bank);
             self::$implementedBanks[$validatorType] = $bank;
@@ -111,11 +111,11 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      * and fills {@link $implementedBanks}.
      *
      * @param String $validatorType
-     * @throws BAV_ClassFileException_IO
-     * @throws BAV_ClassFileException_MissingClass
+     * @throws ClassFileException_IO
+     * @throws ClassFileException_MissingClass
      * @dataProvider provideBanks
      */
-    public function testFindParseErrors(BAV_Bank $bank)
+    public function testFindParseErrors(Bank $bank)
     {
         /**
          * testing 10 random bank accounts
@@ -130,11 +130,11 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      * 0 - 0000000000 should always be invalid
      *
      * @param String $validatorType
-     * @throws BAV_ClassFileException_IO
-     * @throws BAV_ClassFileException_MissingClass
+     * @throws ClassFileException_IO
+     * @throws ClassFileException_MissingClass
      * @dataProvider provideBanks
      */
-    public function testNullIsInvalid(BAV_Bank $bank)
+    public function testNullIsInvalid(Bank $bank)
     {
         for ($length = 0; $length <= 10; $length++) {
             $account = str_pad("0", $length, "0", STR_PAD_LEFT);
@@ -150,11 +150,11 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      * Short accounts should not raise exception.
      *
      * @param int $account
-     * @throws BAV_ClassFileException_IO
-     * @throws BAV_ClassFileException_MissingClass
+     * @throws ClassFileException_IO
+     * @throws ClassFileException_MissingClass
      * @dataProvider provideAccountsAndBanksInAllLengths
      */
-    public function testAccountLength(BAV_Bank $bank, $account)
+    public function testAccountLength(Bank $bank, $account)
     {
         $bank->isValid($account);
     }
@@ -208,29 +208,29 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
             try {
                 $bank = self::$dataBackend->getBank($typeOrBankID);
 
-            } catch (BAV_DataBackendException_BankNotFound $e) {
+            } catch (DataBackendException_BankNotFound $e) {
                 switch ($e->getBankID()) {
 
                     case '13051052':
                     case '13051172':
                     case '81053132':
-                        $bank = new BAV_Bank(self::$dataBackend, $e->getBankID(), '52');
+                        $bank = new Bank(self::$dataBackend, $e->getBankID(), '52');
                         break;
 
                     case '16052072':
                     case '85055142':
-                        $bank = new BAV_Bank(self::$dataBackend, $e->getBankID(), '53');
+                        $bank = new Bank(self::$dataBackend, $e->getBankID(), '53');
                         break;
 
                     case '80053762':
                     case '80053772':
                     case '80053782':
-                        $bank = new BAV_Bank(self::$dataBackend, $e->getBankID(), 'B6');
+                        $bank = new Bank(self::$dataBackend, $e->getBankID(), 'B6');
                         break;
 
                     case '81053272':
                     case '86055462':
-                        $bank = new BAV_Bank(self::$dataBackend, $e->getBankID(), 'C0');
+                        $bank = new Bank(self::$dataBackend, $e->getBankID(), 'C0');
                         break;
 
                     default:

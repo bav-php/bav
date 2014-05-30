@@ -27,7 +27,7 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
-class BAV_CheckAgainstTestAPIs
+class CheckAgainstTestAPIs
 {
 
     const VALID            = 1;
@@ -65,16 +65,16 @@ class BAV_CheckAgainstTestAPIs
     {
         $ktoblzcheckPath = __DIR__ . "/../tmp/ktoblzcheck/ktoblzcheck-1.21/src";
 
-        $this->testAPIs[] = new BAV_TestAPI_BAV();
-        $this->testAPIs[] = new BAV_TestAPI_Kontocheck('/etc/blz.lut', 2);
-        $this->testAPIs[] = new BAV_TestAPI_Ktoblzcheck(
+        $this->testAPIs[] = new TestAPI_BAV();
+        $this->testAPIs[] = new TestAPI_Kontocheck('/etc/blz.lut', 2);
+        $this->testAPIs[] = new TestAPI_Ktoblzcheck(
             "$ktoblzcheckPath/bankdata/bankdata.txt",
             "$ktoblzcheckPath/bin/ktoblzcheck"
         );
 
 
-        #$backend = new BAV_DataBackend_File();
-        $backend = new BAV_DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
+        #$backend = new DataBackend_File();
+        $backend = new DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
 
 
         if (! empty($GLOBALS['argv'][1])) {
@@ -120,7 +120,7 @@ class BAV_CheckAgainstTestAPIs
         foreach ($backend->getAllBanks() as $bank) {
             try {
                 if (array_key_exists($bank->getValidationType(), $this->testedValidators)
-                     && ! $bank->getValidator() instanceof BAV_Validator_BankDependent) {
+                     && ! $bank->getValidator() instanceof Validator_BankDependent) {
 
                      continue;
 
@@ -140,14 +140,14 @@ class BAV_CheckAgainstTestAPIs
 
                 $this->testedValidators[$bank->getValidationType()] = true;
 
-            } catch (BAV_TestAPIException_Validation_BankNotFound $e) {
+            } catch (TestAPIException_Validation_BankNotFound $e) {
                 continue;
 
             }
         }
     }
 
-    private function testAccount(BAV_Bank $bank, $account)
+    private function testAccount(Bank $bank, $account)
     {
         $results = array();
         $resultValues = array();
@@ -165,9 +165,9 @@ class BAV_CheckAgainstTestAPIs
 
 
         $resultTranslation = array(
-            BAV_TestAPIResult::VALID   => "valid",
-            BAV_TestAPIResult::INVALID => "invalid",
-            BAV_TestAPIResult::ERROR   => "error"
+            TestAPIResult::VALID   => "valid",
+            TestAPIResult::INVALID => "invalid",
+            TestAPIResult::ERROR   => "error"
         );
 
         echo "{$bank->getBankID()}/{$bank->getValidationType()}\t",
@@ -176,7 +176,7 @@ class BAV_CheckAgainstTestAPIs
         foreach ($results as $result) {
             echo "{$result->getTestAPI()->getName()}: ",
                  str_pad($resultTranslation[$result->getResult()], 8);
-            if ($result instanceof BAV_TestAPIResult_Error) {
+            if ($result instanceof TestAPIResult_Error) {
                 echo " {$result->getMessage()}";
 
             }
@@ -189,4 +189,4 @@ class BAV_CheckAgainstTestAPIs
     }
 }
 
-new BAV_CheckAgainstTestAPIs();
+new CheckAgainstTestAPIs();

@@ -25,5 +25,5 @@ return array(
     'verifyimporttest' => '../tests/VerifyImportTest.php',
     'dataconstrainttest' => '../tests/DataConstraintTest.php',
     'malkusch\bav\backendcontainertest' => '../tests/BackendContainerTest.php',
-    'bav_checkagainsttestapis' => '../tests/checkAgainstTestAPIs.php',
+    'checkagainsttestapis' => '../tests/checkAgainstTestAPIs.php',
 );

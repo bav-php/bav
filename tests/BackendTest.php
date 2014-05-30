@@ -13,7 +13,7 @@ class BackendTest extends PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var BAV_DataBackend_File
+     * @var DataBackend_File
      */
     private static $referenceBackend;
 
@@ -22,7 +22,7 @@ class BackendTest extends PHPUnit_Framework_TestCase
      */
     public static function classConstructor()
     {
-        self::$referenceBackend = new BAV_DataBackend_File();
+        self::$referenceBackend = new DataBackend_File();
     }
 
     /**
@@ -30,10 +30,10 @@ class BackendTest extends PHPUnit_Framework_TestCase
      */
     public function provideBackends()
     {
-        $pdoBackend = new BAV_DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
+        $pdoBackend = new DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
         $this->setupBackend($pdoBackend);
 
-        $fileBackend = new BAV_DataBackend_File();
+        $fileBackend = new DataBackend_File();
         $this->setupBackend($fileBackend);
 
         return array(
@@ -42,7 +42,7 @@ class BackendTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    private function setupBackend(BAV_DataBackend $backend)
+    private function setupBackend(DataBackend $backend)
     {
         if ($backend->isInstalled()) {
             return;
@@ -55,10 +55,10 @@ class BackendTest extends PHPUnit_Framework_TestCase
      */
     public function provideInstallationBackends()
     {
-        $pdoBackend = new BAV_DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'), 'bavtest_');
+        $pdoBackend = new DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'), 'bavtest_');
         $this->setupInstallationBackends($pdoBackend);
 
-        $fileBackend = new BAV_DataBackend_File(tempnam(BAV_DataBackend_File::getTempdir(), 'bavtest'));
+        $fileBackend = new DataBackend_File(tempnam(DataBackend_File::getTempdir(), 'bavtest'));
         $this->setupInstallationBackends($fileBackend);
 
         return array(
@@ -67,7 +67,7 @@ class BackendTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    private function setupInstallationBackends(BAV_DataBackend $backend)
+    private function setupInstallationBackends(DataBackend $backend)
     {
         if (! $backend->isInstalled()) {
             return;
@@ -124,7 +124,7 @@ class BackendTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider provideInstallationBackends
      */
-    public function testInstallation(BAV_DataBackend $backend)
+    public function testInstallation(DataBackend $backend)
     {
         $backend->install();
         $backend->update();
@@ -134,7 +134,7 @@ class BackendTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider provideInstallationBackends
      */
-    public function testIsInstalled(BAV_DataBackend $backend)
+    public function testIsInstalled(DataBackend $backend)
     {
         $backend->install();
         $this->assertTrue($backend->isInstalled());
@@ -146,7 +146,7 @@ class BackendTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider provideInstallationBackends
      */
-    public function testLastUpdate(BAV_DataBackend $backend)
+    public function testLastUpdate(DataBackend $backend)
     {
         $now = time();
         $backend->install();
@@ -164,7 +164,7 @@ class BackendTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider provideInstallationBackends
      */
-    public function testInstallationIsComplete(BAV_DataBackend $backend)
+    public function testInstallationIsComplete(DataBackend $backend)
     {
         $this->markTestIncomplete();
         //TODO test if the installation process fills all banks
@@ -176,7 +176,7 @@ class BackendTest extends PHPUnit_Framework_TestCase
      *
      * @dataProvider provideBackends
      */
-    public function testSingleInstances(BAV_DataBackend $backend)
+    public function testSingleInstances(DataBackend $backend)
     {
         foreach (self::$referenceBackend->getAllBanks() as $refBank) {
             $this->assertTrue(
@@ -189,7 +189,7 @@ class BackendTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider provideBackends
      */
-    public function testGetAllBanks(BAV_DataBackend $backend)
+    public function testGetAllBanks(DataBackend $backend)
     {
         $this->assertEquals(
             count(self::$referenceBackend->getAllBanks()),
@@ -200,7 +200,7 @@ class BackendTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider provideBanks
      */
-    public function testBanks(BAV_Bank $referenceBank, BAV_Bank $testedBank)
+    public function testBanks(Bank $referenceBank, Bank $testedBank)
     {
         $this->assertEquals(
             $referenceBank->getValidationType(),
@@ -221,12 +221,12 @@ class BackendTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider provideAgencies
      */
-    public function testAgencies(BAV_Agency $referenceAgency, BAV_Agency $testedAgency)
+    public function testAgencies(Agency $referenceAgency, Agency $testedAgency)
     {
         $this->assertEqualAgency($referenceAgency, $testedAgency);
     }
 
-    private function assertEqualAgency(BAV_Agency $a, BAV_Agency $b)
+    private function assertEqualAgency(Agency $a, Agency $b)
     {
         $this->assertTrue($a->getBank()->getBankID() === $b->getBank()->getBankID());
         $this->assertTrue($a->getID()                === $b->getID());

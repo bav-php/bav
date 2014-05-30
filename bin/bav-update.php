@@ -5,7 +5,7 @@
  *
  * @author Markus Malkusch <markus@malkusch.de>
  * @license GPL
- * @see BAV_DataBackend
+ * @see DataBackend
  */
 
 namespace malkusch\bav;
@@ -18,7 +18,7 @@ try {
     $databack->update();
     echo "Bundesbank file downloaded.\n";
 
-} catch (BAV_DataBackendException $error) {
+} catch (DataBackendException $error) {
     die("Installation failed: {$error->getMessage()}\n");
 
 }

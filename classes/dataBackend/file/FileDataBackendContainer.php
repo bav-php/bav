@@ -3,11 +3,11 @@
 namespace malkusch\bav;
 
 /**
- * Container for BAV_DataBackend_File objects.
+ * Container for DataBackend_File objects.
  * 
  * @author Markus Malkusch <markus@malkusch.de>
  * @license GPL
- * @see BAV_DataBackend
+ * @see DataBackend
  */ 
 class FileDataBackendContainer extends DataBackendContainer
 {
@@ -31,10 +31,10 @@ class FileDataBackendContainer extends DataBackendContainer
      * Returns the unconfigured backend which is only created by calling the
      * constructor.
      *
-     * @return BAV_DataBackend_File
+     * @return DataBackend_File
      */
     protected function makeDataBackend()
     {
-        return new \BAV_DataBackend_File($this->file);
+        return new \DataBackend_File($this->file);
     }
 }

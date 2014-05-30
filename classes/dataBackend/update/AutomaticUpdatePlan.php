@@ -31,7 +31,7 @@ class AutomaticUpdatePlan extends UpdatePlan
      * 
      * @see setNotice()
      */
-    public function perform(\BAV_DataBackend $backend)
+    public function perform(\DataBackend $backend)
     {
         // TODO lock concurrent updates
         $backend->update();

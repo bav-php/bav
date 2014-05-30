@@ -3,7 +3,7 @@
 require_once __DIR__ . "/../autoloader/autoloader.php";
 
 /**
- * check BAV_DataBackend_PDO->getAgencies($sql)
+ * check DataBackend_PDO->getAgencies($sql)
  *
  * Copyright (C) 2009  Markus Malkusch <markus@malkusch.de>
  *
@@ -29,7 +29,7 @@ class AgencyQueryTest extends PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var BAV_DataBackend_PDO
+     * @var DataBackend_PDO
      */
     private $backend;
 
@@ -37,7 +37,7 @@ class AgencyQueryTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->backend = new BAV_DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
+        $this->backend = new DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
     }
 
     public function testOnlyID()
@@ -65,7 +65,7 @@ class AgencyQueryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException BAV_DataBackendException_IO_MissingAttributes
+     * @expectedException DataBackendException_IO_MissingAttributes
      */
     public function testNoID()
     {

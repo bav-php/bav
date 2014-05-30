@@ -3,7 +3,7 @@
 require_once __DIR__ . "/../autoloader/autoloader.php";
 
 /**
- * A test for BAV_VerifyImport.
+ * A test for VerifyImport.
  *
  *
  * Copyright (C) 2009  Markus Malkusch <markus@malkusch.de>
@@ -25,7 +25,7 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
  * @package test
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
- * @see BAV_VerifyImport
+ * @see VerifyImport
  */
 class VerifyImportTest extends PHPUnit_Framework_TestCase
 {
@@ -41,13 +41,13 @@ class VerifyImportTest extends PHPUnit_Framework_TestCase
     private $verifyArray = array();
 
     /**
-     * @var BAV_DataBackend_File
+     * @var DataBackend_File
      */
     private $databack;
 
     protected function setUp()
     {
-        $this->databack    = new BAV_DataBackend_File();
+        $this->databack    = new DataBackend_File();
         $this->verifyArray = parse_ini_file(__DIR__.'/../data/verify.ini', true);
 
         $this->assertInternalType(
@@ -64,14 +64,14 @@ class VerifyImportTest extends PHPUnit_Framework_TestCase
 
     public function testFileImport()
     {
-        $importer = new BAV_VerifyImport($this->databack);
+        $importer = new VerifyImport($this->databack);
         $importer->importVerifyFile();
         $this->assertImporter($importer);
     }
 
     public function testSequentialImport()
     {
-        $importer       = new BAV_VerifyImport($this->databack);
+        $importer       = new VerifyImport($this->databack);
         $notSupported   = array();
         foreach ($this->verifyArray as $expect => $array) {
             foreach ($array as $type => $accounts) {
@@ -84,7 +84,7 @@ class VerifyImportTest extends PHPUnit_Framework_TestCase
 
                     }
 
-                } catch (BAV_DataBackendException_BankNotFound $e) {
+                } catch (DataBackendException_BankNotFound $e) {
                     $notSupported[] = $type;
 
                 }
@@ -95,7 +95,7 @@ class VerifyImportTest extends PHPUnit_Framework_TestCase
         $this->assertImporter($importer, $notSupported);
     }
 
-    private function assertImporter(BAV_VerifyImport $importer, Array $notSupported = array())
+    private function assertImporter(VerifyImport $importer, Array $notSupported = array())
     {
         $file = tempnam('/tmp', 'BAV');
         $this->assertFileExists($file);
@@ -134,12 +134,12 @@ class VerifyImportTest extends PHPUnit_Framework_TestCase
 
     /**
      * @param String $validationType
-     * @return BAV_Bank
+     * @return Bank
      */
     private function getBank($validationType)
     {
         if (! isset($this->validationMap[$validationType])) {
-            throw new BAV_DataBackendException_BankNotFound($validationType);
+            throw new DataBackendException_BankNotFound($validationType);
 
         }
         return $this->validationMap[$validationType];

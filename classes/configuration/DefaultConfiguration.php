@@ -27,11 +27,11 @@ class DefaultConfiguration extends Configuration
 
         $encoding = null;
         try {
-            $encoding = \BAV_Encoding::getInstance("UTF-8");
+            $encoding = \Encoding::getInstance("UTF-8");
 
-        } catch (\BAV_EncodingException_Unsupported $e) {
+        } catch (\EncodingException_Unsupported $e) {
             trigger_error("UTF-8 is not supported; bav is falling back to ISO-8859-15", E_WARNING);
-            $encoding = \BAV_Encoding::getInstance("ISO-8859-15");
+            $encoding = \Encoding::getInstance("ISO-8859-15");
 
         }
         $this->setEncoding($encoding);

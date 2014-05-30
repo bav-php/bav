@@ -17,7 +17,7 @@ class Configuration
     private $automaticInstallation;
 
     /**
-     * @var BAV_Encoding
+     * @var Encoding
      */
     private $encoding;
 
@@ -57,7 +57,7 @@ class Configuration
      * If automatic installation is activated. The backend factory will check if it is
      * installed and if not so install the backend.
      * 
-     * @see BAV_DataBackend::install()
+     * @see DataBackend::install()
      * @param bool $automaticInstallation Set true to turn installation on
      */
     public function setAutomaticInstallation($automaticInstallation)
@@ -96,7 +96,7 @@ class Configuration
     /**
      * Sets the encoding.
      */
-    public function setEncoding(\BAV_Encoding $encoding)
+    public function setEncoding(\Encoding $encoding)
     {
         $this->encoding = $encoding;
     }
@@ -104,7 +104,7 @@ class Configuration
     /**
      * Returns the encoding.
      *
-     * @return BAV_Encoding
+     * @return Encoding
      */
     public function getEncoding()
     {

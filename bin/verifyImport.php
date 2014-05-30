@@ -24,7 +24,7 @@
  * @package scripts
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
- * @see BAV_VerifyImport
+ * @see VerifyImport
  */
 
 
@@ -35,14 +35,14 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
 
 
 /**
- * This works only if you have called BAV_DataBackend_File->install(). That
+ * This works only if you have called DataBackend_File->install(). That
  * means there must exist a ../data/banklist.txt. If this does not apply to
  * you, you have to change these lines.
  */
-$databack = new BAV_DataBackend_File();
+$databack = new DataBackend_File();
 
 
-$importer = new BAV_VerifyImport($databack);
+$importer = new VerifyImport($databack);
 
 
 /**
