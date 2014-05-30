@@ -12,6 +12,9 @@ Version 1.0.0 - not yet released
 
     - removed DataBackend::_getAgencies() and DataBackend::_getMainAgency()
 
+    - added the API facade BAV (don't confuse with the removed class BAV).
+
+
 Version 0.28 - May 26, 2014
 ---------------------------
     - added Composer support

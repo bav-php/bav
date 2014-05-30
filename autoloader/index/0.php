@@ -15,6 +15,7 @@
  */
 
 return array(
+    'malkusch\bav\bav' => '../classes/BAV.php',
     'malkusch\bav\bank' => '../classes/bank/Bank.php',
     'malkusch\bav\agency' => '../classes/bank/Agency.php',
     'malkusch\bav\encoding' => '../classes/encoding/Encoding.php',

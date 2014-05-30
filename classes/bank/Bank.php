@@ -116,7 +116,7 @@ class Bank
      * A bank may have more agencies.
      *
      * @throws DataBackendException
-     * @return array
+     * @return Agency[]
      */
     public function getAgencies()
     {
