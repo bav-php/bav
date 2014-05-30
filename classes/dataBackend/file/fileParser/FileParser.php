@@ -32,26 +32,39 @@ class FileParser
 {
 
     const FILE_ENCODING     = 'ISO-8859-15';
-    const BANKID_OFFSET     = 0;
+    const BANKID_OFFSET     = 0; // field 1
     const BANKID_LENGTH     = 8;
-    const ISMAIN_OFFSET     = 8;
+    const ISMAIN_OFFSET     = 8; // field 2
     const ISMAIN_LENGTH     = 1;
-    const NAME_OFFSET       = 9;
+    const NAME_OFFSET       = 9; // field 3
     const NAME_LENGTH       = 58;
-    const POSTCODE_OFFSET   = 67;
+    const POSTCODE_OFFSET   = 67; // field 4
     const POSTCODE_LENGTH   = 5;
-    const CITY_OFFSET       = 72;
+    const CITY_OFFSET       = 72; // field 5
     const CITY_LENGTH       = 35;
-    const SHORTTERM_OFFSET  = 107;
+    const SHORTTERM_OFFSET  = 107; // field 6
     const SHORTTERM_LENGTH  = 27;
-    const PAN_OFFSET        = 134;
+    const PAN_OFFSET        = 134; // field 7
     const PAN_LENGTH        = 5;
-    const BIC_OFFSET        = 139;
+    const BIC_OFFSET        = 139; // field 8
     const BIC_LENGTH        = 11;
-    const TYPE_OFFSET       = 150;
+    const TYPE_OFFSET       = 150; // field 9
     const TYPE_LENGTH       = 2;
-    const ID_OFFSET         = 152;
+    const ID_OFFSET         = 152; // field 10
     const ID_LENGTH         = 6;
+    const STATE_OFFSET      = 158; // field 11
+    const STATE_LENGTH      = 1;
+    const DELETE_OFFSET     = 159; // field 12
+    const DELETE_LENGTH     = 1;
+    const SUCCESSOR_OFFSET  = 160; // field 13
+    const SUCCESSOR_LENGTH  = 8;
+
+    /**
+     * This field is only accessible from a new version of the file.
+     * The new version is only accessible from the Bundesbank ExtraNet.
+     */
+    const IBAN_RULE_OFFSET  = 168; // field 14
+    const IBAN_RULE_LENGTH  = 8;
 
     /**
      * @var resource
