@@ -75,7 +75,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $banks = array();
         $files = ClassFile::getClassFiles(__DIR__.'/../classes/validator/validators/');
         foreach ($files as $class) {
-            if (! preg_match('~^Validator_([A-Z0-9]{2})$~', $class->getName(), $matchType)) {
+            if (! preg_match('~^Validator([A-Z0-9]{2})$~', $class->getName(), $matchType)) {
                 continue;
 
             }

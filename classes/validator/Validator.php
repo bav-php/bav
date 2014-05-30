@@ -71,7 +71,7 @@ abstract class Validator
     public static function getInstance(Bank $bank)
     {
         $type  = trim(strtoupper($bank->getValidationType()));
-        $class = "Validator_$type";
+        $class = "Validator$type";
         $file  = __DIR__."/validators/$class.php";
         if (! file_exists($file)) {
             throw new ValidatorException_NotExists($bank);
