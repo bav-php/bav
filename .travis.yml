@@ -5,9 +5,15 @@ php:
     - 5.4
     - 5.3
 
+env: PDO_DSN="mysql:host=localhost;dbname=bav" PDO_USER=travis
+
 before_script:
     - composer --prefer-source --dev install
+    - mysql -e 'create database bav;'
+    - php tests/bin/bav-install.php
 
 script:
     - phpunit tests/ValidatorTest.php
     - phpunit tests/UpdatePlanTest.php
+    - phpunit tests/BAVFacadeTest.php
+    - phpunit tests/AgencyQueryTest.php
