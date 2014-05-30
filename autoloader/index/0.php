@@ -27,7 +27,6 @@ return array(
     'malkusch\bav\configuration' => '../classes/configuration/Configuration.php',
     'malkusch\bav\logupdateplan' => '../classes/dataBackend/update/LogUpdatePlan.php',
     'bav_validator' => '../classes/validator/BAV_Validator.php',
-    'bav_autoloader' => '../classes/autoloader/BAV_Autoloader.php',
     'bav_fileparser' => '../classes/dataBackend/file/fileParser/BAV_FileParser.php',
     'bav_databackend' => '../classes/dataBackend/BAV_DataBackend.php',
     'bav_encoding_mb' => '../classes/encoding/BAV_Encoding_MB.php',
