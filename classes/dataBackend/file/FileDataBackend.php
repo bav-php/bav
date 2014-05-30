@@ -12,8 +12,10 @@ namespace malkusch\bav;
  */
 class FileDataBackend extends DataBackend
 {
-
+    
+    // @codingStandardsIgnoreStart
     const DOWNLOAD_URI = "http://www.bundesbank.de/Redaktion/DE/Standardartikel/Aufgaben/Unbarer_Zahlungsverkehr/bankleitzahlen_download.html";
+    // @codingStandardsIgnoreEnd
 
     /**
      * @var array
