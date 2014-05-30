@@ -279,7 +279,7 @@ class DataBackend_File extends DataBackend
     /**
      * @throws DataBackendException_IO
      * @throws DataBackendException
-     * @return array
+     * @return Bank[]
      * @see DataBackend::getAllBanks()
      */
     public function getAllBanks()
@@ -422,7 +422,7 @@ class DataBackend_File extends DataBackend
      * @see DataBackend::getAgenciesForBank()
      * @throws DataBackendException_IO
      * @throws DataBackendException
-     * @return array
+     * @return Agency[]
      */
     public function getAgenciesForBank(Bank $bank)
     {

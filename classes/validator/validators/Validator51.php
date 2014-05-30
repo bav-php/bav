@@ -72,7 +72,7 @@ class Validator51 extends ValidatorChain
     }
 
     /**
-     * @return array
+     * @return Validator[]
      */
     public static function getExceptionValidators(Bank $bank)
     {

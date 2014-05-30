@@ -110,7 +110,7 @@ abstract class DataBackend
      * to garantee that there will never exist two identical objects.
      *
      * @throws DataBackendException
-     * @return array
+     * @return Bank[]
      */
     abstract public function getAllBanks();
 
@@ -148,7 +148,7 @@ abstract class DataBackend
      * @todo remove _getAgencies() and make getAgenciesForBank() abstract.
      * @throws DataBackendException
      * @see Bank::getAgencies()
-     * @return array
+     * @return Agency[]
      * @internal YOU SHOULD NOT CALL THIS METHOD! Use Bank->getMainAgency()
      */
     abstract public function getAgenciesForBank(Bank $bank);

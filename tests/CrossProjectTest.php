@@ -49,9 +49,6 @@ class CrossProjectTest extends \PHPUnit_Framework_TestCase
      */
     private $testAPIs = array();
 
-    /**
-     * @return Array
-     */
     protected function setUp()
     {
         $ktoblzcheckPath = __DIR__ . "/../tmp/ktoblzcheck/ktoblzcheck-1.21/src";

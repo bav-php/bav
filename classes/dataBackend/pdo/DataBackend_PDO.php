@@ -98,7 +98,7 @@ class DataBackend_PDO extends DataBackend
      * @throws DataBackendException_IO_MissingAttributes
      * @throws DataBackendException_IO
      * @throws DataBackendException
-     * @return array
+     * @return Agency[]
      */
     public function getAgencies($sql)
     {
@@ -364,7 +364,7 @@ class DataBackend_PDO extends DataBackend
     /**
      * @see DataBackend::getAllBanks()
      * @throws DataBackendException
-     * @return array
+     * @return Bank[]
      */
     public function getAllBanks()
     {
@@ -515,7 +515,7 @@ class DataBackend_PDO extends DataBackend
 
     /**
      * @throws DataBackendException
-     * @return array
+     * @return Agency[]
      * @see DataBackend::getAgenciesForBank()
      */
     public function getAgenciesForBank(Bank $bank)
