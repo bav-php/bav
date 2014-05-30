@@ -50,6 +50,9 @@ class Validator68 extends ValidatorChain
 
     public function isValid($account)
     {
+        // Die Kontonummern [..] enthalten keine führenden Nullen. 
+        $account = ltrim($account, "0");
+
         switch (strlen($account)) {
 
             case 10:
