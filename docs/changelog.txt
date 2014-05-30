@@ -16,7 +16,7 @@ Version 1.0.0 - not yet released
 
     - renamed all classes which where not conform to PSR2
 
-    - Fixed Validators 68, 78
+    - Fixed Validators 68, 78, 59
 
 
 Version 0.28 - May 26, 2014
