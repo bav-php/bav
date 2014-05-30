@@ -63,7 +63,8 @@ class CrossProjectTest extends \PHPUnit_Framework_TestCase
         }
 
         try {
-            self::$testAPIs[] = new KtoblzcheckTestAPI();
+            //Too slow and version 1.45 has many false positives
+            //self::$testAPIs[] = new KtoblzcheckTestAPI();
 
         } catch (TestAPIUnavailableException $e) {
             trigger_error("KtoblzcheckTestAPI unavailable", E_USER_WARNING);
