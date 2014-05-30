@@ -2,8 +2,6 @@
 
 namespace malkusch\bav;
 
-namespace malkusch\bav;
-
 /**
  * time() mock.
  */
