@@ -33,6 +33,11 @@ class Validator78 extends Validator00
 
     public function isValid($account)
     {
-        return strlen($account) !== 8 && parent::isValid($account);
+        // 8-stellige Kontonummern sind nicht prüfbar
+        if (strlen($account) === 8) {
+            return true;
+
+        }
+        return parent::isValid($account);
     }
 }
