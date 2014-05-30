@@ -138,23 +138,7 @@ abstract class DataBackend
      * @see Bank::getMainAgency()
      * @internal YOU SHOULD NOT CALL THIS METHOD! Use Bank->getMainAgency()
      */
-    public function getMainAgency(Bank $bank)
-    {
-        trigger_error(
-            "_getMainAgency() was renamed into getMainAgency().",
-            E_USER_DEPRECATED
-        );
-        return $this->_getMainAgency($bank);
-    }
-
-    /**
-     * @deprecated 0.28
-     * @see getMainAgency()
-     */
-    public function _getMainAgency(Bank $bank)
-    {
-        throw new BadMethodCallException("You have to override getMainAgency()");
-    }
+    abstract public function getMainAgency(Bank $bank);
 
     /**
      * If you implement this method you should return an array with the appropriate Agency
@@ -167,21 +151,5 @@ abstract class DataBackend
      * @return array
      * @internal YOU SHOULD NOT CALL THIS METHOD! Use Bank->getMainAgency()
      */
-    public function getAgenciesForBank(Bank $bank)
-    {
-        trigger_error(
-            "_getAgencies() was renamed into getAgenciesForBank().",
-            E_USER_DEPRECATED
-        );
-        return $this->_getAgencies($bank);
-    }
-    
-    /**
-     * @deprecated 0.28
-     * @see getAgenciesForBank()
-     */
-    public function _getAgencies(Bank $bank)
-    {
-        throw new BadMethodCallException("You have to override getAgenciesForBank()");
-    }
+    abstract public function getAgenciesForBank(Bank $bank);
 }

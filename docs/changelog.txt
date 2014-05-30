@@ -10,6 +10,8 @@ Version 1.0.0 - not yet released
     
     - using namespace malkusch\bav and removed the class prefix BAV_
 
+    - removed DataBackend::_getAgencies() and DataBackend::_getMainAgency()
+
 Version 0.28 - May 26, 2014
 ---------------------------
     - added Composer support
