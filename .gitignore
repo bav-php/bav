@@ -2,3 +2,5 @@ nbproject
 .settings
 .buildpath
 .project
+vendor
+composer.lock
