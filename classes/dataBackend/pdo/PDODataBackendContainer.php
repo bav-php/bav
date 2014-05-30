@@ -8,7 +8,7 @@ namespace malkusch\bav;
  * @author Markus Malkusch <markus@malkusch.de>
  * @license GPL
  * @see DataBackend
- */ 
+ */
 class PDODataBackendContainer extends DataBackendContainer
 {
 
