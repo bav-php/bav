@@ -17,6 +17,5 @@ before_script:
     - php tests/bin/test-install.php
 
 script:
-    - phpunit tests/BAVFacadeTest.php
-    - phpunit tests/AgencyQueryTest.php
+    - phpunit --exclude-group large tests/
     - phpcs --standard=PSR2 classes/ bin/ docs/example.php tests/classes/ tests/bin/

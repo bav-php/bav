@@ -7,6 +7,10 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
 /**
  * Tests UpdatePlan
  *
+ * This dates uses a mock for time(). Therefore this test must run before
+ * any unmocked call to time().
+ *
+ * @see TimeMock
  * @license GPL
  * @author Markus Malkusch <markus@malkusch.de>
  */
