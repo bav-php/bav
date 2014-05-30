@@ -32,6 +32,16 @@ class BAV_DataBackend_File extends BAV_DataBackend
     }
 
     /**
+     * Returns the path to the data file.
+     *
+     * @return string
+     */
+    public function getFile()
+    {
+        return $this->parser->getFile();
+    }
+
+    /**
      * For the file of March 8th 2010 (blz_20100308.txt)
      * Bundesbank appended new banks at the end of the file.
      * That broked binary search. This method sorts the lines so

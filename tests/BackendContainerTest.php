@@ -13,28 +13,14 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
 class BackendContainerTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function provideContainers()
-    {
-        $fileContainer = new FileDataBackendContainer(tempnam(\BAV_DataBackend_File::getTempdir(), 'bavtest'));
-
-        $pdoContainer = new PDODataBackendContainer(
-            new \PDO('mysql:host=localhost;dbname=test', 'test'),
-            'bavtest_'
-        );
-
-        return array(
-            array($fileContainer),
-            array($pdoContainer)
-        );
-    }
-
     /**
      * Tests automatic installation.
-     *
-     * @dataProvider provideContainers
      */
-    public function testAutomaticInstallation(DataBackendContainer $container)
+    public function testAutomaticInstallation()
     {
+        ConfigurationRegistry::getConfiguration()->setUpdatePlan(null);
+        $container = new FileDataBackendContainer(tempnam(\BAV_DataBackend_File::getTempdir(), 'bavtest'));
+
         $this->assertTrue(ConfigurationRegistry::getConfiguration()->isAutomaticInstallation());
     
         $backend = $container->getDataBackend();
@@ -43,4 +29,25 @@ class BackendContainerTest extends \PHPUnit_Framework_TestCase
         $backend->uninstall();
     }
 
+    /**
+     * Tests automatic installation.
+     */
+    public function testAutomaticUpdate()
+    {
+        $updatePlan = new AutomaticUpdatePlan();
+        $updatePlan->setNotice(false);
+        ConfigurationRegistry::getConfiguration()->setUpdatePlan($updatePlan);
+
+        $container = new FileDataBackendContainer(tempnam(\BAV_DataBackend_File::getTempdir(), 'bavtest'));
+        $backend = $container->getDataBackend();
+            
+        touch($backend->getFile(), strtotime("-1 year"));
+        $this->assertTrue($updatePlan->isOutdated($backend));
+
+        $container->applyUpdatePlan($backend);
+        $this->assertFalse($updatePlan->isOutdated($backend));
+
+        $backend->uninstall();
+        ConfigurationRegistry::getConfiguration()->setUpdatePlan(null);
+    }
 }

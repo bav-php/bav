@@ -15,12 +15,15 @@
  */
 
 return array(
+    'malkusch\bav\timemoc' => '../tests/classes/TimeMoc.php',
     'testsuite' => '../tests/TestSuite.php',
     'backendtest' => '../tests/BackendTest.php',
     'validatortest' => '../tests/ValidatorTest.php',
+    'malkusch\bav\updateplantest' => '../tests/UpdatePlanTest.php',
     'agencyquerytest' => '../tests/AgencyQueryTest.php',
     'crossprojecttest' => '../tests/CrossProjectTest.php',
     'verifyimporttest' => '../tests/VerifyImportTest.php',
     'dataconstrainttest' => '../tests/DataConstraintTest.php',
+    'malkusch\bav\backendcontainertest' => '../tests/BackendContainerTest.php',
     'bav_checkagainsttestapis' => '../tests/checkAgainstTestAPIs.php',
 );

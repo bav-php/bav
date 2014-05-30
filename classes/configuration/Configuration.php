@@ -14,7 +14,7 @@ class Configuration
     /**
      * @var bool
      */
-    private $automaticInstallation = null;
+    private $automaticInstallation;
 
     /**
      * @var BAV_Encoding
@@ -25,6 +25,31 @@ class Configuration
      * @var DataBackendContainer
      */
     private $backendContainer;
+
+    /**
+     * @var UpdatePlan
+     */
+    private $updatePlan;
+
+    /**
+     * Sets the update plan.
+     * 
+     * Set to null if you don't want to use an update plan.
+     */
+    public function setUpdatePlan(UpdatePlan $updatePlan = null)
+    {
+        $this->updatePlan = $updatePlan;
+    }
+
+    /**
+     * Gets the update plan.
+     *
+     * @return UpdatePlan|null
+     */
+    public function getUpdatePlan()
+    {
+        return $this->updatePlan;
+    }
 
     /**
      * Turns automatic installation on or off.

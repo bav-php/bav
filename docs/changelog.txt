@@ -6,7 +6,7 @@ Version 1.0.0 - not yet released
 
     - removed BAV::$encoding, BAV::setEncoding() and BAV::getEncoding()
 
-    - added support for automatic installation
+    - added support for automatic installation and update
 
 Version 0.28 - May 26, 2014
 ---------------------------
