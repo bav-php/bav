@@ -38,6 +38,11 @@ class CrossProjectTest extends \PHPUnit_Framework_TestCase
     private $lastAccount = 99999;
 
     /**
+     * @var int
+     */
+    private $accountPadSize = 10;
+
+    /**
      * @var Array
      */
     private $testedValidators = array();
@@ -123,6 +128,7 @@ class CrossProjectTest extends \PHPUnit_Framework_TestCase
     public function testCrossProjects(Bank $bank)
     {
         try {
+            // Skip failed bank dependend validators or valid independend validators.
             $isSkip = $bank->getValidator() instanceof Validator_BankDependent
                     ? array_key_exists($bank->getValidationType(), $this->failedBankDependentValidators)
                     : array_key_exists($bank->getValidationType(), $this->testedValidators);
@@ -132,8 +138,11 @@ class CrossProjectTest extends \PHPUnit_Framework_TestCase
 
             }
 
+            // Generate accounts from $this->lastAccount until 0.
             for ($account = $this->lastAccount; $account >= 0; $account--) {
-                for ($pad = strlen($account); $pad <= strlen($this->lastAccount); $pad++) {
+
+                // Generate accounts with padded zeros up to $this->accountPadSize
+                for ($pad = strlen($account); $pad <= $this->accountPadSize; $pad++) {
                     $paddedAccount = str_pad($account, $pad, "0", STR_PAD_LEFT);
                     $this->assertSameResult($bank, $paddedAccount);
 
