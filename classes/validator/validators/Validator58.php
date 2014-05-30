@@ -34,6 +34,6 @@ class Validator58 extends Validator02
 
     public function isValid($account)
     {
-        return strlen($account) >= 6 && parent::isValid($account);
+        return strlen(ltrim($account, "0")) >= 6 && parent::isValid($account);
     }
 }
