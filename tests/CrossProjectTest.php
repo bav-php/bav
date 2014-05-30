@@ -5,29 +5,31 @@ namespace malkusch\bav;
 require_once __DIR__ . "/../autoloader/autoloader.php";
 
 /**
- * Copyright (C) 2009  Markus Malkusch <markus@malkusch.de>
+ * Tests the values between different projects.
+ * 
+ * This test takes a very long time (days!). You should split it on several
+ * machines. You can therefore set the environment variables NODE_NUMBER, which
+ * starts with 0 and NODE_COUNT. Two cores would run with:
+ * 
+ * $ NODE_NUMBER=0 NODE_COUNT=2 phpunit CrossProjectTest.php
+ * $ NODE_NUMBER=1 NODE_COUNT=2 phpunit CrossProjectTest.php
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- *
- * @package test
  * @author Markus Malkusch <markus@malkusch.de>
- * @copyright Copyright (C) 2009 Markus Malkusch
+ * @license GPL
  * @large
  */
 class CrossProjectTest extends \PHPUnit_Framework_TestCase
 {
+
+    /**
+     * name of environment variable for setting this node number.
+     */
+    const ENV_NODE_NUMBER = "NODE_NUMBER";
+    
+    /**
+     * name of environment variable for setting the node count.
+     */
+    const ENV_NODE_COUNT = "NODE_COUNT";
 
     /**
      * @var int
@@ -44,6 +46,16 @@ class CrossProjectTest extends \PHPUnit_Framework_TestCase
      * @var Array
      */
     private $failedBankDependentValidators = array();
+    
+    /**
+     * @var int
+     */
+    private static $nodeNumber = 0;
+    
+    /**
+     * @var int
+     */
+    private static $nodeCount = 1;
 
     /**
      * @var TestAPI[]
@@ -77,14 +89,30 @@ class CrossProjectTest extends \PHPUnit_Framework_TestCase
      */
     public function provideBanks()
     {
-        $banks   = array();
-        $backend = new PDODataBackend(new \PDO('mysql:host=localhost;dbname=test', 'test'));
-        foreach ($backend->getAllBanks() as $bank) {
-            $banks[] = array($bank);
+        $nodeNumber = getenv(self::ENV_NODE_NUMBER);
+        if ($nodeNumber) {
+            self::$nodeNumber = (int) $nodeNumber;
 
         }
-        
-        // $banks = array_slice($banks, 0, 60);
+        $nodeCount = getenv(self::ENV_NODE_COUNT);
+        if ($nodeCount) {
+            self::$nodeCount = (int) $nodeCount;
+
+        }
+        self::assertGreaterThan(self::$nodeNumber, self::$nodeCount);
+
+        $banks   = array();
+        $backend = new PDODataBackend(new \PDO('mysql:host=localhost;dbname=test', 'test'));
+        $i = 0;
+        foreach ($backend->getAllBanks() as $bank) {
+            // only pick banks for this node.
+            if ($i % self::$nodeCount == self::$nodeNumber) {
+                $banks[] = array($bank);
+
+            }
+            $i++;
+
+        }
     
         return $banks;
     }
