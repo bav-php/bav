@@ -55,8 +55,10 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
             return;
 
         }
+        $container = new FileDataBackendContainer();
+
         #self::$dataBackend = new PDODataBackend(new \PDO('mysql:host=localhost;dbname=test', 'test'));
-        self::$dataBackend = new FileDataBackend();
+        self::$dataBackend = $container->getDataBackend();
 
 
         foreach (self::$dataBackend->getAllBanks() as $bank) {
