@@ -284,23 +284,6 @@ class PDODataBackend extends DataBackend
     }
 
     /**
-     * Query DDL statements and support error handling.
-     * 
-     * @param String $query
-     * @see \PDO::exec()
-     * @throws DataBackendIOException
-     */
-    private function execDDL($query)
-    {
-        $success = $this->pdo->exec($query);
-        if ($success === false) {
-            $errorInfo = $this->pdo->errorInfo();
-            throw new DataBackendIOException(print_r($errorInfo, true));
-
-        }
-    }
-
-    /**
      * @see DataBackend::install()
      * @throws DataBackendIOException
      */
@@ -315,7 +298,7 @@ class PDODataBackend extends DataBackend
                     break;
 
             }
-            $this->execDDL(
+            $this->pdo->exec(
                 "CREATE TABLE {$this->prefix}bank(
                     id          int primary key,
                     validator   char(2) NOT NULL,
@@ -324,8 +307,7 @@ class PDODataBackend extends DataBackend
                     /* FOREIGN KEY (mainAgency) REFERENCES {$this->prefix}agency(id) */
                 )$createOptions"
             );
-            
-            $this->execDDL(
+            $this->pdo->exec(
                 "CREATE TABLE {$this->prefix}agency(
                     id          int primary key,
                     name        varchar(".FileParser::NAME_LENGTH.")        NOT NULL,
@@ -339,14 +321,12 @@ class PDODataBackend extends DataBackend
                     FOREIGN KEY (bank) REFERENCES {$this->prefix}bank(id)
                 )$createOptions"
             );
-
-            $this->execDDL(
+            $this->pdo->exec(
                 "CREATE TABLE {$this->prefix}meta(
                     name   char(32) NOT NULL primary key,
                     value  varchar(128)
                 )$createOptions"
             );
-
             $insertMetaStmt = $this->pdo->prepare(
                 "INSERT INTO {$this->prefix}meta
                     SET name  = :name,
@@ -356,7 +336,6 @@ class PDODataBackend extends DataBackend
                 ":name" => self::META_MODIFICATION,
                 ":value" => null
             ));
-
             $this->update();
 
         } catch (\PDOException $e) {
