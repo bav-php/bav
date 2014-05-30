@@ -53,10 +53,18 @@ class KontocheckTestAPI extends TestAPI
      */
     public function ignoreTestCase(Bank $bank, $account)
     {
-        if ($bank->getValidator() instanceof Validator09) {
+        // http://sourceforge.net/p/kontocheck/bugs/11/
+        if ($bank->getBankID() == "80063508") {
             return true;
 
         }
+
+        // http://sourceforge.net/p/kontocheck/bugs/12/
+        if ($bank->getValidationType() == "90") {
+            return true;
+
+        }
+
         return parent::ignoreTestCase($bank, $account);
     }
 
