@@ -63,8 +63,10 @@ class FileParser
      * This field is only accessible from a new version of the file.
      * The new version is only accessible from the Bundesbank ExtraNet.
      */
-    const IBAN_RULE_OFFSET  = 168; // field 14
-    const IBAN_RULE_LENGTH  = 8;
+    const IBAN_RULE_OFFSET = 168; // field 14 Rule
+    const IBAN_RULE_LENGTH = 4;
+    const IBAN_VERSION_OFFSET = 172; // field 14 Version
+    const IBAN_VERSION_LENGTH = 2;
 
     /**
      * @var resource
