@@ -1,5 +1,7 @@
 <?php
 
+namespace malkusch\bav;
+
 /**
  * Implements 28
  *

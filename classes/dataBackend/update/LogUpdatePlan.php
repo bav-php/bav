@@ -14,7 +14,7 @@ class LogUpdatePlan extends UpdatePlan
     /**
      * Log an E_USER_WARNING
      */
-    public function perform(\DataBackend $backend)
+    public function perform(DataBackend $backend)
     {
         trigger_error(
             "bav's bank data is outdated. Update the data with e.g. bin/bav-update.php",

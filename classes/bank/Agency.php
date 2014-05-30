@@ -1,5 +1,7 @@
 <?php
 
+namespace malkusch\bav;
+
 /**
  * The agency belongs to one bank. Every bank has one main agency and may have
  * some more agencies in different cities. Don't create this object directly.

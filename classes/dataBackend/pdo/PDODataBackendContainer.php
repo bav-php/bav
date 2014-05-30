@@ -13,7 +13,7 @@ class PDODataBackendContainer extends DataBackendContainer
 {
 
     /**
-     * @var PDO
+     * @var \PDO
      */
     private $pdo;
 
@@ -41,6 +41,6 @@ class PDODataBackendContainer extends DataBackendContainer
      */
     protected function makeDataBackend()
     {
-        return new \DataBackend_PDO($this->pdo, $this->prefix);
+        return new DataBackend_PDO($this->pdo, $this->prefix);
     }
 }

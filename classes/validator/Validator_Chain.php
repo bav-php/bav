@@ -1,5 +1,7 @@
 <?php
 
+namespace malkusch\bav;
+
 /**
  * This class offers support for algorithmns which uses more algorithmns
  *

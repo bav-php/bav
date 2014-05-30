@@ -1,5 +1,7 @@
 <?php
 
+namespace malkusch\bav;
+
 /**
  * This interfaces marks validators which depend on the bank.
  *

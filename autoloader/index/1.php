@@ -16,14 +16,14 @@
 
 return array(
     'malkusch\bav\timemock' => '../tests/classes/TimeMock.php',
-    'testsuite' => '../tests/TestSuite.php',
-    'backendtest' => '../tests/BackendTest.php',
-    'validatortest' => '../tests/ValidatorTest.php',
+    'malkusch\bav\testsuite' => '../tests/TestSuite.php',
+    'malkusch\bav\backendtest' => '../tests/BackendTest.php',
+    'malkusch\bav\validatortest' => '../tests/ValidatorTest.php',
     'malkusch\bav\updateplantest' => '../tests/UpdatePlanTest.php',
-    'agencyquerytest' => '../tests/AgencyQueryTest.php',
-    'crossprojecttest' => '../tests/CrossProjectTest.php',
-    'verifyimporttest' => '../tests/VerifyImportTest.php',
-    'dataconstrainttest' => '../tests/DataConstraintTest.php',
+    'malkusch\bav\agencyquerytest' => '../tests/AgencyQueryTest.php',
+    'malkusch\bav\crossprojecttest' => '../tests/CrossProjectTest.php',
+    'malkusch\bav\verifyimporttest' => '../tests/VerifyImportTest.php',
+    'malkusch\bav\dataconstrainttest' => '../tests/DataConstraintTest.php',
     'malkusch\bav\backendcontainertest' => '../tests/BackendContainerTest.php',
-    'checkagainsttestapis' => '../tests/checkAgainstTestAPIs.php',
+    'malkusch\bav\checkagainsttestapis' => '../tests/checkAgainstTestAPIs.php',
 );

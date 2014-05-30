@@ -1,5 +1,7 @@
 <?php
 
+namespace malkusch\bav;
+
 /**
  * This class helps Databackend_File to know the interval of lines which
  * belongs to a bank.

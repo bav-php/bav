@@ -1,23 +1,25 @@
 <?php
 
+namespace malkusch\bav;
+
 require_once __DIR__ . "/../autoloader/autoloader.php";
 
 /**
  * Test if the banklist.txt fits into the model.
  */
-class DataConstraintTest extends PHPUnit_Framework_TestCase
+class DataConstraintTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var PDO
+     * @var \PDO
      */
     private static $pdo;
 
     public static function setUpBeforeClass()
     {
 
-        self::$pdo = new PDO('mysql:host=localhost;dbname=test', 'test');
-        self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        self::$pdo = new \PDO('mysql:host=localhost;dbname=test', 'test');
+        self::$pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
         self::$pdo->exec("DROP TABLE IF EXISTS bank");
         self::$pdo->exec(

@@ -1,5 +1,7 @@
 <?php
 
+namespace malkusch\bav;
+
 require_once __DIR__ . "/../autoloader/autoloader.php";
 
 /**
@@ -27,7 +29,7 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
  * @copyright Copyright (C) 2009 Markus Malkusch
  * @see VerifyImport
  */
-class VerifyImportTest extends PHPUnit_Framework_TestCase
+class VerifyImportTest extends \PHPUnit_Framework_TestCase
 {
 
     /**

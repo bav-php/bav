@@ -1,5 +1,7 @@
 <?php
 
+namespace malkusch\bav;
+
 /**
  * Use any DBS as backend. In addition to the DataBackend methods you
  * may use getAgencies($sql) which returns an array of Agency objects.
@@ -16,42 +18,42 @@ class DataBackend_PDO extends DataBackend
     private $agencies = array();
 
     /**
-     * @var PDOStatement
+     * @var \PDOStatement
      */
     private $selectBank;
 
     /**
-     * @var PDOStatement
+     * @var \PDOStatement
      */
     private $selectMainAgency;
 
     /**
-     * @var PDOStatement
+     * @var \PDOStatement
      */
     private $selectAgencies;
 
     /**
-     * @var PDOStatement
+     * @var \PDOStatement
      */
     private $selectAgency;
 
     /**
-     * @var PDOStatement
+     * @var \PDOStatement
      */
     private $selectAgencysBank;
 
     /**
-     * @var PDOStatement
+     * @var \PDOStatement
      */
     private $selectMeta;
 
     /**
-     * @var PDOStatement
+     * @var \PDOStatement
      */
     private $selectInstalled;
 
     /**
-     * @var PDO
+     * @var \PDO
      */
     private $pdo;
 
@@ -68,12 +70,12 @@ class DataBackend_PDO extends DataBackend
     /**
      * @param String $prefix the prefix of the table names.
      */
-    public function __construct(PDO $pdo, $prefix = "bav_")
+    public function __construct(\PDO $pdo, $prefix = "bav_")
     {
         $this->pdo    = $pdo;
         $this->prefix = $prefix;
 
-        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
     }
 
     /**
@@ -111,7 +113,7 @@ class DataBackend_PDO extends DataBackend
 
                     }
                     $this->selectAgency->execute(array(':agency' => $result['id']));
-                    $result = $this->selectAgency->fetch(PDO::FETCH_ASSOC);
+                    $result = $this->selectAgency->fetch(\PDO::FETCH_ASSOC);
                     $this->selectAgency->closeCursor();
                     if ($result === false) {
                         throw new DataBackendException_IO();
@@ -120,7 +122,7 @@ class DataBackend_PDO extends DataBackend
                 }
                 if (! array_key_exists('bank', $result)) {
                     $this->selectAgencysBank->execute(array(':agency' => $result['id']));
-                    $bankResult = $this->selectAgencysBank->fetch(PDO::FETCH_ASSOC);
+                    $bankResult = $this->selectAgencysBank->fetch(\PDO::FETCH_ASSOC);
                     $this->selectAgencysBank->closeCursor();
                     if ($bankResult === false) {
                         throw new DataBackendException_IO();
@@ -134,7 +136,7 @@ class DataBackend_PDO extends DataBackend
             }
             return $agencies;
 
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             throw new DataBackendException_IO();
 
         } catch (DataBackendException_BankNotFound $e) {
@@ -144,7 +146,7 @@ class DataBackend_PDO extends DataBackend
     }
 
     /**
-     * @throws PDOException
+     * @throws \PDOException
      */
     private function prepareStatements()
     {
@@ -209,7 +211,7 @@ class DataBackend_PDO extends DataBackend
                 $this->pdo->beginTransaction();
                 $useTA = true;
 
-            } catch (PDOException $e) {
+            } catch (\PDOException $e) {
                 trigger_error("Your DBS doesn't support transactions. Your data may be corrupted.");
 
             }
@@ -271,7 +273,7 @@ class DataBackend_PDO extends DataBackend
                 }
                 throw $e;
 
-            } catch (PDOException $e2) {
+            } catch (\PDOException $e2) {
                 throw new DataBackendException_IO(
                     get_class($e) . ": {$e->getMessage()}\nadditionally: {$e2->getMessage()}"
                 );
@@ -289,7 +291,7 @@ class DataBackend_PDO extends DataBackend
     {
         try {
             $createOptions = '';
-            switch ($this->pdo->getAttribute(PDO::ATTR_DRIVER_NAME)) {
+            switch ($this->pdo->getAttribute(\PDO::ATTR_DRIVER_NAME)) {
 
                 case 'mysql':
                     $createOptions .= " engine=InnoDB";
@@ -336,7 +338,7 @@ class DataBackend_PDO extends DataBackend
             ));
             $this->update();
 
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             throw new DataBackendException_IO($e->getMessage());
 
         }
@@ -353,7 +355,7 @@ class DataBackend_PDO extends DataBackend
             $this->pdo->exec("DROP TABLE {$this->prefix}bank");
             $this->pdo->exec("DROP TABLE {$this->prefix}meta");
 
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             throw new DataBackendException_IO();
 
         }
@@ -378,7 +380,7 @@ class DataBackend_PDO extends DataBackend
             }
             return array_values($this->instances);
 
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             throw new DataBackendException_IO();
 
         } catch (DataBackendException_IO_MissingAttributes $e) {
@@ -400,7 +402,7 @@ class DataBackend_PDO extends DataBackend
         try {
             $this->prepareStatements();
             $this->selectBank->execute(array(':bankID' => $bankID));
-            $result = $this->selectBank->fetch(PDO::FETCH_ASSOC);
+            $result = $this->selectBank->fetch(\PDO::FETCH_ASSOC);
             if ($result === false) {
                 $this->selectBank->closeCursor();
                 throw new DataBackendException_BankNotFound($bankID);
@@ -409,7 +411,7 @@ class DataBackend_PDO extends DataBackend
             $this->selectBank->closeCursor();
             return $this->getBankObject($result);
 
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             $this->selectBank->closeCursor();
             throw new DataBackendException_IO();
 
@@ -500,7 +502,7 @@ class DataBackend_PDO extends DataBackend
             $this->selectMainAgency->closeCursor();
             return $this->getAgencyObject($bank, $result);
 
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             $this->selectMainAgency->closeCursor();
             throw new DataBackendException_IO();
 
@@ -531,7 +533,7 @@ class DataBackend_PDO extends DataBackend
             $this->selectAgencies->closeCursor();
             return $agencies;
 
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             $this->selectAgencies->closeCursor();
             throw new DataBackendException_IO();
 
@@ -563,7 +565,7 @@ class DataBackend_PDO extends DataBackend
             $this->selectMeta->closeCursor();
             return $result["value"];
 
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             $this->selectMeta->closeCursor();
             throw new DataBackendException_IO($e->getMessage(), $e->getCode(), $e);
 
@@ -589,7 +591,7 @@ class DataBackend_PDO extends DataBackend
             $this->selectInstalled->closeCursor();
             return $result[0] == 1;
 
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             $this->selectInstalled->closeCursor();
             throw new DataBackendException_IO($e->getMessage(), $e->getCode(), $e);
 

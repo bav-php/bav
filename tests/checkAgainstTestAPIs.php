@@ -1,5 +1,7 @@
 #!/usr/bin/php
 <?php
+
+namespace malkusch\bav;
 error_reporting(E_ALL);
 
 require_once __DIR__ . "/../autoloader/autoloader.php";
@@ -74,7 +76,7 @@ class CheckAgainstTestAPIs
 
 
         #$backend = new DataBackend_File();
-        $backend = new DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
+        $backend = new DataBackend_PDO(new \PDO('mysql:host=localhost;dbname=test', 'test'));
 
 
         if (! empty($GLOBALS['argv'][1])) {

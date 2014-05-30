@@ -32,7 +32,7 @@ abstract class UpdatePlan
     /**
      * Perform the update process.
      */
-    abstract public function perform(\DataBackend $backend);
+    abstract public function perform(DataBackend $backend);
 
     /**
      * Returns true if the data is to old and needs an update
@@ -40,7 +40,7 @@ abstract class UpdatePlan
      * @see DataBackend::getLastUpdate()
      * @return bool
      */
-    public function isOutdated(\DataBackend $backend)
+    public function isOutdated(DataBackend $backend)
     {
         /*
          * The following code creates a sorted list with the release months (update month - $relaseThreshold)

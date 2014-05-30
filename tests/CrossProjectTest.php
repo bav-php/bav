@@ -1,5 +1,7 @@
 <?php
 
+namespace malkusch\bav;
+
 require_once __DIR__ . "/../autoloader/autoloader.php";
 
 /**
@@ -23,7 +25,7 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
-class CrossProjectTest extends PHPUnit_Framework_TestCase
+class CrossProjectTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -70,7 +72,7 @@ class CrossProjectTest extends PHPUnit_Framework_TestCase
     public function provideBanks()
     {
         $banks   = array();
-        $backend = new DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
+        $backend = new DataBackend_PDO(new \PDO('mysql:host=localhost;dbname=test', 'test'));
         foreach ($backend->getAllBanks() as $bank) {
             $banks[] = array($bank);
 

@@ -1,5 +1,7 @@
 <?php
 
+namespace malkusch\bav;
+
 require_once __DIR__ . "/../autoloader/autoloader.php";
 
 /**
@@ -9,7 +11,7 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
  * @license GPL
  * @author Markus Malkusch <markus@malkusch.de>
  */
-class BackendTest extends PHPUnit_Framework_TestCase
+class BackendTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -30,7 +32,7 @@ class BackendTest extends PHPUnit_Framework_TestCase
      */
     public function provideBackends()
     {
-        $pdoBackend = new DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
+        $pdoBackend = new DataBackend_PDO(new \PDO('mysql:host=localhost;dbname=test', 'test'));
         $this->setupBackend($pdoBackend);
 
         $fileBackend = new DataBackend_File();
@@ -55,7 +57,7 @@ class BackendTest extends PHPUnit_Framework_TestCase
      */
     public function provideInstallationBackends()
     {
-        $pdoBackend = new DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'), 'bavtest_');
+        $pdoBackend = new DataBackend_PDO(new \PDO('mysql:host=localhost;dbname=test', 'test'), 'bavtest_');
         $this->setupInstallationBackends($pdoBackend);
 
         $fileBackend = new DataBackend_File(tempnam(DataBackend_File::getTempdir(), 'bavtest'));

@@ -1,5 +1,7 @@
 <?php
 
+namespace malkusch\bav;
+
 /**
  * It uses the huge file from the Bundesbank and uses a binary search to find a row.
  * This is the easiest way to use BAV. BAV can work as a standalone application without

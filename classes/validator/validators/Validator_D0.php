@@ -1,5 +1,7 @@
 <?php
 
+namespace malkusch\bav;
+
 /**
  * Copyright (C) 2008  Markus Malkusch <markus@malkusch.de>
  *

@@ -1,5 +1,7 @@
 <?php
 
+namespace malkusch\bav;
+
 /**
  * This abstract class defines the API for using other validation
  * projects. It's useful to test other projects agains each other.

@@ -1,5 +1,7 @@
 <?php
 
+namespace malkusch\bav;
+
 /**
  * The API for  Michael Plugge's kontocheck.
  *

@@ -1,5 +1,7 @@
 <?php
 
+namespace malkusch\bav;
+
 /**
  * This class is used for debugging purposes. An Object contains the path to the class
  * and can create instances.

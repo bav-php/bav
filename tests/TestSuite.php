@@ -1,5 +1,7 @@
 <?php
 
+namespace malkusch\bav;
+
 /**
  * Copyright (C) 2009  Markus Malkusch <markus@malkusch.de>
  *
@@ -28,7 +30,7 @@ require_once __DIR__ . '/DataConstraintTest.php';
 require_once __DIR__ . '/ValidatorTest.php';
 require_once __DIR__ . '/VerifyImportTest.php';
 
-class TestSuite extends PHPUnit_Framework_TestSuite
+class TestSuite extends \PHPUnit_Framework_TestSuite
 {
 
     /**

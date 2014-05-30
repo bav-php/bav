@@ -1,5 +1,7 @@
 <?php
 
+namespace malkusch\bav;
+
 /**
  * Copyright (C) 2009  Markus Malkusch <markus@malkusch.de>
  *
@@ -23,7 +25,7 @@
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
-class TestAPIException extends RuntimeException
+class TestAPIException extends BAVException
 {
 
 }

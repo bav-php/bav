@@ -1,5 +1,8 @@
 #!/bin/env php
 <?php
+
+namespace malkusch\bav;
+
 /**
  * A sample script for importing many test accounts to a verify.ini
  * you need to modify this script. It won't work unmodified.

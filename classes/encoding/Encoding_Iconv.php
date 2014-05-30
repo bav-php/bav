@@ -1,5 +1,7 @@
 <?php
 
+namespace malkusch\bav;
+
 /**
  * Wrapper for the iconv Functions. If you use this wrapper
  * PHP must be compiled with these functions.

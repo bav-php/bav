@@ -1,6 +1,6 @@
 <?php
 
-use malkusch\bav\ConfigurationRegistry;
+namespace malkusch\bav;
 
 /**
  * This class is responsable for I/O and formating which helps the DataBackend_File.

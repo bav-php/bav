@@ -55,7 +55,7 @@ abstract class DataBackendContainer
     /**
      * Shut down hook for applying the update plan.
      */
-    public function applyUpdatePlan(\DataBackend $backend)
+    public function applyUpdatePlan(DataBackend $backend)
     {
         $plan = ConfigurationRegistry::getConfiguration()->getUpdatePlan();
         if ($plan != null && $plan->isOutdated($backend)) {

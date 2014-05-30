@@ -1,5 +1,7 @@
 <?php
 
+namespace malkusch\bav;
+
 require_once __DIR__ . "/../autoloader/autoloader.php";
 
 /**
@@ -25,7 +27,7 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
-class AgencyQueryTest extends PHPUnit_Framework_TestCase
+class AgencyQueryTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -37,7 +39,7 @@ class AgencyQueryTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->backend = new DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
+        $this->backend = new DataBackend_PDO(new \PDO('mysql:host=localhost;dbname=test', 'test'));
     }
 
     public function testOnlyID()
@@ -65,7 +67,7 @@ class AgencyQueryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException DataBackendException_IO_MissingAttributes
+     * @expectedException malkusch\bav\DataBackendException_IO_MissingAttributes
      */
     public function testNoID()
     {

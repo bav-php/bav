@@ -1,5 +1,7 @@
 <?php
 
+namespace malkusch\bav;
+
 /**
  * The DataBackend is an abstract class which is responsable for the
  * datastructure of the banks. If you want to use a custom datastructure

@@ -1,5 +1,7 @@
 <?php
 
+namespace malkusch\bav;
+
 /**
  * A bank can validate a bank account (Bank->isValid(String $account)) and
  * has a bank ID, a main agency (Bank->getMainAgency()) and optionally some

@@ -35,6 +35,6 @@ class FileDataBackendContainer extends DataBackendContainer
      */
     protected function makeDataBackend()
     {
-        return new \DataBackend_File($this->file);
+        return new DataBackend_File($this->file);
     }
 }

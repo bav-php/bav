@@ -96,7 +96,7 @@ class Configuration
     /**
      * Sets the encoding.
      */
-    public function setEncoding(\Encoding $encoding)
+    public function setEncoding(Encoding $encoding)
     {
         $this->encoding = $encoding;
     }

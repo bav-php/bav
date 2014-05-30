@@ -47,9 +47,9 @@ class UpdatePlanTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsOutdated($mtime, $time, $expectedIsOutdated)
     {
-        $file = tempnam(\DataBackend_File::getTempdir(), 'bavtest');
+        $file = tempnam(DataBackend_File::getTempdir(), 'bavtest');
         touch($file, strtotime($mtime));
-        $backend = new \DataBackend_File($file);
+        $backend = new DataBackend_File($file);
 
         TimeMock::setTime(strtotime($time));
 
@@ -65,7 +65,7 @@ class UpdatePlanTest extends \PHPUnit_Framework_TestCase
     public function testLogUpdatePlan()
     {
         $updatePlan = new LogUpdatePlan();
-        $updatePlan->perform(new \DataBackend_File());
+        $updatePlan->perform(new DataBackend_File());
     }
 
     /**
@@ -74,9 +74,9 @@ class UpdatePlanTest extends \PHPUnit_Framework_TestCase
      */
     public function testAutomaticUpdatePlanNotice()
     {
-        $file = tempnam(\DataBackend_File::getTempdir(), 'bavtest');
+        $file = tempnam(DataBackend_File::getTempdir(), 'bavtest');
         $updatePlan = new AutomaticUpdatePlan();
-        $updatePlan->perform(new \DataBackend_File($file));
+        $updatePlan->perform(new DataBackend_File($file));
     }
 
     /**
@@ -85,9 +85,9 @@ class UpdatePlanTest extends \PHPUnit_Framework_TestCase
      */
     public function testAutomaticUpdatePlan()
     {
-        $file = tempnam(\DataBackend_File::getTempdir(), 'bavtest');
+        $file = tempnam(DataBackend_File::getTempdir(), 'bavtest');
         touch($file, strtotime("-1 year"));
-        $backend = new \DataBackend_File($file);
+        $backend = new DataBackend_File($file);
 
         $updatePlan = new AutomaticUpdatePlan();
         $this->assertTrue($updatePlan->isOutdated($backend));

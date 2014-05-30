@@ -4,9 +4,11 @@ Version 1.0.0 - not yet released
     
     - added BAV_DataBackend::isInstalled()
 
-    - removed BAV::$encoding, BAV::setEncoding() and BAV::getEncoding()
+    - removed class BAV and BAV_Version
 
     - added support for automatic installation and update
+    
+    - using namespace malkusch\bav and removed the class prefix BAV_
 
 Version 0.28 - May 26, 2014
 ---------------------------

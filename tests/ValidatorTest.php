@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__ . "/../autoloader/autoloader.php";
+namespace malkusch\bav;
 
+require_once __DIR__ . "/../autoloader/autoloader.php";
 
 /**
  * check all validators in order to find errors
@@ -26,7 +27,7 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
-class ValidatorTest extends PHPUnit_Framework_TestCase
+class ValidatorTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -54,7 +55,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
             return;
 
         }
-        #self::$dataBackend = new DataBackend_PDO(new PDO('mysql:host=localhost;dbname=test', 'test'));
+        #self::$dataBackend = new DataBackend_PDO(new \PDO('mysql:host=localhost;dbname=test', 'test'));
         self::$dataBackend = new DataBackend_File();
 
 

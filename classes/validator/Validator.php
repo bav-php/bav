@@ -1,5 +1,7 @@
 <?php
 
+namespace malkusch\bav;
+
 /**
  * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
@@ -76,7 +78,8 @@ abstract class Validator
 
         }
         require_once $file;
-        return new $class($bank);
+        $nsClass = __NAMESPACE__ . "\\$class";
+        return new $nsClass($bank);
     }
 
     /**
