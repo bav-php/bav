@@ -10,6 +10,7 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
  *
  * @license GPL
  * @author Markus Malkusch <markus@malkusch.de>
+ * @large
  */
 class BackendTest extends \PHPUnit_Framework_TestCase
 {

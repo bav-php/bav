@@ -17,7 +17,6 @@ before_script:
     - php tests/bin/test-install.php
 
 script:
-    # - phpunit --exclude-group large tests/
+    - phpunit --exclude-group large tests/
     - phpcs --standard=PSR2 classes/ bin/ docs/example.php tests/classes/ tests/bin/
-    - phpunit tests/BackendTest.php
 
