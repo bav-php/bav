@@ -19,7 +19,6 @@ return array(
     'bav_bank' => '../classes/bank/BAV_Bank.php',
     'bav_agency' => '../classes/bank/BAV_Agency.php',
     'malkusch\bav\updateplan' => '../classes/dataBackend/update/UpdatePlan.php',
-    'bav_version' => '../classes/BAV_Version.php',
     'bav_testapi' => '../classes/verify/testAPI/BAV_TestAPI.php',
     'bav_encoding' => '../classes/encoding/BAV_Encoding.php',
     'malkusch\bav\bavexception' => '../classes/exception/BAVException.php',

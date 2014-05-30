@@ -15,46 +15,4 @@ use malkusch\bav\ConfigurationRegistry;
 abstract class BAV
 {
 
-    /**
-     * @return BAV_Version version of BAV
-     */
-    public static function getVersion()
-    {
-        return new BAV_Version('1.0.0');
-    }
-
-    /**
-     * @return BAV_Version version of BAV
-     * @deprecated 0.28
-     * @see getVersion()
-     */
-    public static function get_bav_version()
-    {
-        trigger_error("use getVersion()", E_USER_DEPRECATED);
-        return self::getVersion();
-    }
-
-    /**
-     * Returns the version of the API. Note that different BAV versions
-     * may have the same API version.
-     *
-     * @return BAV_Version version of BAV's API
-     */
-    public static function getApiVersion()
-    {
-        return new BAV_Version('2.6');
-    }
-
-    /**
-     * Returns the version of the API. Note that different BAV versions
-     * may have the same API version.
-     *
-     * @deprecated 0.28
-     * @return BAV_Version version of BAV's API
-     */
-    public static function get_bav_api_version()
-    {
-        trigger_error("use getApiVersion()", E_USER_DEPRECATED);
-        return self::getApiVersion();
-    }
 }
