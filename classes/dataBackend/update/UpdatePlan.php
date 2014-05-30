@@ -43,12 +43,17 @@ abstract class UpdatePlan
     public function isOutdated(\BAV_DataBackend $backend)
     {
         /*
-         * The following code creates a list with the release months (update month - $relaseThreshold)
-         * and the current month. Then sort that list and take the month before the current month as
-         * the current threshold.
+         * The following code creates a sorted list with the release months (update month - $relaseThreshold)
+         * and the current month. To build that threshold date simply pick the month before the current month from
+         * that list.
          * 
+         * Note that the second parameter of the date() calls is there on purpose. This allows
+         * to mock time() for testing.
+         */
+
+        /*
          * The current month gets an increment of 0.5 for the case that the current month is a 
-         * release month (e.g. the list will look (2, 3.5, 5, 8, 11)).
+         * release month (e.g. the list will look (2, 2.5, 5, 8, 11)).
          */
         $currentMonth = date("n", time()) + 0.5;
 
@@ -58,17 +63,19 @@ abstract class UpdatePlan
             $monthList[] = $releaseMonth;
 
         }
-        sort($monthList); // You have now something like (2, 3.5, 5, 8, 11).
+        sort($monthList); // You have now something like (2, 2.5, 5, 8, 11).
 
-        // Now reflect the cycle between the last and the first month(11, 2, 3.5, 5, 8, 11, 2).
-        $monthList[] = self::$updateMonths[0] - self::$relaseThreshold;
+        // Now add the cycle between the last and the first month(11, 2, 3.5, 5, 8, 11, 2).
+        $monthList[] = self::$updateMonths[0] - self::$relaseThreshold; // this is acually not needed.
         array_unshift($monthList, self::$updateMonths[count(self::$updateMonths) - 1] - self::$relaseThreshold);
         
         $index = array_search($currentMonth, $monthList);
-        assert($index !== false);
+        assert($index > 0);
         $previousIndex = $index - 1;
 
         $thresholdMonth = $monthList[$previousIndex];
+
+        // flip the year if the threshold was in the last year.
         $year = $thresholdMonth > $currentMonth ? date("Y", time()) - 1 : date("Y", time());
 
         $threshold = mktime(0, 0, 0, $thresholdMonth, 1, $year);

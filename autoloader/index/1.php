@@ -15,7 +15,7 @@
  */
 
 return array(
-    'malkusch\bav\timemoc' => '../tests/classes/TimeMoc.php',
+    'malkusch\bav\timemock' => '../tests/classes/TimeMock.php',
     'testsuite' => '../tests/TestSuite.php',
     'backendtest' => '../tests/BackendTest.php',
     'validatortest' => '../tests/ValidatorTest.php',

@@ -51,12 +51,12 @@ class UpdatePlanTest extends \PHPUnit_Framework_TestCase
         touch($file, strtotime($mtime));
         $backend = new \BAV_DataBackend_File($file);
 
-        TimeMoc::setTime(strtotime($time));
+        TimeMock::setTime(strtotime($time));
 
         $updatePlan = new AutomaticUpdatePlan();
         $this->assertEquals($expectedIsOutdated, $updatePlan->isOutdated($backend));
 
-        TimeMoc::disable();
+        TimeMock::disable();
     }
 
     /**

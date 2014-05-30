@@ -7,7 +7,7 @@ namespace malkusch\bav;
  */
 function time()
 {
-    return TimeMoc::time();
+    return TimeMock::time();
 }
 
 /**
@@ -16,7 +16,7 @@ function time()
  * @license GPL
  * @author Markus Malkusch <markus@malkusch.de>
  */
-class TimeMoc
+class TimeMock
 {
 
     /**
