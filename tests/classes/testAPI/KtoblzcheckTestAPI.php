@@ -47,6 +47,8 @@ class KtoblzcheckTestAPI extends TestAPI
     /**
      * Return true for known false positives.
      * 
+     * Version 1.45 has many false positives.
+     * 
      * @return true
      */
     public function ignoreTestCase(Bank $bank, $account)
@@ -55,6 +57,23 @@ class KtoblzcheckTestAPI extends TestAPI
             return true;
 
         }
+
+        /* In version 1.45 those do differ:
+         *
+         * bank: 28570092  method: 63  account: 5  bav: valid  kc: valid  ktoblzcheck: invalid
+         * bank: 76026000  method: C7  account: 5  bav: valid  kc: valid  ktoblzcheck: invalid
+         * bank: 30022000  method: 08  account: 5  bav: invalid  kc: invalid  ktoblzcheck: valid
+         * bank: 80063508  method: 09  account: 30  bav: valid  ktoblzcheck: invalid
+         * bank: 22230023  method: 68  account: 26  bav: invalid  kc: invalid  ktoblzcheck: valid
+         * AccountNumberCheck::check: Specified method 'E1' is unknown
+         * bank: 36050105  method: 78  account: 30  bav: invalid  kc: invalid  ktoblzcheck: valid
+         */
+        $falsePositives = array("63", "C7", "08", "09", "68", "E1", "78");
+        if (in_array($bank->getValidationType(), array($falsePositives))) {
+            return true;
+
+        }
+
         return parent::ignoreTestCase($bank, $account);
     }
     

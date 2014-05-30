@@ -190,18 +190,14 @@ class CrossProjectTest extends \PHPUnit_Framework_TestCase
             TestAPIResult::ERROR   => "error"
         );
 
-        $message = "{$bank->getBankID()}/{$bank->getValidationType()}\t"
-                 . str_pad($account, strlen($this->lastAccount)) . "\t";
+        $message = "bank: {$bank->getBankID()}  method: {$bank->getValidationType()}  account: $account";
 
         foreach ($results as $result) {
-            $message .= "{$result->getTestAPI()->getName()}: "
-                     .  str_pad($resultTranslation[$result->getResult()], 8);
+            $message .= "  {$result->getTestAPI()->getName()}: ". $resultTranslation[$result->getResult()];
             if ($result instanceof TestAPIErrorResult) {
                 $message .= " {$result->getMessage()}";
 
             }
-            $message .= "\t";
-
         }
 
         return $message;
