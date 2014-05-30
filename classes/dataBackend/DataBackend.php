@@ -132,7 +132,6 @@ abstract class DataBackend
      * method is called by Bank->getMainAgency(), if the Bank object doesn't know its
      * main agency.
      *
-     * @todo remove _getMainAgency() and make getMainAgency() abstract.
      * @throws DataBackendException
      * @return Agency
      * @see Bank::getMainAgency()
@@ -145,7 +144,6 @@ abstract class DataBackend
      * objects. This method is called by Bank->getAgencies(), if the Bank object doesn't
      * know its agencies. A bank may have no agencies and will return an empty array.
      *
-     * @todo remove _getAgencies() and make getAgenciesForBank() abstract.
      * @throws DataBackendException
      * @see Bank::getAgencies()
      * @return Agency[]

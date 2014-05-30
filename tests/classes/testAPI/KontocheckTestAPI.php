@@ -3,7 +3,7 @@
 namespace malkusch\bav;
 
 /**
- * The API for  Michael Plugge's kontocheck.
+ * The API for Michael Plugge's kontocheck.
  *
  * @license GPL
  * @author Markus Malkusch <markus@malkusch.de>
