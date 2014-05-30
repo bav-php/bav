@@ -504,11 +504,7 @@ class PDODataBackend extends DataBackend
 
         } catch (\PDOException $e) {
             $this->selectMainAgency->closeCursor();
-            var_dump(
-                $e->getMessage(),
-                $e->getCode()
-            );
-            throw new DataBackendIOException("XXX", 0, $e);
+            throw new DataBackendIOException($e->getMessage(), 0, $e);
 
         } catch (MissingAttributesDataBackendIOException $e) {
             $this->selectMainAgency->closeCursor();
