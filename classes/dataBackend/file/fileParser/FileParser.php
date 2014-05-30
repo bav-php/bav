@@ -3,7 +3,7 @@
 namespace malkusch\bav;
 
 /**
- * This class is responsable for I/O and formating which helps the DataBackend_File.
+ * This class is responsable for I/O and formating which helps the FileDataBackend.
  *
  *
  * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
@@ -97,8 +97,8 @@ class FileParser
     }
 
     /**
-     * @throws FileParserException_IO
-     * @throws FileParserException_FileNotExists
+     * @throws FileParserIOException
+     * @throws FileParserNotExistsException
      */
     private function init()
     {
@@ -109,10 +109,10 @@ class FileParser
         $this->fp = @fopen($this->file, 'r');
         if (! is_resource($this->fp)) {
             if (! file_exists($this->file)) {
-                throw new FileParserException_FileNotExists($this->file);
+                throw new FileParserNotExistsException($this->file);
 
             } else {
-                throw new FileParserException_IO();
+                throw new FileParserIOException();
 
             }
 
@@ -121,7 +121,7 @@ class FileParser
 
         $dummyLine = fgets($this->fp, 1024);
         if (! $dummyLine) {
-            throw new FileParserException_IO();
+            throw new FileParserIOException();
 
         }
         $this->lineLength = strlen($dummyLine);
@@ -129,7 +129,7 @@ class FileParser
         clearstatcache(); // filesize() seems to be 0 sometimes
         $filesize = filesize($this->file);
         if (! $filesize) {
-            throw new FileParserException_IO(
+            throw new FileParserIOException(
                 "Could not read filesize for '$this->file'."
             );
 
@@ -138,8 +138,8 @@ class FileParser
     }
 
     /**
-     * @throws FileParserException_IO
-     * @throws FileParserException_FileNotExists
+     * @throws FileParserIOException
+     * @throws FileParserNotExistsException
      * @return int
      */
     public function getLines()
@@ -149,34 +149,34 @@ class FileParser
     }
 
     /**
-     * @throws FileParserException_IO
-     * @throws FileParserException_FileNotExists
+     * @throws FileParserIOException
+     * @throws FileParserNotExistsException
      */
     public function rewind()
     {
         if (fseek($this->getFileHandle(), 0) === -1) {
-            throw new FileParserException_IO();
+            throw new FileParserIOException();
 
         }
     }
 
     /**
-     * @throws FileParserException_IO
-     * @throws FileParserException_FileNotExists
+     * @throws FileParserIOException
+     * @throws FileParserNotExistsException
      * @param int $line
      * @param int $offset
      */
     public function seekLine($line, $offset = 0)
     {
         if (fseek($this->getFileHandle(), $line * $this->lineLength + $offset) === -1) {
-            throw new FileParserException_IO();
+            throw new FileParserIOException();
 
         }
     }
 
     /**
-     * @throws FileParserException_IO
-     * @throws FileParserException_FileNotExists
+     * @throws FileParserIOException
+     * @throws FileParserNotExistsException
      * @param int $line
      * @return string
      */
@@ -187,8 +187,8 @@ class FileParser
     }
 
     /**
-     * @throws FileParserException_IO
-     * @throws FileParserException_FileNotExists
+     * @throws FileParserIOException
+     * @throws FileParserNotExistsException
      * @param int $line
      * @return string
      */
@@ -199,8 +199,8 @@ class FileParser
     }
 
     /**
-     * @throws FileParserException_FileNotExists
-     * @throws FileParserException_IO
+     * @throws FileParserNotExistsException
+     * @throws FileParserIOException
      * @return resource
      */
     public function getFileHandle()
@@ -210,8 +210,8 @@ class FileParser
     }
 
     /**
-     * @throws FileParserException_FileNotExists
-     * @throws FileParserException_IO
+     * @throws FileParserNotExistsException
+     * @throws FileParserIOException
      * @return int
      */
     public function getLineLength()
@@ -231,14 +231,14 @@ class FileParser
     }
 
     /**
-     * @throws FileParserException_ParseError
+     * @throws ParseException
      * @param string $line
      * @return Bank
      */
     public function getBank(DataBackend $dataBackend, $line)
     {
         if ($this->encoding->strlen($line) < self::TYPE_OFFSET + self::TYPE_LENGTH) {
-            throw new FileParserException_ParseError("Invalid line length in Line $line.");
+            throw new ParseException("Invalid line length in Line $line.");
 
         }
         $type   = $this->encoding->substr($line, self::TYPE_OFFSET, self::TYPE_LENGTH);
@@ -247,14 +247,14 @@ class FileParser
     }
 
     /**
-     * @throws FileParserException_ParseError
+     * @throws ParseException
      * @param string $line
      * @return Agency
      */
     public function getAgency(Bank $bank, $line)
     {
         if ($this->encoding->strlen($line) < self::ID_OFFSET + self::ID_LENGTH) {
-            throw new FileParserException_ParseError("Invalid line length.");
+            throw new ParseException("Invalid line length.");
 
         }
         $id   = trim($this->encoding->substr($line, self::ID_OFFSET, self::ID_LENGTH));
@@ -268,14 +268,14 @@ class FileParser
     }
 
     /**
-     * @throws FileParserException_ParseError
+     * @throws ParseException
      * @param string $line
      * @return bool
      */
     public function isMainAgency($line)
     {
         if ($this->encoding->strlen($line) < self::TYPE_OFFSET + self::TYPE_LENGTH) {
-            throw new FileParserException_ParseError("Invalid line length.");
+            throw new ParseException("Invalid line length.");
 
         }
         return $this->encoding->substr($line, self::ISMAIN_OFFSET, 1) === '1';

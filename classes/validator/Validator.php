@@ -65,7 +65,7 @@ abstract class Validator
     }
 
     /**
-     * @throws ValidatorException_NotExists
+     * @throws ValidatorNotExistsException
      * @return Validator
      */
     public static function getInstance(Bank $bank)
@@ -74,7 +74,7 @@ abstract class Validator
         $class = "Validator$type";
         $file  = __DIR__."/validators/$class.php";
         if (! file_exists($file)) {
-            throw new ValidatorException_NotExists($bank);
+            throw new ValidatorNotExistsException($bank);
 
         }
         require_once $file;
@@ -93,7 +93,7 @@ abstract class Validator
             $this->validate();
             return ltrim($account, "0") != "" && $this->getResult();
 
-        } catch (ValidatorException_OutOfBounds $e) {
+        } catch (ValidatorOutOfBoundsException $e) {
             return false;
 
         }
@@ -141,12 +141,12 @@ abstract class Validator
      *
      * @param int $pos
      * @return int
-     * @throws ValidatorException_OutOfBounds
+     * @throws ValidatorOutOfBoundsException
      */
     protected function getNormalizedPosition($pos)
     {
         if ($pos >= strlen($this->account) || $pos < -strlen($this->account)) {
-            throw new ValidatorException_OutOfBounds("Cannot access offset $pos in String $this->account");
+            throw new ValidatorOutOfBoundsException("Cannot access offset $pos in String $this->account");
 
         }
 
@@ -176,21 +176,21 @@ abstract class Validator
     }
 
     /**
-     * @throws ValidatorException_OutOfBounds
+     * @throws ValidatorOutOfBoundsException
      * @param int $int
      */
     protected function normalizeAccount($size)
     {
         $account = (string) $this->account;
         if (strlen($account) > $size) {
-            throw new ValidatorException_OutOfBounds("Can't normalize $account to size $size.");
+            throw new ValidatorOutOfBoundsException("Can't normalize $account to size $size.");
 
         }
         $this->account = str_repeat('0', $size - strlen($account)) . $account;
     }
 
     /**
-     * @throws ValidatorException_ESER
+     * @throws ValidatorESERException
      * @return string
      */
     protected function getESER8()
@@ -198,12 +198,12 @@ abstract class Validator
         $account = ltrim($this->account, '0');
 
         if (strlen($account) != 8) {
-            throw new ValidatorException_ESER();
+            throw new ValidatorESERException();
 
         }
         $bankID = $this->bank->getBankID();
         if ($bankID{3} != 5) {
-            throw new ValidatorException_ESER();
+            throw new ValidatorESERException();
 
         }
         $blzPart = ltrim(substr($bankID, 4), '0');
@@ -211,7 +211,7 @@ abstract class Validator
         $this->eserChecknumberOffset = -(4 - strlen($blzPart));
 
         if (empty($blzPart)) {
-            throw new ValidatorException_ESER();
+            throw new ValidatorESERException();
 
         }
         $accountPart = ltrim(substr($account, 2), '0');
@@ -221,7 +221,7 @@ abstract class Validator
     }
 
     /**
-     * @throws ValidatorException_ESER
+     * @throws ValidatorESERException
      * @return string
      */
     protected function getESER9()
@@ -231,11 +231,11 @@ abstract class Validator
 
 
         if (strlen($account) != 9) {
-            throw new ValidatorException_ESER();
+            throw new ValidatorESERException();
 
         }
         if ($bankID{3} != 5) {
-            throw new ValidatorException_ESER();
+            throw new ValidatorESERException();
 
         }
 

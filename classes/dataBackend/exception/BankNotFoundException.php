@@ -3,9 +3,6 @@
 namespace malkusch\bav;
 
 /**
- * This wrapper supports PHP's built-in functions for the ISO-8859-* encodings.
- *
- *
  * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -28,50 +25,25 @@ namespace malkusch\bav;
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class Encoding_ISO8859 extends Encoding
+class BankNotFoundException extends DataBackendException
 {
 
     /**
-     * @return bool
+     * @var string
      */
-    public static function isSupported($encoding)
+    private $bankID;
+
+    public function __construct($bankID)
     {
-        return preg_match('~^ISO-8859-([1-9]|1[0-5])$~', $encoding);
+        parent::__construct("bank $bankID not found");
+        $this->bankID = $bankID;
     }
 
     /**
-     * @return int length of $string
+     * @return string
      */
-    public function strlen($string)
+    public function getBankID()
     {
-        return strlen($string);
-    }
-
-    /**
-     * @param String $string
-     * @param int $offset
-     * @param int $length
-     * @return String
-     */
-    public function substr($string, $offset, $length = null)
-    {
-        return is_null($length)
-             ? substr($string, $offset)
-             : substr($string, $offset, $length);
-    }
-
-    /**
-     * @throws EncodingException
-     * @param String $string
-     * @param String $from_encoding
-     * @return $string the encoded string
-     */
-    public function convert($string, $from_encoding)
-    {
-        if ($from_encoding == $this->enc) {
-            return $string;
-
-        }
-        throw new EncodingException();
+        return $this->bankID;
     }
 }

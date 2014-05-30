@@ -25,7 +25,7 @@ namespace malkusch\bav;
  * https://github.com/jschaedl/Bav/blob/master/library/Bav/Validator/De/SystemE1.php
  */
 
-class ValidatorE1 extends ValidatorIteration_Weighted
+class ValidatorE1 extends WeightedIterationValidator
 {
 
     private static $subsitutions = array(48, 49, 50, 51, 52, 53, 54, 55, 56, 57);

@@ -25,7 +25,7 @@ namespace malkusch\bav;
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-abstract class ValidatorIteration_Transformation extends ValidatorIteration
+abstract class TransformationIterationValidator extends ValidatorIteration
 {
 
     /**

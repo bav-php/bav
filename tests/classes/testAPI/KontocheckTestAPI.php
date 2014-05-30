@@ -26,7 +26,7 @@ namespace malkusch\bav;
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
-class TestAPI_Kontocheck extends TestAPI
+class KontocheckTestAPI extends TestAPI
 {
 
     const NOT_INITIALIZED = -40;
@@ -56,9 +56,9 @@ class TestAPI_Kontocheck extends TestAPI
      * @param int $bank
      * @param int $account
      * @return bool
-     * @throws TestAPIException_Validation
-     * @throws TestAPIException_Validation_NotInitialized
-     * @throws TestAPIException_Validation_BankNotFound
+     * @throws ValidationTestAPIException
+     * @throws NotInitializedTestAPIException
+     * @throws BankNotFoundTestAPIException
      */
     protected function isValid(Bank $bank, $account)
     {
@@ -67,10 +67,10 @@ class TestAPI_Kontocheck extends TestAPI
         switch ($isValid) {
 
             case self::NOT_INITIALIZED:
-                throw new TestAPIException_Validation_NotInitialized("LUT not initialized");
+                throw new NotInitializedTestAPIException("LUT not initialized");
 
             case self::BANK_NOT_FOUND:
-                throw new TestAPIException_Validation_BankNotFound($bank->getBankID());
+                throw new BankNotFoundTestAPIException($bank->getBankID());
 
             case self::INVALID_NULL:
             case self::INVALID_KTO:
@@ -79,7 +79,7 @@ class TestAPI_Kontocheck extends TestAPI
 
             default:
                 if ($isValid < 0) {
-                    throw new TestAPIException_Validation("unknown code $isValid");
+                    throw new ValidationTestAPIException("unknown code $isValid");
 
                 }
                 return true;

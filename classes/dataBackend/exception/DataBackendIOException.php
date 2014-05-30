@@ -21,11 +21,11 @@ namespace malkusch\bav;
  *
  *
  * @package classes
- * @subpackage validator
+ * @subpackage dataBackend
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class ValidatorException_OutOfBounds extends ValidatorException
+class DataBackendIOException extends DataBackendException
 {
 
 }

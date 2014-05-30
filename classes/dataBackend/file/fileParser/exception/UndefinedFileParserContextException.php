@@ -25,27 +25,7 @@ namespace malkusch\bav;
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class FileParserException_FileNotExists extends FileParserException
+class UndefinedFileParserContextException extends FileParserContextException
 {
 
-    /**
-     * @var string
-     */
-    private $parsedFile = '';
-
-    /**
-     * @param string $file
-     */
-    public function __construct($parsedFile)
-    {
-        $this->parsedFile = $parsedFile;
-    }
-
-    /**
-     * @return string
-     */
-    public function getParsedFile()
-    {
-        return $this->parsedFile;
-    }
 }

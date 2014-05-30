@@ -9,7 +9,7 @@ namespace malkusch\bav;
  * @author Markus Malkusch <markus@malkusch.de>
  * @license GPL
  */
-class DataBackend_PDO extends DataBackend
+class PDODataBackend extends DataBackend
 {
 
     /**
@@ -95,8 +95,8 @@ class DataBackend_PDO extends DataBackend
      * If you don't, BAV needs to do one additional query for each object.
      *
      * @param string $sql
-     * @throws DataBackendException_IO_MissingAttributes
-     * @throws DataBackendException_IO
+     * @throws MissingAttributesDataBackendIOException
+     * @throws DataBackendIOException
      * @throws DataBackendException
      * @return Agency[]
      */
@@ -109,14 +109,14 @@ class DataBackend_PDO extends DataBackend
             foreach ($this->pdo->query($sql) as $result) {
                 if (! $this->isValidAgencyResult($result)) {
                     if (! array_key_exists('id', $result)) {
-                        throw new DataBackendException_IO_MissingAttributes();
+                        throw new MissingAttributesDataBackendIOException();
 
                     }
                     $this->selectAgency->execute(array(':agency' => $result['id']));
                     $result = $this->selectAgency->fetch(\PDO::FETCH_ASSOC);
                     $this->selectAgency->closeCursor();
                     if ($result === false) {
-                        throw new DataBackendException_IO();
+                        throw new DataBackendIOException();
 
                     }
                 }
@@ -125,7 +125,7 @@ class DataBackend_PDO extends DataBackend
                     $bankResult = $this->selectAgencysBank->fetch(\PDO::FETCH_ASSOC);
                     $this->selectAgencysBank->closeCursor();
                     if ($bankResult === false) {
-                        throw new DataBackendException_IO();
+                        throw new DataBackendIOException();
 
                     }
                     $result['bank'] = $bankResult['bank'];
@@ -137,9 +137,9 @@ class DataBackend_PDO extends DataBackend
             return $agencies;
 
         } catch (\PDOException $e) {
-            throw new DataBackendException_IO();
+            throw new DataBackendIOException();
 
-        } catch (DataBackendException_BankNotFound $e) {
+        } catch (BankNotFoundException $e) {
             throw new LogicException($e);
 
         }
@@ -194,7 +194,7 @@ class DataBackend_PDO extends DataBackend
     {
         $useTA = false;
         try {
-            $fileBackend = new DataBackend_File(tempnam(DataBackend_File::getTempdir(), 'bav'));
+            $fileBackend = new FileDataBackend(tempnam(FileDataBackend::getTempdir(), 'bav'));
             $fileBackend->install();
 
             $insertBank     = $this->pdo->prepare(
@@ -240,7 +240,7 @@ class DataBackend_PDO extends DataBackend
                         ));
 
                     }
-                } catch (DataBackendException_NoMainAgency $e) {
+                } catch (NoMainAgencyException $e) {
                     trigger_error(
                         "Skipping bank {$e->getBank()->getBankID()} without any main agency."
                     );
@@ -274,7 +274,7 @@ class DataBackend_PDO extends DataBackend
                 throw $e;
 
             } catch (\PDOException $e2) {
-                throw new DataBackendException_IO(
+                throw new DataBackendIOException(
                     get_class($e) . ": {$e->getMessage()}\nadditionally: {$e2->getMessage()}"
                 );
 
@@ -285,7 +285,7 @@ class DataBackend_PDO extends DataBackend
 
     /**
      * @see DataBackend::install()
-     * @throws DataBackendException_IO
+     * @throws DataBackendIOException
      */
     public function install()
     {
@@ -339,14 +339,14 @@ class DataBackend_PDO extends DataBackend
             $this->update();
 
         } catch (\PDOException $e) {
-            throw new DataBackendException_IO($e->getMessage());
+            throw new DataBackendIOException($e->getMessage());
 
         }
     }
 
     /**
      * @see DataBackend::uninstall()
-     * @throws DataBackendException_IO
+     * @throws DataBackendIOException
      */
     public function uninstall()
     {
@@ -356,7 +356,7 @@ class DataBackend_PDO extends DataBackend
             $this->pdo->exec("DROP TABLE {$this->prefix}meta");
 
         } catch (\PDOException $e) {
-            throw new DataBackendException_IO();
+            throw new DataBackendIOException();
 
         }
     }
@@ -381,9 +381,9 @@ class DataBackend_PDO extends DataBackend
             return array_values($this->instances);
 
         } catch (\PDOException $e) {
-            throw new DataBackendException_IO();
+            throw new DataBackendIOException();
 
-        } catch (DataBackendException_IO_MissingAttributes $e) {
+        } catch (MissingAttributesDataBackendIOException $e) {
             $this->selectBank->closeCursor();
             throw new LogicException($e);
 
@@ -392,7 +392,7 @@ class DataBackend_PDO extends DataBackend
 
     /**
      * @throws DataBackendException
-     * @throws DataBackendException_BankNotFound
+     * @throws BankNotFoundException
      * @param string $bankID
      * @return Bank
      * @see DataBackend::getNewBank()
@@ -405,7 +405,7 @@ class DataBackend_PDO extends DataBackend
             $result = $this->selectBank->fetch(\PDO::FETCH_ASSOC);
             if ($result === false) {
                 $this->selectBank->closeCursor();
-                throw new DataBackendException_BankNotFound($bankID);
+                throw new BankNotFoundException($bankID);
 
             }
             $this->selectBank->closeCursor();
@@ -413,9 +413,9 @@ class DataBackend_PDO extends DataBackend
 
         } catch (\PDOException $e) {
             $this->selectBank->closeCursor();
-            throw new DataBackendException_IO();
+            throw new DataBackendIOException();
 
-        } catch (DataBackendException_IO_MissingAttributes $e) {
+        } catch (MissingAttributesDataBackendIOException $e) {
             $this->selectBank->closeCursor();
             throw new LogicException($e);
 
@@ -447,12 +447,12 @@ class DataBackend_PDO extends DataBackend
 
     /**
      * @return Bank
-     * @throws DataBackendException_IO_MissingAttributes
+     * @throws MissingAttributesDataBackendIOException
      */
     private function getBankObject(Array $fetchedResult)
     {
         if (! $this->isValidBankResult($fetchedResult)) {
-            throw new DataBackendException_IO_MissingAttributes();
+            throw new MissingAttributesDataBackendIOException();
 
         }
         return new Bank($this, $fetchedResult['id'], $fetchedResult['validator']);
@@ -460,12 +460,12 @@ class DataBackend_PDO extends DataBackend
 
     /**
      * @return Agency
-     * @throws DataBackendException_IO_MissingAttributes
+     * @throws MissingAttributesDataBackendIOException
      */
     private function getAgencyObject(Bank $bank, Array $fetchedResult)
     {
         if (! $this->isValidAgencyResult($fetchedResult)) {
-            throw new DataBackendException_IO_MissingAttributes();
+            throw new MissingAttributesDataBackendIOException();
 
         }
         if (! array_key_exists($fetchedResult['id'], $this->agencies)) {
@@ -504,9 +504,9 @@ class DataBackend_PDO extends DataBackend
 
         } catch (\PDOException $e) {
             $this->selectMainAgency->closeCursor();
-            throw new DataBackendException_IO();
+            throw new DataBackendIOException();
 
-        } catch (DataBackendException_IO_MissingAttributes $e) {
+        } catch (MissingAttributesDataBackendIOException $e) {
             $this->selectMainAgency->closeCursor();
             throw new LogicException($e);
 
@@ -535,9 +535,9 @@ class DataBackend_PDO extends DataBackend
 
         } catch (\PDOException $e) {
             $this->selectAgencies->closeCursor();
-            throw new DataBackendException_IO();
+            throw new DataBackendIOException();
 
-        } catch (DataBackendException_IO_MissingAttributes $e) {
+        } catch (MissingAttributesDataBackendIOException $e) {
             $this->selectAgencies->closeCursor();
             throw new LogicException($e);
 
@@ -567,7 +567,7 @@ class DataBackend_PDO extends DataBackend
 
         } catch (\PDOException $e) {
             $this->selectMeta->closeCursor();
-            throw new DataBackendException_IO($e->getMessage(), $e->getCode(), $e);
+            throw new DataBackendIOException($e->getMessage(), $e->getCode(), $e);
 
         }
     }
@@ -593,7 +593,7 @@ class DataBackend_PDO extends DataBackend
 
         } catch (\PDOException $e) {
             $this->selectInstalled->closeCursor();
-            throw new DataBackendException_IO($e->getMessage(), $e->getCode(), $e);
+            throw new DataBackendIOException($e->getMessage(), $e->getCode(), $e);
 
         }
     }

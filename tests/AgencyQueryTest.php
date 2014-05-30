@@ -5,7 +5,7 @@ namespace malkusch\bav;
 require_once __DIR__ . "/../autoloader/autoloader.php";
 
 /**
- * check DataBackend_PDO->getAgencies($sql)
+ * check PDODataBackend->getAgencies($sql)
  *
  * Copyright (C) 2009  Markus Malkusch <markus@malkusch.de>
  *
@@ -31,7 +31,7 @@ class AgencyQueryTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var DataBackend_PDO
+     * @var PDODataBackend
      */
     private $backend;
 
@@ -39,7 +39,7 @@ class AgencyQueryTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->backend = new DataBackend_PDO(new \PDO('mysql:host=localhost;dbname=test', 'test'));
+        $this->backend = new PDODataBackend(new \PDO('mysql:host=localhost;dbname=test', 'test'));
     }
 
     public function testOnlyID()
@@ -67,7 +67,7 @@ class AgencyQueryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException malkusch\bav\DataBackendException_IO_MissingAttributes
+     * @expectedException malkusch\bav\MissingAttributesDataBackendIOException
      */
     public function testNoID()
     {

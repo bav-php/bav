@@ -26,7 +26,7 @@ namespace malkusch\bav;
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
-class TestAPI_Ktoblzcheck extends TestAPI
+class KtoblzcheckTestAPI extends TestAPI
 {
 
     const BINARY            = "ktoblzcheck";
@@ -62,9 +62,9 @@ class TestAPI_Ktoblzcheck extends TestAPI
     /**
      * @param int $account
      * @return bool
-     * @throws TestAPIException_Validation
-     * @throws TestAPIException_Validation_NotInitialized
-     * @throws TestAPIException_Validation_BankNotFound
+     * @throws ValidationTestAPIException
+     * @throws NotInitializedTestAPIException
+     * @throws BankNotFoundTestAPIException
      */
     protected function isValid(Bank $bank, $account)
     {
@@ -83,10 +83,10 @@ class TestAPI_Ktoblzcheck extends TestAPI
                 return false;
 
             case self::BANK_NOT_FOUND:
-                throw new TestAPIException_Validation_BankNotFound("Bank not found: {$bank->getBankID()}");
+                throw new BankNotFoundTestAPIException("Bank not found: {$bank->getBankID()}");
 
             default:
-                throw new TestAPIException_Validation("unknown code $result: " . implode("\n", $out));
+                throw new ValidationTestAPIException("unknown code $result: " . implode("\n", $out));
 
         }
     }

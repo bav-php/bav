@@ -21,30 +21,28 @@ namespace malkusch\bav;
  *
  *
  * @package classes
- * @subpackage dataBackend
+ * @subpackage validator
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class EncodingException_Unsupported extends EncodingException
+class ValidatorNotExistsException extends ValidatorException
 {
 
     /**
-     * @var String
+     * @var Bank
      */
-    private $encoding = '';
+    private $bank;
 
-    public function __construct($encoding)
+    public function __construct(Bank $bank)
     {
-        parent::__construct();
-
-        $this->encoding = $encoding;
+        $this->bank = $bank;
     }
 
     /**
-     * @return String
+     * @return Bank
      */
-    public function getEncoding()
+    public function getBank()
     {
-        return $this->encoding;
+        return $this->bank;
     }
 }

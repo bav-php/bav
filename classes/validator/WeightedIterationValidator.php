@@ -21,29 +21,43 @@ namespace malkusch\bav;
  *
  *
  * @package classes
- * @subpackage dataBackend
+ * @subpackage validator
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class DataBackendException_BankNotFound extends DataBackendException
+abstract class WeightedIterationValidator extends ValidatorIteration
 {
 
     /**
-     * @var string
+     * @var int
      */
-    private $bankID;
+    protected $divisor = 0;
 
-    public function __construct($bankID)
+    /**
+     * @var Array an array of rotating weights
+     */
+    private $weights = array();
+
+    /**
+     */
+    public function setWeights(Array $weights)
     {
-        parent::__construct("bank $bankID not found");
-        $this->bankID = $bankID;
+        $this->weights = $weights;
     }
 
     /**
-     * @return string
+     * @param int $divisor
      */
-    public function getBankID()
+    public function setDivisor($divisor)
     {
-        return $this->bankID;
+        $this->divisor = $divisor;
+    }
+
+    /**
+     * @return int
+     */
+    protected function getWeight()
+    {
+        return $this->weights[$this->i % count($this->weights)];
     }
 }

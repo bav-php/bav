@@ -65,13 +65,13 @@ class FileParserContext
     }
 
     /**
-     * @throws FileParserContextException_Undefined
+     * @throws UndefinedFileParserContextException
      * @return int
      */
     public function getStart()
     {
         if (is_null($this->start)) {
-            throw new FileParserContextException_Undefined();
+            throw new UndefinedFileParserContextException();
 
         }
         return $this->start;
@@ -86,13 +86,13 @@ class FileParserContext
     }
 
     /**
-     * @throws FileParserContextException_Undefined
+     * @throws UndefinedFileParserContextException
      * @return int
      */
     public function getEnd()
     {
         if (is_null($this->end)) {
-            throw new FileParserContextException_Undefined();
+            throw new UndefinedFileParserContextException();
 
         }
         return $this->end;

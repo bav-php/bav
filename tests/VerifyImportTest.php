@@ -43,13 +43,13 @@ class VerifyImportTest extends \PHPUnit_Framework_TestCase
     private $verifyArray = array();
 
     /**
-     * @var DataBackend_File
+     * @var FileDataBackend
      */
     private $databack;
 
     protected function setUp()
     {
-        $this->databack    = new DataBackend_File();
+        $this->databack    = new FileDataBackend();
         $this->verifyArray = parse_ini_file(__DIR__.'/../data/verify.ini', true);
 
         $this->assertInternalType(
@@ -86,7 +86,7 @@ class VerifyImportTest extends \PHPUnit_Framework_TestCase
 
                     }
 
-                } catch (DataBackendException_BankNotFound $e) {
+                } catch (BankNotFoundException $e) {
                     $notSupported[] = $type;
 
                 }
@@ -141,7 +141,7 @@ class VerifyImportTest extends \PHPUnit_Framework_TestCase
     private function getBank($validationType)
     {
         if (! isset($this->validationMap[$validationType])) {
-            throw new DataBackendException_BankNotFound($validationType);
+            throw new BankNotFoundException($validationType);
 
         }
         return $this->validationMap[$validationType];

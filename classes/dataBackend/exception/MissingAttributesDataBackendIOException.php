@@ -25,7 +25,7 @@ namespace malkusch\bav;
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class FileParserException_IO extends FileParserException
+class MissingAttributesDataBackendIOException extends DataBackendIOException
 {
 
 }

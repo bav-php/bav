@@ -21,11 +21,12 @@ namespace malkusch\bav;
  *
  *
  * @package classes
- * @subpackage dataBackend
+ * @subpackage class
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class FileParserException_ParseError extends FileParserException
+class ClassFileIOException extends ClassFileException
 {
+
 
 }

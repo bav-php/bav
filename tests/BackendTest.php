@@ -15,7 +15,7 @@ class BackendTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var DataBackend_File
+     * @var FileDataBackend
      */
     private static $referenceBackend;
 
@@ -24,7 +24,7 @@ class BackendTest extends \PHPUnit_Framework_TestCase
      */
     public static function classConstructor()
     {
-        self::$referenceBackend = new DataBackend_File();
+        self::$referenceBackend = new FileDataBackend();
     }
 
     /**
@@ -32,10 +32,10 @@ class BackendTest extends \PHPUnit_Framework_TestCase
      */
     public function provideBackends()
     {
-        $pdoBackend = new DataBackend_PDO(new \PDO('mysql:host=localhost;dbname=test', 'test'));
+        $pdoBackend = new PDODataBackend(new \PDO('mysql:host=localhost;dbname=test', 'test'));
         $this->setupBackend($pdoBackend);
 
-        $fileBackend = new DataBackend_File();
+        $fileBackend = new FileDataBackend();
         $this->setupBackend($fileBackend);
 
         return array(
@@ -57,10 +57,10 @@ class BackendTest extends \PHPUnit_Framework_TestCase
      */
     public function provideInstallationBackends()
     {
-        $pdoBackend = new DataBackend_PDO(new \PDO('mysql:host=localhost;dbname=test', 'test'), 'bavtest_');
+        $pdoBackend = new PDODataBackend(new \PDO('mysql:host=localhost;dbname=test', 'test'), 'bavtest_');
         $this->setupInstallationBackends($pdoBackend);
 
-        $fileBackend = new DataBackend_File(tempnam(DataBackend_File::getTempdir(), 'bavtest'));
+        $fileBackend = new FileDataBackend(tempnam(FileDataBackend::getTempdir(), 'bavtest'));
         $this->setupInstallationBackends($fileBackend);
 
         return array(

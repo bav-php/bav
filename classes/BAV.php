@@ -67,7 +67,7 @@ class BAV
             $bank = $this->getBank($bankID);
             return $bank->isValid($account);
 
-        } catch (DataBackendException_BankNotFound $e) {
+        } catch (BankNotFoundException $e) {
             return false;
 
         }
@@ -92,7 +92,7 @@ class BAV
      * This agency is not included in getAgencies().
      *
      * @throws DataBackendException
-     * @throws DataBackendException_BankNotFound
+     * @throws BankNotFoundException
      * @see Bank::getMainAgency()
      * @see getAgencies()
      * @return Agency
@@ -106,7 +106,7 @@ class BAV
      * A bank may have more agencies.
      *
      * @throws DataBackendException
-     * @throws DataBackendException_BankNotFound
+     * @throws BankNotFoundException
      * @return Agency[]
      */
     public function getAgencies($bankID)
@@ -119,7 +119,7 @@ class BAV
      * that a call to this method with an identical id will return the same
      * objects.
      *
-     * @throws DataBackendException_BankNotFound
+     * @throws BankNotFoundException
      * @throws DataBackendException
      * @param string $bankID
      * @return Bank

@@ -21,12 +21,11 @@ namespace malkusch\bav;
  *
  *
  * @package classes
- * @subpackage class
+ * @subpackage validator
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class ClassFileException_IO extends ClassFileException
+class ValidatorESERException extends ValidatorException
 {
-
 
 }

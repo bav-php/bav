@@ -21,11 +21,30 @@ namespace malkusch\bav;
  *
  *
  * @package classes
- * @subpackage validator
+ * @subpackage dataBackend
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class ValidatorException_ESER extends ValidatorException
+class UnsupportedEncodingException extends EncodingException
 {
 
+    /**
+     * @var String
+     */
+    private $encoding = '';
+
+    public function __construct($encoding)
+    {
+        parent::__construct();
+
+        $this->encoding = $encoding;
+    }
+
+    /**
+     * @return String
+     */
+    public function getEncoding()
+    {
+        return $this->encoding;
+    }
 }

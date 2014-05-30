@@ -54,9 +54,9 @@ class CrossProjectTest extends \PHPUnit_Framework_TestCase
         $ktoblzcheckPath = __DIR__ . "/../tmp/ktoblzcheck/ktoblzcheck-1.21/src";
 
         $this->testAPIs = array(
-            new TestAPI_BAV(),
-            new TestAPI_Kontocheck('/etc/blz.lut2', 2),
-            new TestAPI_Ktoblzcheck(
+            new BAVTestAPI(),
+            new KontocheckTestAPI('/etc/blz.lut2', 2),
+            new KtoblzcheckTestAPI(
                 "$ktoblzcheckPath/bankdata/bankdata.txt",
                 "$ktoblzcheckPath/bin/ktoblzcheck"
             )
@@ -69,7 +69,7 @@ class CrossProjectTest extends \PHPUnit_Framework_TestCase
     public function provideBanks()
     {
         $banks   = array();
-        $backend = new DataBackend_PDO(new \PDO('mysql:host=localhost;dbname=test', 'test'));
+        $backend = new PDODataBackend(new \PDO('mysql:host=localhost;dbname=test', 'test'));
         foreach ($backend->getAllBanks() as $bank) {
             $banks[] = array($bank);
 
@@ -100,7 +100,7 @@ class CrossProjectTest extends \PHPUnit_Framework_TestCase
                 }
             }
 
-        } catch (TestAPIException_Validation_BankNotFound $e) {
+        } catch (BankNotFoundTestAPIException $e) {
             return;
 
         } catch (Exception $e) {
@@ -152,7 +152,7 @@ class CrossProjectTest extends \PHPUnit_Framework_TestCase
         foreach ($results as $result) {
             $message .= "{$result->getTestAPI()->getName()}: "
                      .  str_pad($resultTranslation[$result->getResult()], 8);
-            if ($result instanceof TestAPIResult_Error) {
+            if ($result instanceof TestAPIErrorResult) {
                 $message .= " {$result->getMessage()}";
 
             }

@@ -170,26 +170,26 @@ class Agency
     }
 
     /**
-     * @throws AgencyException_UndefinedAttribute
+     * @throws UndefinedAttributeAgencyException
      * @return string
      */
     public function getPAN()
     {
         if (! $this->hasPAN()) {
-            throw new AgencyException_UndefinedAttribute($this, 'pan');
+            throw new UndefinedAttributeAgencyException($this, 'pan');
 
         }
         return $this->pan;
     }
 
     /**
-     * @throws AgencyException_UndefinedAttribute
+     * @throws UndefinedAttributeAgencyException
      * @return string
      */
     public function getBIC()
     {
         if (! $this->hasBIC()) {
-            throw new AgencyException_UndefinedAttribute($this, 'bic');
+            throw new UndefinedAttributeAgencyException($this, 'bic');
 
         }
         return $this->bic;

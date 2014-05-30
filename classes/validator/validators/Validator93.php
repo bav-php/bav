@@ -40,7 +40,7 @@ class Validator93 extends ValidatorChain
     }
 
     /**
-     * @throws ValidatorException_OutOfBounds
+     * @throws ValidatorOutOfBoundsException
      * @param int $int
      */
     protected function normalizeAccount($size)

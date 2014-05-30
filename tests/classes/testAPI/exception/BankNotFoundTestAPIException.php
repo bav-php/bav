@@ -3,7 +3,7 @@
 namespace malkusch\bav;
 
 /**
- * Copyright (C) 2010  Markus Malkusch <markus@malkusch.de>
+ * Copyright (C) 2009  Markus Malkusch <markus@malkusch.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,29 +21,11 @@ namespace malkusch\bav;
  *
  *
  * @package classes
- * @subpackage dataBackend
+ * @subpackage class
  * @author Markus Malkusch <markus@malkusch.de>
- * @copyright Copyright (C) 2010 Markus Malkusch
+ * @copyright Copyright (C) 2009 Markus Malkusch
  */
-class DataBackendException_NoMainAgency extends DataBackendException
+class BankNotFoundTestAPIException extends ValidationTestAPIException
 {
 
-    /**
-     * @var Bank
-     */
-    private $bank;
-
-    public function __construct(Bank $bank)
-    {
-        parent::__construct("bank {$bank->getBankID()} has no main agency.");
-        $this->bank = $bank;
-    }
-
-    /**
-     * @return Bank
-     */
-    public function getBank()
-    {
-        return $this->bank;
-    }
 }

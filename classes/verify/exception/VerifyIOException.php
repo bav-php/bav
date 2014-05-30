@@ -21,28 +21,11 @@ namespace malkusch\bav;
  *
  *
  * @package classes
- * @subpackage validator
+ * @subpackage verify
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class ValidatorException_NotExists extends ValidatorException
+class VerifyIOException extends VerifyException
 {
 
-    /**
-     * @var Bank
-     */
-    private $bank;
-
-    public function __construct(Bank $bank)
-    {
-        $this->bank = $bank;
-    }
-
-    /**
-     * @return Bank
-     */
-    public function getBank()
-    {
-        return $this->bank;
-    }
 }

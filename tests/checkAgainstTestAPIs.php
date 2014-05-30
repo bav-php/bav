@@ -2,6 +2,7 @@
 <?php
 
 namespace malkusch\bav;
+
 error_reporting(E_ALL);
 
 require_once __DIR__ . "/../autoloader/autoloader.php";
@@ -67,16 +68,16 @@ class CheckAgainstTestAPIs
     {
         $ktoblzcheckPath = __DIR__ . "/../tmp/ktoblzcheck/ktoblzcheck-1.21/src";
 
-        $this->testAPIs[] = new TestAPI_BAV();
-        $this->testAPIs[] = new TestAPI_Kontocheck('/etc/blz.lut', 2);
-        $this->testAPIs[] = new TestAPI_Ktoblzcheck(
+        $this->testAPIs[] = new BAVTestAPI();
+        $this->testAPIs[] = new KontocheckTestAPI('/etc/blz.lut', 2);
+        $this->testAPIs[] = new KtoblzcheckTestAPI(
             "$ktoblzcheckPath/bankdata/bankdata.txt",
             "$ktoblzcheckPath/bin/ktoblzcheck"
         );
 
 
-        #$backend = new DataBackend_File();
-        $backend = new DataBackend_PDO(new \PDO('mysql:host=localhost;dbname=test', 'test'));
+        #$backend = new FileDataBackend();
+        $backend = new PDODataBackend(new \PDO('mysql:host=localhost;dbname=test', 'test'));
 
 
         if (! empty($GLOBALS['argv'][1])) {
@@ -142,7 +143,7 @@ class CheckAgainstTestAPIs
 
                 $this->testedValidators[$bank->getValidationType()] = true;
 
-            } catch (TestAPIException_Validation_BankNotFound $e) {
+            } catch (BankNotFoundTestAPIException $e) {
                 continue;
 
             }
@@ -178,7 +179,7 @@ class CheckAgainstTestAPIs
         foreach ($results as $result) {
             echo "{$result->getTestAPI()->getName()}: ",
                  str_pad($resultTranslation[$result->getResult()], 8);
-            if ($result instanceof TestAPIResult_Error) {
+            if ($result instanceof TestAPIErrorResult) {
                 echo " {$result->getMessage()}";
 
             }

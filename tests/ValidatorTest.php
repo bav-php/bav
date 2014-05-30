@@ -46,8 +46,8 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     private static $knownBanks = array();
 
     /**
-     * @throws FileParserException_IO
-     * @throws FileParserException_FileNotExists
+     * @throws FileParserIOException
+     * @throws FileParserNotExistsException
      */
     protected function setUp()
     {
@@ -55,8 +55,8 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
             return;
 
         }
-        #self::$dataBackend = new DataBackend_PDO(new \PDO('mysql:host=localhost;dbname=test', 'test'));
-        self::$dataBackend = new DataBackend_File();
+        #self::$dataBackend = new PDODataBackend(new \PDO('mysql:host=localhost;dbname=test', 'test'));
+        self::$dataBackend = new FileDataBackend();
 
 
         foreach (self::$dataBackend->getAllBanks() as $bank) {
@@ -112,8 +112,8 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
      * and fills {@link $implementedBanks}.
      *
      * @param String $validatorType
-     * @throws ClassFileException_IO
-     * @throws ClassFileException_MissingClass
+     * @throws ClassFileIOException
+     * @throws MissingClassException
      * @dataProvider provideBanks
      */
     public function testFindParseErrors(Bank $bank)
@@ -131,8 +131,8 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
      * 0 - 0000000000 should always be invalid
      *
      * @param String $validatorType
-     * @throws ClassFileException_IO
-     * @throws ClassFileException_MissingClass
+     * @throws ClassFileIOException
+     * @throws MissingClassException
      * @dataProvider provideBanks
      */
     public function testNullIsInvalid(Bank $bank)
@@ -151,8 +151,8 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
      * Short accounts should not raise exception.
      *
      * @param int $account
-     * @throws ClassFileException_IO
-     * @throws ClassFileException_MissingClass
+     * @throws ClassFileIOException
+     * @throws MissingClassException
      * @dataProvider provideAccountsAndBanksInAllLengths
      */
     public function testAccountLength(Bank $bank, $account)
@@ -209,7 +209,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
             try {
                 $bank = self::$dataBackend->getBank($typeOrBankID);
 
-            } catch (DataBackendException_BankNotFound $e) {
+            } catch (BankNotFoundException $e) {
                 switch ($e->getBankID()) {
 
                     case '13051052':

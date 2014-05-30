@@ -37,13 +37,13 @@ abstract class Encoding
     protected $enc = 'UTF-8';
 
     /**
-     * @throws EncodingException_Unsupported
+     * @throws UnsupportedEncodingException
      * @param String $encoding
      */
     public function __construct($encoding = 'UTF-8')
     {
         if (! $this->isSupported($encoding)) {
-            throw new EncodingException_Unsupported($encoding);
+            throw new UnsupportedEncodingException($encoding);
 
         }
         $this->enc = $encoding;
@@ -80,23 +80,23 @@ abstract class Encoding
     }
 
     /**
-     * @throws EncodingException_Unsupported
+     * @throws UnsupportedEncodingException
      * @param String $encoding
      * @return Encoding
      */
     public static function getInstance($encoding)
     {
-        if (Encoding_Iconv::isSupported($encoding)) {
-            return new Encoding_Iconv($encoding);
+        if (IconvEncoding::isSupported($encoding)) {
+            return new IconvEncoding($encoding);
 
-        } elseif (Encoding_MB::isSupported($encoding)) {
-            return new Encoding_MB($encoding);
+        } elseif (MBEncoding::isSupported($encoding)) {
+            return new MBEncoding($encoding);
 
-        } elseif (Encoding_ISO8859::isSupported($encoding)) {
-            return new Encoding_ISO8859($encoding);
+        } elseif (ISO8859Encoding::isSupported($encoding)) {
+            return new ISO8859Encoding($encoding);
 
         } else {
-            throw new EncodingException_Unsupported($encoding);
+            throw new UnsupportedEncodingException($encoding);
 
         }
     }

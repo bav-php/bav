@@ -19,13 +19,36 @@ namespace malkusch\bav;
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- *
  * @package classes
- * @subpackage class
+ * @subpackage verify
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
-class TestAPIException_Validation extends TestAPIException
+class TestAPIErrorResult extends TestAPIResult
 {
 
+    /**
+     * @var String
+     */
+    private $message = '';
+
+    /**
+     * @param TestAPI $testAPI
+     * @param int $result
+     * @param String $message
+     */
+    public function __construct(TestAPI $testAPI, $result, $message = '')
+    {
+        parent::__construct($testAPI, $result);
+
+        $this->message = $message;
+    }
+
+    /**
+     * @return String
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
 }

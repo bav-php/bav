@@ -3,9 +3,7 @@
 namespace malkusch\bav;
 
 /**
- * The API for BAV itself.
- *
- * Copyright (C) 2009  Markus Malkusch <markus@malkusch.de>
+ * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,36 +19,33 @@ namespace malkusch\bav;
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
+ *
  * @package classes
- * @subpackage verify
+ * @subpackage dataBackend
  * @author Markus Malkusch <markus@malkusch.de>
- * @copyright Copyright (C) 2009 Markus Malkusch
+ * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class TestAPI_BAV extends TestAPI
+class FileParserNotExistsException extends FileParserException
 {
 
-    public function __construct()
-    {
-        parent::__construct();
+    /**
+     * @var string
+     */
+    private $parsedFile = '';
 
-        $this->setName("bav");
+    /**
+     * @param string $file
+     */
+    public function __construct($parsedFile)
+    {
+        $this->parsedFile = $parsedFile;
     }
 
     /**
-     * @param int $bankCode
-     * @param int $account
-     * @return bool
-     * @throws TestAPIException_Validation_BankNotFound
+     * @return string
      */
-    protected function isValid(Bank $bank, $account)
+    public function getParsedFile()
     {
-        try {
-            return $bank->isValid($account);
-
-        } catch (Exception $e) {
-            echo $e->getMessage(), "\n", $e->getTraceAsString();
-            exit(1);
-
-        }
+        return $this->parsedFile;
     }
 }

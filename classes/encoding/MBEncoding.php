@@ -29,7 +29,7 @@ namespace malkusch\bav;
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class Encoding_MB extends Encoding
+class MBEncoding extends Encoding
 {
 
     /**
@@ -42,7 +42,7 @@ class Encoding_MB extends Encoding
     }
 
     /**
-     * @throws EncodingException_Unsupported
+     * @throws UnsupportedEncodingException
      * @param String $encoding
      */
     public function __construct($encoding = 'UTF-8')

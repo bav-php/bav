@@ -62,7 +62,7 @@ class ClassFile
      * The constructor loads the class definition and parses it to initialize
      * {@link $parent} and {@link $neededClasses}.
      *
-     * @throws ClassFileException_MissingClass
+     * @throws MissingClassException
      * @param string $path
      */
     private function __construct($path)
@@ -83,7 +83,7 @@ class ClassFile
         preg_match_all(':extends +([a-zA-Z0-9_]+):', $this->getClassDefinition(), $matches);
         foreach ($matches[1] as $match) {
             if (! isset($this->neededClasses[$match])) {
-                throw new ClassFileException_MissingClass($this->name, $match);
+                throw new MissingClassException($this->name, $match);
 
             }
             $this->parent                  = $this->neededClasses[$match];
@@ -99,14 +99,14 @@ class ClassFile
         preg_match_all('/([a-zA-Z0-9_]+)::/', $this->getClassDefinition(), $matchesStatic);
         foreach (array_merge($matchesNew[1], $matchesStatic[1]) as $match) {
             if (! isset($this->neededClasses[$match])) {
-                throw new ClassFileException_MissingClass($this->name, $match);
+                throw new MissingClassException($this->name, $match);
 
             }
         }
     }
 
     /**
-     * @throws ClassFileException_MissingClass
+     * @throws MissingClassException
      * @param string $path
      * @return ClassFile
      */
@@ -120,8 +120,8 @@ class ClassFile
     }
 
     /**
-     * @throws ClassFileException_IO
-     * @throws ClassFileException_MissingClass
+     * @throws ClassFileIOException
+     * @throws MissingClassException
      * @param string $dir
      * @return array ClassFile objects
      */
@@ -130,7 +130,7 @@ class ClassFile
         $classFiles = array();
         $dh         = opendir($dir);
         if (! $dh) {
-            throw new ClassFileException_IO();
+            throw new ClassFileIOException();
 
         }
         while (($file = readdir($dh)) !== false) {
@@ -164,7 +164,7 @@ class ClassFile
     }
 
     /**
-     * @throws ClassFileException_IO
+     * @throws ClassFileIOException
      * @return string
      */
     public function getClassDefinition()
@@ -173,7 +173,7 @@ class ClassFile
             $this->classDefinition = '';
             $fp                    = fopen($this->path, 'r');
             if (! $fp) {
-                throw new ClassFileException_IO();
+                throw new ClassFileIOException();
 
             }
             $this->classDefinition = fread($fp, filesize($this->path));

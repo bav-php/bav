@@ -29,7 +29,7 @@ class DefaultConfiguration extends Configuration
         try {
             $encoding = Encoding::getInstance("UTF-8");
 
-        } catch (EncodingException_Unsupported $e) {
+        } catch (UnsupportedEncodingException $e) {
             trigger_error("UTF-8 is not supported; bav is falling back to ISO-8859-15", E_WARNING);
             $encoding = Encoding::getInstance("ISO-8859-15");
 

@@ -38,7 +38,7 @@ abstract class TestAPI
     /**
      * @param int $account
      * @return bool
-     * @throws TestAPIException_Validation
+     * @throws ValidationTestAPIException
      */
     abstract protected function isValid(Bank $bank, $account);
 
@@ -68,7 +68,7 @@ abstract class TestAPI
             return new TestAPIResult($this, $result);
 
         } catch (Exception $e) {
-            return new TestAPIResult_Error(
+            return new TestAPIErrorResult(
                 $this,
                 TestAPIResult::ERROR,
                 $e->getMessage()

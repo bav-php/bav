@@ -25,7 +25,28 @@ namespace malkusch\bav;
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-class DataBackendException_IO_MissingAttributes extends DataBackendException_IO
+class UndefinedAttributeAgencyException extends AgencyException
 {
 
+    /**
+     * @var string
+     */
+    private $attribute = '';
+
+    /**
+     * @param string $attribute
+     */
+    public function __construct(Agency $agency, $attribute)
+    {
+        parent::__construct($agency);
+        $this->attribute = $attribute;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAttribute()
+    {
+        return $this->attribute;
+    }
 }

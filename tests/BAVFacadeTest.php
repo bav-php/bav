@@ -29,7 +29,7 @@ class BAVFacadeTest extends \PHPUnit_Framework_TestCase
     /**
      * Tests BAV::getBank();
      *
-     * @expectedException malkusch\bav\DataBackendException_BankNotFound
+     * @expectedException malkusch\bav\BankNotFoundException
      * @see BAV::getBank();
      */
     public function testFailGetBank()
@@ -41,7 +41,7 @@ class BAVFacadeTest extends \PHPUnit_Framework_TestCase
     /**
      * Tests BAV::getAgencies();
      *
-     * @expectedException malkusch\bav\DataBackendException_BankNotFound
+     * @expectedException malkusch\bav\BankNotFoundException
      * @see BAV::getAgencies();
      */
     public function testFailGetAgencies()
@@ -93,7 +93,7 @@ class BAVFacadeTest extends \PHPUnit_Framework_TestCase
     /**
      * Tests BAV::getMainAgency();
      *
-     * @expectedException malkusch\bav\DataBackendException_BankNotFound
+     * @expectedException malkusch\bav\BankNotFoundException
      * @see BAV::getMainAgency();
      */
     public function testFailGetMainAgency()

@@ -71,7 +71,7 @@ abstract class DataBackend
      * that a call to this method with an identical id will return the same
      * objects.
      *
-     * @throws DataBackendException_BankNotFound
+     * @throws BankNotFoundException
      * @throws DataBackendException
      * @param string
      * @return Bank
@@ -98,7 +98,7 @@ abstract class DataBackend
             $this->getBank($bankID);
             return true;
 
-        } catch (DataBackendException_BankNotFound $e) {
+        } catch (BankNotFoundException $e) {
             return false;
 
         }
@@ -117,11 +117,11 @@ abstract class DataBackend
     /**
      * This method will be called by getBank() if getBank() thinks it is necessary to
      * create a new object. You have to return the new object and have not to take care
-     * about $instances. getBank() cares about $instances. Throw a DataBackendException_BankNotFound
+     * about $instances. getBank() cares about $instances. Throw a BankNotFoundException
      * if the bank does not exist.
      *
      * @throws DataBackendException
-     * @throws DataBackendException_BankNotFound if the bank does not exist
+     * @throws BankNotFoundException if the bank does not exist
      * @param string
      * @return Bank
      */

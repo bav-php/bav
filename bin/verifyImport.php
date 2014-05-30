@@ -38,11 +38,11 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
 
 
 /**
- * This works only if you have called DataBackend_File->install(). That
+ * This works only if you have called FileDataBackend->install(). That
  * means there must exist a ../data/banklist.txt. If this does not apply to
  * you, you have to change these lines.
  */
-$databack = new DataBackend_File();
+$databack = new FileDataBackend();
 
 
 $importer = new VerifyImport($databack);

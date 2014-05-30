@@ -27,7 +27,7 @@ namespace malkusch\bav;
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2011 Markus Malkusch
  */
-class ValidatorD7 extends ValidatorIteration_Weighted
+class ValidatorD7 extends WeightedIterationValidator
 {
 
     public function __construct(Bank $bank)

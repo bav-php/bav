@@ -3,7 +3,7 @@
 namespace malkusch\bav;
 
 /**
- * Container for DataBackend_PDO objects.
+ * Container for PDODataBackend objects.
  * 
  * @author Markus Malkusch <markus@malkusch.de>
  * @license GPL
@@ -37,10 +37,10 @@ class PDODataBackendContainer extends DataBackendContainer
      * Returns the unconfigured backend which is only created by calling the
      * constructor.
      *
-     * @return DataBackend_PDO
+     * @return PDODataBackend
      */
     protected function makeDataBackend()
     {
-        return new DataBackend_PDO($this->pdo, $this->prefix);
+        return new PDODataBackend($this->pdo, $this->prefix);
     }
 }

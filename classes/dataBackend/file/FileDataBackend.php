@@ -10,7 +10,7 @@ namespace malkusch\bav;
  * @author Markus Malkusch <markus@malkusch.de>
  * @license GPL
  */
-class DataBackend_File extends DataBackend
+class FileDataBackend extends DataBackend
 {
 
     const DOWNLOAD_URI = "http://www.bundesbank.de/Redaktion/DE/Standardartikel/Aufgaben/Unbarer_Zahlungsverkehr/bankleitzahlen_download.html";
@@ -52,14 +52,14 @@ class DataBackend_File extends DataBackend
      * Be aware that this needs some amount of memory.
      *
      * @param String $file
-     * @throws DataBackendException_IO
+     * @throws DataBackendIOException
      */
     private function sortFile($file)
     {
         //read the unordered bank file
         $lines = file($file);
         if (! is_array($lines) || empty($lines)) {
-            throw new DataBackendException_IO("Could not read lines in '$file'.");
+            throw new DataBackendIOException("Could not read lines in '$file'.");
 
         }
 
@@ -76,7 +76,7 @@ class DataBackend_File extends DataBackend
         $temp    = tempnam(self::getTempdir(), "");
         $tempH   = fopen($temp, 'w');
         if (! ($temp && $tempH)) {
-            throw new DataBackendException_IO("Could not open a temporary file.");
+            throw new DataBackendIOException("Could not open a temporary file.");
 
         }
         foreach (array_keys($index) as $line) {
@@ -84,7 +84,7 @@ class DataBackend_File extends DataBackend
 
             $writtenBytes = fputs($tempH, $data);
             if ($writtenBytes != strlen($data)) {
-                throw new DataBackendException_IO("Could not write sorted data: '$data' into $temp.");
+                throw new DataBackendIOException("Could not write sorted data: '$data' into $temp.");
 
             }
 
@@ -95,19 +95,19 @@ class DataBackend_File extends DataBackend
 
     /**
      * @see DataBackend::uninstall()
-     * @throws DataBackendException_IO
+     * @throws DataBackendIOException
      */
     public function uninstall()
     {
         if (! unlink($this->parser->getFile())) {
-            throw new DataBackendException_IO();
+            throw new DataBackendIOException();
 
         }
     }
 
     /**
      * @see DataBackend::install()
-     * @throws DataBackendException_IO
+     * @throws DataBackendIOException
      */
     public function install()
     {
@@ -119,20 +119,20 @@ class DataBackend_File extends DataBackend
      * TODO: test this with a proxy
      *
      * @see DataBackend::update()
-     * @throws DataBackendException_IO
+     * @throws DataBackendIOException
      */
     public function update()
     {
         $ch = curl_init(self::DOWNLOAD_URI);
         if (! is_resource($ch)) {
-            throw new DataBackendException_IO();
+            throw new DataBackendIOException();
 
         }
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $content = curl_exec($ch);
         $curl_info = curl_getinfo($ch);
         if ($curl_info['http_code'] >= 400) {
-            throw new DataBackendException_IO(
+            throw new DataBackendIOException(
                 sprintf(
                     "Failed to download '%s'. HTTP Code: %d",
                     self::DOWNLOAD_URI,
@@ -141,7 +141,7 @@ class DataBackend_File extends DataBackend
             );
         }
         if (! $content) {
-            throw new DataBackendException_IO(
+            throw new DataBackendIOException(
                 "Failed to download '" . self::DOWNLOAD_URI . "'."
             );
 
@@ -168,7 +168,7 @@ class DataBackend_File extends DataBackend
         $temp    = tempnam(self::getTempdir(), "");
         $tempH   = fopen($temp, 'w');
         if (! ($temp && $tempH)) {
-            throw new DataBackendException_IO();
+            throw new DataBackendIOException();
 
         }
         $path = $isZIP ? $zipMatches[1] : $txtMatches[1];
@@ -198,7 +198,7 @@ class DataBackend_File extends DataBackend
         if (! curl_exec($ch)) {
             fclose($tempH);
             unlink($temp);
-            throw new DataBackendException_IO(curl_error($ch), curl_errno($ch));
+            throw new DataBackendIOException(curl_error($ch), curl_errno($ch));
 
         }
         fclose($tempH);
@@ -208,13 +208,13 @@ class DataBackend_File extends DataBackend
             $file = tempnam(self::getTempdir(), "");
             if (! $file) {
                 unlink($temp);
-                throw new DataBackendException_IO();
+                throw new DataBackendIOException();
 
             }
             system('unzip -qqp '.$temp.' > '.$file, $error);
             if (! unlink($temp) || $error !== 0) {
                 unlink($file);
-                throw new DataBackendException_IO();
+                throw new DataBackendIOException();
 
             }
 
@@ -240,7 +240,7 @@ class DataBackend_File extends DataBackend
      *
      * @param String $source path of the source
      * @param String $destination path of the destination
-     * @throws DataBackendException_IO
+     * @throws DataBackendIOException
      */
     private function safeRename($source, $destination)
     {
@@ -255,7 +255,7 @@ class DataBackend_File extends DataBackend
 
         $isCopied = copy($source, $tempFileOnSameFS);
         if (! $isCopied) {
-            throw new DataBackendException_IO(
+            throw new DataBackendIOException(
                 "failed to copy $source to $tempFileOnSameFS."
             );
 
@@ -269,7 +269,7 @@ class DataBackend_File extends DataBackend
 
         $isRenamed = rename($tempFileOnSameFS, $destination);
         if (! $isRenamed) {
-            throw new DataBackendException_IO(
+            throw new DataBackendIOException(
                 "failed to rename $tempFileOnSameFS to $destination."
             );
 
@@ -277,7 +277,7 @@ class DataBackend_File extends DataBackend
     }
 
     /**
-     * @throws DataBackendException_IO
+     * @throws DataBackendIOException
      * @throws DataBackendException
      * @return Bank[]
      * @see DataBackend::getAllBanks()
@@ -297,8 +297,8 @@ class DataBackend_File extends DataBackend
             }
             return array_values($this->instances);
 
-        } catch (FileParserException_IO $e) {
-            throw new DataBackendException_IO();
+        } catch (FileParserIOException $e) {
+            throw new DataBackendIOException();
 
         } catch (FileParserException $e) {
             throw new DataBackendException();
@@ -307,8 +307,8 @@ class DataBackend_File extends DataBackend
     }
 
     /**
-     * @throws DataBackendException_IO
-     * @throws DataBackendException_BankNotFound
+     * @throws DataBackendIOException
+     * @throws BankNotFoundException
      * @param String $bankID
      * @see DataBackend::getNewBank()
      * @return Bank
@@ -334,15 +334,15 @@ class DataBackend_File extends DataBackend
             }
 
         } catch (FileParserException $e) {
-            throw new DataBackendException_IO();
+            throw new DataBackendIOException();
 
         }
     }
 
     /**
-     * @throws DataBackendException_BankNotFound
-     * @throws FileParserException_ParseError
-     * @throws FileParserException_IO
+     * @throws BankNotFoundException
+     * @throws ParseException
+     * @throws FileParserIOException
      * @param int $bankID
      * @param int $offset the line number to start
      * @param int $length the line count
@@ -351,7 +351,7 @@ class DataBackend_File extends DataBackend
     private function findBank($bankID, $offset, $end)
     {
         if ($end - $offset < 0) {
-            throw new DataBackendException_BankNotFound($bankID);
+            throw new BankNotFoundException($bankID);
 
         }
         $line = $offset + (int)(($end - $offset) / 2);
@@ -364,7 +364,7 @@ class DataBackend_File extends DataBackend
             try {
                 return $this->findBank($bankID, $offset, $line - 1);
 
-            } catch (DataBackendException_BankNotFound $e) {
+            } catch (BankNotFoundException $e) {
                 return $this->findBank($bankID, $line + 1, $end);
 
             }
@@ -389,7 +389,7 @@ class DataBackend_File extends DataBackend
     /**
      * @see DataBackend::getMainAgency()
      * @throws DataBackendException
-     * @throws DataBackendException_NoMainAgency
+     * @throws NoMainAgencyException
      * @return Agency
      */
     public function getMainAgency(Bank $bank)
@@ -404,15 +404,15 @@ class DataBackend_File extends DataBackend
                 }
             }
             // Maybe there are banks without a main agency
-            throw new DataBackendException_NoMainAgency($bank);
+            throw new NoMainAgencyException($bank);
 
-        } catch (FileParserContextException_Undefined $e) {
+        } catch (UndefinedFileParserContextException $e) {
             throw new LogicException("Start and end should be defined.");
 
-        } catch (FileParserException_IO $e) {
-            throw new DataBackendException_IO("Parser Exception at bank {$bank->getBankID()}");
+        } catch (FileParserIOException $e) {
+            throw new DataBackendIOException("Parser Exception at bank {$bank->getBankID()}");
 
-        } catch (FileParserException_ParseError $e) {
+        } catch (ParseException $e) {
             throw new DataBackendException(get_class($e) . ": " . $e->getMessage());
 
         }
@@ -420,7 +420,7 @@ class DataBackend_File extends DataBackend
 
     /**
      * @see DataBackend::getAgenciesForBank()
-     * @throws DataBackendException_IO
+     * @throws DataBackendIOException
      * @throws DataBackendException
      * @return Agency[]
      */
@@ -438,13 +438,13 @@ class DataBackend_File extends DataBackend
             }
             return $agencies;
 
-        } catch (FileParserContextException_Undefined $e) {
+        } catch (UndefinedFileParserContextException $e) {
             throw new LogicException("Start and end should be defined.");
 
-        } catch (FileParserException_IO $e) {
-            throw new DataBackendException_IO();
+        } catch (FileParserIOException $e) {
+            throw new DataBackendIOException();
 
-        } catch (FileParserException_ParseError $e) {
+        } catch (ParseException $e) {
             throw new DataBackendException();
 
         }
@@ -490,7 +490,7 @@ class DataBackend_File extends DataBackend
     }
 
     /**
-     * @throws DataBackendException_IO
+     * @throws DataBackendIOException
      * @return String a writable directory for temporary files
      */
     public static function getTempdir()
@@ -519,7 +519,7 @@ class DataBackend_File extends DataBackend
 
         }
 
-        throw new DataBackendException_IO();
+        throw new DataBackendIOException();
     }
 
     /**

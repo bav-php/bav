@@ -117,7 +117,7 @@ class VerifyImport
      * @param string $bankID
      * @param string $accountID
      * @param bool $isValid if $accountID should be valid or not. Defaults to TRUE for valid.
-     * @throws DataBackendException_BankNotFound
+     * @throws BankNotFoundException
      * @throws DataBackendException
      */
     public function import($bankID, $accountID, $isValid = true)
@@ -150,14 +150,14 @@ class VerifyImport
 
     /**
      * @param string $filePath The file where the arrays are saved (default's to ../../data/verify.ini)
-     * @throws VerifyException_IO
+     * @throws VerifyIOException
      */
     public function save($file = null)
     {
         $file = $this->getFile($file);
         $fp   = fopen($file, 'w');
         if (! is_resource($fp)) {
-            throw new VerifyException_IO("Could not open $file.");
+            throw new VerifyIOException("Could not open $file.");
 
         }
         try {
@@ -165,7 +165,7 @@ class VerifyImport
             $this->saveArray($fp, $this->validNumbers, 'valid');
             fclose($fp);
 
-        } catch (VerifyException_IO $e) {
+        } catch (VerifyIOException $e) {
             fclose($fp);
             throw $e;
 
@@ -176,12 +176,12 @@ class VerifyImport
      * @param Resource $fp Filepointer
      * @param Array $array Array with bank IDs
      * @param String $name Name of the section
-     * @throws VerifyException_IO
+     * @throws VerifyIOException
      */
     private function saveArray($fp, Array $array, $name)
     {
         if (! fwrite($fp, "\n\n".'['.$name.']')) {
-            throw new VerifyException_IO();
+            throw new VerifyIOException();
 
         }
         ksort($array);
@@ -192,12 +192,12 @@ class VerifyImport
 
             }
             if (! fwrite($fp, "\n".'    '.$type.' = ')) {
-                throw new VerifyException_IO();
+                throw new VerifyIOException();
 
             }
             $line = implode(', ', array_unique($numbers));
             if (fwrite($fp, $line, strlen($line)) !== strlen($line)) {
-                throw new VerifyException_IO();
+                throw new VerifyIOException();
 
             }
 
@@ -207,7 +207,7 @@ class VerifyImport
     /**
      * @param String $bankID
      * @return String
-     * @throws DataBackendException_BankNotFound
+     * @throws BankNotFoundException
      * @throws DataBackendException
      */
     private function bankIDToType($bankID)

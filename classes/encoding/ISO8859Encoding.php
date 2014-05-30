@@ -3,6 +3,9 @@
 namespace malkusch\bav;
 
 /**
+ * This wrapper supports PHP's built-in functions for the ISO-8859-* encodings.
+ *
+ *
  * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -21,43 +24,54 @@ namespace malkusch\bav;
  *
  *
  * @package classes
- * @subpackage validator
+ * @subpackage dataBackend
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
-abstract class ValidatorIteration_Weighted extends ValidatorIteration
+class ISO8859Encoding extends Encoding
 {
 
     /**
-     * @var int
+     * @return bool
      */
-    protected $divisor = 0;
-
-    /**
-     * @var Array an array of rotating weights
-     */
-    private $weights = array();
-
-    /**
-     */
-    public function setWeights(Array $weights)
+    public static function isSupported($encoding)
     {
-        $this->weights = $weights;
+        return preg_match('~^ISO-8859-([1-9]|1[0-5])$~', $encoding);
     }
 
     /**
-     * @param int $divisor
+     * @return int length of $string
      */
-    public function setDivisor($divisor)
+    public function strlen($string)
     {
-        $this->divisor = $divisor;
+        return strlen($string);
     }
 
     /**
-     * @return int
+     * @param String $string
+     * @param int $offset
+     * @param int $length
+     * @return String
      */
-    protected function getWeight()
+    public function substr($string, $offset, $length = null)
     {
-        return $this->weights[$this->i % count($this->weights)];
+        return is_null($length)
+             ? substr($string, $offset)
+             : substr($string, $offset, $length);
+    }
+
+    /**
+     * @throws EncodingException
+     * @param String $string
+     * @param String $from_encoding
+     * @return $string the encoded string
+     */
+    public function convert($string, $from_encoding)
+    {
+        if ($from_encoding == $this->enc) {
+            return $string;
+
+        }
+        throw new EncodingException();
     }
 }
