@@ -32,7 +32,7 @@ class BackendTest extends \PHPUnit_Framework_TestCase
      */
     public function provideBackends()
     {
-        $pdoBackend = new PDODataBackend(new \PDO('mysql:host=localhost;dbname=test', 'test'));
+        $pdoBackend = new PDODataBackend(PDOFactory::makePDO());
         $this->setupBackend($pdoBackend);
 
         $fileBackend = new FileDataBackend();
@@ -57,7 +57,7 @@ class BackendTest extends \PHPUnit_Framework_TestCase
      */
     public function provideInstallationBackends()
     {
-        $pdoBackend = new PDODataBackend(new \PDO('mysql:host=localhost;dbname=test', 'test'), 'bavtest_');
+        $pdoBackend = new PDODataBackend(PDOFactory::makePDO(), 'bavtest_');
         $this->setupInstallationBackends($pdoBackend);
 
         $fileBackend = new FileDataBackend(tempnam(FileDataBackend::getTempdir(), 'bavtest'));

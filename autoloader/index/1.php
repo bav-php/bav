@@ -17,7 +17,9 @@
 return array(
     'malkusch\bav\testapi' => '../tests/classes/testAPI/TestAPI.php',
     'malkusch\bav\timemock' => '../tests/classes/TimeMock.php',
+    'malkusch\bav\issuetest' => '../tests/IssueTest.php',
     'malkusch\bav\classfile' => '../tests/classes/class/ClassFile.php',
+    'malkusch\bav\pdofactory' => '../tests/classes/PDOFactory.php',
     'malkusch\bav\bavtestapi' => '../tests/classes/testAPI/BAVTestAPI.php',
     'malkusch\bav\backendtest' => '../tests/BackendTest.php',
     'malkusch\bav\bavfacadetest' => '../tests/BAVFacadeTest.php',

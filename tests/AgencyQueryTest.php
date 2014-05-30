@@ -39,7 +39,7 @@ class AgencyQueryTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->backend = new PDODataBackend(new \PDO('mysql:host=localhost;dbname=test', 'test'));
+        $this->backend = new PDODataBackend(PDOFactory::makePDO());
     }
 
     public function testOnlyID()

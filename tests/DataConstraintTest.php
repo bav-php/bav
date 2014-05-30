@@ -18,7 +18,7 @@ class DataConstraintTest extends \PHPUnit_Framework_TestCase
     public static function setUpBeforeClass()
     {
 
-        self::$pdo = new \PDO('mysql:host=localhost;dbname=test', 'test');
+        self::$pdo = PDOFactory::makePDO();
         self::$pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
         self::$pdo->exec("DROP TABLE IF EXISTS bank");

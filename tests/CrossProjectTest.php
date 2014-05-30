@@ -107,7 +107,7 @@ class CrossProjectTest extends \PHPUnit_Framework_TestCase
         self::assertGreaterThan(self::$nodeNumber, self::$nodeCount);
 
         $banks   = array();
-        $backend = new PDODataBackend(new \PDO('mysql:host=localhost;dbname=test', 'test'));
+        $backend = new PDODataBackend(PDOFactory::makePDO());
         $i = 0;
         foreach ($backend->getAllBanks() as $bank) {
             // only pick banks for this node.
