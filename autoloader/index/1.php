@@ -17,7 +17,6 @@
 return array(
     'malkusch\bav\testapi' => '../tests/classes/testAPI/TestAPI.php',
     'malkusch\bav\timemock' => '../tests/classes/TimeMock.php',
-    'malkusch\bav\testsuite' => '../tests/TestSuite.php',
     'malkusch\bav\classfile' => '../tests/classes/class/ClassFile.php',
     'malkusch\bav\bavtestapi' => '../tests/classes/testAPI/BAVTestAPI.php',
     'malkusch\bav\backendtest' => '../tests/BackendTest.php',
@@ -39,6 +38,7 @@ return array(
     'malkusch\bav\classfileioexception' => '../tests/classes/class/exception/ClassFileIOException.php',
     'malkusch\bav\missingclassexception' => '../tests/classes/class/exception/MissingClassException.php',
     'malkusch\bav\validationtestapiexception' => '../tests/classes/testAPI/exception/ValidationTestAPIException.php',
+    'malkusch\bav\testapiunavailableexception' => '../tests/classes/testAPI/exception/TestAPIUnavailableException.php',
     'malkusch\bav\banknotfoundtestapiexception' => '../tests/classes/testAPI/exception/BankNotFoundTestAPIException.php',
     'malkusch\bav\notinitializedtestapiexception' => '../tests/classes/testAPI/exception/NotInitializedTestAPIException.php',
 );

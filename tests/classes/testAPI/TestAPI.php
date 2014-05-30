@@ -41,10 +41,35 @@ abstract class TestAPI
      * @throws ValidationTestAPIException
      */
     abstract protected function isValid(Bank $bank, $account);
+    
+    /**
+     * Returns true if the API is available.
+     * 
+     * @return bool
+     */
+    abstract protected function isAvailable();
+    
+    /**
+     * Return true for known false positives.
+     * 
+     * @return true
+     */
+    public function ignoreTestCase(Bank $bank, $account)
+    {
+        return false;
+    }
 
+    /**
+     * @throws TestAPIUnavailableException
+     */
     public function __construct()
     {
         $this->setName(get_class($this));
+        
+        if (! $this->isAvailable()) {
+            throw new TestAPIUnavailableException();
+
+        }
     }
 
     /**

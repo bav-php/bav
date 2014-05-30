@@ -24,6 +24,7 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
  * @package test
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
+ * @large
  */
 class CrossProjectTest extends \PHPUnit_Framework_TestCase
 {
@@ -45,26 +46,33 @@ class CrossProjectTest extends \PHPUnit_Framework_TestCase
     private $failedBankDependentValidators = array();
 
     /**
-     * @var Array
+     * @var TestAPI[]
      */
-    private $testAPIs = array();
+    private static $testAPIs = array();
 
-    protected function setUp()
+    public static function setUpBeforeClass()
     {
-        $ktoblzcheckPath = __DIR__ . "/../tmp/ktoblzcheck/ktoblzcheck-1.21/src";
+        self::$testAPIs = array(new BAVTestAPI());
 
-        $this->testAPIs = array(
-            new BAVTestAPI(),
-            new KontocheckTestAPI('/etc/blz.lut2', 2),
-            new KtoblzcheckTestAPI(
-                "$ktoblzcheckPath/bankdata/bankdata.txt",
-                "$ktoblzcheckPath/bin/ktoblzcheck"
-            )
-        );
+        try {
+            self::$testAPIs[] = new KontocheckTestAPI();
+
+        } catch (TestAPIUnavailableException $e) {
+            trigger_error("KontocheckTestAPI unavailable", E_USER_WARNING);
+
+        }
+
+        try {
+            self::$testAPIs[] = new KtoblzcheckTestAPI();
+
+        } catch (TestAPIUnavailableException $e) {
+            trigger_error("KtoblzcheckTestAPI unavailable", E_USER_WARNING);
+
+        }
     }
 
     /**
-     * @return Array
+     * @return Bank[][]
      */
     public function provideBanks()
     {
@@ -74,6 +82,9 @@ class CrossProjectTest extends \PHPUnit_Framework_TestCase
             $banks[] = array($bank);
 
         }
+        
+        // $banks = array_slice($banks, 0, 60);
+    
         return $banks;
     }
 
@@ -118,7 +129,11 @@ class CrossProjectTest extends \PHPUnit_Framework_TestCase
     {
         $results = array();
         $resultValues = array();
-        foreach ($this->testAPIs as $key => $testAPI) {
+        foreach (self::$testAPIs as $key => $testAPI) {
+            if ($testAPI->ignoreTestCase($bank, $account)) {
+                continue;
+
+            }
             $result          = $testAPI->getResult($bank, $account);
             $results[]       = $result;
             $resultValues[]  = $result->getResult();

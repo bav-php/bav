@@ -66,14 +66,9 @@ class CheckAgainstTestAPIs
 
     public function __construct()
     {
-        $ktoblzcheckPath = __DIR__ . "/../tmp/ktoblzcheck/ktoblzcheck-1.21/src";
-
         $this->testAPIs[] = new BAVTestAPI();
-        $this->testAPIs[] = new KontocheckTestAPI('/etc/blz.lut', 2);
-        $this->testAPIs[] = new KtoblzcheckTestAPI(
-            "$ktoblzcheckPath/bankdata/bankdata.txt",
-            "$ktoblzcheckPath/bin/ktoblzcheck"
-        );
+        $this->testAPIs[] = new KontocheckTestAPI();
+        $this->testAPIs[] = new KtoblzcheckTestAPI();
 
 
         #$backend = new FileDataBackend();

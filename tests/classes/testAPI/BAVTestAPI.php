@@ -37,6 +37,16 @@ class BAVTestAPI extends TestAPI
     }
 
     /**
+     * Returns true if the API is available.
+     * 
+     * @return bool
+     */
+    protected function isAvailable()
+    {
+        return true;
+    }
+
+    /**
      * @param int $bankCode
      * @param int $account
      * @return bool
