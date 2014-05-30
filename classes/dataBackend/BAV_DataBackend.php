@@ -17,7 +17,7 @@
  * @license GPL
  * @see DataBackendFactory
  */
-abstract class BAV_DataBackend extends BAV
+abstract class BAV_DataBackend
 {
 
     /**

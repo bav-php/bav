@@ -15,7 +15,6 @@
  */
 
 return array(
-    'bav' => '../classes/BAV.php',
     'bav_bank' => '../classes/bank/BAV_Bank.php',
     'bav_agency' => '../classes/bank/BAV_Agency.php',
     'malkusch\bav\updateplan' => '../classes/dataBackend/update/UpdatePlan.php',

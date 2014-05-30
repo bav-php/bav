@@ -27,7 +27,7 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
  * @author Markus Malkusch <markus@malkusch.de>
  * @copyright Copyright (C) 2009 Markus Malkusch
  */
-class BAV_CheckAgainstTestAPIs extends BAV
+class BAV_CheckAgainstTestAPIs
 {
 
     const VALID            = 1;
