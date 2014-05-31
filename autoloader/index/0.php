@@ -17,6 +17,7 @@
 return array(
     'malkusch\bav\bav' => '../classes/BAV.php',
     'malkusch\bav\bank' => '../classes/bank/Bank.php',
+    'malkusch\bav\lock' => '../classes/util/Lock.php',
     'malkusch\bav\agency' => '../classes/bank/Agency.php',
     'malkusch\bav\fileutil' => '../classes/dataBackend/file/FileUtil.php',
     'malkusch\bav\encoding' => '../classes/encoding/Encoding.php',
@@ -186,6 +187,7 @@ return array(
     'malkusch\bav\fileexception' => '../classes/dataBackend/file/exception/FileException.php',
     'malkusch\bav\logupdateplan' => '../classes/dataBackend/update/LogUpdatePlan.php',
     'malkusch\bav\iconvencoding' => '../classes/encoding/IconvEncoding.php',
+    'malkusch\bav\lockexception' => '../classes/util/exception/LockException.php',
     'malkusch\bav\pdodatabackend' => '../classes/dataBackend/pdo/PDODataBackend.php',
     'malkusch\bav\validatorchain' => '../classes/validator/ValidatorChain.php',
     'malkusch\bav\agencyexception' => '../classes/bank/exception/AgencyException.php',

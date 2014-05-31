@@ -13,6 +13,11 @@ abstract class DataBackendContainer
 {
 
     /**
+     * @var string Name of the installation lock file
+     */
+    const INSTALL_LOCK = "bav_install.lock";
+
+    /**
      * @var DataBackend
      */
     private $backend;
@@ -41,9 +46,12 @@ abstract class DataBackendContainer
 
         // Installation
         if ($configuration->isAutomaticInstallation() && ! $backend->isInstalled()) {
-            // TODO Lock concurrent installations
-            $backend->install();
-
+            $lock = new Lock(self::INSTALL_LOCK);
+            $lock->executeOnce(
+                function() use ($backend) {
+                    $backend->install();
+                }
+            );
         }
 
         // Update hook
