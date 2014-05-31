@@ -61,6 +61,7 @@ class FileDataBackend extends DataBackend
      *
      * @param String $file
      * @throws DataBackendIOException
+     * @throws FileException
      */
     private function sortFile($file)
     {
@@ -98,7 +99,7 @@ class FileDataBackend extends DataBackend
 
         }
         fclose($tempH);
-        $this->safeRename($temp, $file);
+        $this->fileUtil->safeRename($temp, $file);
     }
 
     /**
@@ -128,6 +129,7 @@ class FileDataBackend extends DataBackend
      *
      * @see DataBackend::update()
      * @throws DataBackendIOException
+     * @throws FileException
      */
     public function update()
     {
@@ -239,49 +241,8 @@ class FileDataBackend extends DataBackend
 
         }
 
-        $this->safeRename($file, $this->parser->getFile());
+        $this->fileUtil->safeRename($file, $this->parser->getFile());
         chmod($this->parser->getFile(), 0644);
-    }
-
-    /**
-     * Renames a file atomically between different filesystems.
-     *
-     * @param String $source path of the source
-     * @param String $destination path of the destination
-     * @throws DataBackendIOException
-     */
-    private function safeRename($source, $destination)
-    {
-        $isRenamed = @rename($source, $destination);
-        if ($isRenamed) {
-            return;
-
-        }
-
-        // copy to the target filesystem
-        $tempFileOnSameFS = "$destination.tmp";
-
-        $isCopied = copy($source, $tempFileOnSameFS);
-        if (! $isCopied) {
-            throw new DataBackendIOException(
-                "failed to copy $source to $tempFileOnSameFS."
-            );
-
-        }
-
-        $isUnlinked = unlink($source);
-        if (! $isUnlinked) {
-            trigger_error("Failed to unlink $source.");
-
-        }
-
-        $isRenamed = rename($tempFileOnSameFS, $destination);
-        if (! $isRenamed) {
-            throw new DataBackendIOException(
-                "failed to rename $tempFileOnSameFS to $destination."
-            );
-
-        }
     }
 
     /**

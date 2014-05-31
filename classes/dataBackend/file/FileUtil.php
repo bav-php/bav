@@ -34,6 +34,47 @@ class FileUtil
     }
 
     /**
+     * Renames a file atomically between different filesystems.
+     *
+     * @param String $source path of the source
+     * @param String $destination path of the destination
+     * @throws FileException
+     */
+    public function safeRename($source, $destination)
+    {
+        $isRenamed = @rename($source, $destination);
+        if ($isRenamed) {
+            return;
+
+        }
+
+        // copy to the target filesystem
+        $tempFileOnSameFS = "$destination.tmp";
+
+        $isCopied = copy($source, $tempFileOnSameFS);
+        if (! $isCopied) {
+            throw new FileException(
+                "failed to copy $source to $tempFileOnSameFS."
+            );
+
+        }
+
+        $isUnlinked = unlink($source);
+        if (! $isUnlinked) {
+            trigger_error("Failed to unlink $source.");
+
+        }
+
+        $isRenamed = rename($tempFileOnSameFS, $destination);
+        if (! $isRenamed) {
+            throw new FileException(
+                "failed to rename $tempFileOnSameFS to $destination."
+            );
+
+        }
+    }
+
+    /**
      * Returns a writable directory for temporary files
      *
      * @return String

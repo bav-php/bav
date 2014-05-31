@@ -12,7 +12,25 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
  * @license GPL
  */
 class FileUtilTest extends \PHPUnit_Framework_TestCase
-{ 
+{
+
+    /**
+     * Test only renaming in one filesystem.
+     */
+    public function testSafeRenameOneFS()
+    {
+        $before = __DIR__ . "/data/testSafeRenameBefore";
+        $after = __DIR__ . "/data/testSafeRenameAfter";
+
+        touch($before);
+
+        $fileUtil = new FileUtil();
+        $fileUtil->safeRename($before, $after);
+
+        $this->assertFileExists($after);
+
+        unlink($after);
+    }
 
     /**
      * Tests a user configured temporary directory
