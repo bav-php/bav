@@ -16,10 +16,8 @@ before_script:
     - mysql -e 'create database bav;'
     - php tests/bin/test-install.php
     - echo 'SET @@GLOBAL.wait_timeout=600' | mysql -uroot
-    - echo 'show variables where Variable_name IN ("max_connections", "max_delayed_threads", "wait_timeout")' | mysql -utravis
 
 script:
     - phpunit --exclude-group large tests/
     - phpcs --standard=PSR2 classes/ bin/ docs/example.php tests/classes/ tests/bin/
-    - phpunit tests/BackendTest.php
 
