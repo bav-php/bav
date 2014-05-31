@@ -12,6 +12,11 @@ class AutomaticUpdatePlan extends UpdatePlan
 {
 
     /**
+     * @var string Name of the update lock file
+     */
+    const UPDATE_LOCK = "bav_update.lock";
+
+    /**
      * @var bool
      */
     private $notice = true;
@@ -33,11 +38,16 @@ class AutomaticUpdatePlan extends UpdatePlan
      */
     public function perform(DataBackend $backend)
     {
-        // TODO lock concurrent updates
-        $backend->update();
-        if ($this->notice) {
-            trigger_error("bav's bank data was updated sucessfully.", E_USER_NOTICE);
+        $isNotice = $this->notice;
+        $lock = new Lock(self::UPDATE_LOCK);
+        $lock->nonblockingExecuteOnce(
+            function () use ($backend, $isNotice) {
+                $backend->update();
+                if ($isNotice) {
+                    trigger_error("bav's bank data was updated sucessfully.", E_USER_NOTICE);
 
-        }
+                }
+            }
+        );
     }
 }

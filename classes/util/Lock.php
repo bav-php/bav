@@ -69,6 +69,35 @@ class Lock
     }
 
     /**
+     * Get a lock and execute a task only if the lock was aquired.
+     *
+     * If more processes call this method only the process which aquired the lock
+     * will execute the task. The others will continue execution.
+     * 
+     * @throws Exception
+     */
+    public function nonblockingExecuteOnce(\Closure $task)
+    {
+        if (! $this->nonblockingLock()) {
+            return;
+
+        }
+        $error = null;
+        try {
+            call_user_func($task);
+
+        } catch (\Exception $e) {
+            $error = $e;
+
+        }
+        $this->unlock();
+        if (! is_null($error)) {
+            throw $error;
+
+        }
+    }
+
+    /**
      * Blocking lock
      *
      * @throws LockException
@@ -79,6 +108,16 @@ class Lock
             throw new LockException("flock() failed for {$this->name}.");
 
         }
+    }
+
+    /**
+     * Nonblocking lock which returns if the lock was aquired
+     *
+     * @return bool true if the lock was aquired.
+     */
+    public function nonblockingLock()
+    {
+        return flock($this->handle, LOCK_EX | LOCK_NB);
     }
 
     /**
