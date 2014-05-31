@@ -132,3 +132,5 @@ But it would be nice to leave a note about the authors.
 
 The author of the original project which gave the idea to this project is
 Björn Wilmsmann. Responsable for this project is Markus Malkusch <markus@malkusch.de>.
+
+[![Build Status](https://travis-ci.org/malkusch/bav.svg?branch=master)](https://travis-ci.org/malkusch/bav)
