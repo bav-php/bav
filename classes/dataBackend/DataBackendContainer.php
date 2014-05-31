@@ -48,7 +48,7 @@ abstract class DataBackendContainer
         if ($configuration->isAutomaticInstallation() && ! $backend->isInstalled()) {
             $lock = new Lock(self::INSTALL_LOCK);
             $lock->executeOnce(
-                function() use ($backend) {
+                function () use ($backend) {
                     $backend->install();
                 }
             );
