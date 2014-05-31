@@ -15,6 +15,7 @@ before_script:
     - composer --prefer-source --dev install
     - mysql -e 'create database bav;'
     - php tests/bin/test-install.php
+    - echo 'show variables where Variable_name IN ("max_connections", "max_delayed_threads", "wait_timeout")' | mysql -utravis
 
 script:
     - phpunit --exclude-group large tests/
