@@ -32,6 +32,11 @@ class Configuration
     private $updatePlan;
 
     /**
+     * @var string
+     */
+    private $tempDirectory;
+
+    /**
      * Sets the update plan.
      * 
      * Set to null if you don't want to use an update plan.
@@ -109,5 +114,28 @@ class Configuration
     public function getEncoding()
     {
         return $this->encoding;
+    }
+
+    /**
+     * Sets the temporary directory.
+     * 
+     * If you set a temporary directory BAV will use this for temporary files.
+     * This option is optional. If it is not set the system's path will be used.
+     * 
+     * @param string $tempDirectory
+     */
+    public function setTempDirectory($tempDirectory)
+    {
+        $this->tempDirectory = $tempDirectory;
+    }
+
+    /**
+     * Returns the optional configured temporary directory.
+     *
+     * @return string
+     */
+    public function getTempDirectory()
+    {
+        return $this->tempDirectory;
     }
 }

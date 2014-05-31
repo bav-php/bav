@@ -28,11 +28,17 @@ class FileDataBackend extends DataBackend
     private $parser;
 
     /**
+     * @var FileUtil
+     */
+    private $fileUtil;
+
+    /**
      * @param String $file The data source
      */
     public function __construct($file = null)
     {
         $this->parser = new FileParser($file);
+        $this->fileUtil = new FileUtil();
     }
 
     /**
@@ -75,7 +81,7 @@ class FileDataBackend extends DataBackend
         asort($index);
 
         //write a sorted bank file atomically
-        $temp    = tempnam(self::getTempdir(), "");
+        $temp    = tempnam($this->fileUtil->getTempDirectory(), "");
         $tempH   = fopen($temp, 'w');
         if (! ($temp && $tempH)) {
             throw new DataBackendIOException("Could not open a temporary file.");
@@ -167,7 +173,7 @@ class FileDataBackend extends DataBackend
 
         }
 
-        $temp    = tempnam(self::getTempdir(), "");
+        $temp    = tempnam($this->fileUtil->getTempDirectory(), "");
         $tempH   = fopen($temp, 'w');
         if (! ($temp && $tempH)) {
             throw new DataBackendIOException();
@@ -207,7 +213,7 @@ class FileDataBackend extends DataBackend
         curl_close($ch);
 
         if ($isZIP) {
-            $file = tempnam(self::getTempdir(), "");
+            $file = tempnam($this->fileUtil->getTempDirectory(), "");
             if (! $file) {
                 unlink($temp);
                 throw new DataBackendIOException();
@@ -489,39 +495,6 @@ class FileDataBackend extends DataBackend
 
         }
         return $context;
-    }
-
-    /**
-     * @throws DataBackendIOException
-     * @return String a writable directory for temporary files
-     */
-    public static function getTempdir()
-    {
-        $tmpDirs = array(
-            function_exists('sys_get_temp_dir') ? sys_get_temp_dir() : false,
-            empty($_ENV['TMP'])    ? false : $_ENV['TMP'],
-            empty($_ENV['TMPDIR']) ? false : $_ENV['TMPDIR'],
-            empty($_ENV['TEMP'])   ? false : $_ENV['TEMP'],
-            ini_get('upload_tmp_dir'),
-            '/tmp'
-        );
-
-        foreach ($tmpDirs as $tmpDir) {
-            if ($tmpDir && is_writable($tmpDir)) {
-                return realpath($tmpDir);
-
-            }
-
-        }
-
-        $tempfile = tempnam(uniqid(mt_rand(), true), '');
-        if (file_exists($tempfile)) {
-            unlink($tempfile);
-            return realpath(dirname($tempfile));
-
-        }
-
-        throw new DataBackendIOException();
     }
 
     /**

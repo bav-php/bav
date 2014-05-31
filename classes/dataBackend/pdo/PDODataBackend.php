@@ -194,7 +194,8 @@ class PDODataBackend extends DataBackend
     {
         $useTA = false;
         try {
-            $fileBackend = new FileDataBackend(tempnam(FileDataBackend::getTempdir(), 'bav'));
+            $fileUtil = new fileUtil();
+            $fileBackend = new FileDataBackend(tempnam($fileUtil->getTempDirectory(), 'bav'));
             $fileBackend->install();
 
             $insertBank     = $this->pdo->prepare(

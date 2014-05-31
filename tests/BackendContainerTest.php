@@ -19,7 +19,8 @@ class BackendContainerTest extends \PHPUnit_Framework_TestCase
     public function testAutomaticInstallation()
     {
         ConfigurationRegistry::getConfiguration()->setUpdatePlan(null);
-        $container = new FileDataBackendContainer(tempnam(FileDataBackend::getTempdir(), 'bavtest'));
+        $fileUtil = new FileUtil();
+        $container = new FileDataBackendContainer(tempnam($fileUtil->getTempDirectory(), 'bavtest'));
 
         $this->assertTrue(ConfigurationRegistry::getConfiguration()->isAutomaticInstallation());
     
@@ -38,7 +39,8 @@ class BackendContainerTest extends \PHPUnit_Framework_TestCase
         $updatePlan->setNotice(false);
         ConfigurationRegistry::getConfiguration()->setUpdatePlan($updatePlan);
 
-        $container = new FileDataBackendContainer(tempnam(FileDataBackend::getTempdir(), 'bavtest'));
+        $fileUtil = new FileUtil();
+        $container = new FileDataBackendContainer(tempnam($fileUtil->getTempDirectory(), 'bavtest'));
         $backend = $container->getDataBackend();
             
         touch($backend->getFile(), strtotime("-1 year"));

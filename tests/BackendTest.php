@@ -60,7 +60,9 @@ class BackendTest extends \PHPUnit_Framework_TestCase
         $pdoBackend = new PDODataBackend(PDOFactory::makePDO(), 'bavtest_');
         $this->setupInstallationBackends($pdoBackend);
 
-        $fileBackend = new FileDataBackend(tempnam(FileDataBackend::getTempdir(), 'bavtest'));
+        $fileUtil = new FileUtil();
+
+        $fileBackend = new FileDataBackend(tempnam($fileUtil->getTempDirectory(), 'bavtest'));
         $this->setupInstallationBackends($fileBackend);
 
         return array(
