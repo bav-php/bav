@@ -67,8 +67,10 @@ Call `bin/bav-update.php`.
 ## Programmatically
 
 ```php
-$container = ConfigurationRegistry::getConfiguration()->getDataBackendContainer();
-$container->getDatabackend()->update();
+namespace malkusch\bav;
+
+$bav = new BAV();
+$bav->update();
 ```
 
 ## Automatic

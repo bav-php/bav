@@ -51,6 +51,21 @@ class BAV
     }
 
     /**
+     * Updates bav with a new bundesbank file.
+     *
+     * You might consider enabling automatic update with setting 
+     * AutomaticUpdatePlan as configuration.
+     * 
+     * @see AutomaticUpdatePlan
+     * @see Configuration::setUpdatePlan()
+     * @throws DataBackendException
+     */
+    public function update()
+    {
+        $this->getDataBackend()->update();
+    }
+
+    /**
      * Returns true if both the bank exists and the account is valid.
      *
      * @throws DataBackendException for some reason the validator might not be implemented

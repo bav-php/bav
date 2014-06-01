@@ -14,9 +14,8 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
 
 try {
     ConfigurationRegistry::getConfiguration()->setUpdatePlan(null);
-    $databack = ConfigurationRegistry::getConfiguration()->getDatabackendContainer()->getDataBackend();
-
-    $databack->update();
+    $bav = new BAV();
+    $bav->update();
     echo "Bundesbank file downloaded.\n";
 
 } catch (DataBackendException $error) {
