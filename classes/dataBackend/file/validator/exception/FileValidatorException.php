@@ -8,7 +8,7 @@ namespace malkusch\bav;
  * @author Markus Malkusch <markus@malkusch.de>
  * @license GPL
  */
-class FileValidatorException extends BAVException
+class FileValidatorException extends DataBackendException
 {
 
 }

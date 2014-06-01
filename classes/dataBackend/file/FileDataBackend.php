@@ -130,7 +130,6 @@ class FileDataBackend extends DataBackend
      * @see DataBackend::update()
      * @throws DataBackendIOException
      * @throws FileException
-     * @throws FileValidatorException
      */
     public function update()
     {
