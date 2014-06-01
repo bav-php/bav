@@ -32,7 +32,8 @@ class BAV_Validator_78 extends BAV_Validator_00
     public function isValid($account)
     {
         // 8-stellige Kontonummern sind nicht prüfbar
-        if (strlen($account) === 8) {
+        $trimedAccount = ltrim($account, "0");
+        if (strlen($trimedAccount) === 8) {
             return true;
 
         }
