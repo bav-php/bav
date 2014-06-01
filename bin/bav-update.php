@@ -13,6 +13,7 @@ namespace malkusch\bav;
 require_once __DIR__ . "/../autoloader/autoloader.php";
 
 try {
+    ConfigurationRegistry::getConfiguration()->setUpdatePlan(null);
     $databack = ConfigurationRegistry::getConfiguration()->getDatabackendContainer()->getDataBackend();
 
     $databack->update();
