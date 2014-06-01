@@ -48,6 +48,9 @@ class BAV_Validator_68 extends BAV_Validator_Chain
 
     public function isValid($account)
     {
+        // Die Kontonummern [..] enthalten keine führenden Nullen. 
+        $account = ltrim($account, "0");
+
         switch (strlen($account)) {
 
             case 10:
