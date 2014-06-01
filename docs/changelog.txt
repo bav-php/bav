@@ -35,6 +35,11 @@ Version 1.0.0 - not yet released
     - added the Doctrine data backend DoctrineBackendContainer.
 
 
+Version 0.29 - June 1, 2014
+---------------------------
+    - fixed validators: 78, 68, 59, 58
+
+
 Version 0.28 - May 26, 2014
 ---------------------------
     - added Composer support
