@@ -60,7 +60,9 @@ class URIPickerTest extends \PHPUnit_Framework_TestCase
         $uri = $picker->pickURI($html);
 
         $this->assertEquals(
+            // @codingStandardsIgnoreStart
             "/Redaktion/DE/Downloads/Aufgaben/Unbarer_Zahlungsverkehr/Bankleitzahlen/2014_09_07/blz_2014_06_09_txt.txt?__blob=publicationFile",
+            // @codingStandardsIgnoreEnd
             $uri
         );
     }
