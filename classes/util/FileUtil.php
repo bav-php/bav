@@ -108,7 +108,7 @@ class FileUtil
             empty($_ENV['TEMP'])   ? false : $_ENV['TEMP'],
             ini_get('upload_tmp_dir'),
             '/tmp',
-            __DIR__ . "/../../../data/"
+            __DIR__ . "/../../data/"
         );
 
         foreach ($tmpDirs as $tmpDir) {
