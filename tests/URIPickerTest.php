@@ -86,4 +86,4 @@ class URIPickerTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue($picker->isAvailable());
     }
-} 
+}

@@ -25,5 +25,4 @@ interface URIPicker
      * @return string
      */
     public function pickURI($html);
-
 }
