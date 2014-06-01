@@ -156,24 +156,9 @@ class FileDataBackend extends DataBackend
             );
 
         }
-        $isTXT = preg_match('/Bankleitzahlendateien ungepackt.+href *= *"([^"]+\.txt[^"]*)"/sU', $content, $txtMatches);
-        $isZIP = (exec('unzip -v') == '')
-               ? false
-               : preg_match('/Bankleitzahlendateien gepackt.+href *= *"([^"]+\.zip[^"]*)"/sU', $content, $zipMatches);
 
-        /**
-         * There is an unresolved bug, that doesn't allow to uncompress
-         * the zip archive. Zip support is disabled until it's repaired.
-         *
-         * @see http://sourceforge.net/forum/message.php?msg_id=7555232
-         * TODO enable Zip support
-         */
-        $isZIP = false;
-
-        if (! ($isTXT || $isZIP)) {
-            throw new DataBackendException("Could not find a file.");
-
-        }
+        $uriPicker = new FallbackURIPicker();
+        $path = $uriPicker->pickURI($content);
 
         $temp    = tempnam($this->fileUtil->getTempDirectory(), "");
         $tempH   = fopen($temp, 'w');
@@ -181,7 +166,6 @@ class FileDataBackend extends DataBackend
             throw new DataBackendIOException();
 
         }
-        $path = $isZIP ? $zipMatches[1] : $txtMatches[1];
         if (strlen($path) > 0 && $path{0} != "/") {
             $path = sprintf("/%s/%s", dirname(self::DOWNLOAD_URI), $path);
 
@@ -214,24 +198,7 @@ class FileDataBackend extends DataBackend
         fclose($tempH);
         curl_close($ch);
 
-        if ($isZIP) {
-            $file = tempnam($this->fileUtil->getTempDirectory(), "");
-            if (! $file) {
-                unlink($temp);
-                throw new DataBackendIOException();
-
-            }
-            system('unzip -qqp '.$temp.' > '.$file, $error);
-            if (! unlink($temp) || $error !== 0) {
-                unlink($file);
-                throw new DataBackendIOException();
-
-            }
-
-        } else {
-            $file = $temp;
-
-        }
+        $file = $temp;
 
         // Validate file format.
         $validator = new FileValidator();

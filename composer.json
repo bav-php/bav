@@ -22,6 +22,7 @@
     "suggest": {
         "ext-PDO": "Allows storing bank information in a database",
         "ext-mbstring": "Enables UTF-8 support",
+        "ext-dom": "Enables picking the download URI by xpath",
         "lib-curl": "Enables API for downloading the bank file",
         "lib-iconv": "Enables UTF-8 support"
     },
