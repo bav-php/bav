@@ -130,6 +130,7 @@ class FileDataBackend extends DataBackend
      * @see DataBackend::update()
      * @throws DataBackendIOException
      * @throws FileException
+     * @throws FileValidatorException
      */
     public function update()
     {
@@ -232,6 +233,10 @@ class FileDataBackend extends DataBackend
             $file = $temp;
 
         }
+
+        // Validate file format.
+        $validator = new FileValidator();
+        $validator->validate($file);
 
         // blz_20100308.txt is not sorted.
         $parser     = new FileParser($file);
