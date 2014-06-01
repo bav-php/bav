@@ -29,7 +29,7 @@ Visit <http://bav.malkusch.de/> and download the latest version or use [Composer
 ```json
 {
     "require": {
-        "malkusch/bav": "0.28"
+        "malkusch/bav": "0.29"
     }
 }
 ```
