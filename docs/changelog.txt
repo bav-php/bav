@@ -20,6 +20,16 @@ Version 1.0.0 - not yet released
     
     - Moved FileDatabackend::getTempDir() into new FileUtil
 
+    -[TODO] move the curl operations out of FileDataBackend. Use HTTP pipelining (curl_multi).
+
+    -[TODO] check API verbs (bankExists() might be better as isValidBank()).
+    
+    -[TODO] document public API in README.md
+
+    -[TODO] add IBAN rule support
+
+    -[TODO] evaluate IBAN validation support
+
 
 Version 0.28 - May 26, 2014
 ---------------------------
