@@ -88,7 +88,34 @@ return $configuration;
 
 # Usage
 
-You can use BAV with the api facade `BAV`:
+You can use BAV with the api facade `BAV`.
+
+* `BAV::isValidBank($bankID)`: Returns true for existing bank ids.
+
+* `BAV::isValidBankAccount($bankID, $account)`: Returns true for existing accounts of an existing
+bank.
+
+* `BAV::getMainAgency()`: Returns the main agency of a bank.
+
+* `BAV::getAgencies()`: Returns further agencies. The main agency is not included in this list.
+This list can be empty.
+
+An Agency object has the fields:
+
+* `Agency::getBIC()`
+
+* `Agency::getPostcode()`
+
+* `Agency::getCity()`
+
+* `Agency::getName()`
+
+* `Agency::getShortTerm()`
+
+* `Agency::getPAN()`
+
+## Example
+
 ```php
 namespace malkusch\bav;
 
@@ -106,7 +133,7 @@ var_dump(
     $bav->isValidBankAccount($bankID, $account)
 );
 
-// print the name of the bank
+// Get informations about a bank
 $agency = $bav->getMainAgency($bankID);
 echo "{$agency->getName()} {$agency->getCity()}\n";
 ```

@@ -119,6 +119,8 @@ class BAV
 
     /**
      * A bank may have more agencies.
+     * 
+     * The main agency is not included in this list.
      *
      * @throws DataBackendException
      * @throws BankNotFoundException

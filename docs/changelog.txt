@@ -22,8 +22,6 @@ Version 1.0.0 - not yet released
 
     - Renamed bankExists() into isValidBank()
     
-    -[TODO] document public API in README.md
-
     -[TODO] add IBAN rule support
 
     -[TODO] evaluate IBAN validation support
