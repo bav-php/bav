@@ -125,47 +125,20 @@ class FileDataBackend extends DataBackend
 
     /**
      * This method works only if your PHP is compiled with cURL.
-     * TODO: test this with a proxy
      *
      * @see DataBackend::update()
      * @throws DataBackendIOException
      * @throws FileException
+     * @throws DownloaderException
      */
     public function update()
     {
-        $ch = curl_init(self::DOWNLOAD_URI);
-        if (! is_resource($ch)) {
-            throw new DataBackendIOException();
-
-        }
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $content = curl_exec($ch);
-        $curl_info = curl_getinfo($ch);
-        if ($curl_info['http_code'] >= 400) {
-            throw new DataBackendIOException(
-                sprintf(
-                    "Failed to download '%s'. HTTP Code: %d",
-                    self::DOWNLOAD_URI,
-                    $curl_info['http_code']
-                )
-            );
-        }
-        if (! $content) {
-            throw new DataBackendIOException(
-                "Failed to download '" . self::DOWNLOAD_URI . "'."
-            );
-
-        }
+        $downloader = new Downloader();
+        $content = $downloader->downloadContent(self::DOWNLOAD_URI);
 
         $uriPicker = new FallbackURIPicker();
         $path = $uriPicker->pickURI($content);
 
-        $temp    = tempnam($this->fileUtil->getTempDirectory(), "");
-        $tempH   = fopen($temp, 'w');
-        if (! ($temp && $tempH)) {
-            throw new DataBackendIOException();
-
-        }
         if (strlen($path) > 0 && $path{0} != "/") {
             $path = sprintf("/%s/%s", dirname(self::DOWNLOAD_URI), $path);
 
@@ -187,18 +160,8 @@ class FileDataBackend extends DataBackend
         $urlParts = parse_url(self::DOWNLOAD_URI);
         $url = sprintf("%s://%s%s", $urlParts["scheme"], $urlParts["host"], $path);
 
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_FILE, $tempH);
-        if (! curl_exec($ch)) {
-            fclose($tempH);
-            unlink($temp);
-            throw new DataBackendIOException(curl_error($ch), curl_errno($ch));
-
-        }
-        fclose($tempH);
-        curl_close($ch);
-
-        $file = $temp;
+        // download file
+        $file = $downloader->downloadFile($url);
 
         // Validate file format.
         $validator = new FileValidator();

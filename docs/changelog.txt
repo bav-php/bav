@@ -20,8 +20,6 @@ Version 1.0.0 - not yet released
     
     - Moved FileDatabackend::getTempDir() into new FileUtil
 
-    -[TODO] move the curl operations out of FileDataBackend. Use HTTP pipelining (curl_multi).
-
     - Renamed bankExists() into isValidBank()
     
     -[TODO] document public API in README.md
