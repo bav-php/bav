@@ -86,13 +86,28 @@ abstract class DataBackend
     }
 
     /**
-     * Perhaps you just want to know if a bank exists.
+     * Return true if a bank exists.
+     *
+     * @throws DataBackendException
+     * @param String $bankID
+     * @deprecated 1.0.0
+     * @see isValidBank()
+     * @return bool
+     */
+    public function bankExists($bankID)
+    {
+        trigger_error("bankExists() is deprecated, use isValidBank().", E_USER_DEPRECATED);
+        return $this->isValidBank($bankID);
+    }
+
+    /**
+     * Return true if a bank exists.
      *
      * @throws DataBackendException
      * @param String $bankID
      * @return bool
      */
-    public function bankExists($bankID)
+    public function isValidBank($bankID)
     {
         try {
             $this->getBank($bankID);

@@ -98,7 +98,7 @@ $account = "1234567890"
 
 // check for a bank
 var_dump(
-    $bav->bankExists($bankID)
+    $bav->isValidBank($bankID)
 );
 
 // check for a bank account

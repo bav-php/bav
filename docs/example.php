@@ -27,7 +27,7 @@ try {
 
     // Does the bank exist?
     echo "Bank 10000000 ",
-        $bav->bankExists("10000000") ? "exists" : "doesn't exist", "\n";
+        $bav->isValidBank("10000000") ? "exists" : "doesn't exist", "\n";
     
     // Does the account exist?
     echo "Account 12345 is ",

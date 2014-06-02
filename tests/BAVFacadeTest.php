@@ -103,12 +103,12 @@ class BAVFacadeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test cases for testBankExists()
+     * Test cases for testIsValidBank()
      * 
      * @see testBankExists()
      * @return array
      */
-    public function provideTestbankExists()
+    public function provideTestIsValidBank()
     {
         return array(
             array("73362500", true),
@@ -117,15 +117,15 @@ class BAVFacadeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests BAV::bankExists();
+     * Tests BAV::isValidBank();
      *
-     * @dataProvider provideTestbankExists
-     * @see BAV::bankExists();
+     * @dataProvider provideTestIsValidBank
+     * @see BAV::isValidBank();
      */
-    public function testBankExists($bankID, $expected)
+    public function testIsValidBank($bankID, $expected)
     {
         $bav = new BAV();
-        $this->assertEquals($expected, $bav->bankExists($bankID));
+        $this->assertEquals($expected, $bav->isValidBank($bankID));
     }
 
     /**

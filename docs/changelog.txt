@@ -22,7 +22,7 @@ Version 1.0.0 - not yet released
 
     -[TODO] move the curl operations out of FileDataBackend. Use HTTP pipelining (curl_multi).
 
-    -[TODO] check API verbs (bankExists() might be better as isValidBank()).
+    - Renamed bankExists() into isValidBank()
     
     -[TODO] document public API in README.md
 

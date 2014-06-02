@@ -71,7 +71,7 @@ class BAV
      * @throws DataBackendException for some reason the validator might not be implemented
      * @param string $bankID
      * @param string $account
-     * @see bankExists()
+     * @see isValidBank()
      * @see getBank()
      * @see Bank::isValid()
      * @return bool
@@ -94,11 +94,11 @@ class BAV
      * @throws DataBackendException
      * @param string $bankID
      * @return bool
-     * @see DataBackend::bankExists()
+     * @see DataBackend::isValidBank()
      */
-    public function bankExists($bankID)
+    public function isValidBank($bankID)
     {
-        return $this->backend->bankExists($bankID);
+        return $this->backend->isValidBank($bankID);
     }
 
     /**
@@ -138,7 +138,7 @@ class BAV
      * @throws DataBackendException
      * @param string $bankID
      * @return Bank
-     * @see DataBackend::bankExists()
+     * @see DataBackend::isValidBank()
      */
     public function getBank($bankID)
     {
