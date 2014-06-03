@@ -211,7 +211,7 @@ class PDODataBackend extends DataBackend
     {
         $useTA = false;
         try {
-            $fileUtil = new fileUtil();
+            $fileUtil = new FileUtil();
             $fileBackend = new FileDataBackend(tempnam($fileUtil->getTempDirectory(), 'bav'));
             $fileBackend->install();
 
