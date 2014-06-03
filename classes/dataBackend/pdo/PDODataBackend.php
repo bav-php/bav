@@ -53,6 +53,16 @@ class PDODataBackend extends DataBackend
     private $selectInstalled;
 
     /**
+     * @var \PDOStatement
+     */
+    private $selectBICAgencies;
+
+    /**
+     * @var \PDOStatement
+     */
+    private $selectValidBIC;
+
+    /**
      * @var \PDO
      */
     private $pdo;
@@ -183,6 +193,13 @@ class PDODataBackend extends DataBackend
             "SELECT CASE WHEN EXISTS(
                 (SELECT * FROM information_schema.tables WHERE table_name='{$this->prefix}meta')
             ) THEN 1 ELSE 0 END"
+        );
+        $this->selectBICAgencies = $this->pdo->prepare(
+            "SELECT bank, $agencyAttributes FROM {$this->prefix}agency a
+                WHERE bic = :bic"
+        );
+        $this->selectValidBIC = $this->pdo->prepare(
+            "SELECT bic FROM {$this->prefix}agency WHERE bic = :bic GROUP BY (bic)"
         );
     }
 
@@ -322,6 +339,15 @@ class PDODataBackend extends DataBackend
                     FOREIGN KEY (bank) REFERENCES {$this->prefix}bank(id)
                 )$createOptions"
             );
+            
+            try {
+                $this->pdo->exec("CREATE INDEX bic ON {$this->prefix}agency (bic)");
+
+            } catch (\PDOException $e) {
+                trigger_error("Failed to create index for bic: {$e->getMessage()}", E_USER_WARNING);
+
+            }
+
             $this->pdo->exec(
                 "CREATE TABLE {$this->prefix}meta(
                     name   char(32) NOT NULL primary key,
@@ -329,9 +355,7 @@ class PDODataBackend extends DataBackend
                 )$createOptions"
             );
             $insertMetaStmt = $this->pdo->prepare(
-                "INSERT INTO {$this->prefix}meta
-                    SET name  = :name,
-                        value = :value"
+                "INSERT INTO {$this->prefix}meta (name, value) VALUES (:name, :value)"
             );
             $insertMetaStmt->execute(array(
                 ":name" => self::META_MODIFICATION,
@@ -340,7 +364,7 @@ class PDODataBackend extends DataBackend
             $this->update();
 
         } catch (\PDOException $e) {
-            throw new DataBackendIOException($e->getMessage());
+            throw new DataBackendIOException($e->getMessage(), 0, $e);
 
         }
     }
@@ -595,6 +619,59 @@ class PDODataBackend extends DataBackend
         } catch (\PDOException $e) {
             $this->selectInstalled->closeCursor();
             throw new DataBackendIOException($e->getMessage(), $e->getCode(), $e);
+
+        }
+    }
+
+    /**
+     * Returns if a bic is valid.
+     *
+     * @param string $bic BIC
+     * @return bool
+     */
+    public function isValidBIC($bic)
+    {
+        try {
+            $this->prepareStatements();
+            $this->selectValidBIC->execute(array(":bic" => $bic));
+            
+            $rows = $this->selectValidBIC->fetchAll();
+            $this->selectValidBIC->closeCursor();
+            return ! empty($rows);
+
+        } catch (\PDOException $e) {
+            $this->selectValidBIC->closeCursor();
+            throw new DataBackendIOException($e->getMessage(), 0, $e);
+
+        }
+    }
+
+    /**
+     * Returns bank agencies for a given BIC.
+     *
+     * @param string $bic BIC
+     * @return Agency[]
+     */
+    public function getBICAgencies($bic)
+    {
+        try {
+            $this->prepareStatements();
+            $agencies = array();
+            $this->selectBICAgencies->execute(array(":bic" => $bic));
+            foreach ($this->selectBICAgencies->fetchAll() as $result) {
+                $agencies[] = $this->getAgencyObject($this->getBank($result['bank']), $result);
+
+            }
+            $this->selectBICAgencies->closeCursor();
+            return $agencies;
+
+        } catch (\PDOException $e) {
+            $this->selectBICAgencies->closeCursor();
+            throw new DataBackendIOException($e->getMessage(), 0, $e);
+
+        } catch (MissingAttributesDataBackendIOException $e) {
+            $this->selectBICAgencies->closeCursor();
+            throw new LogicException($e);
 
         }
     }

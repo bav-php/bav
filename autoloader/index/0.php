@@ -19,6 +19,7 @@ return array(
     'malkusch\bav\bank' => '../classes/bank/Bank.php',
     'malkusch\bav\lock' => '../classes/util/Lock.php',
     'malkusch\bav\agency' => '../classes/bank/Agency.php',
+    'malkusch\bav\bicutil' => '../classes/util/BICUtil.php',
     'malkusch\bav\encoding' => '../classes/encoding/Encoding.php',
     'malkusch\bav\fileutil' => '../classes/util/FileUtil.php',
     'malkusch\bav\uripicker' => '../classes/dataBackend/file/download/uripicker/URIPicker.php',

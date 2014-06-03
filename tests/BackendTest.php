@@ -249,6 +249,76 @@ class BackendTest extends \PHPUnit_Framework_TestCase
 
         }
     }
+
+    /**
+     * Test cases for testIsValidBIC()
+     * 
+     * @see testIsValidBIC()
+     * @return array
+     */
+    public function provideTestIsValidBIC()
+    {
+        $cases = array();
+        foreach ($this->provideBackends() as $backendArray) {
+            $backend = $backendArray[0];
+            $cases[] = array($backend, true, "VZVDDED1XXX");
+            $cases[] = array($backend, true, "VZVDDED1001");
+            $cases[] = array($backend, false, "VZVDDED1001X");
+            $cases[] = array($backend, false, "");
+            $cases[] = array($backend, false, "VZVDDED1~~~");
+
+        }
+        return $cases;
+    }
+
+    /**
+     * Tests DataBackend::isValidBIC();
+     *
+     * @dataProvider provideTestIsValidBIC
+     * @see DataBackend::isValidBIC();
+     */
+    public function testIsValidBIC(DataBackend $backend, $expected, $bic)
+    {
+        $this->assertEquals($expected, $backend->isValidBIC($bic));
+    }
+
+    /**
+     * Test cases for testGetBICAgencies()
+     * 
+     * @see testGetBICAgencies()
+     */
+    public function provideTestGetBICAgencies()
+    {
+        $cases = array();
+        foreach ($this->provideBackends() as $backendArray) {
+            $backend = $backendArray[0];
+            $cases[] = array($backend, "XXX", array());
+            $cases[] = array($backend, "VZVDDED1XXX", array("52944"));
+            $cases[] = array($backend, "VZVDDED1XXX", array("52944"));
+            $cases[] = array($backend, "DELBDE33XXX", array("8536", "13567", "33248", "51683"));
+
+        }
+        return $cases;
+    }
+
+    /**
+     * Tests DataBackend::getBICAgencies()
+     * 
+     * @dataProvider provideTestGetBICAgencies
+     * @see DataBackend::getBICAgencies();
+     */
+    public function testGetBICAgencies(DataBackend $backend, $bic, $expectedAgencyIds)
+    {
+        $agencies = $backend->getBICAgencies($bic);
+        $getID = function (Agency $agency) {
+            return $agency->getID();
+        };
+        $agenciesIds = array_map($getID, $agencies);
+        
+        sort($expectedAgencyIds);
+        sort($agenciesIds);
+        $this->assertEquals($expectedAgencyIds, $agenciesIds);
+    }
 }
 
 BackendTest::classConstructor();

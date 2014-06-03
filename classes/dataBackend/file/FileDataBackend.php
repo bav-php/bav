@@ -420,4 +420,27 @@ class FileDataBackend extends DataBackend
         return file_exists($this->parser->getFile())
             && filesize($this->parser->getFile()) > 0;
     }
+
+    /**
+     * Returns bank agencies for a given BIC.
+     *
+     * @todo This method is inefficient. Add index based implementation.
+     * @param string $bic BIC
+     * @return Agency[]
+     */
+    public function getBICAgencies($bic)
+    {
+        $agencies = array();
+        foreach ($this->getAllBanks() as $bank) {
+            $bankAgencies = $bank->getAgencies();
+            $bankAgencies[] = $bank->getMainAgency();
+            foreach ($bankAgencies as $agency) {
+                if ($agency->hasBIC() && $agency->getBIC() == $bic) {
+                    $agencies[] = $agency;
+
+                }
+            }
+        }
+        return $agencies;
+    }
 }

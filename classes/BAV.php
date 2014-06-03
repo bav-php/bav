@@ -146,4 +146,26 @@ class BAV
     {
         return $this->backend->getBank($bankID);
     }
+
+    /**
+     * Returns bank agencies for a given BIC.
+     *
+     * @param string $bic BIC
+     * @return Agency[]
+     */
+    public function getBICAgencies($bic)
+    {
+        return $this->backend->getBICAgencies(BICUtil::normalize($bic));
+    }
+
+    /**
+     * Returns if a bic is valid.
+     *
+     * @param string $bic BIC
+     * @return bool
+     */
+    public function isValidBIC($bic)
+    {
+        return $this->backend->isValidBIC(BICUtil::normalize($bic));
+    }
 }

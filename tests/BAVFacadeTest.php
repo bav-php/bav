@@ -153,4 +153,66 @@ class BAVFacadeTest extends \PHPUnit_Framework_TestCase
         $bav = new BAV();
         $this->assertEquals($expected, $bav->isValidBankAccount($bankID, $account));
     }
+
+    /**
+     * Test cases for testIsValidBIC()
+     * 
+     * @see testIsValidBIC()
+     * @return array
+     */
+    public function provideTestIsValidBIC()
+    {
+        return array(
+            array("VZVDDED1XXX", true),
+            array("VZVDDED1", true),
+            array("VZVDDED1~~~", false),
+        );
+    }
+
+    /**
+     * Tests BAV::isValidBankAccount();
+     *
+     * @dataProvider provideTestIsValidBIC
+     * @see BAV::isValidBIC();
+     */
+    public function testIsValidBIC($bic, $expected)
+    {
+        $bav = new BAV();
+        $this->assertEquals($expected, $bav->isValidBIC($bic));
+    }
+
+    /**
+     * Test cases for testGetBICAgencies()
+     * 
+     * @see testGetBICAgencies()
+     * @return array
+     */
+    public function provideTestGetBICAgencies()
+    {
+        return array(
+            array("VZVDDED1XXX", array("52944")),
+            array("VZVDDED1", array("52944")),
+            array("VZVDDED1~~~", array()),
+        );
+    }
+
+    /**
+     * Tests BAV::getBICAgencies();
+     *
+     * @dataProvider provideTestGetBICAgencies
+     * @see BAV::getBICAgencies();
+     */
+    public function testGetBICAgencies($bic, $expected)
+    {
+        $bav = new BAV();
+        $agencies = $bav->getBICAgencies($bic);
+        $getID = function (Agency $agency) {
+            return $agency->getID();
+        };
+        $agenciesIds = array_map($getID, $agencies);
+        
+        sort($expected);
+        sort($agenciesIds);
+        $this->assertEquals($expected, $agenciesIds);
+    }
 }

@@ -21,6 +21,8 @@ Version 1.0.0 - not yet released
     - Moved FileDatabackend::getTempDir() into new FileUtil
 
     - Renamed bankExists() into isValidBank()
+
+    - added BIC support: BAV::isValidBIC($bic), BAV::getBICAgencies($bic)
     
     -[TODO] add IBAN rule support
 

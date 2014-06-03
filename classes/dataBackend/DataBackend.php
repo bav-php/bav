@@ -165,4 +165,24 @@ abstract class DataBackend
      * @internal YOU SHOULD NOT CALL THIS METHOD! Use Bank->getMainAgency()
      */
     abstract public function getAgenciesForBank(Bank $bank);
+
+    /**
+     * Returns bank agencies for a given BIC.
+     *
+     * @param string $bic BIC
+     * @return Agency[]
+     */
+    abstract public function getBICAgencies($bic);
+
+    /**
+     * Returns if a bic is valid.
+     *
+     * @param string $bic BIC
+     * @return bool
+     */
+    public function isValidBIC($bic)
+    {
+        $agencies = $this->getBICAgencies($bic);
+        return ! empty($agencies);
+    }
 }
