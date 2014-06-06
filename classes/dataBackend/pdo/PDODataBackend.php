@@ -543,11 +543,26 @@ class PDODataBackend extends DataBackend
     public function isInstalled()
     {
         try {
-            $stmt = $this->statementContainer->prepare(
-                "SELECT CASE WHEN EXISTS(
-                    (SELECT * FROM information_schema.tables WHERE table_name='{$this->prefix}meta')
-                ) THEN 1 ELSE 0 END"
-            );
+            
+            switch ($this->pdo->getAttribute(\PDO::ATTR_DRIVER_NAME)) {
+                
+                case "sqlite":
+                    $query =
+                        "SELECT count(*) FROM sqlite_master
+                            WHERE type='table' AND name = '{$this->prefix}meta'";
+                    break;
+                
+                default:
+                    $query =
+                        "SELECT CASE WHEN EXISTS(
+                            (SELECT * FROM information_schema.tables
+                                WHERE table_name='{$this->prefix}meta')
+                        ) THEN 1 ELSE 0 END";
+                    break;
+                
+            }
+            
+            $stmt = $this->statementContainer->prepare($query);
             $stmt->execute();
             $result = $stmt->fetch();
             if ($result === false) {
@@ -559,7 +574,7 @@ class PDODataBackend extends DataBackend
 
         } catch (\PDOException $e) {
             $stmt->closeCursor();
-            throw new DataBackendIOException($e->getMessage(), $e->getCode(), $e);
+            throw new DataBackendIOException($e->getMessage(), 0, $e);
 
         }
     }

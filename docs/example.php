@@ -64,7 +64,7 @@ try {
      * @see ConfigurationRegistry
      */
     $backendContainer = new PDODataBackendContainer(
-        new \PDO('mysql:host=localhost;dbname=test', 'test')
+        new \PDO('sqlite::memory:')
     );
     $backend = $backendContainer->getDataBackend();
 
