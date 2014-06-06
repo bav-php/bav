@@ -18,6 +18,7 @@ before_script:
     - echo 'SET @@GLOBAL.wait_timeout=600' | mysql -uroot
 
 script:
-    - phpunit --exclude-group large tests/
+    - phpunit large tests/unit/
+    - phpunit --exclude-group large tests/unit-large/
     - phpcs --standard=PSR2 classes/ bin/ docs/example.php tests/classes/ tests/bin/
 

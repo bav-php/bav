@@ -40,7 +40,7 @@ class FileValidatorTest extends \PHPUnit_Framework_TestCase
         $backend = new FileDataBackend();
         $file = $backend->getFile();
 
-        $invalidFile = __DIR__ . "/data/invalidLength.txt";
+        $invalidFile = __DIR__ . "/../data/invalidLength.txt";
         copy($file, $invalidFile);
 
         $fp = fopen($invalidFile, "c");
@@ -58,7 +58,7 @@ class FileValidatorTest extends \PHPUnit_Framework_TestCase
         $backend = new FileDataBackend();
         $file = $backend->getFile();
 
-        $invalidFile = __DIR__ . "/data/notConstantLength.txt";
+        $invalidFile = __DIR__ . "/../data/notConstantLength.txt";
         copy($file, $invalidFile);
 
         $fp = fopen($invalidFile, "a");
@@ -76,7 +76,7 @@ class FileValidatorTest extends \PHPUnit_Framework_TestCase
         $backend = new FileDataBackend();
         $file = $backend->getFile();
 
-        $invalidFile = __DIR__ . "/data/invalidFirstLineContent.txt";
+        $invalidFile = __DIR__ . "/../data/invalidFirstLineContent.txt";
         copy($file, $invalidFile);
 
         $fp = fopen($invalidFile, "c");

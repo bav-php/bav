@@ -19,8 +19,8 @@ class FileUtilTest extends \PHPUnit_Framework_TestCase
      */
     public function testSafeRenameOneFS()
     {
-        $before = __DIR__ . "/data/testSafeRenameBefore";
-        $after = __DIR__ . "/data/testSafeRenameAfter";
+        $before = __DIR__ . "/../data/testSafeRenameBefore";
+        $after = __DIR__ . "/../data/testSafeRenameAfter";
 
         touch($before);
 

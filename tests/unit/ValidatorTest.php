@@ -58,7 +58,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $this->setUp();
 
         $banks = array();
-        $files = ClassFile::getClassFiles(__DIR__.'/../classes/validator/validators/');
+        $files = ClassFile::getClassFiles(__DIR__.'/../../classes/validator/validators/');
         foreach ($files as $class) {
             if (! preg_match('~^Validator([A-Z0-9]{2})$~', $class->getName(), $matchType)) {
                 continue;
@@ -150,7 +150,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function provideTestAccounts()
     {
-        $verifyArray = json_decode(file_get_contents(__DIR__ . '/data/accounts.json'));
+        $verifyArray = json_decode(file_get_contents(__DIR__ . '/../data/accounts.json'));
         if (! is_array($verifyArray)) {
             throw new \RuntimeException("couldn't parse accounts.json.");
 

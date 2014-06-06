@@ -42,7 +42,7 @@ class DataConstraintTest extends \PHPUnit_Framework_TestCase
             ) engine=MEMORY"
         );
 
-        $fp = fopen(__DIR__ . '/../data/banklist.txt', 'r');
+        $fp = fopen(__DIR__ . '/../../data/banklist.txt', 'r');
         if (! is_resource($fp)) {
             throw new RuntimeException('I/O-Error');
 

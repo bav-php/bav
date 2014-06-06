@@ -56,7 +56,7 @@ class URIPickerTest extends \PHPUnit_Framework_TestCase
      */
     public function testPickURI(URIPicker $picker)
     {
-        $html = file_get_contents(__DIR__ . "/data/bankleitzahlen_download.html");
+        $html = file_get_contents(__DIR__ . "/../data/bankleitzahlen_download.html");
         $uri = $picker->pickURI($html);
 
         $this->assertEquals(
