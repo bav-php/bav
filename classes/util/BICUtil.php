@@ -9,7 +9,7 @@ namespace malkusch\bav;
  * @license GPL
  */
 class BICUtil
-{ 
+{
 
     /**
      * Extends an 8 character BIC to an 11 character BIC.
