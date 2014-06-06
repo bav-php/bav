@@ -23,10 +23,14 @@ Version 1.0.0 - not yet released
     - Renamed bankExists() into isValidBank()
 
     - added BIC support: BAV::isValidBIC($bic), BAV::getBICAgencies($bic)
+
+    -[TODO] Add international support for BIC validation.
     
     -[TODO] add IBAN rule support
 
     -[TODO] evaluate IBAN validation support
+
+    - changed format of verifiy.ini into JSON
 
 
 Version 0.28 - May 26, 2014

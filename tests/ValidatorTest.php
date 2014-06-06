@@ -7,25 +7,8 @@ require_once __DIR__ . "/../autoloader/autoloader.php";
 /**
  * check all validators in order to find errors
  *
- * Copyright (C) 2009  Markus Malkusch <markus@malkusch.de>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- *
- * @package test
  * @author Markus Malkusch <markus@malkusch.de>
- * @copyright Copyright (C) 2009 Markus Malkusch
+ * @license GPL
  */
 class ValidatorTest extends \PHPUnit_Framework_TestCase
 {
@@ -167,88 +150,50 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function provideTestAccounts()
     {
-        $verifyArray = parse_ini_file(__DIR__.'/../data/verify.ini', true);
-        if (! $verifyArray) {
-            throw new RuntimeException("couldn't parse verify.ini.");
+        $verifyArray = json_decode(file_get_contents(__DIR__ . '/data/accounts.json'));
+        if (! is_array($verifyArray)) {
+            throw new \RuntimeException("couldn't parse accounts.json.");
 
         }
-        return array_merge(
-            $this->getTestAccounts($verifyArray['valid'], true),
-            $this->getTestAccounts($verifyArray['invalid'], false)
+        array_walk(
+            $verifyArray,
+            function (&$item) {
+                $item = array($item);
+            }
         );
-    }
-
-    /**
-     * @return Array
-     */
-    private function getTestAccounts(Array $testAccounts, $expectedValidation)
-    {
-        $accounts = array();
-        foreach ($testAccounts as $typeOrBankID => $tests) {
-            $accounts[] = array(
-                $typeOrBankID,
-                preg_split(':\D+:', $tests),
-                $expectedValidation
-            );
-
-        }
-        return $accounts;
+        return $verifyArray;
     }
 
     /**
      * @dataProvider provideTestAccounts
      */
-    public function testAccount($typeOrBankID, Array $accountIDs, $expectedValidation)
+    public function testAccount(\stdClass $testCase)
     {
-        if (strlen($typeOrBankID) <= 2) {
-            $typeOrBankID = (strlen($typeOrBankID) < 2 ? '0' : '').$typeOrBankID;
-            $this->assertArrayHasKey($typeOrBankID, self::$implementedBanks);
-            $bank = self::$implementedBanks[$typeOrBankID];
-
-            $this->assertEquals($typeOrBankID, $bank->getValidationType());
+        if (! empty($testCase->blz)) {
+            $bank = new Bank(self::$dataBackend, $testCase->blz, $testCase->validator);
 
         } else {
-            try {
-                $bank = self::$dataBackend->getBank($typeOrBankID);
+            $this->assertArrayHasKey($testCase->validator, self::$implementedBanks);
+            $bank = self::$implementedBanks[$testCase->validator];
 
-            } catch (BankNotFoundException $e) {
-                switch ($e->getBankID()) {
+            $this->assertEquals($testCase->validator, $bank->getValidationType());
 
-                    case '13051052':
-                    case '13051172':
-                    case '81053132':
-                        $bank = new Bank(self::$dataBackend, $e->getBankID(), '52');
-                        break;
-
-                    case '16052072':
-                    case '85055142':
-                        $bank = new Bank(self::$dataBackend, $e->getBankID(), '53');
-                        break;
-
-                    case '80053762':
-                    case '80053772':
-                    case '80053782':
-                        $bank = new Bank(self::$dataBackend, $e->getBankID(), 'B6');
-                        break;
-
-                    case '81053272':
-                    case '86055462':
-                        $bank = new Bank(self::$dataBackend, $e->getBankID(), 'C0');
-                        break;
-
-                    default:
-                        throw $e;
-
-                }
-            }
         }
 
-        foreach ($accountIDs as $accountID) {
+        $checkAccounts = function ($account, $key, $isValid) use ($bank) {
             $this->assertEquals(
-                $expectedValidation,
-                $bank->isValid($accountID),
-                "$accountID validates wrongly."
+                $isValid,
+                $bank->isValid($account),
+                "$account validates wrongly."
             );
+        };
+
+        if (isset($testCase->valid)) {
+            array_walk($testCase->valid, $checkAccounts, true);
+
+        }
+        if (isset($testCase->invalid)) {
+            array_walk($testCase->invalid, $checkAccounts, false);
 
         }
     }
