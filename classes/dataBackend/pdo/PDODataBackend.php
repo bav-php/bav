@@ -18,49 +18,15 @@ class PDODataBackend extends DataBackend
     private $agencies = array();
 
     /**
-     * @var \PDOStatement
+     * @var string
      */
-    private $selectBank;
+    private $agencyAttributes =
+        "a.id, name, postcode, city, shortTerm AS 'shortTerm', pan, bic";
 
     /**
-     * @var \PDOStatement
+     * @var StatementContainer
      */
-    private $selectMainAgency;
-
-    /**
-     * @var \PDOStatement
-     */
-    private $selectAgencies;
-
-    /**
-     * @var \PDOStatement
-     */
-    private $selectAgency;
-
-    /**
-     * @var \PDOStatement
-     */
-    private $selectAgencysBank;
-
-    /**
-     * @var \PDOStatement
-     */
-    private $selectMeta;
-
-    /**
-     * @var \PDOStatement
-     */
-    private $selectInstalled;
-
-    /**
-     * @var \PDOStatement
-     */
-    private $selectBICAgencies;
-
-    /**
-     * @var \PDOStatement
-     */
-    private $selectValidBIC;
+    private $statementContainer;
 
     /**
      * @var \PDO
@@ -84,6 +50,7 @@ class PDODataBackend extends DataBackend
     {
         $this->pdo    = $pdo;
         $this->prefix = $prefix;
+        $this->statementContainer = new StatementContainer($pdo);
 
         $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
     }
@@ -113,7 +80,6 @@ class PDODataBackend extends DataBackend
     public function getAgencies($sql)
     {
         try {
-            $this->prepareStatements();
             $agencies = array();
 
             foreach ($this->pdo->query($sql) as $result) {
@@ -122,18 +88,26 @@ class PDODataBackend extends DataBackend
                         throw new MissingAttributesDataBackendIOException();
 
                     }
-                    $this->selectAgency->execute(array(':agency' => $result['id']));
-                    $result = $this->selectAgency->fetch(\PDO::FETCH_ASSOC);
-                    $this->selectAgency->closeCursor();
+                    $stmt = $this->statementContainer->prepare(
+                        "SELECT $this->agencyAttributes, bank FROM {$this->prefix}agency a
+                            WHERE id = :agency"
+                    );
+                    $stmt->execute(array(':agency' => $result['id']));
+                    $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+                    $stmt->closeCursor();
                     if ($result === false) {
                         throw new DataBackendIOException();
 
                     }
                 }
                 if (! array_key_exists('bank', $result)) {
-                    $this->selectAgencysBank->execute(array(':agency' => $result['id']));
-                    $bankResult = $this->selectAgencysBank->fetch(\PDO::FETCH_ASSOC);
-                    $this->selectAgencysBank->closeCursor();
+                    $stmt = $this->statementContainer->prepare(
+                        "SELECT bank FROM {$this->prefix}agency
+                            WHERE id = :agency"
+                    );
+                    $stmt->execute(array(':agency' => $result['id']));
+                    $bankResult = $stmt->fetch(\PDO::FETCH_ASSOC);
+                    $stmt->closeCursor();
                     if ($bankResult === false) {
                         throw new DataBackendIOException();
 
@@ -153,54 +127,6 @@ class PDODataBackend extends DataBackend
             throw new LogicException($e);
 
         }
-    }
-
-    /**
-     * @throws \PDOException
-     */
-    private function prepareStatements()
-    {
-        if (! is_null($this->selectBank)) {
-            return;
-        }
-
-        $this->selectBank = $this->pdo->prepare("SELECT id, validator FROM {$this->prefix}bank WHERE id = :bankID");
-
-        $agencyAttributes
-            = "a.id, name, postcode, city, shortTerm AS 'shortTerm', pan, bic";
-        $this->selectMainAgency = $this->pdo->prepare(
-            "SELECT $agencyAttributes FROM {$this->prefix}bank b
-                INNER JOIN {$this->prefix}agency a ON b.mainAgency = a.id
-                WHERE b.id = :bankID"
-        );
-        $this->selectAgencies = $this->pdo->prepare(
-            "SELECT $agencyAttributes FROM {$this->prefix}agency a
-                WHERE bank = :bankID AND id != :mainAgency"
-        );
-        $this->selectAgency = $this->pdo->prepare(
-            "SELECT $agencyAttributes, bank FROM {$this->prefix}agency a
-                WHERE id = :agency"
-        );
-        $this->selectAgencysBank = $this->pdo->prepare(
-            "SELECT bank FROM {$this->prefix}agency
-                WHERE id = :agency"
-        );
-        $this->selectMeta = $this->pdo->prepare(
-            "SELECT value FROM {$this->prefix}meta
-                WHERE name = :name"
-        );
-        $this->selectInstalled = $this->pdo->prepare(
-            "SELECT CASE WHEN EXISTS(
-                (SELECT * FROM information_schema.tables WHERE table_name='{$this->prefix}meta')
-            ) THEN 1 ELSE 0 END"
-        );
-        $this->selectBICAgencies = $this->pdo->prepare(
-            "SELECT bank, $agencyAttributes FROM {$this->prefix}agency a
-                WHERE bic = :bic"
-        );
-        $this->selectValidBIC = $this->pdo->prepare(
-            "SELECT bic FROM {$this->prefix}agency WHERE bic = :bic GROUP BY (bic)"
-        );
     }
 
     /**
@@ -409,7 +335,6 @@ class PDODataBackend extends DataBackend
             throw new DataBackendIOException();
 
         } catch (MissingAttributesDataBackendIOException $e) {
-            $this->selectBank->closeCursor();
             throw new LogicException($e);
 
         }
@@ -425,23 +350,25 @@ class PDODataBackend extends DataBackend
     protected function getNewBank($bankID)
     {
         try {
-            $this->prepareStatements();
-            $this->selectBank->execute(array(':bankID' => $bankID));
-            $result = $this->selectBank->fetch(\PDO::FETCH_ASSOC);
+            $stmt = $this->statementContainer->prepare(
+                "SELECT id, validator FROM {$this->prefix}bank WHERE id = :bankID"
+            );
+            $stmt->execute(array(':bankID' => $bankID));
+            $result = $stmt->fetch(\PDO::FETCH_ASSOC);
             if ($result === false) {
-                $this->selectBank->closeCursor();
+                $stmt->closeCursor();
                 throw new BankNotFoundException($bankID);
 
             }
-            $this->selectBank->closeCursor();
+            $stmt->closeCursor();
             return $this->getBankObject($result);
 
         } catch (\PDOException $e) {
-            $this->selectBank->closeCursor();
+            $stmt->closeCursor();
             throw new DataBackendIOException();
 
         } catch (MissingAttributesDataBackendIOException $e) {
-            $this->selectBank->closeCursor();
+            $stmt->closeCursor();
             throw new LogicException($e);
 
         }
@@ -517,22 +444,26 @@ class PDODataBackend extends DataBackend
     public function getMainAgency(Bank $bank)
     {
         try {
-            $this->prepareStatements();
-            $this->selectMainAgency->execute(array(":bankID" => $bank->getBankID()));
-            $result = $this->selectMainAgency->fetch();
+            $stmt = $this->statementContainer->prepare(
+                "SELECT $this->agencyAttributes FROM {$this->prefix}bank b
+                    INNER JOIN {$this->prefix}agency a ON b.mainAgency = a.id
+                    WHERE b.id = :bankID"
+            );
+            $stmt->execute(array(":bankID" => $bank->getBankID()));
+            $result = $stmt->fetch();
             if ($result === false) {
                 throw new DataBackendException();
 
             }
-            $this->selectMainAgency->closeCursor();
+            $stmt->closeCursor();
             return $this->getAgencyObject($bank, $result);
 
         } catch (\PDOException $e) {
-            $this->selectMainAgency->closeCursor();
+            $stmt->closeCursor();
             throw new DataBackendIOException($e->getMessage(), 0, $e);
 
         } catch (MissingAttributesDataBackendIOException $e) {
-            $this->selectMainAgency->closeCursor();
+            $stmt->closeCursor();
             throw new LogicException($e);
 
         }
@@ -546,24 +477,27 @@ class PDODataBackend extends DataBackend
     public function getAgenciesForBank(Bank $bank)
     {
         try {
-            $this->prepareStatements();
+            $stmt = $this->statementContainer->prepare(
+                "SELECT $this->agencyAttributes FROM {$this->prefix}agency a
+                    WHERE bank = :bankID AND id != :mainAgency"
+            );
             $agencies = array();
-            $this->selectAgencies->execute(array(
+            $stmt->execute(array(
                 ":bankID"       => $bank->getBankID(),
                 ":mainAgency"   => $bank->getMainAgency()->getID()));
-            foreach ($this->selectAgencies->fetchAll() as $agencyResult) {
+            foreach ($stmt->fetchAll() as $agencyResult) {
                 $agencies[] = $this->getAgencyObject($bank, $agencyResult);
 
             }
-            $this->selectAgencies->closeCursor();
+            $stmt->closeCursor();
             return $agencies;
 
         } catch (\PDOException $e) {
-            $this->selectAgencies->closeCursor();
+            $stmt->closeCursor();
             throw new DataBackendIOException($e->getMessage(), 0, $e);
 
         } catch (MissingAttributesDataBackendIOException $e) {
-            $this->selectAgencies->closeCursor();
+            $stmt->closeCursor();
             throw new LogicException($e);
 
         }
@@ -578,20 +512,23 @@ class PDODataBackend extends DataBackend
     public function getLastUpdate()
     {
         try {
-            $this->prepareStatements();
-            $this->selectMeta->execute(array(
+            $stmt = $this->statementContainer->prepare(
+                "SELECT value FROM {$this->prefix}meta
+                    WHERE name = :name"
+            );
+            $stmt->execute(array(
                 ":name" => self::META_MODIFICATION,
             ));
-            $result = $this->selectMeta->fetch();
+            $result = $stmt->fetch();
             if ($result === false) {
                 throw new DataBackendException();
 
             }
-            $this->selectMeta->closeCursor();
+            $stmt->closeCursor();
             return $result["value"];
 
         } catch (\PDOException $e) {
-            $this->selectMeta->closeCursor();
+            $stmt->closeCursor();
             throw new DataBackendIOException($e->getMessage(), $e->getCode(), $e);
 
         }
@@ -606,18 +543,22 @@ class PDODataBackend extends DataBackend
     public function isInstalled()
     {
         try {
-            $this->prepareStatements();
-            $this->selectInstalled->execute();
-            $result = $this->selectInstalled->fetch();
+            $stmt = $this->statementContainer->prepare(
+                "SELECT CASE WHEN EXISTS(
+                    (SELECT * FROM information_schema.tables WHERE table_name='{$this->prefix}meta')
+                ) THEN 1 ELSE 0 END"
+            );
+            $stmt->execute();
+            $result = $stmt->fetch();
             if ($result === false) {
                 throw new DataBackendException();
 
             }
-            $this->selectInstalled->closeCursor();
+            $stmt->closeCursor();
             return $result[0] == 1;
 
         } catch (\PDOException $e) {
-            $this->selectInstalled->closeCursor();
+            $stmt->closeCursor();
             throw new DataBackendIOException($e->getMessage(), $e->getCode(), $e);
 
         }
@@ -632,15 +573,16 @@ class PDODataBackend extends DataBackend
     public function isValidBIC($bic)
     {
         try {
-            $this->prepareStatements();
-            $this->selectValidBIC->execute(array(":bic" => $bic));
+            $stmt = $this->statementContainer->prepare(
+                "SELECT bic FROM {$this->prefix}agency WHERE bic = :bic GROUP BY (bic)"
+            );
+            $stmt->execute(array(":bic" => $bic));
             
-            $rows = $this->selectValidBIC->fetchAll();
-            $this->selectValidBIC->closeCursor();
+            $rows = $stmt->fetchAll();
             return ! empty($rows);
 
         } catch (\PDOException $e) {
-            $this->selectValidBIC->closeCursor();
+            $stmt->closeCursor();
             throw new DataBackendIOException($e->getMessage(), 0, $e);
 
         }
@@ -655,22 +597,25 @@ class PDODataBackend extends DataBackend
     public function getBICAgencies($bic)
     {
         try {
-            $this->prepareStatements();
+            $stmt = $this->statementContainer->prepare(
+                "SELECT bank, $this->agencyAttributes FROM {$this->prefix}agency a
+                    WHERE bic = :bic"
+            );
             $agencies = array();
-            $this->selectBICAgencies->execute(array(":bic" => $bic));
-            foreach ($this->selectBICAgencies->fetchAll() as $result) {
+            $stmt->execute(array(":bic" => $bic));
+            foreach ($stmt->fetchAll() as $result) {
                 $agencies[] = $this->getAgencyObject($this->getBank($result['bank']), $result);
 
             }
-            $this->selectBICAgencies->closeCursor();
+            $stmt->closeCursor();
             return $agencies;
 
         } catch (\PDOException $e) {
-            $this->selectBICAgencies->closeCursor();
+            $stmt->closeCursor();
             throw new DataBackendIOException($e->getMessage(), 0, $e);
 
         } catch (MissingAttributesDataBackendIOException $e) {
-            $this->selectBICAgencies->closeCursor();
+            $stmt->closeCursor();
             throw new LogicException($e);
 
         }

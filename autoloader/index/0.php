@@ -204,6 +204,7 @@ return array(
     'malkusch\bav\fileparsercontext' => '../classes/dataBackend/file/fileParser/FileParserContext.php',
     'malkusch\bav\encodingexception' => '../classes/encoding/exception/EncodingException.php',
     'malkusch\bav\uripickerexception' => '../classes/dataBackend/file/download/uripicker/exception/URIPickerException.php',
+    'malkusch\bav\statementcontainer' => '../classes/dataBackend/pdo/StatementContainer.php',
     'malkusch\bav\validatoriteration' => '../classes/validator/ValidatorIteration.php',
     'malkusch\bav\validatorexception' => '../classes/validator/exception/ValidatorException.php',
     'malkusch\bav\downloaderexception' => '../classes/dataBackend/file/download/exception/DownloaderException.php',
