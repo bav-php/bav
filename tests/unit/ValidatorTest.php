@@ -182,7 +182,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
         $test = $this;
         $checkAccounts = function ($account, $key, $isValid) use ($bank, $test) {
-            $this->assertEquals(
+            $test->assertEquals(
                 $isValid,
                 $bank->isValid($account),
                 "$account validates wrongly."
