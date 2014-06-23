@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                    http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+
+    <entity name="malkusch\bav\Agency" table="bav_agency">
+        <id name="id" type="integer" />
+        
+        <field name="name" type="string" length="58" />
+        <field name="postcode" type="string" length="5" />
+        <field name="city" type="string" length="35" />
+        <field name="shortTerm" type="string" length="27" />
+        
+        <many-to-one field="bank" target-entity="Bank">
+            <join-column name="bank" referenced-column-name="id" />
+        </many-to-one>
+        
+        <field name="pan" type="string" length="5" nullable="true" />
+        <field name="bic" type="string" length="11" nullable="true" />
+    </entity>
+</doctrine-mapping>

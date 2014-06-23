@@ -32,6 +32,8 @@ Version 1.0.0 - not yet released
 
     - changed format of verifiy.ini into JSON
 
+    -[TODO] add ORM-Backends (Doctrine, Propel)
+
 
 Version 0.28 - May 26, 2014
 ---------------------------
