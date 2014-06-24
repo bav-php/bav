@@ -443,4 +443,10 @@ class FileDataBackend extends DataBackend
         }
         return $agencies;
     }
+    
+    public function free()
+    {
+        parent::free();
+        $this->contextCache = array();
+    }
 }

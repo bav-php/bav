@@ -21,9 +21,9 @@ class BackendTest extends \PHPUnit_Framework_TestCase
     private static $referenceBackend;
     
     /**
-     * @var EntityManager[]
+     * @var DataBackend[]
      */
-    private static $entityManagers = array();
+    private static $freeableDatabackends = array();
 
     /**
      * Defines the reference backend
@@ -38,71 +38,61 @@ class BackendTest extends \PHPUnit_Framework_TestCase
      */
     public function provideBackends()
     {
-        $pdoBackend = new PDODataBackend(PDOFactory::makePDO());
-        $this->setupBackend($pdoBackend);
-
-        $fileBackend = new FileDataBackend();
-        $this->setupBackend($fileBackend);
+        $backends = array();
+        
+        $backends[] = new PDODataBackend(PDOFactory::makePDO());
+        $backends[] = new FileDataBackend();
         
         $conn = array(
-            'pdo' => PDOFactory::makePDO(),
+            "pdo" => PDOFactory::makePDO(),
         );
         $doctrineContainer = DoctrineBackendContainer::buildByConnection($conn, true);
-        $doctrineBackend = new DoctrineDataBackend($doctrineContainer->getEntityManager());
-        self::$entityManagers[] = $doctrineContainer->getEntityManager();
-        $this->setupBackend($doctrineBackend);
+        $backends[] = new DoctrineDataBackend($doctrineContainer->getEntityManager());
 
-        return array(
-            array($pdoBackend),
-            array($fileBackend),
-            array($doctrineBackend),
-        );
-    }
+        array_walk($backends, function (DataBackend &$backend) {
+            if (! $backend->isInstalled()) {
+                $backend->install();
 
-    private function setupBackend(DataBackend $backend)
-    {
-        if ($backend->isInstalled()) {
-            return;
-
-        }
-        $backend->install();
+            }
+            
+            self::$freeableDatabackends[] = $backend;
+            
+            $backend = array($backend);
+        });
+        
+        return $backends;
     }
 
     /**
      */
     public function provideInstallationBackends()
     {
-        $pdoBackend = new PDODataBackend(PDOFactory::makePDO(), 'bavtest_');
-        $this->setupInstallationBackends($pdoBackend);
+        $backends = array();
+        
+        $backends[] = new PDODataBackend(PDOFactory::makePDO(), "bavtest_");
 
         $fileUtil = new FileUtil();
-
-        $fileBackend = new FileDataBackend(tempnam($fileUtil->getTempDirectory(), 'bavtest'));
-        $this->setupInstallationBackends($fileBackend);
+        $backends[] = new FileDataBackend(tempnam($fileUtil->getTempDirectory(), "bavtest"));
         
         $conn = array(
-            'driver' => 'pdo_sqlite',
-            'path' => ":memory:"
+            "driver" => "pdo_sqlite",
+            "path" => ":memory:"
         );
         $doctrineContainer = DoctrineBackendContainer::buildByConnection($conn, true);
-        $doctrineBackend = new DoctrineDataBackend($doctrineContainer->getEntityManager());
-        self::$entityManagers[] = $doctrineContainer->getEntityManager();
-        $this->setupInstallationBackends($doctrineBackend);
+        $backends[] = new DoctrineDataBackend($doctrineContainer->getEntityManager());
 
-        return array(
-            array($pdoBackend),
-            array($fileBackend),
-            array($doctrineBackend),
-        );
-    }
+        array_walk($backends, function (DataBackend &$backend) {
+            if ($backend->isInstalled()) {
+                $backend->uninstall();
 
-    private function setupInstallationBackends(DataBackend $backend)
-    {
-        if (! $backend->isInstalled()) {
-            return;
-
-        }
-        $backend->uninstall();
+            }
+            
+            self::$freeableDatabackends[] = $backend;
+            
+            $backend = array($backend);
+        });
+        
+        return $backends;
     }
 
     /**
@@ -153,8 +143,8 @@ class BackendTest extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         // Reduce memory foot print
-        foreach (self::$entityManagers as $em) {
-            $em->clear();
+        foreach (self::$freeableDatabackends as $backend) {
+            $backend->free();
             
         }
     }

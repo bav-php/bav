@@ -166,4 +166,10 @@ class DoctrineDataBackend extends DataBackend
             $em->persist($lastModified);
         });
     }
+
+    public function free()
+    {
+        parent::free();
+        $this->em->clear();
+    }
 }

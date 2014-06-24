@@ -630,4 +630,10 @@ class PDODataBackend extends DataBackend
 
         }
     }
+        
+    public function free()
+    {
+        parent::free();
+        $this->agencies = array();
+    }
 }
