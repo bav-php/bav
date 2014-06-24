@@ -7,6 +7,7 @@ namespace malkusch\bav;
  * 
  * @internal
  * @author Markus Malkusch <markus@malkusch.de>
+ * @license GPL
  */
 class MetaData
 {
