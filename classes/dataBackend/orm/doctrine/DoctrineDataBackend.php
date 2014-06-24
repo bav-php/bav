@@ -65,7 +65,9 @@ class DoctrineDataBackend extends DataBackend
 
     public function getBICAgencies($bic)
     {
-        
+        return $this->em->getRepository("malkusch\bav\Agency")->findBy(array(
+            "bic" => $bic
+        ));
     }
 
     public function getLastUpdate()
