@@ -194,6 +194,7 @@ return array(
     'malkusch\bav\iconvencoding' => '../classes/encoding/IconvEncoding.php',
     'malkusch\bav\fileexception' => '../classes/util/exception/FileException.php',
     'malkusch\bav\lockexception' => '../classes/util/exception/LockException.php',
+    'malkusch\bav\sqldatabackend' => '../classes/dataBackend/SQLDataBackend.php',
     'malkusch\bav\fieldexception' => '../classes/dataBackend/file/validator/exception/FieldException.php',
     'malkusch\bav\pdodatabackend' => '../classes/dataBackend/pdo/PDODataBackend.php',
     'malkusch\bav\validatorchain' => '../classes/validator/ValidatorChain.php',

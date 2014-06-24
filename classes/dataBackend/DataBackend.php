@@ -17,7 +17,7 @@ namespace malkusch\bav;
  *
  * @author Markus Malkusch <markus@malkusch.de>
  * @license GPL
- * @see DataBackendFactory
+ * @see DataBackendContainer
  */
 abstract class DataBackend
 {

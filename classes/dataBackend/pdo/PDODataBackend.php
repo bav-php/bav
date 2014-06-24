@@ -9,7 +9,7 @@ namespace malkusch\bav;
  * @author Markus Malkusch <markus@malkusch.de>
  * @license GPL
  */
-class PDODataBackend extends DataBackend
+class PDODataBackend extends SQLDataBackend
 {
 
     /**

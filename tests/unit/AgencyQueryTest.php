@@ -3,75 +3,73 @@
 namespace malkusch\bav;
 
 require_once __DIR__ . "/../bootstrap.php";
+require_once __DIR__ . "/../../vendor/autoload.php";
 
 /**
- * check PDODataBackend->getAgencies($sql)
+ * Test SQLDataBackend::getAgencies($sql)
  *
- * Copyright (C) 2009  Markus Malkusch <markus@malkusch.de>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- *
- * @package test
  * @author Markus Malkusch <markus@malkusch.de>
- * @copyright Copyright (C) 2009 Markus Malkusch
+ * @licends GPL
  */
 class AgencyQueryTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var PDODataBackend
+     * @return SQLDataBackend[][]
      */
-    private $backend;
-
-    /**
-     */
-    protected function setUp()
+    public function provideBackends()
     {
-        $this->backend = new PDODataBackend(PDOFactory::makePDO());
+        $conn = array(
+            "pdo" => PDOFactory::makePDO(),
+        );
+        $doctrineContainer = DoctrineBackendContainer::buildByConnection($conn, true);
+        
+        return array(
+            array(new PDODataBackend(PDOFactory::makePDO())),
+            array($doctrineContainer->getDataBackend())
+        );
     }
 
-    public function testOnlyID()
+    /**
+     * @dataProvider provideBackends
+     */
+    public function testOnlyID(SQLDataBackend $backend)
     {
-        $agencies = $this->backend->getAgencies(
+        $agencies = $backend->getAgencies(
             'SELECT id FROM bav_agency LIMIT 100'
         );
         $this->assertAgencies($agencies, 100);
     }
 
-    public function testIDAndBank()
+    /**
+     * @dataProvider provideBackends
+     */
+    public function testIDAndBank(SQLDataBackend $backend)
     {
-        $agencies = $this->backend->getAgencies(
+        $agencies = $backend->getAgencies(
             'SELECT id, bank FROM bav_agency LIMIT 100'
         );
         $this->assertAgencies($agencies, 100);
     }
 
-    public function testNoBank()
+    /**
+     * @dataProvider provideBackends
+     */
+    public function testNoBank(SQLDataBackend $backend)
     {
-        $agencies = $this->backend->getAgencies(
+        $agencies = $backend->getAgencies(
             'SELECT id, name, postcode, city, shortTerm, pan, bic FROM bav_agency LIMIT 100'
         );
         $this->assertAgencies($agencies, 100);
     }
 
     /**
+     * @dataProvider provideBackends
      * @expectedException malkusch\bav\MissingAttributesDataBackendIOException
      */
-    public function testNoID()
+    public function testNoID(SQLDataBackend $backend)
     {
-        $result = $this->backend->getAgencies(
+        $result = $backend->getAgencies(
             'SELECT name, postcode, city, shortTerm, pan, bic, bank FROM bav_agency LIMIT 1'
         );
     }

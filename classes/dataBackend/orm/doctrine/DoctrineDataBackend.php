@@ -16,7 +16,7 @@ use Doctrine\DBAL\DBALException;
  * @license GPL
  * @link http://www.doctrine-project.org/
  */
-class DoctrineDataBackend extends DataBackend
+class DoctrineDataBackend extends SQLDataBackend
 {
 
     /**
@@ -171,5 +171,38 @@ class DoctrineDataBackend extends DataBackend
     {
         parent::free();
         $this->em->clear();
+    }
+    
+    /**
+     * You may use an arbitrary SQL statement to receive Agency objects.
+     * Your statement should at least return the id of the agencies.
+     *
+     * @param string $sql
+     * @throws MissingAttributesDataBackendIOException
+     * @throws DataBackendIOException
+     * @throws DataBackendException
+     * @return Agency[]
+     */
+    public function getAgencies($sql)
+    {
+        $agencies = array();
+        $backend = $this;
+        $this->em->transactional(function () use (&$agencies, $sql, $backend) {
+            $stmt = $this->em->getConnection()->executeQuery($sql);
+            
+            foreach ($stmt as $result) {
+                if (! array_key_exists('id', $result)) {
+                    throw new MissingAttributesDataBackendIOException();
+
+                }
+                $id = $result["id"];
+                $agency = $this->em->find("malkusch\bav\Agency", $id);
+                $agencies[] = $agency;
+                
+                $agency->getBank()->setDataBackend($backend);
+
+            }
+        });
+        return $agencies;
     }
 }
