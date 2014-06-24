@@ -67,7 +67,8 @@ class DoctrineDataBackend extends DataBackend
 
     public function getMainAgency(Bank $bank)
     {
-        
+        // Return the Doctrine proxy
+        return $bank->getMainAgency();
     }
     
     private function getClassesMetadata()
