@@ -160,6 +160,9 @@ missing BAV works only with the ISO-8859-15 encoding.
 * **PDO**: If you intend to use a DBS you need to use `PDODataBackendContainer`. 
 `PDODataBackendContainer` needs a `PDO` support compiled in PHP.
 
+* **doctrine/orm**: You can use `DoctrineBackendContainer` which uses doctrine
+as data backend.
+
 
 # License and authors
 
