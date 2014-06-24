@@ -3,10 +3,11 @@
 namespace malkusch\bav;
 
 require_once __DIR__ . "/../bootstrap.php";
+require_once __DIR__ . "/../../vendor/autoload.php";
 
 /**
  * Tests the Backends.
- * This test needs some memory (about 400M)!
+ * This test needs some memory (about 800M)!
  *
  * @license GPL
  * @author Markus Malkusch <markus@malkusch.de>
@@ -37,10 +38,16 @@ class BackendTest extends \PHPUnit_Framework_TestCase
 
         $fileBackend = new FileDataBackend();
         $this->setupBackend($fileBackend);
+        
+        $conn = array(
+            'pdo' => PDOFactory::makePDO(),
+        );
+        $doctrineContainer = DoctrineBackendContainer::buildByConnection($conn, true);
 
         return array(
             array($pdoBackend),
-            array($fileBackend)
+            array($fileBackend),
+            array($doctrineContainer->getDataBackend()),
         );
     }
 
@@ -64,10 +71,19 @@ class BackendTest extends \PHPUnit_Framework_TestCase
 
         $fileBackend = new FileDataBackend(tempnam($fileUtil->getTempDirectory(), 'bavtest'));
         $this->setupInstallationBackends($fileBackend);
+        
+        $conn = array(
+            'driver' => 'pdo_sqlite',
+            'path' => ":memory:"
+        );
+        $doctrineContainer = DoctrineBackendContainer::buildByConnection($conn, true);
+        $doctrineBackend = $doctrineContainer->getDataBackend();
+        $this->setupInstallationBackends($doctrineBackend);
 
         return array(
             array($pdoBackend),
-            array($fileBackend)
+            array($fileBackend),
+            array($doctrineBackend),
         );
     }
 
