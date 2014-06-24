@@ -19,6 +19,11 @@ class BackendTest extends \PHPUnit_Framework_TestCase
      * @var FileDataBackend
      */
     private static $referenceBackend;
+    
+    /**
+     * @var EntityManager[]
+     */
+    private static $entityManagers = array();
 
     /**
      * Defines the reference backend
@@ -44,6 +49,7 @@ class BackendTest extends \PHPUnit_Framework_TestCase
         );
         $doctrineContainer = DoctrineBackendContainer::buildByConnection($conn, true);
         $doctrineBackend = new DoctrineDataBackend($doctrineContainer->getEntityManager());
+        self::$entityManagers[] = $doctrineContainer->getEntityManager();
         $this->setupBackend($doctrineBackend);
 
         return array(
@@ -80,6 +86,7 @@ class BackendTest extends \PHPUnit_Framework_TestCase
         );
         $doctrineContainer = DoctrineBackendContainer::buildByConnection($conn, true);
         $doctrineBackend = new DoctrineDataBackend($doctrineContainer->getEntityManager());
+        self::$entityManagers[] = $doctrineContainer->getEntityManager();
         $this->setupInstallationBackends($doctrineBackend);
 
         return array(
@@ -141,6 +148,15 @@ class BackendTest extends \PHPUnit_Framework_TestCase
 
         }
         return $agencies;
+    }
+    
+    protected function tearDown()
+    {
+        // Reduce memory foot print
+        foreach (self::$entityManagers as $em) {
+            $em->clear();
+            
+        }
     }
 
     /**
