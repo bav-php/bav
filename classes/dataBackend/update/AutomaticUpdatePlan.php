@@ -23,6 +23,8 @@ class AutomaticUpdatePlan extends UpdatePlan
 
     /**
      * Set to false if you don't want to see an E_USER_NOTICE about an update.
+     * 
+     * @param bool $notice
      */
     public function setNotice($notice)
     {
