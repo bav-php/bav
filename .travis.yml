@@ -13,7 +13,7 @@ install:
 
 before_script:
     - composer --prefer-source --dev install
-    - mysql -e 'SET @@GLOBAL.wait_timeout=600'
+    - mysql -e 'SET @@GLOBAL.wait_timeout=1200'
     - mysql -e 'create database bav;'
     - php tests/bin/test-install.php
 
