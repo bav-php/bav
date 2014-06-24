@@ -36,10 +36,10 @@ class DoctrineBackendContainer extends DataBackendContainer
     /**
      * Builds a container for a connection.
      * 
-     * @param array $connection Doctrine::DBAL connection
+     * @param mixed $connection Doctrine::DBAL connection
      * @return DoctrineBackendContainer
      */
-    public static function buildByConnection(array $connection, $isDevMode = false)
+    public static function buildByConnection($connection, $isDevMode = false)
     {
         $mappings = self::getXMLMappings();
         $config = Setup::createXMLMetadataConfiguration($mappings, $isDevMode);
