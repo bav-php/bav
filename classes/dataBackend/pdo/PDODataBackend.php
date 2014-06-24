@@ -39,11 +39,6 @@ class PDODataBackend extends DataBackend
     private $prefix = '';
 
     /**
-     * @var string last modification name
-     */
-    const META_MODIFICATION = "lastModified";
-
-    /**
      * @param String $prefix the prefix of the table names.
      */
     public function __construct(\PDO $pdo, $prefix = "bav_")
@@ -197,7 +192,7 @@ class PDODataBackend extends DataBackend
                 "UPDATE {$this->prefix}meta SET value=:value WHERE name=:name"
             );
             $modificationStmt->execute(array(
-                ":name"  => self::META_MODIFICATION,
+                ":name"  => MetaData::LASTMODIFIED,
                 ":value" => time()
             ));
 
@@ -284,7 +279,7 @@ class PDODataBackend extends DataBackend
                 "INSERT INTO {$this->prefix}meta (name, value) VALUES (:name, :value)"
             );
             $insertMetaStmt->execute(array(
-                ":name" => self::META_MODIFICATION,
+                ":name" => MetaData::LASTMODIFIED,
                 ":value" => null
             ));
             $this->update();
@@ -517,7 +512,7 @@ class PDODataBackend extends DataBackend
                     WHERE name = :name"
             );
             $stmt->execute(array(
-                ":name" => self::META_MODIFICATION,
+                ":name" => MetaData::LASTMODIFIED,
             ));
             $result = $stmt->fetch();
             if ($result === false) {
