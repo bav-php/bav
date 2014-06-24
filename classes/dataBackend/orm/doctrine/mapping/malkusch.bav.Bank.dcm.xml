@@ -10,7 +10,7 @@
         <field name="validationType" type="string" length="2" column="validator" />
 
         <one-to-one field="mainAgency" target-entity="Agency">
-            <join-column name="mainAgency" referenced-column-name="id" />
+            <join-column name="mainAgency" referenced-column-name="id" on-delete="CASCADE" />
         </one-to-one>
     </entity>
 </doctrine-mapping>
