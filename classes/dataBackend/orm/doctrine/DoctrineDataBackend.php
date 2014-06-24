@@ -121,6 +121,7 @@ class DoctrineDataBackend extends DataBackend
         $tool = new SchemaTool($this->em);
         $classes = $this->getClassesMetadata();
         $tool->dropSchema($classes);
+        $this->em->clear();
     }
 
     public function update()
