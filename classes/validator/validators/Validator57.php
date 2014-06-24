@@ -182,7 +182,7 @@ class Validator57 extends Validator
             return 4;
 
         } else {
-            throw new LogicException();
+            throw new \LogicException();
 
         }
     }

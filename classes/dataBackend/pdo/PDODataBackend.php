@@ -119,7 +119,7 @@ class PDODataBackend extends DataBackend
             throw new DataBackendIOException();
 
         } catch (BankNotFoundException $e) {
-            throw new LogicException($e);
+            throw new \LogicException($e);
 
         }
     }
@@ -330,7 +330,7 @@ class PDODataBackend extends DataBackend
             throw new DataBackendIOException();
 
         } catch (MissingAttributesDataBackendIOException $e) {
-            throw new LogicException($e);
+            throw new \LogicException($e);
 
         }
     }
@@ -364,7 +364,7 @@ class PDODataBackend extends DataBackend
 
         } catch (MissingAttributesDataBackendIOException $e) {
             $stmt->closeCursor();
-            throw new LogicException($e);
+            throw new \LogicException($e);
 
         }
     }
@@ -459,7 +459,7 @@ class PDODataBackend extends DataBackend
 
         } catch (MissingAttributesDataBackendIOException $e) {
             $stmt->closeCursor();
-            throw new LogicException($e);
+            throw new \LogicException($e);
 
         }
     }
@@ -493,7 +493,7 @@ class PDODataBackend extends DataBackend
 
         } catch (MissingAttributesDataBackendIOException $e) {
             $stmt->closeCursor();
-            throw new LogicException($e);
+            throw new \LogicException($e);
 
         }
     }
@@ -626,7 +626,7 @@ class PDODataBackend extends DataBackend
 
         } catch (MissingAttributesDataBackendIOException $e) {
             $stmt->closeCursor();
-            throw new LogicException($e);
+            throw new \LogicException($e);
 
         }
     }

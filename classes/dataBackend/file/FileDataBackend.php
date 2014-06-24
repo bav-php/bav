@@ -310,7 +310,7 @@ class FileDataBackend extends DataBackend
             throw new NoMainAgencyException($bank);
 
         } catch (UndefinedFileParserContextException $e) {
-            throw new LogicException("Start and end should be defined.");
+            throw new \LogicException("Start and end should be defined.");
 
         } catch (FileParserIOException $e) {
             throw new DataBackendIOException("Parser Exception at bank {$bank->getBankID()}");
@@ -342,7 +342,7 @@ class FileDataBackend extends DataBackend
             return $agencies;
 
         } catch (UndefinedFileParserContextException $e) {
-            throw new LogicException("Start and end should be defined.");
+            throw new \LogicException("Start and end should be defined.");
 
         } catch (FileParserIOException $e) {
             throw new DataBackendIOException();
@@ -359,7 +359,7 @@ class FileDataBackend extends DataBackend
     private function defineContextInterval($bankID)
     {
         if (! isset($this->contextCache[$bankID])) {
-            throw new LogicException("The contextCache object should exist!");
+            throw new \LogicException("The contextCache object should exist!");
 
         }
         $context = $this->contextCache[$bankID];
