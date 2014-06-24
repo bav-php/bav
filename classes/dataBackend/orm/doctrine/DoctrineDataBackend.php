@@ -4,6 +4,8 @@ namespace malkusch\bav;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
+use Doctrine\ORM\Tools\SchemaValidator;
+use Doctrine\ORM\ORMException;
 
 /**
  * Use Doctrine ORM as backend.
@@ -29,7 +31,18 @@ class DoctrineDataBackend extends DataBackend
 
     protected function getNewBank($bankID)
     {
-        
+        try {
+            $bank = $this->em->find('malkusch\bav\Bank', $bankID);
+            if ($bank == null) {
+                throw new BankNotFoundException($bankID);
+
+            }
+            return $bank;
+            
+        } catch (ORMException $e) {
+            throw new DataBackendException($e);
+            
+        }
     }
 
     public function getAgenciesForBank(Bank $bank)
@@ -76,7 +89,9 @@ class DoctrineDataBackend extends DataBackend
 
     public function isInstalled()
     {
-        
+        $schemaValidator = new SchemaValidator($this->em);
+        $validation = $schemaValidator->validateClass($this->em->getClassMetadata("malkusch\bav\Bank"));
+        return empty($validation);
     }
 
     public function uninstall()
@@ -116,6 +131,8 @@ class DoctrineDataBackend extends DataBackend
                     );
                 }
             }
+            
+            //TODO update last modified!
         });
     }
 }
