@@ -49,7 +49,7 @@ class BackendTest extends \PHPUnit_Framework_TestCase
         $doctrineContainer = DoctrineBackendContainer::buildByConnection($conn, true);
         $backends[] = new DoctrineDataBackend($doctrineContainer->getEntityManager());
 
-        array_walk($backends, function (DataBackend &$backend) {
+        foreach ($backends as &$backend) {
             if (! $backend->isInstalled()) {
                 $backend->install();
 
@@ -58,7 +58,8 @@ class BackendTest extends \PHPUnit_Framework_TestCase
             self::$freeableDatabackends[] = $backend;
             
             $backend = array($backend);
-        });
+            
+        };
         
         return $backends;
     }
@@ -81,7 +82,7 @@ class BackendTest extends \PHPUnit_Framework_TestCase
         $doctrineContainer = DoctrineBackendContainer::buildByConnection($conn, true);
         $backends[] = new DoctrineDataBackend($doctrineContainer->getEntityManager());
 
-        array_walk($backends, function (DataBackend &$backend) {
+        foreach ($backends as &$backend) {
             if ($backend->isInstalled()) {
                 $backend->uninstall();
 
@@ -90,7 +91,8 @@ class BackendTest extends \PHPUnit_Framework_TestCase
             self::$freeableDatabackends[] = $backend;
             
             $backend = array($backend);
-        });
+            
+        };
         
         return $backends;
     }
@@ -157,7 +159,6 @@ class BackendTest extends \PHPUnit_Framework_TestCase
             $backend->free();
             
         }
-        gc_collect_cycles();
     }
 
     /**
