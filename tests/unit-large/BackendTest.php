@@ -7,7 +7,7 @@ require_once __DIR__ . "/../../vendor/autoload.php";
 
 /**
  * Tests the Backends.
- * This test needs some memory (about 900M)!
+ * This test needs some memory (about 550M)!
  *
  * @license GPL
  * @author Markus Malkusch <markus@malkusch.de>
@@ -107,6 +107,16 @@ class BackendTest extends \PHPUnit_Framework_TestCase
                 $comparedBank = $backend->getBank($bank->getBankID());
                 $banks[] = array($bank, $comparedBank);
 
+                /*
+                 * load agencies, because clearing the backend in tearDown()
+                 * makes it impossible for some data backends to load the
+                 * agencies later.
+                 */
+                $comparedBank->getMainAgency();
+                $comparedBank->getAgencies();
+                $bank->getMainAgency();
+                $bank->getAgencies();
+                
             }
         }
         return $banks;
@@ -147,6 +157,7 @@ class BackendTest extends \PHPUnit_Framework_TestCase
             $backend->free();
             
         }
+        gc_collect_cycles();
     }
 
     /**
