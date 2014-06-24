@@ -60,7 +60,7 @@ class DoctrineDataBackend extends DataBackend
 
     public function getAllBanks()
     {
-        
+        return $this->em->getRepository("malkusch\bav\Bank")->findAll();
     }
 
     public function getBICAgencies($bic)
