@@ -34,7 +34,7 @@ class BackendTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return Array The tested backends
+     * @return DataBackend[] The tested backends
      */
     public function provideBackends()
     {
@@ -65,6 +65,7 @@ class BackendTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @return DataBackend[]
      */
     public function provideInstallationBackends()
     {
@@ -97,61 +98,6 @@ class BackendTest extends \PHPUnit_Framework_TestCase
         return $backends;
     }
 
-    /**
-     * @return Array
-     */
-    public function provideBanks()
-    {
-        $banks = array();
-        foreach ($this->provideBackends() as $backendArray) {
-            $backend = $backendArray[0];
-            foreach (self::$referenceBackend->getAllBanks() as $bank) {
-                $comparedBank = $backend->getBank($bank->getBankID());
-                $banks[] = array($bank, $comparedBank);
-
-                /*
-                 * load agencies, because clearing the backend in tearDown()
-                 * makes it impossible for some data backends to load the
-                 * agencies later.
-                 */
-                $comparedBank->getMainAgency();
-                $comparedBank->getAgencies();
-                $bank->getMainAgency();
-                $bank->getAgencies();
-                
-            }
-        }
-        return $banks;
-    }
-
-    /**
-     * @return Array
-     */
-    public function provideAgencies()
-    {
-        $agencies = array();
-        foreach ($this->provideBanks() as $banks) {
-            $referenceBank = $banks[0];
-            $testedBank    = $banks[1];
-
-            $referenceAgencies = array();
-            foreach ($referenceBank->getAgencies() as $agency) {
-                $referenceAgencies[$agency->getID()] = $agency;
-
-            }
-
-            foreach ($testedBank->getAgencies() as $agency) {
-                $agencies[] = array(
-                    $referenceAgencies[$agency->getID()],
-                    $agency
-                );
-
-            }
-
-        }
-        return $agencies;
-    }
-    
     protected function tearDown()
     {
         // Reduce memory foot print
@@ -238,32 +184,56 @@ class BackendTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider provideBanks
+     * Test loading all banks
+     * 
+     * @dataProvider provideBackends
      */
-    public function testBanks(Bank $referenceBank, Bank $testedBank)
+    public function testBanks(DataBackend $backend)
     {
-        $this->assertEquals(
-            $referenceBank->getValidationType(),
-            $testedBank->getValidationType()
-        );
+        foreach (self::$referenceBackend->getAllBanks() as $referenceBank) {
+            $testedBank = $backend->getBank($referenceBank->getBankID());
 
-        $this->assertEqualAgency(
-            $referenceBank->getMainAgency(),
-            $testedBank->getMainAgency()
-        );
+            $this->assertEquals(
+                $referenceBank->getValidationType(),
+                $testedBank->getValidationType()
+            );
 
-        $this->assertEquals(
-            count($referenceBank->getAgencies()),
-            count($testedBank->getAgencies())
-        );
+            $this->assertEqualAgency(
+                $referenceBank->getMainAgency(),
+                $testedBank->getMainAgency()
+            );
+
+            $this->assertEquals(
+                count($referenceBank->getAgencies()),
+                count($testedBank->getAgencies())
+            );
+            
+        }
     }
 
     /**
-     * @dataProvider provideAgencies
+     * Tests loading all agencies
+     * 
+     * @dataProvider provideBackends
      */
-    public function testAgencies(Agency $referenceAgency, Agency $testedAgency)
+    public function testAgencies(DataBackend $backend)
     {
-        $this->assertEqualAgency($referenceAgency, $testedAgency);
+        foreach (self::$referenceBackend->getAllBanks() as $referenceBank) {
+            $testedBank = $backend->getBank($referenceBank->getBankID());
+            
+            $referenceAgencies = array();
+            foreach ($referenceBank->getAgencies() as $agency) {
+                $referenceAgencies[$agency->getID()] = $agency;
+
+            }
+
+            foreach ($testedBank->getAgencies() as $agency) {
+                $referenceAgency = $referenceAgencies[$agency->getID()];
+                
+                $this->assertEqualAgency($referenceAgency, $agency);
+
+            }
+        }
     }
 
     private function assertEqualAgency(Agency $a, Agency $b)
