@@ -37,6 +37,7 @@ class DoctrineDataBackend extends DataBackend
                 throw new BankNotFoundException($bankID);
 
             }
+            $bank->setDataBackend($this);
             return $bank;
             
         } catch (ORMException $e) {
@@ -47,7 +48,14 @@ class DoctrineDataBackend extends DataBackend
 
     public function getAgenciesForBank(Bank $bank)
     {
-        
+        $query = $this->em->createQuery(
+            "select agency from malkusch\bav\Agency agency where agency.id != :mainAgency and agency.bank=:bank"
+        );
+        $query->setParameters(array(
+            "mainAgency" => $bank->getMainAgency()->getID(),
+            "bank" => $bank
+        ));
+        return $query->getResult();
     }
 
     public function getAllBanks()

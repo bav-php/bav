@@ -126,6 +126,14 @@ class Bank
         }
         return $this->agencies;
     }
+    
+    /**
+     * @internal
+     */
+    public function setDataBackend(DataBackend $backend)
+    {
+        $this->dataBackend = $backend;
+    }
 
     /**
      * Use this method to check your bank account.
