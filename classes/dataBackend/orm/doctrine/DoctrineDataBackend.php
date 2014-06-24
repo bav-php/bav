@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\ORM\Tools\SchemaValidator;
 use Doctrine\ORM\ORMException;
+use Doctrine\DBAL\DBALException;
 
 /**
  * Use Doctrine ORM as backend.
@@ -106,9 +107,14 @@ class DoctrineDataBackend extends DataBackend
 
     public function isInstalled()
     {
-        $schemaValidator = new SchemaValidator($this->em);
-        $validation = $schemaValidator->validateClass($this->em->getClassMetadata("malkusch\bav\Bank"));
-        return empty($validation);
+        try {
+            $this->em->find("malkusch\bav\MetaData", MetaData::LASTMODIFIED);
+            return true;
+            
+        } catch (DBALException $e) {
+            return false;
+            
+        }
     }
 
     public function uninstall()
@@ -150,7 +156,11 @@ class DoctrineDataBackend extends DataBackend
             }
             
             // last modified
-            $lastModified = new MetaData();
+            $lastModified = $em->find("malkusch\bav\MetaData", MetaData::LASTMODIFIED);
+            if ($lastModified == null) {
+                $lastModified = new MetaData();
+                
+            }
             $lastModified->setName(MetaData::LASTMODIFIED);
             $lastModified->setValue(time());
             $em->persist($lastModified);
