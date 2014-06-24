@@ -7,7 +7,7 @@ require_once __DIR__ . "/../../vendor/autoload.php";
 
 /**
  * Tests the Backends.
- * This test needs some memory (about 800M)!
+ * This test needs some memory (about 900M)!
  *
  * @license GPL
  * @author Markus Malkusch <markus@malkusch.de>
@@ -43,11 +43,13 @@ class BackendTest extends \PHPUnit_Framework_TestCase
             'pdo' => PDOFactory::makePDO(),
         );
         $doctrineContainer = DoctrineBackendContainer::buildByConnection($conn, true);
+        $doctrineBackend = new DoctrineDataBackend($doctrineContainer->getEntityManager());
+        $this->setupBackend($doctrineBackend);
 
         return array(
             array($pdoBackend),
             array($fileBackend),
-            array($doctrineContainer->getDataBackend()),
+            array($doctrineBackend),
         );
     }
 
@@ -77,7 +79,7 @@ class BackendTest extends \PHPUnit_Framework_TestCase
             'path' => ":memory:"
         );
         $doctrineContainer = DoctrineBackendContainer::buildByConnection($conn, true);
-        $doctrineBackend = $doctrineContainer->getDataBackend();
+        $doctrineBackend = new DoctrineDataBackend($doctrineContainer->getEntityManager());
         $this->setupInstallationBackends($doctrineBackend);
 
         return array(
