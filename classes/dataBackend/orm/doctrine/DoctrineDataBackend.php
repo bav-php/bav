@@ -72,7 +72,12 @@ class DoctrineDataBackend extends DataBackend
 
     public function getLastUpdate()
     {
-        
+        $lastModified = $this->em->find("malkusch\bav\MetaData", MetaData::LASTMODIFIED);
+        if ($lastModified == null) {
+            throw new DataBackendException();
+            
+        }
+        return $lastModified->getValue();
     }
 
     public function getMainAgency(Bank $bank)
@@ -86,6 +91,7 @@ class DoctrineDataBackend extends DataBackend
         return array(
             $this->em->getClassMetadata('malkusch\bav\Bank'),
             $this->em->getClassMetadata('malkusch\bav\Agency'),
+            $this->em->getClassMetadata('malkusch\bav\MetaData'),
         );
     }
 
@@ -114,7 +120,7 @@ class DoctrineDataBackend extends DataBackend
 
     public function update()
     {
-        $this->em->transactional(function ($em) {
+        $this->em->transactional(function (EntityManager $em) {
             
             // Download data
             $fileUtil = new FileUtil();
@@ -143,7 +149,11 @@ class DoctrineDataBackend extends DataBackend
                 }
             }
             
-            //TODO update last modified!
+            // last modified
+            $lastModified = new MetaData();
+            $lastModified->setName(MetaData::LASTMODIFIED);
+            $lastModified->setValue(time());
+            $em->persist($lastModified);
         });
     }
 }
