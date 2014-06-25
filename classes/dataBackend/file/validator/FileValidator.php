@@ -28,7 +28,8 @@ class FileValidator
         $size = filesize($file);
         if ($size < self::FILESIZE) {
             throw new InvalidFilesizeException(
-                "Get updated BAV version: file size should be less than " . self::FILESIZE . " but was $size."
+                "Get updated BAV version:"
+                . " file size should not be less than " . self::FILESIZE . " but was $size."
             );
 
         }
