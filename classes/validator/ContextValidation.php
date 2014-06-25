@@ -98,7 +98,7 @@ class ContextValidation
      * filter_var($bankID, FILTER_CALLBACK, $validation->getValidBankFilterCallback());
      * 
      * @return array
-     * @see isValidBank();
+     * @see isValidBank()
      * @see filter_var()
      */
     public function getValidBankFilterCallback()
@@ -113,10 +113,10 @@ class ContextValidation
      * Returns the third call back parameter for filter_var() for validating
      * a bank account.
      * 
-     * filter_var($bankID, FILTER_CALLBACK, $validation->getValidBankFilterCallback());
+     * filter_var($account, FILTER_CALLBACK, $validation->getValidBankFilterCallback());
      * 
      * @return array
-     * @see isValidAccount();
+     * @see isValidAccount()
      * @see filter_var()
      */
     public function getValidAccountFilterCallback()

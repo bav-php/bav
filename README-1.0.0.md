@@ -1,3 +1,6 @@
+# About BAV
+BAV (bank account validator) is a validation library for German bank accounts.
+
 # Installation
 
 Visit <http://bav.malkusch.de/> and download the latest version or use [Composer](https://getcomposer.org/):

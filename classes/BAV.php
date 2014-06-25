@@ -3,7 +3,9 @@
 namespace malkusch\bav;
 
 /**
- * Facade for bav's API.
+ * Facade for BAV's API.
+ * 
+ * This class provides methods for validation of German bank accounts.
  * 
  * @author Markus Malkusch <markus@malkusch.de>
  * @license GPL
@@ -200,7 +202,8 @@ class BAV
      * filter_var($bankID, FILTER_CALLBACK, $bav->getValidBankFilterCallback());
      * 
      * @return array
-     * @see isValidBank();
+     * @see isValidBank()
+     * @see filter_var()
      */
     public function getValidBankFilterCallback()
     {
@@ -211,10 +214,11 @@ class BAV
      * Returns the third call back parameter for filter_var() for validating
      * a bank account.
      * 
-     * filter_var($bankID, FILTER_CALLBACK, $bav->getValidBankFilterCallback());
+     * filter_var($account, FILTER_CALLBACK, $bav->getValidBankFilterCallback());
      * 
      * @return array
-     * @see isValidAccount();
+     * @see isValidAccount()
+     * @see filter_var()
      */
     public function getValidAccountFilterCallback()
     {

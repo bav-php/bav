@@ -24,8 +24,6 @@ Version 1.0.0 - not yet released
 
     - added BIC support: BAV::isValidBIC($bic), BAV::getBICAgencies($bic)
 
-    -[TODO] Add international support for BIC validation.
-    
     -[TODO] add IBAN rule support
 
     -[TODO] evaluate IBAN validation support
