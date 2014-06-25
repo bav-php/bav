@@ -16,6 +16,7 @@ namespace malkusch\bav;
  * getBank() methode with the same id, you will receive each time the same object.
  *
  * @author Markus Malkusch <markus@malkusch.de>
+ * @link bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations
  * @license GPL
  * @see DataBackendContainer
  */

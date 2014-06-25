@@ -23,6 +23,7 @@ namespace malkusch\bav;
  * @package classes
  * @subpackage dataBackend
  * @author Markus Malkusch <markus@malkusch.de>
+ * @link bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
 class EncodingException extends BAVException

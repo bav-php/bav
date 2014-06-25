@@ -6,6 +6,7 @@ namespace malkusch\bav;
  * Additional methods for SQL based data backends
  *
  * @author Markus Malkusch <markus@malkusch.de>
+ * @link bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations
  * @license GPL
  */
 abstract class SQLDataBackend extends DataBackend

@@ -28,6 +28,7 @@ namespace malkusch\bav;
  * @package classes
  * @subpackage bank
  * @author Markus Malkusch <markus@malkusch.de>
+ * @link bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations
  * @copyright Copyright (C) 2006 Markus Malkusch
  */
 class Agency

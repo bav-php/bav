@@ -13,6 +13,7 @@ use Doctrine\DBAL\DBALException;
  * You will need Doctrine as composer dependency.
  * 
  * @author Markus Malkusch <markus@malkusch.de>
+ * @link bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations
  * @license GPL
  * @link http://www.doctrine-project.org/
  */

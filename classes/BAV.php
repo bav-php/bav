@@ -8,6 +8,7 @@ namespace malkusch\bav;
  * This class provides methods for validation of German bank accounts.
  * 
  * @author Markus Malkusch <markus@malkusch.de>
+ * @link bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations
  * @license GPL
  */
 class BAV

@@ -11,6 +11,7 @@ use Doctrine\ORM\Tools\Setup;
  * You will need Doctrine as composer dependency.
  * 
  * @author Markus Malkusch <markus@malkusch.de>
+ * @link bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations
  * @license GPL
  * @see DataBackend
  * @link http://www.doctrine-project.org/
