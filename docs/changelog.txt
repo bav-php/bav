@@ -1,5 +1,13 @@
-Version 1.0.0 - not yet released
+Version 1.1.0 - not yet released
 --------------------------------
+
+    -[TODO] add IBAN rule support
+
+    -[TODO] evaluate IBAN validation support
+
+
+Version 1.0.0 - June 25, 2014
+-----------------------------
     - added BAV_DataBackend::getLastUpdate()
     
     - added BAV_DataBackend::isInstalled()
@@ -23,10 +31,6 @@ Version 1.0.0 - not yet released
     - Renamed bankExists() into isValidBank()
 
     - added BIC support: BAV::isValidBIC($bic), BAV::getBICAgencies($bic)
-
-    -[TODO] add IBAN rule support
-
-    -[TODO] evaluate IBAN validation support
 
     - changed format of verifiy.ini into JSON
 

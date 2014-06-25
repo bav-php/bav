@@ -35,7 +35,7 @@
         "exclude": ["/tests/"]
     },
     "bin": [
-	    "bin/bav-update.php",
-	    "bin/bav-install.php"
+        "bin/bav-update.php",
+        "bin/bav-install.php"
     ]
 }
