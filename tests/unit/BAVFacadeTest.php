@@ -215,4 +215,61 @@ class BAVFacadeTest extends \PHPUnit_Framework_TestCase
         sort($agenciesIds);
         $this->assertEquals($expected, $agenciesIds);
     }
+    
+    /**
+     * Tests filter validation
+     * 
+     * @see BAV::getValidAccountFilterCallback()
+     * @see BAV::getValidBankFilterCallback()
+     */
+    public function testFilterValidation()
+    {
+        $bav = new BAV();
+        
+        $this->assertFalse(
+            filter_var(
+                "0",
+                FILTER_CALLBACK,
+                $bav->getValidBankFilterCallback()
+            )
+        );
+        
+        $this->assertTrue(
+            filter_var(
+                "10000000",
+                FILTER_CALLBACK,
+                $bav->getValidBankFilterCallback()
+            )
+        );
+        
+        $this->assertTrue(
+            filter_var(
+                "12345",
+                FILTER_CALLBACK,
+                $bav->getValidAccountFilterCallback()
+            )
+        );
+        
+        $this->assertFalse(
+            filter_var(
+                "0",
+                FILTER_CALLBACK,
+                $bav->getValidAccountFilterCallback()
+            )
+        );
+    }
+    
+    /**
+     * Tests BAV::isValidAccount();
+     *
+     * @dataProvider provideTestIsValidBankAccount
+     * @see BAV::isValidAccount();
+     */
+    public function testValidAccount($bankID, $account, $expected)
+    {
+        $bav = new BAV();
+        $bav->isValidBank($bankID);
+        
+        $this->assertEquals($expected, $bav->isValidAccount($account));
+    }
 }

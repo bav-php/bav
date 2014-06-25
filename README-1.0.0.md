@@ -102,6 +102,14 @@ You can use BAV with the api facade `BAV`.
 * `BAV::isValidBankAccount($bankID, $account)`: Returns true for existing accounts of an existing
 bank.
 
+* `BAV::isValidAccount($account)`: This method validates an account against the bank
+of the last `isValidBank()` call.
+
+* `BAV::getValidBankFilterCallback()`: Returns a callback for filter bank validation.
+
+* `BAV::getValidAccountFilterCallback()`: Returns a callback for filter account validation.
+The account filter needs to be called after the bank filter.
+
 * `BAV::getMainAgency()`: Returns the main agency of a bank.
 
 * `BAV::getAgencies()`: Returns further agencies. The main agency is not included in this list.

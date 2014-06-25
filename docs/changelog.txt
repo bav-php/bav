@@ -34,6 +34,8 @@ Version 1.0.0 - not yet released
 
     - added the Doctrine data backend DoctrineBackendContainer.
 
+    - support PHP's filter validation.
+
 
 Version 0.29 - June 1, 2014
 ---------------------------

@@ -33,6 +33,24 @@ try {
     echo "Account 12345 is ",
         $bav->isValidBankAccount("10000000", "12345") ? "valid" : "invalid", "\n";
 
+    // Use PHP's validation filter
+    if (filter_var("10000000", FILTER_CALLBACK, $bav->getValidBankFilterCallback())) {
+        echo "Bank 10000000 is valid.\n";
+        
+    } else {
+        echo "Bank 10000000 is invalid.\n";
+        
+    }
+    
+    // Account filter validation needs a previous call to the bank filter.
+    if (filter_var("12345", FILTER_CALLBACK, $bav->getValidAccountFilterCallback())) {
+        echo "Account 12345 is valid.\n";
+        
+    } else {
+        echo "Account 12345 is invalid.\n";
+        
+    }
+    
     // Print name of the bank
     $agency = $bav->getMainAgency("10000000");
     echo "{$agency->getName()} {$agency->getCity()}\n";

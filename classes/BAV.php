@@ -20,6 +20,11 @@ class BAV
      * @var DataBackend
      */
     private $backend;
+    
+    /**
+     * @var ContextValidation
+     */
+    private $contextValidation;
 
     /**
      * Inject the configuration.
@@ -38,6 +43,8 @@ class BAV
         $this->configuration = $configuration;
 
         $this->backend = $configuration->getDataBackendContainer()->getDataBackend();
+        
+        $this->contextValidation = new ContextValidation($this->backend);
     }
 
     /**
@@ -89,18 +96,35 @@ class BAV
     }
 
     /**
+     * Returns true if the account is valid for the current context.
+     * 
+     * You have to have called isValidBank() before! If the current context
+     * is no valid bank every account will validate to true.
+     *
+     * @param string $account
+     * @see isValidBank()
+     * @see ContextValidation::isValidAccount()
+     * @throws InvalidContextException isValidBank() was not called before.
+     * @return bool
+     */
+    public function isValidAccount($account)
+    {
+        return $this->contextValidation->isValidAccount($account);
+    }
+
+    /**
      * Returns true if a bank exists
      *
      * @throws DataBackendException
      * @param string $bankID
      * @return bool
-     * @see DataBackend::isValidBank()
+     * @see ContextValidation::isValidBank()
      */
     public function isValidBank($bankID)
     {
-        return $this->backend->isValidBank($bankID);
+        return $this->contextValidation->isValidBank($bankID);
     }
-
+    
     /**
      * Every bank has one main agency.
      * 
@@ -167,5 +191,33 @@ class BAV
     public function isValidBIC($bic)
     {
         return $this->backend->isValidBIC(BICUtil::normalize($bic));
+    }
+    
+    /**
+     * Returns the third call back parameter for filter_var() for validating
+     * a bank.
+     * 
+     * filter_var($bankID, FILTER_CALLBACK, $bav->getValidBankFilterCallback());
+     * 
+     * @return array
+     * @see isValidBank();
+     */
+    public function getValidBankFilterCallback()
+    {
+        return $this->contextValidation->getValidBankFilterCallback();
+    }
+    
+    /**
+     * Returns the third call back parameter for filter_var() for validating
+     * a bank account.
+     * 
+     * filter_var($bankID, FILTER_CALLBACK, $bav->getValidBankFilterCallback());
+     * 
+     * @return array
+     * @see isValidAccount();
+     */
+    public function getValidAccountFilterCallback()
+    {
+        return $this->contextValidation->getValidAccountFilterCallback();
     }
 }
