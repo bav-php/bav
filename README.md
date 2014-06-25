@@ -151,6 +151,12 @@ var_dump(
     $bav->isValidBankAccount($bankID, $account)
 );
 
+// filter validation
+var_dump(
+    filter_var($bankID, FILTER_CALLBACK, $bav->getValidBankFilterCallback()),
+    filter_var($account, FILTER_CALLBACK, $bav->getValidAccountFilterCallback())
+);
+
 // Get informations about a bank
 $agency = $bav->getMainAgency($bankID);
 echo "{$agency->getName()} {$agency->getCity()}\n";
