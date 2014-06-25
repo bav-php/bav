@@ -187,8 +187,9 @@ class DoctrineDataBackend extends SQLDataBackend
     {
         $agencies = array();
         $backend = $this;
-        $this->em->transactional(function () use (&$agencies, $sql, $backend) {
-            $stmt = $this->em->getConnection()->executeQuery($sql);
+        $em = $this->em;
+        $this->em->transactional(function () use (&$agencies, $sql, $backend, $em) {
+            $stmt = $em->getConnection()->executeQuery($sql);
             
             foreach ($stmt as $result) {
                 if (! array_key_exists('id', $result)) {
@@ -196,7 +197,7 @@ class DoctrineDataBackend extends SQLDataBackend
 
                 }
                 $id = $result["id"];
-                $agency = $this->em->find("malkusch\bav\Agency", $id);
+                $agency = $em->find("malkusch\bav\Agency", $id);
                 $agencies[] = $agency;
                 
                 $agency->getBank()->setDataBackend($backend);
