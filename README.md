@@ -40,6 +40,8 @@ configuration (`DefaultConfiguration`):
 * `UTF-8` encoding (if supported)
 
 * `FileDataBackendContainer`. I.e. it uses binary search on the file from the Bundesbank.
+Note that this data backend uses the directory `bav/data` for install and update
+operations. You have to make sure that this directory is writable.
 
 * automatic installation. You don't have to call any installation
 script. The container will download the Bundesbank file upon the first execution.
