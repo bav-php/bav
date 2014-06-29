@@ -10,7 +10,6 @@ env: PDO_DSN="mysql:host=localhost;dbname=bav" PDO_USER=travis
 install:
     - pyrus install pear/PHP_CodeSniffer
     - phpenv rehash
-    - sudo apt-get install parallel
 
 before_script:
     - composer --prefer-source --dev install
@@ -19,6 +18,7 @@ before_script:
     - php tests/bin/test-install.php
 
 script:
-    - find tests/ -type f -name "*Test.php" | parallel phpunit --exclude-group large {}
+    - phpunit tests/unit/
+    - phpunit --exclude-group large tests/unit-large/
     - phpcs --standard=PSR2 classes/ bin/ docs/example.php tests/classes/ tests/bin/ tests/bootstrap.php
 
