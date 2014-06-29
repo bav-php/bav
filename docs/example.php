@@ -3,7 +3,7 @@
 /**
  * This script shows examples how to use BAV.
  * 
- * If you didn't installt BAV yet and Configuration::isAutomaticInstallation() is true
+ * If you didn't install BAV yet and Configuration::isAutomaticInstallation() is true
  * (default) then BAV will install the bundesbank file which might take a few seconds.
  *
  * @filesource
