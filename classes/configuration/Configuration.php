@@ -8,6 +8,8 @@ namespace malkusch\bav;
  * @author Markus Malkusch <markus@malkusch.de>
  * @link bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations
  * @license GPL
+ * @see ConfigurationRegistry
+ * @api
  */
 class Configuration
 {
@@ -60,8 +62,8 @@ class Configuration
     /**
      * Turns automatic installation on or off.
      * 
-     * If automatic installation is activated. The backend factory will check if it is
-     * installed and if not so install the backend.
+     * If automatic installation is activated {@link DataBackendContainer} will
+     * check if it is installed and if not install the backend.
      * 
      * @see DataBackend::install()
      * @param bool $automaticInstallation Set true to turn installation on
@@ -82,7 +84,7 @@ class Configuration
     }
 
     /**
-     * Sets the data backend container.
+     * Sets the data {@link DataBackendContainer}.
      */
     public function setDataBackendContainer(DataBackendContainer $backendContainer)
     {
@@ -90,7 +92,7 @@ class Configuration
     }
 
     /**
-     * Returns the data backend factory.
+     * Returns the {@link DataBackendContainer}.
      *
      * @return DataBackendContainer
      */
@@ -122,6 +124,8 @@ class Configuration
      * 
      * If you set a temporary directory BAV will use this for temporary files.
      * This option is optional. If it is not set the system's path will be used.
+     * 
+     * The temporary directory is used for the installation and update process.
      * 
      * @param string $tempDirectory
      */

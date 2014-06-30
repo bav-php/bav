@@ -3,33 +3,18 @@
 namespace malkusch\bav;
 
 /**
- * The agency belongs to one bank. Every bank has one main agency and may have
- * some more agencies in different cities. Don't create this object directly.
- * Use Bank->getMainAgency() or Bank->getAgencies().
+ * The bank agency.
+ * 
+ * Every bank has one main agency and may have some more agencies
+ * in different cities.
  *
- *
- * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- *
- *
- * @package classes
- * @subpackage bank
  * @author Markus Malkusch <markus@malkusch.de>
  * @link bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations
- * @copyright Copyright (C) 2006 Markus Malkusch
+ * @license GPL
+ * @see BAV::getAgencies()
+ * @see BAV::getBICAgencies()
+ * @see BAV::getMainAgency()
+ * @api
  */
 class Agency
 {
@@ -75,8 +60,7 @@ class Agency
     private $name = '';
 
     /**
-     * Don't create this object directly. Use Bank->getMainAgency()
-     * or Bank->getAgencies().
+     * Don't create this object directly.
      *
      * @param int $id
      * @param string $name
@@ -85,6 +69,10 @@ class Agency
      * @param string $postcode
      * @param string $bic might be empty
      * @param string $pan might be empty
+     * @internal
+     * @see BAV::getAgencies()
+     * @see BAV::getMainAgency()
+     * @see BAV::getBICAgencies()
      */
     public function __construct($id, Bank $bank, $name, $shortTerm, $city, $postcode, $bic = '', $pan = '')
     {

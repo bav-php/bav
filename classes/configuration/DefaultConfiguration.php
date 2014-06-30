@@ -3,17 +3,19 @@
 namespace malkusch\bav;
 
 /**
- * Default configuration uses FileDataBackendContainer and any available UTF-8 encoder.
+ * Default configuration uses {@link FileDataBackendContainer}
+ * and any available UTF-8 encoder.
  * 
  * Automatic installation is enabled.
  * 
- * The update plan is set to LogUpdatePlan.
+ * The update plan is set to {@link LogUpdatePlan}
  * 
  * If no UTF-8 encoding is supported ISO-8859-15 will be used.
  *
  * @author Markus Malkusch <markus@malkusch.de>
  * @link bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations
  * @license GPL
+ * @api
  */
 class DefaultConfiguration extends Configuration
 {

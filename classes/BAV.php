@@ -7,9 +7,15 @@ namespace malkusch\bav;
  * 
  * This class provides methods for validation of German bank accounts.
  * 
+ * If you don't inject a {@link Configuration} the facade will use the
+ * {@link ConfigurationRegistry}. The registry provides per default the
+ * {@link DefaultConfiguration}.
+ * 
  * @author Markus Malkusch <markus@malkusch.de>
  * @link bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations
  * @license GPL
+ * @api
+ * @see ConfigurationRegistry
  */
 class BAV
 {
@@ -33,7 +39,7 @@ class BAV
      * Inject the configuration.
      * 
      * If the $configuration is null the configuration from
-     * ConfigurationRegistry::getConfiguration() will be used.
+     * {@link ConfigurationRegistry::getConfiguration()} will be used.
      * 
      * @see ConfigurationRegistry
      */
@@ -135,6 +141,7 @@ class BAV
      *
      * @throws DataBackendException
      * @throws BankNotFoundException
+     * @param string $bankID Bank id (Bankleitzahl)
      * @see Bank::getMainAgency()
      * @see getAgencies()
      * @return Agency
@@ -149,6 +156,7 @@ class BAV
      * 
      * The main agency is not included in this list.
      *
+     * @param string $bankID Bank id (Bankleitzahl)
      * @throws DataBackendException
      * @throws BankNotFoundException
      * @return Agency[]

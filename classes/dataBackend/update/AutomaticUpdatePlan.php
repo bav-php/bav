@@ -8,6 +8,7 @@ namespace malkusch\bav;
  * @author Markus Malkusch <markus@malkusch.de>
  * @link bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations
  * @license GPL
+ * @api
  */
 class AutomaticUpdatePlan extends UpdatePlan
 {
@@ -35,7 +36,7 @@ class AutomaticUpdatePlan extends UpdatePlan
     /**
      * Perform an update.
      * 
-     * If enabled this method will send a E_USER_NOTICE about the update.
+     * If enabled (default) this method will send a E_USER_NOTICE about the update.
      * 
      * @see setNotice()
      */
