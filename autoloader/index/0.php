@@ -214,6 +214,7 @@ return array(
     'malkusch\bav\fileparserexception' => '../classes/dataBackend/file/fileParser/exception/FileParserException.php',
     'malkusch\bav\doctrinedatabackend' => '../classes/dataBackend/orm/doctrine/DoctrineDataBackend.php',
     'malkusch\bav\automaticupdateplan' => '../classes/dataBackend/update/AutomaticUpdatePlan.php',
+    'malkusch\bav\configurationlocator' => '../classes/configuration/ConfigurationLocator.php',
     'malkusch\bav\defaultconfiguration' => '../classes/configuration/DefaultConfiguration.php',
     'malkusch\bav\databackendcontainer' => '../classes/dataBackend/DataBackendContainer.php',
     'malkusch\bav\databackendexception' => '../classes/dataBackend/exception/DataBackendException.php',

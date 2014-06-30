@@ -1,5 +1,8 @@
 Version 1.1.0 - not yet released
 --------------------------------
+    - configuration.php may now be either in BAV's directory (e.g. 
+      vendor/malkusch/bav/configuration.php) or somewhere in the include path
+      in bav/configuration.php.
 
     -[TODO] add IBAN rule support
 

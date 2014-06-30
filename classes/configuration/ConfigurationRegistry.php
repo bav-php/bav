@@ -35,7 +35,9 @@ namespace malkusch\bav;
 class ConfigurationRegistry
 {
 
-    const CONFIGURATION_PATH = "/../../configuration.php";
+    const BAV_PATH = "/../../configuration.php";
+    
+    const INCLUDE_PATH = "bav/configuration.php";
 
     /**
      * @var Configuration
@@ -49,21 +51,20 @@ class ConfigurationRegistry
      * a Configuration object.
      * 
      * @see DefaultConfiguration
+     * @throws ConfigurationException
      */
     public static function classConstructor()
     {
-        self::setConfiguration(new DefaultConfiguration());
-
-        $file = __DIR__ . self::CONFIGURATION_PATH;
-        if (file_exists($file)) {
-            $configuration = require_once $file;
-            if (! $configuration instanceof Configuration) {
-                throw new ConfigurationException("$file must return a Configuration object.");
-
-            }
-            self::setConfiguration($configuration);
-
+        $locator = new ConfigurationLocator(array(
+            __DIR__ . self::BAV_PATH,
+            self::INCLUDE_PATH
+        ));
+        $configuration = $locator->locate();
+        if ($configuration == null) {
+            $configuration = new DefaultConfiguration();
+            
         }
+        self::setConfiguration($configuration);
     }
 
     /**
