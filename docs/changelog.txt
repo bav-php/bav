@@ -8,6 +8,8 @@ Version 1.1.0 - not yet released
 
     -[TODO] evaluate IBAN validation support
 
+    -[TODO] BIC index for FileDataBackend
+
 
 Version 1.0.0 - June 25, 2014
 -----------------------------
