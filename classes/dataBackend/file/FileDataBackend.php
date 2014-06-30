@@ -2,7 +2,7 @@
 
 namespace malkusch\bav;
 
-use \malkusch\index\Index_FixedSize;
+use \malkusch\index\FixedSizeIndex;
 
 /**
  * It uses the huge file from the Bundesbank and uses a binary search to find a row.
@@ -50,12 +50,12 @@ class FileDataBackend extends DataBackend
     }
     
     /**
-     * @return Index_FixedSize
+     * @return FixedSizeIndex
      */
     private function getIndex()
     {
         if ($this->index == null) {
-            $this->index = new Index_FixedSize(
+            $this->index = new FixedSizeIndex(
                 $this->parser->getFile(),
                 FileParser::BANKID_OFFSET,
                 FileParser::BANKID_LENGTH
