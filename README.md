@@ -15,6 +15,19 @@ Visit <http://bav.malkusch.de/> and download the latest version or use [Composer
 }
 ```
 
+## Version-0
+
+The old version-0 branch (bav-0) is still maintained and will receive updates
+for broken or new validation rules.
+
+```json
+{
+    "require": {
+        "malkusch/bav": "~0.29"
+    }
+}
+```
+
 
 # Autoloader
 
