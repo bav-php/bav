@@ -4,6 +4,8 @@ Version 1.1.0 - not yet released
       vendor/malkusch/bav/configuration.php) or somewhere in the include path
       in bav/configuration.php.
 
+    - Replaced binary search in FileDataBackend with malkusch/php-index
+
     -[TODO] add IBAN rule support
 
     -[TODO] evaluate IBAN validation support

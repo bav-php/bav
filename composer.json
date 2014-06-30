@@ -17,7 +17,8 @@
         "files": ["autoloader/autoloader.php"]
     },
     "require": {
-        "php": ">=5"
+        "php": ">=5",
+        "malkusch/php-index": "0.0.1"
     },
     "suggest": {
         "ext-PDO": "Allows storing bank information in a database",

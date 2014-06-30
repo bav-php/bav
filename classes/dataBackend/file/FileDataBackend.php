@@ -2,6 +2,8 @@
 
 namespace malkusch\bav;
 
+use \malkusch\index\Index_FixedSize;
+
 /**
  * It uses the huge file from the Bundesbank and uses a binary search to find a row.
  * This is the easiest way to use BAV. BAV can work as a standalone application without
@@ -27,6 +29,11 @@ class FileDataBackend extends DataBackend
      * @var FileParser
      */
     private $parser;
+    
+    /**
+     * @var Index_FixedSize
+     */
+    private $index;
 
     /**
      * @var FileUtil
@@ -40,6 +47,22 @@ class FileDataBackend extends DataBackend
     {
         $this->parser = new FileParser($file);
         $this->fileUtil = new FileUtil();
+    }
+    
+    /**
+     * @return Index_FixedSize
+     */
+    private function getIndex()
+    {
+        if ($this->index == null) {
+            $this->index = new Index_FixedSize(
+                $this->parser->getFile(),
+                FileParser::BANKID_OFFSET,
+                FileParser::BANKID_LENGTH
+            );
+            
+        }
+        return $this->index;
     }
 
     /**
@@ -221,21 +244,7 @@ class FileDataBackend extends DataBackend
     {
         try {
             $this->parser->rewind();
-            /**
-             * TODO Binary Search is also possible on $this->contextCache,
-             *      to reduce the interval of $offset and $end;
-             */
-            if (isset($this->contextCache[$bankID])) {
-                return $this->findBank(
-                    $bankID,
-                    $this->contextCache[$bankID]->getLine(),
-                    $this->contextCache[$bankID]->getLine()
-                );
-
-            } else {
-                return $this->findBank($bankID, 0, $this->parser->getLines());
-
-            }
+            return $this->findBank($bankID);
 
         } catch (FileParserException $e) {
             throw new DataBackendIOException();
@@ -252,42 +261,19 @@ class FileDataBackend extends DataBackend
      * @param int $length the line count
      * @return Bank
      */
-    private function findBank($bankID, $offset, $end)
+    private function findBank($bankID)
     {
-        if ($end - $offset < 0) {
+        $result = $this->getIndex()->search($bankID);
+        
+        if ($result == null) {
             throw new BankNotFoundException($bankID);
 
         }
-        $line = $offset + (int)(($end - $offset) / 2);
-        $blz  = $this->parser->getBankID($line);
-
-        /**
-         * This handling is bad, as it may double the work
-         */
-        if ($blz == '00000000') {
-            try {
-                return $this->findBank($bankID, $offset, $line - 1);
-
-            } catch (BankNotFoundException $e) {
-                return $this->findBank($bankID, $line + 1, $end);
-
-            }
-
-        } elseif (! isset($this->contextCache[$blz])) {
-            $this->contextCache[$blz] = new FileParserContext($line);
-
-        }
-
-        if ($blz < $bankID) {
-            return $this->findBank($bankID, $line + 1, $end);
-
-        } elseif ($blz > $bankID) {
-            return $this->findBank($bankID, $offset, $line - 1);
-
-        } else {
-            return $this->parser->getBank($this, $this->parser->readLine($line));
-
-        }
+        
+        $line = $result->getOffset() / $this->parser->getLineLength();
+        $this->contextCache[$bankID] = new FileParserContext($line);
+        
+        return $this->parser->getBank($this, $this->parser->readLine($line));
     }
 
     /**
