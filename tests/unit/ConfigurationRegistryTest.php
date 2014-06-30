@@ -15,6 +15,14 @@ class ConfigurationRegistryTest extends \PHPUnit_Framework_TestCase
 {
     
     /**
+     * Disable update hook
+     */
+    protected function tearDown()
+    {
+        ConfigurationRegistry::getConfiguration()->setUpdatePlan(null);
+    }
+
+    /**
      * Tests the initialization with a configuration from the include path.
      * 
      * @see ConfigurationRegistry::classConstructor()
