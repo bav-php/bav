@@ -48,7 +48,7 @@ $bav = new BAV();
 # Configuration
 
 You can use BAV out of the box. BAV comes with a ready to play default
-configuration (`DefaultConfiguration`):
+configuration ([`DefaultConfiguration`](http://bav-php.github.io/bav/class-malkusch.bav.DefaultConfiguration.html)):
 
 * `UTF-8` encoding (if supported)
 
@@ -62,8 +62,10 @@ script. The container will download the Bundesbank file upon the first execution
 * update plan which triggers an E_USER_NOTICE if the Bundesbank file
 is outdated.
 
-You can define your own configuration by calling `ConfigurationRegistry::setConfiguration()`
-or preferably creating the file `bav/configuration.php` which returns a `Configuration` object:
+You can define your own configuration by calling
+[`ConfigurationRegistry::setConfiguration()`](http://bav-php.github.io/bav/class-malkusch.bav.ConfigurationRegistry.html#_setConfiguration)
+or preferably creating the file `bav/configuration.php` which returns a
+[`Configuration`](http://bav-php.github.io/bav/class-malkusch.bav.Configuration.html) object:
 
 ```php
 namespace malkusch\bav;
@@ -99,7 +101,9 @@ $bav->update();
 
 ## Automatic
 
-Enable automatic updates with `AutomaticUpdatePlan` in your `bav/configuration.php`:
+Enable automatic updates with
+[`AutomaticUpdatePlan`](http://bav-php.github.io/bav/class-malkusch.bav.AutomaticUpdatePlan.html)
+in your `bav/configuration.php`:
 
 ```php
 namespace malkusch\bav;
@@ -115,39 +119,46 @@ hook. I.e. it won't bother users during normal operations.
 
 # Usage
 
-You can use BAV with the api facade `BAV`.
+You can use BAV with the api facade
+[`BAV`](http://bav-php.github.io/bav/class-malkusch.bav.BAV.html):
 
-* `BAV::isValidBank($bankID)`: Returns true for existing bank ids.
+* [`BAV::isValidBank($bankID)`](http://bav-php.github.io/bav/class-malkusch.bav.BAV.html#_isValidBank):
+Returns true for existing bank ids.
 
-* `BAV::isValidBankAccount($bankID, $account)`: Returns true for existing accounts of an existing
-bank.
+* [`BAV::isValidBankAccount($bankID, $account)`](http://bav-php.github.io/bav/class-malkusch.bav.BAV.html#_isValidBankAccount):
+Returns true for existing accounts of an existing bank.
 
-* `BAV::isValidAccount($account)`: This method validates an account against the bank
-of the last `isValidBank()` call.
+* [`BAV::isValidAccount($account)`](http://bav-php.github.io/bav/class-malkusch.bav.BAV.html#_isValidAccount):
+This method validates an account against the bank of the last `isValidBank()` call.
 
-* `BAV::getValidBankFilterCallback()`: Returns a callback for filter bank validation.
+* [`BAV::getValidBankFilterCallback()`](http://bav-php.github.io/bav/class-malkusch.bav.BAV.html#_getValidBankFilterCallback):
+Returns a callback for filter bank validation.
 
-* `BAV::getValidAccountFilterCallback()`: Returns a callback for filter account validation.
-The account filter needs to be called after the bank filter.
+* [`BAV::getValidAccountFilterCallback()`](http://bav-php.github.io/bav/class-malkusch.bav.BAV.html#_getValidAccountFilterCallback):
+Returns a callback for filter account validation. The account filter needs
+to be called after the bank filter.
 
-* `BAV::getMainAgency()`: Returns the main agency of a bank.
+* [`BAV::getMainAgency()`](http://bav-php.github.io/bav/class-malkusch.bav.BAV.html#_getMainAgency):
+Returns the main agency of a bank.
 
-* `BAV::getAgencies()`: Returns further agencies. The main agency is not included in this list.
+* [`BAV::getAgencies()`](http://bav-php.github.io/bav/class-malkusch.bav.BAV.html#_getAgencies):
+Returns further agencies. The main agency is not included in this list.
 This list can be empty.
 
-An Agency object has the fields:
+An [`Agency`](http://bav-php.github.io/bav/class-malkusch.bav.Agency.html)
+object has the fields:
 
-* `Agency::getBIC()`
+* [`Agency::getBIC()`](http://bav-php.github.io/bav/class-malkusch.bav.Agency.html#_getBIC)
 
-* `Agency::getPostcode()`
+* [`Agency::getPostcode()`](http://bav-php.github.io/bav/class-malkusch.bav.Agency.html#_getPostcode)
 
-* `Agency::getCity()`
+* [`Agency::getCity()`](http://bav-php.github.io/bav/class-malkusch.bav.Agency.html#_getCity)
 
-* `Agency::getName()`
+* [`Agency::getName()`](http://bav-php.github.io/bav/class-malkusch.bav.Agency.html#_getName)
 
-* `Agency::getShortTerm()`
+* [`Agency::getShortTerm()`](http://bav-php.github.io/bav/class-malkusch.bav.Agency.html#_getShortTerm)
 
-* `Agency::getPAN()`
+* [`Agency::getPAN()`](http://bav-php.github.io/bav/class-malkusch.bav.Agency.html#_getPAN)
 
 ## Example
 
