@@ -7,7 +7,7 @@
 	<title>Namespace malkusch\bav</title>
 
 	<script type="text/javascript" src="resources/combined.js?862370026"></script>
-	<script type="text/javascript" src="elementlist.js?2285258929"></script>
+	<script type="text/javascript" src="elementlist.js?3158084324"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360">
 
 </head>
@@ -26,6 +26,8 @@
 				<li class="active"><a href="namespace-malkusch.bav.html">bav</a>
 						</li>
 							</ul></li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
 			</ul>
 		</div>
 
@@ -40,8 +42,12 @@
 				<li><a href="class-malkusch.bav.BAV.html">BAV</a></li>
 				<li><a href="class-malkusch.bav.Configuration.html">Configuration</a></li>
 				<li><a href="class-malkusch.bav.ConfigurationRegistry.html">ConfigurationRegistry</a></li>
+				<li><a href="class-malkusch.bav.DataBackendContainer.html">DataBackendContainer</a></li>
 				<li><a href="class-malkusch.bav.DefaultConfiguration.html">DefaultConfiguration</a></li>
+				<li><a href="class-malkusch.bav.DoctrineBackendContainer.html">DoctrineBackendContainer</a></li>
+				<li><a href="class-malkusch.bav.FileDataBackendContainer.html">FileDataBackendContainer</a></li>
 				<li><a href="class-malkusch.bav.LogUpdatePlan.html">LogUpdatePlan</a></li>
+				<li><a href="class-malkusch.bav.PDODataBackendContainer.html">PDODataBackendContainer</a></li>
 				<li><a href="class-malkusch.bav.UpdatePlan.html">UpdatePlan</a></li>
 			</ul>
 
@@ -111,13 +117,29 @@
 	<td>Registry for the configuration</td>
 </tr>
 <tr>
+	<td class="name"><a href="class-malkusch.bav.DataBackendContainer.html">DataBackendContainer</a></td>
+	<td>Container for DataBackend objects.</td>
+</tr>
+<tr>
 	<td class="name"><a href="class-malkusch.bav.DefaultConfiguration.html">DefaultConfiguration</a></td>
-	<td>Default configuration uses FileDataBackendContainer and any available
+	<td>Default configuration uses <code><a href="class-malkusch.bav.FileDataBackendContainer.html">malkusch\bav\FileDataBackendContainer</a></code> and any available
 UTF-8 encoder.</td>
+</tr>
+<tr>
+	<td class="name"><a href="class-malkusch.bav.DoctrineBackendContainer.html">DoctrineBackendContainer</a></td>
+	<td>Container for DoctrineDataBackend objects.</td>
+</tr>
+<tr>
+	<td class="name"><a href="class-malkusch.bav.FileDataBackendContainer.html">FileDataBackendContainer</a></td>
+	<td>Container for FileDataBackend objects.</td>
 </tr>
 <tr>
 	<td class="name"><a href="class-malkusch.bav.LogUpdatePlan.html">LogUpdatePlan</a></td>
 	<td>Logs a E_USER_WARNING if an update should be performed.</td>
+</tr>
+<tr>
+	<td class="name"><a href="class-malkusch.bav.PDODataBackendContainer.html">PDODataBackendContainer</a></td>
+	<td>Container for PDODataBackend objects.</td>
 </tr>
 <tr>
 	<td class="name"><a href="class-malkusch.bav.UpdatePlan.html">UpdatePlan</a></td>

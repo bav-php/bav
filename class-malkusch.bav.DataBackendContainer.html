@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="generator" content="ApiGen 2.8.0">
 
-	<title>Class malkusch\bav\UpdatePlan</title>
+	<title>Class malkusch\bav\DataBackendContainer</title>
 
 	<script type="text/javascript" src="resources/combined.js?862370026"></script>
 	<script type="text/javascript" src="elementlist.js?3158084324"></script>
@@ -42,13 +42,13 @@
 				<li><a href="class-malkusch.bav.BAV.html">BAV</a></li>
 				<li><a href="class-malkusch.bav.Configuration.html">Configuration</a></li>
 				<li><a href="class-malkusch.bav.ConfigurationRegistry.html">ConfigurationRegistry</a></li>
-				<li><a href="class-malkusch.bav.DataBackendContainer.html">DataBackendContainer</a></li>
+				<li class="active"><a href="class-malkusch.bav.DataBackendContainer.html">DataBackendContainer</a></li>
 				<li><a href="class-malkusch.bav.DefaultConfiguration.html">DefaultConfiguration</a></li>
 				<li><a href="class-malkusch.bav.DoctrineBackendContainer.html">DoctrineBackendContainer</a></li>
 				<li><a href="class-malkusch.bav.FileDataBackendContainer.html">FileDataBackendContainer</a></li>
 				<li><a href="class-malkusch.bav.LogUpdatePlan.html">LogUpdatePlan</a></li>
 				<li><a href="class-malkusch.bav.PDODataBackendContainer.html">PDODataBackendContainer</a></li>
-				<li class="active"><a href="class-malkusch.bav.UpdatePlan.html">UpdatePlan</a></li>
+				<li><a href="class-malkusch.bav.UpdatePlan.html">UpdatePlan</a></li>
 			</ul>
 
 
@@ -91,12 +91,12 @@
 	</div>
 
 <div id="content" class="class">
-	<h1>Class UpdatePlan</h1>
+	<h1>Class DataBackendContainer</h1>
 
 
 	<div class="description">
 	
-<p>Abstract update plan.</p>
+<p>Container for DataBackend objects.</p>
 
 	</div>
 
@@ -104,8 +104,9 @@
 
 	<div>
 		<h4>Direct known subclasses</h4>
-			<a href="class-malkusch.bav.AutomaticUpdatePlan.html">malkusch\bav\AutomaticUpdatePlan</a>, 
-			<a href="class-malkusch.bav.LogUpdatePlan.html">malkusch\bav\LogUpdatePlan</a>
+			<a href="class-malkusch.bav.DoctrineBackendContainer.html">malkusch\bav\DoctrineBackendContainer</a>, 
+			<a href="class-malkusch.bav.FileDataBackendContainer.html">malkusch\bav\FileDataBackendContainer</a>, 
+			<a href="class-malkusch.bav.PDODataBackendContainer.html">malkusch\bav\PDODataBackendContainer</a>
 	</div>
 
 
@@ -124,39 +125,80 @@
 				<b>Author:</b>
 				Markus Malkusch &lt;<a
 href="mailto:markus&#64;malkusch.de">markus&#64;<!-- -->malkusch.de</a>&gt;<br>
+				<b>See:</b>
+				DataBackend<br>
 				<b>Link:</b>
 				bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations<br>
 				<b>Api</b>
 				<br>
-		<b>Located at</b> <a href="source-class-malkusch.bav.UpdatePlan.html#5-87" title="Go to source code">UpdatePlan.php</a><br>
+		<b>Located at</b> <a href="source-class-malkusch.bav.DataBackendContainer.html#5-95" title="Go to source code">DataBackendContainer.php</a><br>
 	</div>
 
 
 
 	<table class="summary" id="methods">
 	<caption>Methods summary</caption>
-	<tr data-order="perform" id="_perform">
+	<tr data-order="makeDataBackend" id="_makeDataBackend">
 
 		<td class="attributes"><code>
-			abstract public 
+			abstract protected 
+			DataBackend
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_makeDataBackend">#</a>
+		<code><a href="source-class-malkusch.bav.DataBackendContainer.html#27-33" title="Go to source code">makeDataBackend</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the unconfigured backend which is only created by calling the
+constructor.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the unconfigured backend which is only created by calling the
+constructor.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>DataBackend</code><br>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="applyUpdatePlan" id="_applyUpdatePlan">
+
+		<td class="attributes"><code>
+			 public 
 			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_perform">#</a>
-		<code><a href="source-class-malkusch.bav.UpdatePlan.html#34-37" title="Go to source code">perform</a>( <span>malkusch\bav\DataBackend <var>$backend</var></span> )</code>
+		<a class="anchor" href="#_applyUpdatePlan">#</a>
+		<code><a href="source-class-malkusch.bav.DataBackendContainer.html#65-75" title="Go to source code">applyUpdatePlan</a>( <span>malkusch\bav\DataBackend <var>$backend</var></span> )</code>
 
 		<div class="description short">
 			
-<p>Perform the update process.</p>
+<p>Shut down hook for applying the update plan.</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Perform the update process.</p>
+<p>Shut down hook for applying the update plan.</p>
 
 
 
@@ -168,41 +210,45 @@ href="mailto:markus&#64;malkusch.de">markus&#64;<!-- -->malkusch.de</a>&gt;<br>
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="isOutdated" id="_isOutdated">
+	<tr data-order="getDataBackend" id="_getDataBackend">
 
 		<td class="attributes"><code>
 			 public 
-			boolean
+			DataBackend
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_isOutdated">#</a>
-		<code><a href="source-class-malkusch.bav.UpdatePlan.html#39-86" title="Go to source code">isOutdated</a>( <span>malkusch\bav\DataBackend <var>$backend</var></span> )</code>
+		<a class="anchor" href="#_getDataBackend">#</a>
+		<code><a href="source-class-malkusch.bav.DataBackendContainer.html#77-94" title="Go to source code">getDataBackend</a>( )</code>
 
 		<div class="description short">
 			
-<p>Returns true if the data is to old and needs an update</p>
+<p>Returns a configured data backend.</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Returns true if the data is to old and needs an update</p>
+<p>Returns a configured data backend.</p>
+
+<p>If configured this method would automatically install and update the backend.
+I.e. some calls might take longer.</p>
 
 
 
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code><br>
+					<code>DataBackend</code><br>
 				</div>
 
 
 				<h4>See</h4>
 				<div class="list">
-						DataBackend::getLastUpdate()<br>
+						<code><code><a href="class-malkusch.bav.Configuration.html#_setAutomaticInstallation">malkusch\bav\Configuration::setAutomaticInstallation()</a></code></code><br>
+						DataBackend::install()<br>
 				</div>
 
 
@@ -218,6 +264,33 @@ href="mailto:markus&#64;malkusch.de">markus&#64;<!-- -->malkusch.de</a>&gt;<br>
 
 
 
+	<table class="summary" id="constants">
+	<caption>Constants summary</caption>
+	<tr data-order="INSTALL_LOCK" id="INSTALL_LOCK">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-malkusch.bav.DataBackendContainer.html#17-20" title="Go to source code"><b>INSTALL_LOCK</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">&quot;bav_install.lock&quot;</span></code></td>
+		<td class="description"><div>
+			<a href="#INSTALL_LOCK" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Name of the installation lock file</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Name of the installation lock file</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
 
 
 

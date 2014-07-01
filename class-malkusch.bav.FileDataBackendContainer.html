@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="generator" content="ApiGen 2.8.0">
 
-	<title>Class malkusch\bav\LogUpdatePlan</title>
+	<title>Class malkusch\bav\FileDataBackendContainer</title>
 
 	<script type="text/javascript" src="resources/combined.js?862370026"></script>
 	<script type="text/javascript" src="elementlist.js?3158084324"></script>
@@ -45,8 +45,8 @@
 				<li><a href="class-malkusch.bav.DataBackendContainer.html">DataBackendContainer</a></li>
 				<li><a href="class-malkusch.bav.DefaultConfiguration.html">DefaultConfiguration</a></li>
 				<li><a href="class-malkusch.bav.DoctrineBackendContainer.html">DoctrineBackendContainer</a></li>
-				<li><a href="class-malkusch.bav.FileDataBackendContainer.html">FileDataBackendContainer</a></li>
-				<li class="active"><a href="class-malkusch.bav.LogUpdatePlan.html">LogUpdatePlan</a></li>
+				<li class="active"><a href="class-malkusch.bav.FileDataBackendContainer.html">FileDataBackendContainer</a></li>
+				<li><a href="class-malkusch.bav.LogUpdatePlan.html">LogUpdatePlan</a></li>
 				<li><a href="class-malkusch.bav.PDODataBackendContainer.html">PDODataBackendContainer</a></li>
 				<li><a href="class-malkusch.bav.UpdatePlan.html">UpdatePlan</a></li>
 			</ul>
@@ -91,25 +91,25 @@
 	</div>
 
 <div id="content" class="class">
-	<h1>Class LogUpdatePlan</h1>
+	<h1>Class FileDataBackendContainer</h1>
 
 
 	<div class="description">
 	
-<p>Logs a E_USER_WARNING if an update should be performed.</p>
+<p>Container for FileDataBackend objects.</p>
 
 	</div>
 
 	<dl class="tree">
 		<dd style="padding-left:0px">
-			<a href="class-malkusch.bav.UpdatePlan.html"><span>malkusch\bav\UpdatePlan</span></a>
+			<a href="class-malkusch.bav.DataBackendContainer.html"><span>malkusch\bav\DataBackendContainer</span></a>
 			
 			
 			
 		</dd>
 		<dd style="padding-left:30px">
 			<img src="resources/inherit.png" alt="Extended by">
-<b><span>malkusch\bav\LogUpdatePlan</span></b>			
+<b><span>malkusch\bav\FileDataBackendContainer</span></b>			
 			
 			
 		</dd>
@@ -133,18 +133,20 @@
 				<b>Author:</b>
 				Markus Malkusch &lt;<a
 href="mailto:markus&#64;malkusch.de">markus&#64;<!-- -->malkusch.de</a>&gt;<br>
+				<b>See:</b>
+				DataBackend<br>
 				<b>Link:</b>
 				bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations<br>
 				<b>Api</b>
 				<br>
-		<b>Located at</b> <a href="source-class-malkusch.bav.LogUpdatePlan.html#5-26" title="Go to source code">LogUpdatePlan.php</a><br>
+		<b>Located at</b> <a href="source-class-malkusch.bav.FileDataBackendContainer.html#5-42" title="Go to source code">FileDataBackendContainer.php</a><br>
 	</div>
 
 
 
 	<table class="summary" id="methods">
 	<caption>Methods summary</caption>
-	<tr data-order="perform" id="_perform">
+	<tr data-order="__construct" id="___construct">
 
 		<td class="attributes"><code>
 			 public 
@@ -154,22 +156,66 @@ href="mailto:markus&#64;malkusch.de">markus&#64;<!-- -->malkusch.de</a>&gt;<br>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_perform">#</a>
-		<code><a href="source-class-malkusch.bav.LogUpdatePlan.html#16-25" title="Go to source code">perform</a>( <span>malkusch\bav\DataBackend <var>$backend</var></span> )</code>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-malkusch.bav.FileDataBackendContainer.html#22-30" title="Go to source code">__construct</a>( <span>string <var>$file</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
-<p>Log an E_USER_WARNING</p>
+<p>Sets the path for the backend.</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Log an E_USER_WARNING</p>
+<p>Sets the path for the backend.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$file</var></dt>
+					<dd><code>string</code><br>$file Path to the bundesbank file</dd>
+				</dl></div>
 
 
 
 
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="makeDataBackend" id="_makeDataBackend">
+
+		<td class="attributes"><code>
+			 protected 
+			FileDataBackend
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_makeDataBackend">#</a>
+		<code><a href="source-class-malkusch.bav.FileDataBackendContainer.html#32-41" title="Go to source code">makeDataBackend</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the unconfigured backend which is only created by calling the
+constructor.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the unconfigured backend which is only created by calling the
+constructor.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>FileDataBackend</code><br>
+				</div>
 
 
 
@@ -180,10 +226,11 @@ href="mailto:markus&#64;malkusch.de">markus&#64;<!-- -->malkusch.de</a>&gt;<br>
 	</table>
 
 	<table class="summary inherited">
-	<caption>Methods inherited from <a href="class-malkusch.bav.UpdatePlan.html#methods">malkusch\bav\UpdatePlan</a></caption>
+	<caption>Methods inherited from <a href="class-malkusch.bav.DataBackendContainer.html#methods">malkusch\bav\DataBackendContainer</a></caption>
 	<tr>
 		<td><code>
-			<a href="class-malkusch.bav.UpdatePlan.html#_isOutdated">isOutdated()</a>
+			<a href="class-malkusch.bav.DataBackendContainer.html#_applyUpdatePlan">applyUpdatePlan()</a>, 
+			<a href="class-malkusch.bav.DataBackendContainer.html#_getDataBackend">getDataBackend()</a>
 		</code></td>
 	</tr>
 	</table>
@@ -195,6 +242,14 @@ href="mailto:markus&#64;malkusch.de">markus&#64;<!-- -->malkusch.de</a>&gt;<br>
 
 
 
+	<table class="summary inherited">
+	<caption>Constants inherited from <a href="class-malkusch.bav.DataBackendContainer.html#constants">malkusch\bav\DataBackendContainer</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-malkusch.bav.DataBackendContainer.html#INSTALL_LOCK"><b>INSTALL_LOCK</b></a>
+		</code></td>
+	</tr>
+	</table>
 
 
 
