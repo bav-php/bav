@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="generator" content="ApiGen 2.8.0">
+
+	<title>Class malkusch\bav\BAV</title>
+
+	<script type="text/javascript" src="resources/combined.js?862370026"></script>
+	<script type="text/javascript" src="elementlist.js?2285258929"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li class="active"><a href="namespace-malkusch.html">malkusch<span></span></a>
+						<ul>
+				<li class="active"><a href="namespace-malkusch.bav.html">bav</a>
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-malkusch.bav.Agency.html">Agency</a></li>
+				<li><a href="class-malkusch.bav.AutomaticUpdatePlan.html">AutomaticUpdatePlan</a></li>
+				<li class="active"><a href="class-malkusch.bav.BAV.html">BAV</a></li>
+				<li><a href="class-malkusch.bav.Configuration.html">Configuration</a></li>
+				<li><a href="class-malkusch.bav.ConfigurationRegistry.html">ConfigurationRegistry</a></li>
+				<li><a href="class-malkusch.bav.DefaultConfiguration.html">DefaultConfiguration</a></li>
+				<li><a href="class-malkusch.bav.LogUpdatePlan.html">LogUpdatePlan</a></li>
+				<li><a href="class-malkusch.bav.UpdatePlan.html">UpdatePlan</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text">
+		<input type="submit" value="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-malkusch.bav.html" title="Summary of malkusch\bav"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class BAV</h1>
+
+
+	<div class="description">
+	
+<p>Facade for BAV's API.</p>
+
+<p>This class provides methods for validation of German bank accounts.</p>
+
+<p>If you don't inject a <code><a href="class-malkusch.bav.Configuration.html">malkusch\bav\Configuration</a></code> the facade will use the <code><a href="class-malkusch.bav.ConfigurationRegistry.html">malkusch\bav\ConfigurationRegistry</a></code>. The registry provides per default the <code><a href="class-malkusch.bav.DefaultConfiguration.html">malkusch\bav\DefaultConfiguration</a></code>.</p>
+
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-malkusch.html">malkusch</a>\<a href="namespace-malkusch.bav.html">bav</a><br>
+		
+
+				<b>License:</b>
+				<a href="GPL">GPL</a><br>
+				<b>Author:</b>
+				Markus Malkusch &lt;<a
+href="mailto:markus&#64;malkusch.de">markus&#64;<!-- -->malkusch.de</a>&gt;<br>
+				<b>See:</b>
+				<code><code><a href="class-malkusch.bav.ConfigurationRegistry.html">malkusch\bav\ConfigurationRegistry</a></code></code><br>
+				<b>Link:</b>
+				bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations<br>
+				<b>Api</b>
+				<br>
+		<b>Located at</b> <a href="source-class-malkusch.bav.BAV.html#5-236" title="Go to source code">BAV.php</a><br>
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-malkusch.bav.BAV.html#38-57" title="Go to source code">__construct</a>( <span><code><a href="class-malkusch.bav.Configuration.html">malkusch\bav\Configuration</a></code> <var>$configuration</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Inject the configuration.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Inject the configuration.</p>
+
+<p>If the $configuration is null the configuration from <code><a href="class-malkusch.bav.ConfigurationRegistry.html#_getConfiguration">malkusch\bav\ConfigurationRegistry::getConfiguration()</a></code> will be used.</p>
+
+
+
+
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-malkusch.bav.ConfigurationRegistry.html">malkusch\bav\ConfigurationRegistry</a></code></code><br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getDataBackend" id="_getDataBackend">
+
+		<td class="attributes"><code>
+			 public 
+			DataBackend
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getDataBackend">#</a>
+		<code><a href="source-class-malkusch.bav.BAV.html#59-67" title="Go to source code">getDataBackend</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the data backend</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the data backend</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>DataBackend</code><br>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="update" id="_update">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_update">#</a>
+		<code><a href="source-class-malkusch.bav.BAV.html#69-82" title="Go to source code">update</a>( )</code>
+
+		<div class="description short">
+			
+<p>Updates bav with a new bundesbank file.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Updates bav with a new bundesbank file.</p>
+
+<p>You might consider enabling automatic update with setting AutomaticUpdatePlan
+as configuration.</p>
+
+
+
+
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code>DataBackendException</code><br>
+				</div>
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-malkusch.bav.AutomaticUpdatePlan.html">malkusch\bav\AutomaticUpdatePlan</a></code></code><br>
+						<code><code><a href="class-malkusch.bav.Configuration.html#_setUpdatePlan">malkusch\bav\Configuration::setUpdatePlan()</a></code></code><br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isValidBankAccount" id="_isValidBankAccount">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isValidBankAccount">#</a>
+		<code><a href="source-class-malkusch.bav.BAV.html#84-105" title="Go to source code">isValidBankAccount</a>( <span>string <var>$bankID</var></span>, <span>string <var>$account</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns true if both the bank exists and the account is valid.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns true if both the bank exists and the account is valid.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$bankID</var></dt>
+					<dd><code>string</code><br>$bankID</dd>
+					<dt><var>$account</var></dt>
+					<dd><code>string</code><br>$account</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code>DataBackendException</code><br>for some reason the validator might not be implemented<br>
+				</div>
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-malkusch.bav.BAV.html#_isValidBank">malkusch\bav\BAV::isValidBank()</a></code></code><br>
+						<code><code><a href="class-malkusch.bav.BAV.html#_getBank">malkusch\bav\BAV::getBank()</a></code></code><br>
+						Bank::isValid()<br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isValidAccount" id="_isValidAccount">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isValidAccount">#</a>
+		<code><a href="source-class-malkusch.bav.BAV.html#107-122" title="Go to source code">isValidAccount</a>( <span>string <var>$account</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns true if the account is valid for the current context.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns true if the account is valid for the current context.</p>
+
+<p>You have to have called isValidBank() before! If the current context is no
+valid bank every account will validate to true.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$account</var></dt>
+					<dd><code>string</code><br>$account</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code>InvalidContextException</code><br>isValidBank() was not called before.<br>
+				</div>
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-malkusch.bav.BAV.html#_isValidBank">malkusch\bav\BAV::isValidBank()</a></code></code><br>
+						ContextValidation::isValidAccount()<br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isValidBank" id="_isValidBank">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isValidBank">#</a>
+		<code><a href="source-class-malkusch.bav.BAV.html#124-135" title="Go to source code">isValidBank</a>( <span>string <var>$bankID</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns true if a bank exists</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns true if a bank exists</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$bankID</var></dt>
+					<dd><code>string</code><br>$bankID</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code>DataBackendException</code><br>
+				</div>
+
+				<h4>See</h4>
+				<div class="list">
+						ContextValidation::isValidBank()<br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getMainAgency" id="_getMainAgency">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-malkusch.bav.Agency.html">malkusch\bav\Agency</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getMainAgency">#</a>
+		<code><a href="source-class-malkusch.bav.BAV.html#137-152" title="Go to source code">getMainAgency</a>( <span>string <var>$bankID</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Every bank has one main agency.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Every bank has one main agency.</p>
+
+<p>This agency is not included in getAgencies().</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$bankID</var></dt>
+					<dd><code>string</code><br>$bankID Bank id (Bankleitzahl)</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-malkusch.bav.Agency.html">malkusch\bav\Agency</a></code></code><br>
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code>DataBackendException</code><br>
+					<code>BankNotFoundException</code><br>
+				</div>
+
+				<h4>See</h4>
+				<div class="list">
+						Bank::getMainAgency()<br>
+						<code><code><a href="class-malkusch.bav.BAV.html#_getAgencies">malkusch\bav\BAV::getAgencies()</a></code></code><br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getAgencies" id="_getAgencies">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-malkusch.bav.Agency.html">malkusch\bav\Agency</a>[]</code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getAgencies">#</a>
+		<code><a href="source-class-malkusch.bav.BAV.html#154-167" title="Go to source code">getAgencies</a>( <span>string <var>$bankID</var></span> )</code>
+
+		<div class="description short">
+			
+<p>A bank may have more agencies.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>A bank may have more agencies.</p>
+
+<p>The main agency is not included in this list.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$bankID</var></dt>
+					<dd><code>string</code><br>$bankID Bank id (Bankleitzahl)</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-malkusch.bav.Agency.html">malkusch\bav\Agency</a>[]</code></code><br>
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code>DataBackendException</code><br>
+					<code>BankNotFoundException</code><br>
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getBank" id="_getBank">
+
+		<td class="attributes"><code>
+			 public 
+			Bank
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getBank">#</a>
+		<code><a href="source-class-malkusch.bav.BAV.html#169-183" title="Go to source code">getBank</a>( <span>string <var>$bankID</var></span> )</code>
+
+		<div class="description short">
+			
+<p>With this method you get the Bank objects for certain IDs. Note that a call
+to this method with an identical id will return the same objects.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>With this method you get the Bank objects for certain IDs. Note that a call
+to this method with an identical id will return the same objects.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$bankID</var></dt>
+					<dd><code>string</code><br>$bankID</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Bank</code><br>
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code>BankNotFoundException</code><br>
+					<code>DataBackendException</code><br>
+				</div>
+
+				<h4>See</h4>
+				<div class="list">
+						DataBackend::isValidBank()<br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getBICAgencies" id="_getBICAgencies">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-malkusch.bav.Agency.html">malkusch\bav\Agency</a>[]</code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getBICAgencies">#</a>
+		<code><a href="source-class-malkusch.bav.BAV.html#185-194" title="Go to source code">getBICAgencies</a>( <span>string <var>$bic</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns bank agencies for a given BIC.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns bank agencies for a given BIC.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$bic</var></dt>
+					<dd><code>string</code><br>$bic BIC</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-malkusch.bav.Agency.html">malkusch\bav\Agency</a>[]</code></code><br>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isValidBIC" id="_isValidBIC">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isValidBIC">#</a>
+		<code><a href="source-class-malkusch.bav.BAV.html#196-205" title="Go to source code">isValidBIC</a>( <span>string <var>$bic</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns if a bic is valid.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns if a bic is valid.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$bic</var></dt>
+					<dd><code>string</code><br>$bic BIC</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getValidBankFilterCallback" id="_getValidBankFilterCallback">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getValidBankFilterCallback">#</a>
+		<code><a href="source-class-malkusch.bav.BAV.html#207-220" title="Go to source code">getValidBankFilterCallback</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the third call back parameter for filter_var() for validating a
+bank.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the third call back parameter for filter_var() for validating a
+bank.</p>
+
+<p>filter_var($bankID, FILTER_CALLBACK,
+$bav-&gt;getValidBankFilterCallback());</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br>
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-malkusch.bav.BAV.html#_isValidBank">malkusch\bav\BAV::isValidBank()</a></code></code><br>
+						filter_var()<br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getValidAccountFilterCallback" id="_getValidAccountFilterCallback">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getValidAccountFilterCallback">#</a>
+		<code><a href="source-class-malkusch.bav.BAV.html#222-235" title="Go to source code">getValidAccountFilterCallback</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the third call back parameter for filter_var() for validating a bank
+account.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the third call back parameter for filter_var() for validating a bank
+account.</p>
+
+<p>filter_var($account, FILTER_CALLBACK,
+$bav-&gt;getValidBankFilterCallback());</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br>
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-malkusch.bav.BAV.html#_isValidAccount">malkusch\bav\BAV::isValidAccount()</a></code></code><br>
+						filter_var()<br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

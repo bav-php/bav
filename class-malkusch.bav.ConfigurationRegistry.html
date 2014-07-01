@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="generator" content="ApiGen 2.8.0">
+
+	<title>Class malkusch\bav\ConfigurationRegistry</title>
+
+	<script type="text/javascript" src="resources/combined.js?862370026"></script>
+	<script type="text/javascript" src="elementlist.js?2285258929"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li class="active"><a href="namespace-malkusch.html">malkusch<span></span></a>
+						<ul>
+				<li class="active"><a href="namespace-malkusch.bav.html">bav</a>
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-malkusch.bav.Agency.html">Agency</a></li>
+				<li><a href="class-malkusch.bav.AutomaticUpdatePlan.html">AutomaticUpdatePlan</a></li>
+				<li><a href="class-malkusch.bav.BAV.html">BAV</a></li>
+				<li><a href="class-malkusch.bav.Configuration.html">Configuration</a></li>
+				<li class="active"><a href="class-malkusch.bav.ConfigurationRegistry.html">ConfigurationRegistry</a></li>
+				<li><a href="class-malkusch.bav.DefaultConfiguration.html">DefaultConfiguration</a></li>
+				<li><a href="class-malkusch.bav.LogUpdatePlan.html">LogUpdatePlan</a></li>
+				<li><a href="class-malkusch.bav.UpdatePlan.html">UpdatePlan</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text">
+		<input type="submit" value="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-malkusch.bav.html" title="Summary of malkusch\bav"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class ConfigurationRegistry</h1>
+
+
+	<div class="description">
+	
+<p>Registry for the configuration</p>
+
+<p>BAV uses this static container for its runtime configuration. Per default the
+registry is initialized with the <code><a href="class-malkusch.bav.DefaultConfiguration.html">malkusch\bav\DefaultConfiguration</a></code>. You can set your
+own configuration with <code><a href="class-malkusch.bav.ConfigurationRegistry.html#_setConfiguration">malkusch\bav\ConfigurationRegistry::setConfiguration()</a></code> or preferably by providing the
+file bav/configuration.php. This file should return a <code><a href="class-malkusch.bav.Configuration.html">malkusch\bav\Configuration</a></code>
+object:</p>
+
+<pre>
+<span class="xlang">&lt;?php</span>
+
+<span
+class="php-keyword1">namespace</span> malkusch\bav;
+
+<span
+class="php-var">$configuration</span> = <span
+class="php-keyword1">new</span> DefaultConfiguration();
+
+<span
+class="php-var">$pdo</span> = <span class="php-keyword1">new</span> \PDO(<span
+class="php-quote">&quot;mysql:host=localhost;dbname=test&quot;</span>);
+<span
+class="php-var">$configuration</span>-&gt;setDataBackendContainer(<span
+class="php-keyword1">new</span> PDODataBackendContainer(<span
+class="php-var">$pdo</span>));
+
+<span
+class="php-var">$configuration</span>-&gt;setUpdatePlan(<span
+class="php-keyword1">new</span> AutomaticUpdatePlan());
+
+<span
+class="php-keyword1">return</span> <span
+class="php-var">$configuration</span>;
+</pre>
+
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-malkusch.html">malkusch</a>\<a href="namespace-malkusch.bav.html">bav</a><br>
+		
+
+				<b>License:</b>
+				<a href="GPL">GPL</a><br>
+				<b>Author:</b>
+				Markus Malkusch &lt;<a
+href="mailto:markus&#64;malkusch.de">markus&#64;<!-- -->malkusch.de</a>&gt;<br>
+				<b>See:</b>
+				<code><code><a href="class-malkusch.bav.Configuration.html">malkusch\bav\Configuration</a></code></code><br>
+				<b>Link:</b>
+				bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations<br>
+				<b>Api</b>
+				<br>
+		<b>Located at</b> <a href="source-class-malkusch.bav.ConfigurationRegistry.html#5-90" title="Go to source code">ConfigurationRegistry.php</a><br>
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="classConstructor" id="_classConstructor">
+
+		<td class="attributes"><code>
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_classConstructor">#</a>
+		<code><a href="source-class-malkusch.bav.ConfigurationRegistry.html#47-68" title="Go to source code">classConstructor</a>( )</code>
+
+		<div class="description short">
+			
+<p>locate a configuration or register the default configuration.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>locate a configuration or register the default configuration.</p>
+
+<p>You may define the file bav/configuration.php. This file should return a
+Configuration object.</p>
+
+
+
+
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code>ConfigurationException</code><br>
+				</div>
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-malkusch.bav.DefaultConfiguration.html">malkusch\bav\DefaultConfiguration</a></code></code><br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setConfiguration" id="_setConfiguration">
+
+		<td class="attributes"><code>
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setConfiguration">#</a>
+		<code><a href="source-class-malkusch.bav.ConfigurationRegistry.html#70-79" title="Go to source code">setConfiguration</a>( <span><code><a href="class-malkusch.bav.Configuration.html">malkusch\bav\Configuration</a></code> <var>$configuration</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Register a configuration programmatically.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Register a configuration programmatically.</p>
+
+<p>Alternatively you can provide the file bav/configuration.php which returns a
+<code><a href="class-malkusch.bav.Configuration.html">malkusch\bav\Configuration</a></code> object.</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getConfiguration" id="_getConfiguration">
+
+		<td class="attributes"><code>
+			 public static
+			<code><a href="class-malkusch.bav.Configuration.html">malkusch\bav\Configuration</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getConfiguration">#</a>
+		<code><a href="source-class-malkusch.bav.ConfigurationRegistry.html#81-89" title="Go to source code">getConfiguration</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the configuration</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the configuration</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-malkusch.bav.Configuration.html">malkusch\bav\Configuration</a></code></code><br>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+	<table class="summary" id="constants">
+	<caption>Constants summary</caption>
+	<tr data-order="BAV_PATH" id="BAV_PATH">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-malkusch.bav.ConfigurationRegistry.html#38" title="Go to source code"><b>BAV_PATH</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">&quot;/../../configuration.php&quot;</span></code></td>
+		<td class="description"><div>
+			<a href="#BAV_PATH" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="INCLUDE_PATH" id="INCLUDE_PATH">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-malkusch.bav.ConfigurationRegistry.html#40" title="Go to source code"><b>INCLUDE_PATH</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">&quot;bav/configuration.php&quot;</span></code></td>
+		<td class="description"><div>
+			<a href="#INCLUDE_PATH" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>
