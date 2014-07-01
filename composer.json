@@ -3,6 +3,7 @@
     "require": {
         "php": ">=5",
         "malkusch/bav": "dev-master",
-	"apigen/apigen": "2.8.0"
+	"apigen/apigen": "dev-master",
+	"nette/nette": "~2.1.3"
     }
 }
