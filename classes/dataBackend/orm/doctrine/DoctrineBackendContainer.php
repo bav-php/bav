@@ -15,6 +15,7 @@ use Doctrine\ORM\Tools\Setup;
  * @license GPL
  * @see DataBackend
  * @link http://www.doctrine-project.org/
+ * @api
  */
 class DoctrineBackendContainer extends DataBackendContainer
 {

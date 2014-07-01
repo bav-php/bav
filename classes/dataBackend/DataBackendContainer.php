@@ -9,6 +9,7 @@ namespace malkusch\bav;
  * @link bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations
  * @license GPL
  * @see DataBackend
+ * @api
  */
 abstract class DataBackendContainer
 {
