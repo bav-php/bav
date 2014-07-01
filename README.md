@@ -52,7 +52,8 @@ configuration ([`DefaultConfiguration`](http://bav-php.github.io/bav/class-malku
 
 * `UTF-8` encoding (if supported)
 
-* `FileDataBackendContainer`. I.e. it uses binary search on the file from the Bundesbank.
+* [`FileDataBackendContainer`](http://bav-php.github.io/bav/class-malkusch.bav.FileDataBackendContainer.html).
+I.e. it uses binary search on the file from the Bundesbank.
 Note that this data backend uses the directory `bav/data` for install and update
 operations. You have to make sure that this directory is writable.
 
@@ -202,10 +203,13 @@ You may have:
 in to either the `mb_*` or the `iconv_*` functions. If these functions are
 missing BAV works only with the ISO-8859-15 encoding.
 
-* **PDO**: If you intend to use a DBS you need to use `PDODataBackendContainer`. 
+* **PDO**: If you intend to use a DBS you need to use
+[`PDODataBackendContainer`](http://bav-php.github.io/bav/class-malkusch.bav.PDODataBackendContainer.html). 
 `PDODataBackendContainer` needs a `PDO` support compiled in PHP.
 
-* **doctrine/orm**: You can use `DoctrineBackendContainer` which uses doctrine
+* **doctrine/orm**: You can use
+[`DoctrineBackendContainer`](http://bav-php.github.io/bav/class-malkusch.bav.DoctrineBackendContainer.html)
+which uses doctrine
 as data backend.
 
 
