@@ -139,7 +139,6 @@ class Bank
     /**
      * Use this method to check your bank account.
      *
-     * @throws ValidatorNotExistsException for some reason the validator might not be implemented
      * @param string $account
      * @return bool
      */
@@ -149,7 +148,6 @@ class Bank
     }
 
     /**
-     * @throws ValidatorNotExistsException
      * @return Validator
      */
     public function getValidator()

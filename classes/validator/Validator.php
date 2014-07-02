@@ -66,21 +66,16 @@ abstract class Validator
     }
 
     /**
-     * @throws ValidatorNotExistsException
      * @return Validator
      */
     public static function getInstance(Bank $bank)
     {
-        $type  = trim(strtoupper($bank->getValidationType()));
-        $class = "Validator$type";
-        $file  = __DIR__."/validators/$class.php";
-        if (! file_exists($file)) {
-            throw new ValidatorNotExistsException($bank);
-
-        }
-        require_once $file;
-        $nsClass = __NAMESPACE__ . "\\$class";
-        return new $nsClass($bank);
+        $class = sprintf(
+            '%s\Validator%s',
+            __NAMESPACE__,
+            $bank->getValidationType()
+        );
+        return new $class($bank);
     }
 
     /**
