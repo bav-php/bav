@@ -49,27 +49,32 @@ class Validator68 extends ValidatorChain
         $this->validators[1]->setWeights(array(2, 1, 2, 1, 2, 0, 0, 1));
     }
 
-    public function isValid($account)
+    protected function init($account)
     {
+        parent::init($account);
+        
         // Die Kontonummern [..] enthalten keine führenden Nullen.
-        $account = ltrim($account, "0");
-
-        switch (strlen($account)) {
+        $this->account = ltrim($this->account, "0");
+    }
+    
+    protected function getResult()
+    {
+        switch (strlen($this->account)) {
 
             case 10:
-                return $account{3} == 9 && $this->validator10->isValid($account);
+                return $this->account{3} == 9 && $this->validator10->isValid($this->account);
 
             case 9:
-                if ($account >= 400000000 && $account <= 499999999) {
+                if ($this->account >= 400000000 && $this->account <= 499999999) {
                     return false;
 
                 }
-                return parent::isValid($account);
+                return parent::getResult();
 
             case 6:
             case 7:
             case 8:
-                return parent::isValid($account);
+                return parent::getResult();
 
             default:
                 return false;

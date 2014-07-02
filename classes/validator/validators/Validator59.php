@@ -30,18 +30,18 @@ class Validator59 extends Validator00
 
         $this->setWeights(array(2, 1));
     }
-
-    public function isValid($account)
+    
+    protected function getResult()
     {
-        /* Es ist jedoch zu beachten, dass Kontonummern, die
+        /* 
+         * Es ist jedoch zu beachten, dass Kontonummern, die
          * kleiner als 9-stellig sind,[…] als richtig behandelt werden. 
          */
-        $trimedAccount = ltrim($account, "0");
+        $trimedAccount = ltrim($this->account, "0");
         if (strlen($trimedAccount) < 9) {
             return ! empty($trimedAccount) && true;
 
         }
-
-        return parent::isValid($account);
+        return parent::getResult();
     }
 }

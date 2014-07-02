@@ -79,12 +79,44 @@ abstract class Validator
     }
 
     /**
-     * @param string $account
+     * Raises a E_USER_WARNING for non string accounts.
+     * 
+     * @param string $account bank account
+     */
+    protected function checkType($account)
+    {
+        if (is_string($account)) {
+            return;
+            
+        }
+        trigger_error(
+            "Only validation of strings are defined."
+            . "Note that e.g. an (int) 0020012357 evaluates to (string) '4199663'.",
+            E_USER_WARNING
+        );
+    }
+    
+    /**
+     * Validates a bank account.
+     * 
+     * Null is considered invalid.
+     * 
+     * Note: The parameter $account should be a string. If it's not a string
+     * an E_USER_WARNING will be raised. Bank accounts may start with leading
+     * zeros, wich lead to unexpected results if not treated as a string (
+     * e.g. (int) 0020012357 evaluates to (string) '4199663').
+     * 
+     * @param string $account bank account
      * @return bool
      */
     public function isValid($account)
     {
         try {
+            if ($account == null) {
+                return false;
+                
+            }
+            $this->checkType($account);
             $this->init($account);
             $this->validate();
             return ltrim($account, "0") != "" && $this->getResult();

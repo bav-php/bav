@@ -4,6 +4,9 @@ Version 1.1.0 - not yet released
       vendor/malkusch/bav/configuration.php) or somewhere in the include path
       in bav/configuration.php.
 
+    - Validator::isValid() raises an E_USER_WARNING if the parameter $account
+      is no string.
+
     -[TODO] add IBAN rule support
 
     -[TODO] evaluate IBAN validation support

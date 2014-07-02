@@ -143,6 +143,19 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         );
         return $verifyArray;
     }
+    
+    /**
+     * Validator::isValid() with an int should raise a warning.
+     * 
+     * @see Validator::isValid()
+     * @dataProvider provideBanks
+     * @expectedException PHPUnit_Framework_Error_Warning
+     */
+    public function testWarningForIsValidWithInt(Bank $bank)
+    {
+        $intAccount = 0020012357;
+        $bank->isValid($intAccount);
+    }
 
     /**
      * @dataProvider provideTestAccounts
