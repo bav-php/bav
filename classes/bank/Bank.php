@@ -153,7 +153,8 @@ class Bank
     public function getValidator()
     {
         if (is_null($this->validator)) {
-            $this->validator = Validator::getInstance($this);
+            $factory = new ValidatorFactory();
+            $this->validator = $factory->build($this);
 
         }
         return $this->validator;
