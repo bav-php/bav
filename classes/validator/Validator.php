@@ -66,19 +66,6 @@ abstract class Validator
     }
 
     /**
-     * @return Validator
-     */
-    public static function getInstance(Bank $bank)
-    {
-        $class = sprintf(
-            '%s\Validator%s',
-            __NAMESPACE__,
-            $bank->getValidationType()
-        );
-        return new $class($bank);
-    }
-
-    /**
      * Raises a E_USER_WARNING for non string accounts.
      * 
      * @param string $account bank account
