@@ -93,26 +93,6 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * This Test runs all validators in order to find parse Errors
-     * and fills {@link $implementedBanks}.
-     *
-     * @param String $validatorType
-     * @throws ClassFileIOException
-     * @throws MissingClassException
-     * @dataProvider provideBanks
-     */
-    public function testFindParseErrors(Bank $bank)
-    {
-        /**
-         * testing 10 random bank accounts
-         */
-        for ($i = 0; $i < 10; $i++) {
-            $bank->isValid(mt_rand(0, 9999999999));
-
-        }
-    }
-
-    /**
      * 0 - 0000000000 should always be invalid
      *
      * @param String $validatorType
