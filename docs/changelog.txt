@@ -6,6 +6,9 @@ Version 1.1.0 - not yet released
 
     - Replaced binary search in FileDataBackend with malkusch/php-index
 
+    - fixed a bug in FileParser which did hide the last line in the file
+      of the Bundesbank.
+
     -[TODO] add IBAN rule support
 
     -[TODO] evaluate IBAN validation support

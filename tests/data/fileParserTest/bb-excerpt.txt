@@ -1,0 +1,10 @@
+100000001Bundesbank                                                10591Berlin                             BBk Berlin                 20100MARKDEF110009011380U000000000
+100100101Postbank                                                  10916Berlin                             Postbank Berlin            10010PBNKDEFFXXX24000538U000000000
+100101111SEB                                                       10789Berlin                             SEB Berlin                 25805ESSEDE5F10013005361U000000000
+100104241Aareal Bank                                               10666Berlin                             Aareal Bank                26910AARBDE5W10009004795U000000000
+100196101Dexia Kommunalbank Deutschland                            10969Berlin                             Dexia Berlin                    DXIADEBBXXX09055273U000000000
+100202001BHF-BANK                                                  10117Berlin                             BHF-BANK Berlin            25155BHFBDEFF10060004794U000000000
+100205001Bank für Sozialwirtschaft                                 10178Berlin                             Bank für Sozialwirtschaft  25013BFSWDE33BER09000530U000000000
+100208901UniCredit Bank - HypoVereinsbank                          10896Berlin                             UniCredit Bank-HypoVereinbk22014HYVEDEMM48899039785U000000000
+100208902UniCredit Bank - HypoVereinsbank                          14532Kleinmachnow                       UniCredit Bank-HypoVereinbk22014HYVEDEMM48899049352U000000000
+100208902UniCredit Bank - HypoVereinsbank                          16515Oranienburg                        UniCredit Bank-HypoVereinbk22014HYVEDEMM48899049745U000000000

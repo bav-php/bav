@@ -150,7 +150,9 @@ class FileParser
             );
 
         }
-        $this->lines = floor(($filesize - 1) / $this->lineLength);
+        
+        // size + 1, because the last line has no line break
+        $this->lines = floor(($filesize + 1) / $this->lineLength);
     }
 
     /**
