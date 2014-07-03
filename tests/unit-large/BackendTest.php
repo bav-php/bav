@@ -147,12 +147,81 @@ class BackendTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider provideInstallationBackends
+     * Tests that the backend provides all banks and agencies
+     * 
+     * @dataProvider provideBackends
      */
     public function testInstallationIsComplete(DataBackend $backend)
     {
-        $this->markTestIncomplete();
-        //TODO test if the installation process fills all banks
+        $agencies = array();
+        
+        foreach ($this->provideBanks() as $referenceBank) {
+            $bank = $backend->getBank($referenceBank->getBankID());
+            
+            $this->assertEquals(
+                $referenceBank->getValidationType(),
+                $bank->getValidationType()
+            );
+            
+            $agencies[$bank->getMainAgency()->getID()] = $bank->getMainAgency();
+            foreach ($bank->getAgencies() as $agency) {
+                $agencies[$agency->getID()] = $agency;
+                
+            }
+        }
+        
+        $expectedAgencies = $this->provideAgencies();
+        
+        $this->assertEquals(count($expectedAgencies), count($agencies));
+        
+        foreach ($agencies as $id => $agency) {
+            $expectedAgency = $expectedAgencies[$id];
+            $this->assertEqualAgency($expectedAgency, $agency);
+            
+        }
+    }
+    
+    /**
+     * Read all banks from the bundesbank file.
+     * 
+     * @return Bank[]
+     */
+    private function provideBanks()
+    {
+        $parser = new FileParser();
+        $databackend = new FileDataBackend($parser->getFile());
+        $banks = array();
+        
+        for ($line = 0; $line < $parser->getLines(); $line++) {
+            $data = $parser->readLine($line);
+            $bank = $parser->getBank($databackend, $data);
+            $banks[$bank->getBankID()] = $bank;
+            
+        }
+        
+        return $banks;
+    }
+    
+    /**
+     * Read all agencies from the bundesbank file.
+     * 
+     * @return Agency[]
+     */
+    private function provideAgencies()
+    {
+        $parser = new FileParser();
+        $databackend = new FileDataBackend($parser->getFile());
+        $agencies = array();
+        
+        for ($line = 0; $line < $parser->getLines(); $line++) {
+            $data = $parser->readLine($line);
+            $bank = $parser->getBank($databackend, $data);
+            $agency = $parser->getAgency($bank, $data);
+            $agencies[$agency->getID()] = $agency;
+            
+        }
+        
+        return $agencies;
     }
 
     /**
