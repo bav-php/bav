@@ -33,7 +33,7 @@ class Validator59 extends Validator00
     
     protected function getResult()
     {
-        /* 
+        /*
          * Es ist jedoch zu beachten, dass Kontonummern, die
          * kleiner als 9-stellig sind,[…] als richtig behandelt werden. 
          */
