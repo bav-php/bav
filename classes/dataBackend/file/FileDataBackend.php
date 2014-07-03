@@ -3,6 +3,7 @@
 namespace malkusch\bav;
 
 use \malkusch\index\FixedSizeIndex;
+use \malkusch\index\IndexException;
 
 /**
  * It uses the huge file from the Bundesbank and uses a binary search to find a row.
@@ -225,10 +226,10 @@ class FileDataBackend extends DataBackend
             return array_values($this->instances);
 
         } catch (FileParserIOException $e) {
-            throw new DataBackendIOException();
+            throw new DataBackendIOException($e->getMessage(), $e->getCode(), $e);
 
         } catch (FileParserException $e) {
-            throw new DataBackendException();
+            throw new DataBackendException($e->getMessage(), $e->getCode(), $e);
 
         }
     }
@@ -243,37 +244,25 @@ class FileDataBackend extends DataBackend
     public function getNewBank($bankID)
     {
         try {
-            $this->parser->rewind();
-            return $this->findBank($bankID);
+            $result = $this->getIndex()->search($bankID);
+        
+            if ($result == null) {
+                throw new BankNotFoundException($bankID);
+
+            }
+
+            $line = $result->getOffset() / $this->parser->getLineLength();
+            $this->contextCache[$bankID] = new FileParserContext($line);
+
+            return $this->parser->getBank($this, $this->parser->readLine($line));
 
         } catch (FileParserException $e) {
-            throw new DataBackendIOException();
+            throw new DataBackendIOException($e->getMessage(), $e->getCode(), $e);
 
+        } catch (IndexException $e) {
+            throw new DataBackendIOException($e->getMessage(), $e->getCode(), $e);
+            
         }
-    }
-
-    /**
-     * @throws BankNotFoundException
-     * @throws ParseException
-     * @throws FileParserIOException
-     * @param int $bankID
-     * @param int $offset the line number to start
-     * @param int $length the line count
-     * @return Bank
-     */
-    private function findBank($bankID)
-    {
-        $result = $this->getIndex()->search($bankID);
-        
-        if ($result == null) {
-            throw new BankNotFoundException($bankID);
-
-        }
-        
-        $line = $result->getOffset() / $this->parser->getLineLength();
-        $this->contextCache[$bankID] = new FileParserContext($line);
-        
-        return $this->parser->getBank($this, $this->parser->readLine($line));
     }
 
     /**
