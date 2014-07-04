@@ -115,10 +115,35 @@ class FileParserTest extends \PHPUnit_Framework_TestCase
      * Tests readLine()
      * 
      * @see FileParser::readLine()
+     * @dataProvider provideTestReadLine
      */
-    public function testReadLine()
+    public function testReadLine($file, $line, $expectedData)
     {
-        $this->markTestIncomplete();
+        $parser = new FileParser($file);
+        $data = $parser->readLine($line);
+        $this->assertEquals($expectedData, $data);
+    }
+    
+    /**
+     * Test cases for testReadLine()
+     * 
+     * @return string[][]
+     * @see testReadLine()
+     */
+    public function provideTestReadLine()
+    {
+        return array(
+            array(
+                __DIR__ . "/../data/fileParserTest/simple.txt",
+                0,
+                "12345\n"
+            ),
+            array(
+                __DIR__ . "/../data/fileParserTest/simple.txt",
+                1,
+                "67890"
+            )
+        );
     }
     
     /**
