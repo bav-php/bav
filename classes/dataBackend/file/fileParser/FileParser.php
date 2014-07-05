@@ -135,7 +135,7 @@ class FileParser
         }
 
 
-        $dummyLine = fgets($this->fp, 1024);
+        $dummyLine = fgets($this->fp);
         if (! $dummyLine) {
             throw new FileParserIOException();
 
