@@ -2,6 +2,9 @@
 
 namespace malkusch\bav;
 
+use \malkusch\index\FixedSizeIndex;
+use \malkusch\index\IndexException;
+
 /**
  * It uses the huge file from the Bundesbank and uses a binary search to find a row.
  * This is the easiest way to use BAV. BAV can work as a standalone application without
@@ -27,6 +30,11 @@ class FileDataBackend extends DataBackend
      * @var FileParser
      */
     private $parser;
+    
+    /**
+     * @var Index_FixedSize
+     */
+    private $index;
 
     /**
      * @var FileUtil
@@ -40,6 +48,22 @@ class FileDataBackend extends DataBackend
     {
         $this->parser = new FileParser($file);
         $this->fileUtil = new FileUtil();
+    }
+    
+    /**
+     * @return FixedSizeIndex
+     */
+    private function getIndex()
+    {
+        if ($this->index == null) {
+            $this->index = new FixedSizeIndex(
+                $this->parser->getFile(),
+                FileParser::BANKID_OFFSET,
+                FileParser::BANKID_LENGTH
+            );
+            
+        }
+        return $this->index;
     }
 
     /**
@@ -202,10 +226,10 @@ class FileDataBackend extends DataBackend
             return array_values($this->instances);
 
         } catch (FileParserIOException $e) {
-            throw new DataBackendIOException();
+            throw new DataBackendIOException($e->getMessage(), $e->getCode(), $e);
 
         } catch (FileParserException $e) {
-            throw new DataBackendException();
+            throw new DataBackendException($e->getMessage(), $e->getCode(), $e);
 
         }
     }
@@ -220,73 +244,24 @@ class FileDataBackend extends DataBackend
     public function getNewBank($bankID)
     {
         try {
-            $this->parser->rewind();
-            /**
-             * TODO Binary Search is also possible on $this->contextCache,
-             *      to reduce the interval of $offset and $end;
-             */
-            if (isset($this->contextCache[$bankID])) {
-                return $this->findBank(
-                    $bankID,
-                    $this->contextCache[$bankID]->getLine(),
-                    $this->contextCache[$bankID]->getLine()
-                );
-
-            } else {
-                return $this->findBank($bankID, 0, $this->parser->getLines());
+            $result = $this->getIndex()->search($bankID);
+        
+            if ($result == null) {
+                throw new BankNotFoundException($bankID);
 
             }
 
-        } catch (FileParserException $e) {
-            throw new DataBackendIOException();
+            $line = $result->getOffset() / $this->parser->getLineLength();
+            $this->contextCache[$bankID] = new FileParserContext($line);
 
-        }
-    }
-
-    /**
-     * @throws BankNotFoundException
-     * @throws ParseException
-     * @throws FileParserIOException
-     * @param int $bankID
-     * @param int $offset the line number to start
-     * @param int $length the line count
-     * @return Bank
-     */
-    private function findBank($bankID, $offset, $end)
-    {
-        if ($end - $offset < 0) {
-            throw new BankNotFoundException($bankID);
-
-        }
-        $line = $offset + (int)(($end - $offset) / 2);
-        $blz  = $this->parser->getBankID($line);
-
-        /**
-         * This handling is bad, as it may double the work
-         */
-        if ($blz == '00000000') {
-            try {
-                return $this->findBank($bankID, $offset, $line - 1);
-
-            } catch (BankNotFoundException $e) {
-                return $this->findBank($bankID, $line + 1, $end);
-
-            }
-
-        } elseif (! isset($this->contextCache[$blz])) {
-            $this->contextCache[$blz] = new FileParserContext($line);
-
-        }
-
-        if ($blz < $bankID) {
-            return $this->findBank($bankID, $line + 1, $end);
-
-        } elseif ($blz > $bankID) {
-            return $this->findBank($bankID, $offset, $line - 1);
-
-        } else {
             return $this->parser->getBank($this, $this->parser->readLine($line));
 
+        } catch (FileParserException $e) {
+            throw new DataBackendIOException($e->getMessage(), $e->getCode(), $e);
+
+        } catch (IndexException $e) {
+            throw new DataBackendIOException($e->getMessage(), $e->getCode(), $e);
+            
         }
     }
 

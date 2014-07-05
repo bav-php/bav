@@ -11,10 +11,7 @@
  * @see BAV
  */
 
-/**
- * We need to require the autoloader
- */
-require_once __DIR__ . "/../autoloader/autoloader.php";
+require_once __DIR__ . "/../vendor/autoload.php";
 
 use malkusch\bav\BAV;
 

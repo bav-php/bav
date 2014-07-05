@@ -6,6 +6,11 @@ Version 1.1.0 - not yet released
 
     - Validator::isValid() raises an E_USER_WARNING if the parameter $account
       is no string.
+    
+    - Replaced binary search in FileDataBackend with malkusch/php-index
+
+    - fixed a bug in FileParser which did hide the last line in the file
+      of the Bundesbank.
 
     -[TODO] add IBAN rule support
 

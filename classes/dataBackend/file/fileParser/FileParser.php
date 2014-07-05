@@ -135,7 +135,7 @@ class FileParser
         }
 
 
-        $dummyLine = fgets($this->fp, 1024);
+        $dummyLine = fgets($this->fp);
         if (! $dummyLine) {
             throw new FileParserIOException();
 
@@ -150,7 +150,9 @@ class FileParser
             );
 
         }
-        $this->lines = floor(($filesize - 1) / $this->lineLength);
+        
+        // size + 1, because the last line has no line break
+        $this->lines = floor(($filesize + 1) / $this->lineLength);
     }
 
     /**
