@@ -7,7 +7,7 @@ require_once __DIR__ . "/../bootstrap.php";
 /**
  * Tests the facade BAV.
  *
- * @license GPL
+ * @license WTFPL
  * @author Markus Malkusch <markus@malkusch.de>
  * @see BAV
  */

@@ -5,7 +5,7 @@ namespace malkusch\bav;
 /**
  * PDO factory
  * 
- * @license GPL
+ * @license WTFPL
  * @author Markus Malkusch <markus@malkusch.de>
  * @see makePDO()
  */

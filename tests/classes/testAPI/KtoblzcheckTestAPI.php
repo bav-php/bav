@@ -6,7 +6,7 @@ namespace malkusch\bav;
  * The API for ktoblzcheck
  *
  * @author Markus Malkusch <markus@malkusch.de>
- * @license GPL
+ * @license WTFPL
  * @link http://sourceforge.net/projects/ktoblzcheck/
  */
 class KtoblzcheckTestAPI extends TestAPI

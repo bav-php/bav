@@ -7,7 +7,7 @@ require_once __DIR__ . "/../bootstrap.php";
 /**
  * Tests FileParser
  *
- * @license GPL
+ * @license WTFPL
  * @author Markus Malkusch <markus@malkusch.de>
  * @link bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations
  * @see FileParser

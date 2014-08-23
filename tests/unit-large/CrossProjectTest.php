@@ -15,7 +15,7 @@ require_once __DIR__ . "/../bootstrap.php";
  * $ NODE_NUMBER=1 NODE_COUNT=2 phpunit CrossProjectTest.php
  *
  * @author Markus Malkusch <markus@malkusch.de>
- * @license GPL
+ * @license WTFPL
  * @large
  */
 class CrossProjectTest extends \PHPUnit_Framework_TestCase

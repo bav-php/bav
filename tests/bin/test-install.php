@@ -4,7 +4,7 @@
  * Installs the test environment
  *
  * @author Markus Malkusch <markus@malkusch.de>
- * @license GPL
+ * @license WTFPL
  */
 
 namespace malkusch\bav;

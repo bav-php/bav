@@ -4,7 +4,7 @@
  * Removes the Bundesbank file.
  *
  * @author Markus Malkusch <markus@malkusch.de>
- * @license GPL
+ * @license WTFPL
  * @see DataBackend
  */
 

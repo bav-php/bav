@@ -5,7 +5,7 @@ namespace malkusch\bav;
 /**
  * The API for Michael Plugge's kontocheck.
  *
- * @license GPL
+ * @license WTFPL
  * @author Markus Malkusch <markus@malkusch.de>
  * @link http://sourceforge.net/projects/kontocheck/
  */

@@ -8,7 +8,7 @@ require_once __DIR__ . "/../bootstrap.php";
  * Tests ValidatorFactory.
  *
  * @author Markus Malkusch <markus@malkusch.de>
- * @license GPL
+ * @license WTFPL
  * @see ValidatorFactory
  */
 class ValidatorFactoryTest extends \PHPUnit_Framework_TestCase

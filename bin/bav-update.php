@@ -4,7 +4,7 @@
  * BAV updater for the Bundesbank bank data file.
  *
  * @author Markus Malkusch <markus@malkusch.de>
- * @license GPL
+ * @license WTFPL
  * @see DataBackend
  */
 

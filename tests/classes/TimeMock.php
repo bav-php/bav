@@ -18,7 +18,7 @@ function time()
 /**
  * Mock for PHP's time() built-in.
  *
- * @license GPL
+ * @license WTFPL
  * @author Markus Malkusch <markus@malkusch.de>
  */
 class TimeMock

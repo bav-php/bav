@@ -199,7 +199,7 @@ as data backend.
 
 # License and authors
 
-This project is free and under GPL (see gpl.txt). So do what ever you want.
+This project is free and under the WTFPL. So do what ever you want.
 But it would be nice to leave a note about the authors.
 
 The author of the original project which gave the idea to this project is

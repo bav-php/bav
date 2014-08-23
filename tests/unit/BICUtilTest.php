@@ -7,7 +7,7 @@ require_once __DIR__ . "/../bootstrap.php";
 /**
  * Tests BICUtil.
  *
- * @license GPL
+ * @license WTFPL
  * @see BICUtil
  * @author Markus Malkusch <markus@malkusch.de>
  */

@@ -8,7 +8,7 @@ require_once __DIR__ . "/../bootstrap.php";
  * Tests the Backends.
  * This test needs some memory (about 550M)!
  *
- * @license GPL
+ * @license WTFPL
  * @author Markus Malkusch <markus@malkusch.de>
  */
 class BackendTest extends \PHPUnit_Framework_TestCase

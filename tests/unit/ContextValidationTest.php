@@ -7,7 +7,7 @@ require_once __DIR__ . "/../bootstrap.php";
 /**
  * Tests ContextValidation
  *
- * @license GPL
+ * @license WTFPL
  * @see ContextValidation
  * @author Markus Malkusch <markus@malkusch.de>
  */

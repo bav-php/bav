@@ -6,7 +6,7 @@ namespace malkusch\bav;
  * Error when API is not available.
  *
  * @author Markus Malkusch <markus@malkusch.de>
- * @license GPL
+ * @license WTFPL
  */
 class TestAPIUnavailableException extends TestAPIException
 {

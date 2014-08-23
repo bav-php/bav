@@ -4,7 +4,7 @@
     "description": "BAV provides validation for German Bank Accounts (Konto)",
     "keywords": ["bank", "account", "bankaccount", "validation", "check", "konto"],
     "homepage": "http://bav.malkusch.de/",
-    "license": "GPL-2.0",
+    "license": "WTFPL-2.0",
     "authors": [
         {
             "name": "Markus Malkusch",
