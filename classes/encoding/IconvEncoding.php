@@ -29,6 +29,7 @@ namespace malkusch\bav;
  * @author Markus Malkusch <markus@malkusch.de>
  * @link bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations
  * @copyright Copyright (C) 2006 Markus Malkusch
+ * @deprecated 1.0.1 PHP 5.6.0 deprecated the iconv_* methods
  */
 class IconvEncoding extends Encoding
 {

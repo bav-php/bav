@@ -3,31 +3,11 @@
 namespace malkusch\bav;
 
 /**
- * This class provides methods for any encoded strings
+ * This class provides methods for any encoded strings.
  *
- *
- * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- *
- *
- * @package classes
- * @subpackage dataBackend
  * @author Markus Malkusch <markus@malkusch.de>
  * @link bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations
- * @copyright Copyright (C) 2006 Markus Malkusch
+ * @license WTFPL
  */
 abstract class Encoding
 {
@@ -87,10 +67,7 @@ abstract class Encoding
      */
     public static function getInstance($encoding)
     {
-        if (IconvEncoding::isSupported($encoding)) {
-            return new IconvEncoding($encoding);
-
-        } elseif (MBEncoding::isSupported($encoding)) {
+        if (MBEncoding::isSupported($encoding)) {
             return new MBEncoding($encoding);
 
         } elseif (ISO8859Encoding::isSupported($encoding)) {

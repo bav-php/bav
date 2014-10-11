@@ -183,9 +183,8 @@ You may have:
 
 * **CURL**: If you provide `bav/data/banklist.txt` you don't need CURL.
 
-* **mbstring or iconv**: BAV works with unicode encoding. Your PHP must have support compiled
-in to either the `mb_*` or the `iconv_*` functions. If these functions are
-missing BAV works only with the ISO-8859-15 encoding.
+* **mbstring**: BAV works with unicode encoding. Your PHP must have support compiled
+in the `mb_*` functions. If these functions are missing BAV works only with the ISO-8859-15 encoding.
 
 * **PDO**: If you intend to use a DBS you need to use
 [`PDODataBackendContainer`](http://bav-php.github.io/bav/class-malkusch.bav.PDODataBackendContainer.html). 
