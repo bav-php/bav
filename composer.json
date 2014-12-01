@@ -32,7 +32,7 @@
         "doctrine/orm": "v2.4.3"
     },
     "archive": {
-        "exclude": ["/tests/"]
+        "exclude": ["/tests"]
     },
     "bin": [
         "bin/bav-update.php",
