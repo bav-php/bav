@@ -4,13 +4,13 @@ namespace malkusch\bav;
 
 /**
  * Facade for BAV's API.
- * 
+ *
  * This class provides methods for validation of German bank accounts.
- * 
+ *
  * If you don't inject a {@link Configuration} the facade will use the
  * {@link ConfigurationRegistry}. The registry provides per default the
  * {@link DefaultConfiguration}.
- * 
+ *
  * @author Markus Malkusch <markus@malkusch.de>
  * @link bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations
  * @license WTFPL
@@ -37,10 +37,10 @@ class BAV
 
     /**
      * Inject the configuration.
-     * 
+     *
      * If the $configuration is null the configuration from
      * {@link ConfigurationRegistry::getConfiguration()} will be used.
-     * 
+     *
      * @see ConfigurationRegistry
      */
     public function __construct(Configuration $configuration = null)
@@ -69,9 +69,9 @@ class BAV
     /**
      * Updates bav with a new bundesbank file.
      *
-     * You might consider enabling automatic update with setting 
+     * You might consider enabling automatic update with setting
      * AutomaticUpdatePlan as configuration.
-     * 
+     *
      * @see AutomaticUpdatePlan
      * @see Configuration::setUpdatePlan()
      * @throws DataBackendException
@@ -106,7 +106,7 @@ class BAV
 
     /**
      * Returns true if the account is valid for the current context.
-     * 
+     *
      * You have to have called isValidBank() before! If the current context
      * is no valid bank every account will validate to true.
      *
@@ -136,7 +136,7 @@ class BAV
     
     /**
      * Every bank has one main agency.
-     * 
+     *
      * This agency is not included in getAgencies().
      *
      * @throws DataBackendException
@@ -153,7 +153,7 @@ class BAV
 
     /**
      * A bank may have more agencies.
-     * 
+     *
      * The main agency is not included in this list.
      *
      * @param string $bankID Bank id (Bankleitzahl)
@@ -207,9 +207,9 @@ class BAV
     /**
      * Returns the third call back parameter for filter_var() for validating
      * a bank.
-     * 
+     *
      * filter_var($bankID, FILTER_CALLBACK, $bav->getValidBankFilterCallback());
-     * 
+     *
      * @return array
      * @see isValidBank()
      * @see filter_var()
@@ -222,9 +222,9 @@ class BAV
     /**
      * Returns the third call back parameter for filter_var() for validating
      * a bank account.
-     * 
+     *
      * filter_var($account, FILTER_CALLBACK, $bav->getValidBankFilterCallback());
-     * 
+     *
      * @return array
      * @see isValidAccount()
      * @see filter_var()

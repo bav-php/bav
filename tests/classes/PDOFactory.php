@@ -4,7 +4,7 @@ namespace malkusch\bav;
 
 /**
  * PDO factory
- * 
+ *
  * @license WTFPL
  * @author Markus Malkusch <markus@malkusch.de>
  * @see makePDO()
@@ -29,8 +29,8 @@ class PDOFactory
 
     /**
      * Builds a PDO.
-     * 
-     * If the environment doesn't provide the dsn, user and password 
+     *
+     * If the environment doesn't provide the dsn, user and password
      * it uses the default mysql test database.
      *
      * @return \PDO

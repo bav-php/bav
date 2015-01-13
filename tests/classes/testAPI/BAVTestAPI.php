@@ -38,7 +38,7 @@ class BAVTestAPI extends TestAPI
 
     /**
      * Returns true if the API is available.
-     * 
+     *
      * @return bool
      */
     protected function isAvailable()

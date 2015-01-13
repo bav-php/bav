@@ -4,12 +4,12 @@ namespace malkusch\bav;
 
 /**
  * Context validation
- * 
+ *
  * You have to validate first a bank to set a context. Then you can validate
  * an account.
- * 
+ *
  * This class provides callbacks for filter validation.
- * 
+ *
  * @author Markus Malkusch <markus@malkusch.de>
  * @link bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations
  * @license WTFPL
@@ -42,7 +42,7 @@ class ContextValidation
     
     /**
      * Returns true if a bank exists.
-     * 
+     *
      * This method sets the bank context and should be called first.
      *
      * @throws DataBackendException
@@ -66,7 +66,7 @@ class ContextValidation
     
     /**
      * Returns true if the account is valid for the current context.
-     * 
+     *
      * You have to have called isValidBank() before! If the current context
      * is no valid bank every account will validate to true.
      *
@@ -95,9 +95,9 @@ class ContextValidation
     /**
      * Returns the third call back parameter for filter_var() for validating
      * a bank.
-     * 
+     *
      * filter_var($bankID, FILTER_CALLBACK, $validation->getValidBankFilterCallback());
-     * 
+     *
      * @return array
      * @see isValidBank()
      * @see filter_var()
@@ -113,9 +113,9 @@ class ContextValidation
     /**
      * Returns the third call back parameter for filter_var() for validating
      * a bank account.
-     * 
+     *
      * filter_var($account, FILTER_CALLBACK, $validation->getValidBankFilterCallback());
-     * 
+     *
      * @return array
      * @see isValidAccount()
      * @see filter_var()

@@ -4,28 +4,28 @@ namespace malkusch\bav;
 
 /**
  * Registry for the configuration
- * 
- * BAV uses this static container for its runtime configuration. Per default the 
+ *
+ * BAV uses this static container for its runtime configuration. Per default the
  * registry is initialized with the {@link DefaultConfiguration}. You can
  * set your own configuration with {@link setConfiguration()} or preferably
  * by providing the file bav/configuration.php. This file should return a
  * {@link Configuration} object:
- * 
+ *
  * <code>
  * <?php
- * 
+ *
  * namespace malkusch\bav;
- * 
+ *
  * $configuration = new DefaultConfiguration();
- * 
+ *
  * $pdo = new \PDO("mysql:host=localhost;dbname=test");
  * $configuration->setDataBackendContainer(new PDODataBackendContainer($pdo));
- * 
+ *
  * $configuration->setUpdatePlan(new AutomaticUpdatePlan());
  *
  * return $configuration;
  * </code>
- * 
+ *
  * @author Markus Malkusch <markus@malkusch.de>
  * @link bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations
  * @license WTFPL
@@ -46,10 +46,10 @@ class ConfigurationRegistry
 
     /**
      * locate a configuration or register the default configuration.
-     * 
+     *
      * You may define the file bav/configuration.php. This file should return
      * a Configuration object.
-     * 
+     *
      * @see DefaultConfiguration
      * @throws ConfigurationException
      */
@@ -69,7 +69,7 @@ class ConfigurationRegistry
 
     /**
      * Register a configuration programmatically.
-     * 
+     *
      * Alternatively you can provide the file bav/configuration.php which
      * returns a {@link Configuration} object.
      */

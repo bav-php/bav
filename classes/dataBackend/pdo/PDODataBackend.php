@@ -539,7 +539,6 @@ class PDODataBackend extends SQLDataBackend
     public function isInstalled()
     {
         try {
-            
             switch ($this->pdo->getAttribute(\PDO::ATTR_DRIVER_NAME)) {
                 
                 case "sqlite":

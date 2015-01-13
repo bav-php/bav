@@ -4,7 +4,7 @@ namespace malkusch\bav;
 
 /**
  * Helper for locking
- * 
+ *
  * @author Markus Malkusch <markus@malkusch.de>
  * @link bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations
  * @license WTFPL
@@ -46,7 +46,7 @@ class Lock
      *
      * If more processes call this method only the process which aquired the lock
      * will execute the task. The others will block but won't execute the task.
-     * 
+     *
      * @throws Exception
      */
     public function executeOnce(\Closure $task)
@@ -74,7 +74,7 @@ class Lock
      *
      * If more processes call this method only the process which aquired the lock
      * will execute the task. The others will continue execution.
-     * 
+     *
      * @throws Exception
      */
     public function nonblockingExecuteOnce(\Closure $task)

@@ -25,7 +25,7 @@ class AutomaticUpdatePlan extends UpdatePlan
 
     /**
      * Set to false if you don't want to see an E_USER_NOTICE about an update.
-     * 
+     *
      * @param bool $notice
      */
     public function setNotice($notice)
@@ -35,9 +35,9 @@ class AutomaticUpdatePlan extends UpdatePlan
 
     /**
      * Perform an update.
-     * 
+     *
      * If enabled (default) this method will send a E_USER_NOTICE about the update.
-     * 
+     *
      * @see setNotice()
      */
     public function perform(DataBackend $backend)

@@ -4,7 +4,7 @@ namespace malkusch\bav;
 
 /**
  * Helper for locating a BAV configuration.
- * 
+ *
  * @author Markus Malkusch <markus@malkusch.de>
  * @link bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations
  * @license WTFPL
@@ -20,9 +20,9 @@ class ConfigurationLocator
     
     /**
      * Sets the paths where a location is expected.
-     * 
+     *
      * Those paths may be relative to the include_path.
-     * 
+     *
      * @param string[] $paths
      */
     public function __construct($paths = array())
@@ -32,7 +32,7 @@ class ConfigurationLocator
 
     /**
      * Locates a configuration.
-     * 
+     *
      * @return Configuration|null
      * @throws ConfigurationException
      */

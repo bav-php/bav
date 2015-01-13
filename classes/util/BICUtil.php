@@ -14,7 +14,7 @@ class BICUtil
 
     /**
      * Extends an 8 character BIC to an 11 character BIC.
-     * 
+     *
      * @param string $bic BIC
      * @return string
      */

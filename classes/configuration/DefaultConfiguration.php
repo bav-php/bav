@@ -5,11 +5,11 @@ namespace malkusch\bav;
 /**
  * Default configuration uses {@link FileDataBackendContainer}
  * and any available UTF-8 encoder.
- * 
+ *
  * Automatic installation is enabled.
- * 
+ *
  * The update plan is set to {@link LogUpdatePlan}
- * 
+ *
  * If no UTF-8 encoding is supported ISO-8859-15 will be used.
  *
  * @author Markus Malkusch <markus@malkusch.de>

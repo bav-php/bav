@@ -7,9 +7,9 @@ use Doctrine\ORM\Tools\Setup;
 
 /**
  * Container for DoctrineDataBackend objects.
- * 
+ *
  * You will need Doctrine as composer dependency.
- * 
+ *
  * @author Markus Malkusch <markus@malkusch.de>
  * @link bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations
  * @license WTFPL
@@ -21,13 +21,13 @@ class DoctrineBackendContainer extends DataBackendContainer
 {
     
     /**
-     * @var EntityManager 
+     * @var EntityManager
      */
     private $em;
     
     /**
      * Return the paths to the XML-Mappings
-     * 
+     *
      * @return string[]
      */
     public static function getXMLMappings()
@@ -37,7 +37,7 @@ class DoctrineBackendContainer extends DataBackendContainer
     
     /**
      * Builds a container for a connection.
-     * 
+     *
      * @param mixed $connection Doctrine::DBAL connection
      * @return DoctrineBackendContainer
      */
@@ -51,7 +51,7 @@ class DoctrineBackendContainer extends DataBackendContainer
     }
     
     /**
-     * Injects the EntityManager 
+     * Injects the EntityManager
      */
     public function __construct(EntityManager $entityManager)
     {
@@ -60,7 +60,7 @@ class DoctrineBackendContainer extends DataBackendContainer
     
     /**
      * Gets the EntityManager
-     * 
+     *
      * @return EntityManager
      */
     public function getEntityManager()

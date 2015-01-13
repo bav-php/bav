@@ -4,7 +4,7 @@ namespace malkusch\bav;
 
 /**
  * Container for DataBackend objects.
- * 
+ *
  * @author Markus Malkusch <markus@malkusch.de>
  * @link bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations
  * @license WTFPL
@@ -37,7 +37,7 @@ abstract class DataBackendContainer
      *
      * If configured this method would automatically install the backend. I.e. a first
      * call will take some amount of time.
-     * 
+     *
      * @return DataBackend
      * @throws DataBackendException
      */
@@ -77,7 +77,7 @@ abstract class DataBackendContainer
     /**
      * Returns a configured data backend.
      *
-     * If configured this method would automatically install and update the backend. I.e. 
+     * If configured this method would automatically install and update the backend. I.e.
      * some calls might take longer.
      *
      * @see Configuration::setAutomaticInstallation()

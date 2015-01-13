@@ -136,7 +136,6 @@ class Validator87a extends Validator
             return true;
         } else {
             if ($konto[4] == 0) {
-
                 if ($p > 4) {
                     $p = $p - 5;
                 } else {

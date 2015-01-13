@@ -48,7 +48,7 @@ class KontocheckTestAPI extends TestAPI
 
     /**
      * Return true for known false positives.
-     * 
+     *
      * @return true
      */
     public function ignoreTestCase(Bank $bank, $account)
@@ -70,7 +70,7 @@ class KontocheckTestAPI extends TestAPI
 
     /**
      * Returns true if the API is available.
-     * 
+     *
      * @return bool
      */
     protected function isAvailable()

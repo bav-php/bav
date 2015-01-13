@@ -67,7 +67,7 @@ abstract class Validator
 
     /**
      * Raises a E_USER_WARNING for non string accounts.
-     * 
+     *
      * @param string $account bank account
      */
     protected function checkType($account)
@@ -85,14 +85,14 @@ abstract class Validator
     
     /**
      * Validates a bank account.
-     * 
+     *
      * Null is considered invalid.
-     * 
+     *
      * Note: The parameter $account should be a string. If it's not a string
      * an E_USER_WARNING will be raised. Bank accounts may start with leading
      * zeros, wich lead to unexpected results if not treated as a string (
      * e.g. (int) 0020012357 evaluates to (string) '4199663').
-     * 
+     *
      * @param string $account bank account
      * @return bool
      */

@@ -4,7 +4,7 @@ namespace malkusch\bav;
 
 /**
  * The bank agency.
- * 
+ *
  * Every bank has one main agency and may have some more agencies
  * in different cities.
  *

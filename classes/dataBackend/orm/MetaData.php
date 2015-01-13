@@ -4,7 +4,7 @@ namespace malkusch\bav;
 
 /**
  * Entity for storing metadata for an ORM backend.
- * 
+ *
  * @internal
  * @author Markus Malkusch <markus@malkusch.de>
  * @link bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations
@@ -27,7 +27,7 @@ class MetaData
     
     /**
      * Sets the name
-     * 
+     *
      * @param string $name
      */
     public function setName($name)
@@ -37,7 +37,7 @@ class MetaData
     
     /**
      * Gets the name
-     * 
+     *
      * @return string
      */
     public function getName()
@@ -47,7 +47,7 @@ class MetaData
     
     /**
      * Sets the value
-     * 
+     *
      * @param string $value
      */
     public function setValue($value)
@@ -57,7 +57,7 @@ class MetaData
     
     /**
      * Gets the value
-     * 
+     *
      * @return string
      */
     public function getValue()

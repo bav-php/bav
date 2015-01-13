@@ -32,7 +32,7 @@ class StatementContainer
     
     /**
      * Returns a PDOStatement
-     * 
+     *
      * This method will return the same object for equal queries.
      *
      * @param string $sql

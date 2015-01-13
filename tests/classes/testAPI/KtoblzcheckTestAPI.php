@@ -46,9 +46,9 @@ class KtoblzcheckTestAPI extends TestAPI
 
     /**
      * Return true for known false positives.
-     * 
+     *
      * Version 1.45 has many false positives.
-     * 
+     *
      * @return true
      */
     public function ignoreTestCase(Bank $bank, $account)
@@ -79,7 +79,7 @@ class KtoblzcheckTestAPI extends TestAPI
     
     /**
      * Returns true if the API is available.
-     * 
+     *
      * @return bool
      */
     protected function isAvailable()

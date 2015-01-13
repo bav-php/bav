@@ -11,7 +11,7 @@ use Doctrine\DBAL\DBALException;
  * Use Doctrine ORM as backend.
  *
  * You will need Doctrine as composer dependency.
- * 
+ *
  * @author Markus Malkusch <markus@malkusch.de>
  * @link bitcoin:1335STSwu9hST4vcMRppEPgENMHD2r1REK Donations
  * @license WTFPL
@@ -21,7 +21,7 @@ class DoctrineDataBackend extends SQLDataBackend
 {
 
     /**
-     * @var EntityManager 
+     * @var EntityManager
      */
     private $em;
 
