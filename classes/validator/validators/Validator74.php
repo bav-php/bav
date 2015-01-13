@@ -43,7 +43,7 @@ class Validator74 extends Validator00
 
         } elseif (strlen(ltrim($this->account, '0')) == 6) {
             $nextHalfDecade = round($this->accumulator/10) * 10 + 5;
-            $check          = $nextHalfDecade - $this->accumulator;
+            $check          = ($nextHalfDecade - $this->accumulator) % 10;
             return (string) $check === $this->getChecknumber();
 
         } else {

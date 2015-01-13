@@ -12,6 +12,8 @@ Version 1.1.0 - not yet released
     - fixed a bug in FileParser which did hide the last line in the file
       of the Bundesbank.
 
+    - [PR18] Fixed Validator 74.
+
     -[TODO] add IBAN rule support
 
     -[TODO] evaluate IBAN validation support
