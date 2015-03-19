@@ -33,8 +33,8 @@ class Validator08 extends Validator00
 
     protected function getResult()
     {
-        return ((int)$this->account<= 60000)
-             ? false
+        return ((int)$this->account < 60000)
+             ? true
              : parent::getResult();
     }
 }
