@@ -32,11 +32,11 @@ for broken or new validation rules.
 # Configuration
 
 You can use BAV out of the box. BAV comes with a ready to play default
-configuration ([`DefaultConfiguration`](http://bav-php.github.io/bav/class-malkusch.bav.DefaultConfiguration.html)):
+configuration ([`DefaultConfiguration`](http://bav-php.github.io/bav/api/class-malkusch.bav.DefaultConfiguration.html)):
 
 * `UTF-8` encoding (if supported)
 
-* [`FileDataBackendContainer`](http://bav-php.github.io/bav/class-malkusch.bav.FileDataBackendContainer.html).
+* [`FileDataBackendContainer`](http://bav-php.github.io/bav/api/class-malkusch.bav.FileDataBackendContainer.html).
 I.e. it uses binary search on the file from the Bundesbank.
 Note that this data backend uses the directory `bav/data` for install and update
 operations. You have to make sure that this directory is writable.
@@ -48,9 +48,9 @@ script. The container will download the Bundesbank file upon the first execution
 is outdated.
 
 You can define your own configuration by calling
-[`ConfigurationRegistry::setConfiguration()`](http://bav-php.github.io/bav/class-malkusch.bav.ConfigurationRegistry.html#_setConfiguration)
+[`ConfigurationRegistry::setConfiguration()`](http://bav-php.github.io/bav/api/class-malkusch.bav.ConfigurationRegistry.html#_setConfiguration)
 or preferably creating the file `bav/configuration.php` which returns a
-[`Configuration`](http://bav-php.github.io/bav/class-malkusch.bav.Configuration.html) object:
+[`Configuration`](http://bav-php.github.io/bav/api/class-malkusch.bav.Configuration.html) object:
 
 ```php
 namespace malkusch\bav;
@@ -87,7 +87,7 @@ $bav->update();
 ## Automatic
 
 Enable automatic updates with
-[`AutomaticUpdatePlan`](http://bav-php.github.io/bav/class-malkusch.bav.AutomaticUpdatePlan.html)
+[`AutomaticUpdatePlan`](http://bav-php.github.io/bav/api/class-malkusch.bav.AutomaticUpdatePlan.html)
 in your `bav/configuration.php`:
 
 ```php
@@ -105,45 +105,45 @@ hook. I.e. it won't bother users during normal operations.
 # Usage
 
 You can use BAV with the api facade
-[`BAV`](http://bav-php.github.io/bav/class-malkusch.bav.BAV.html):
+[`BAV`](http://bav-php.github.io/bav/api/class-malkusch.bav.BAV.html):
 
-* [`BAV::isValidBank($bankID)`](http://bav-php.github.io/bav/class-malkusch.bav.BAV.html#_isValidBank):
+* [`BAV::isValidBank($bankID)`](http://bav-php.github.io/bav/api/class-malkusch.bav.BAV.html#_isValidBank):
 Returns true for existing bank ids.
 
-* [`BAV::isValidBankAccount($bankID, $account)`](http://bav-php.github.io/bav/class-malkusch.bav.BAV.html#_isValidBankAccount):
+* [`BAV::isValidBankAccount($bankID, $account)`](http://bav-php.github.io/bav/api/class-malkusch.bav.BAV.html#_isValidBankAccount):
 Returns true for existing accounts of an existing bank.
 
-* [`BAV::isValidAccount($account)`](http://bav-php.github.io/bav/class-malkusch.bav.BAV.html#_isValidAccount):
+* [`BAV::isValidAccount($account)`](http://bav-php.github.io/bav/api/class-malkusch.bav.BAV.html#_isValidAccount):
 This method validates an account against the bank of the last `isValidBank()` call.
 
-* [`BAV::getValidBankFilterCallback()`](http://bav-php.github.io/bav/class-malkusch.bav.BAV.html#_getValidBankFilterCallback):
+* [`BAV::getValidBankFilterCallback()`](http://bav-php.github.io/bav/api/class-malkusch.bav.BAV.html#_getValidBankFilterCallback):
 Returns a callback for filter bank validation.
 
-* [`BAV::getValidAccountFilterCallback()`](http://bav-php.github.io/bav/class-malkusch.bav.BAV.html#_getValidAccountFilterCallback):
+* [`BAV::getValidAccountFilterCallback()`](http://bav-php.github.io/bav/api/class-malkusch.bav.BAV.html#_getValidAccountFilterCallback):
 Returns a callback for filter account validation. The account filter needs
 to be called after the bank filter.
 
-* [`BAV::getMainAgency()`](http://bav-php.github.io/bav/class-malkusch.bav.BAV.html#_getMainAgency):
+* [`BAV::getMainAgency()`](http://bav-php.github.io/bav/api/class-malkusch.bav.BAV.html#_getMainAgency):
 Returns the main agency of a bank.
 
-* [`BAV::getAgencies()`](http://bav-php.github.io/bav/class-malkusch.bav.BAV.html#_getAgencies):
+* [`BAV::getAgencies()`](http://bav-php.github.io/bav/api/class-malkusch.bav.BAV.html#_getAgencies):
 Returns further agencies. The main agency is not included in this list.
 This list can be empty.
 
-An [`Agency`](http://bav-php.github.io/bav/class-malkusch.bav.Agency.html)
+An [`Agency`](http://bav-php.github.io/bav/api/class-malkusch.bav.Agency.html)
 object has the fields:
 
-* [`Agency::getBIC()`](http://bav-php.github.io/bav/class-malkusch.bav.Agency.html#_getBIC)
+* [`Agency::getBIC()`](http://bav-php.github.io/bav/api/class-malkusch.bav.Agency.html#_getBIC)
 
-* [`Agency::getPostcode()`](http://bav-php.github.io/bav/class-malkusch.bav.Agency.html#_getPostcode)
+* [`Agency::getPostcode()`](http://bav-php.github.io/bav/api/class-malkusch.bav.Agency.html#_getPostcode)
 
-* [`Agency::getCity()`](http://bav-php.github.io/bav/class-malkusch.bav.Agency.html#_getCity)
+* [`Agency::getCity()`](http://bav-php.github.io/bav/api/class-malkusch.bav.Agency.html#_getCity)
 
-* [`Agency::getName()`](http://bav-php.github.io/bav/class-malkusch.bav.Agency.html#_getName)
+* [`Agency::getName()`](http://bav-php.github.io/bav/api/class-malkusch.bav.Agency.html#_getName)
 
-* [`Agency::getShortTerm()`](http://bav-php.github.io/bav/class-malkusch.bav.Agency.html#_getShortTerm)
+* [`Agency::getShortTerm()`](http://bav-php.github.io/bav/api/class-malkusch.bav.Agency.html#_getShortTerm)
 
-* [`Agency::getPAN()`](http://bav-php.github.io/bav/class-malkusch.bav.Agency.html#_getPAN)
+* [`Agency::getPAN()`](http://bav-php.github.io/bav/api/class-malkusch.bav.Agency.html#_getPAN)
 
 ## Example
 
@@ -187,11 +187,11 @@ You may have:
 in the `mb_*` functions. If these functions are missing BAV works only with the ISO-8859-15 encoding.
 
 * **PDO**: If you intend to use a DBS you need to use
-[`PDODataBackendContainer`](http://bav-php.github.io/bav/class-malkusch.bav.PDODataBackendContainer.html). 
+[`PDODataBackendContainer`](http://bav-php.github.io/bav/api/class-malkusch.bav.PDODataBackendContainer.html). 
 `PDODataBackendContainer` needs a `PDO` support compiled in PHP.
 
 * **doctrine/orm**: You can use
-[`DoctrineBackendContainer`](http://bav-php.github.io/bav/class-malkusch.bav.DoctrineBackendContainer.html)
+[`DoctrineBackendContainer`](http://bav-php.github.io/bav/api/class-malkusch.bav.DoctrineBackendContainer.html)
 which uses doctrine
 as data backend.
 
