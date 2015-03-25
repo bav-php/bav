@@ -6,14 +6,16 @@ php:
     - 5.4
     - 5.3
 
+cache:
+    directories:
+        - $HOME/.composer/cache
+
 env: PDO_DSN="mysql:host=localhost;dbname=bav" PDO_USER=travis
 
 install:
-    - pyrus install pear/PHP_CodeSniffer
-    - phpenv rehash
+    - composer require squizlabs/php_codesniffer
 
 before_script:
-    - composer --prefer-source --dev install
     - mysql -e 'SET @@GLOBAL.wait_timeout=1200'
     - mysql -e 'create database bav;'
     - php tests/bin/test-install.php
@@ -21,5 +23,5 @@ before_script:
 script:
     - phpunit tests/unit/
     - phpunit --exclude-group large tests/unit-large/
-    - phpcs --standard=PSR2 classes/ bin/ docs/example.php tests/classes/ tests/bin/ tests/bootstrap.php
+    - vendor/bin/phpcs --standard=PSR2 classes/ bin/ docs/example.php tests/classes/ tests/bin/ tests/bootstrap.php
 
