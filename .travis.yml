@@ -22,7 +22,7 @@ before_script:
     - php tests/bin/test-install.php
 
 script:
-    - phpunit tests/unit/
-    - phpunit --exclude-group large tests/unit-large/
+    - vendor/bin/phpunit tests/unit/
+    - vendor/bin/phpunit --exclude-group large tests/unit-large/
     - vendor/bin/phpcs --standard=PSR2 classes/ bin/ docs/example.php tests/classes/ tests/bin/ tests/bootstrap.php
 
