@@ -10,24 +10,10 @@ Use [Composer](https://getcomposer.org/):
 ```json
 {
     "require": {
-        "malkusch/bav": "~1.0"
+        "malkusch/bav": "^1"
     }
 }
 ```
-
-## Version-0
-
-The old version-0 branch (bav-0) is still maintained and will receive updates
-for broken or new validation rules.
-
-```json
-{
-    "require": {
-        "malkusch/bav": "~0.29"
-    }
-}
-```
-
 
 # Configuration
 
