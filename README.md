@@ -43,7 +43,7 @@ namespace malkusch\bav;
 
 $configuration = new DefaultConfiguration();
 
-$pdo = new \PDO("mysql:host=localhost;dbname=test");
+$pdo = new \PDO("mysql:host=localhost;dbname=test;charset=UTF8");
 $configuration->setDataBackendContainer(new PDODataBackendContainer($pdo));
 
 $configuration->setUpdatePlan(new AutomaticUpdatePlan());
