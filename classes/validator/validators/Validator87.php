@@ -46,6 +46,10 @@ class Validator87 extends ValidatorChain
 
         $this->defaultValidators[] = new Validator87c($bank);
 
+        // Method D
+        $this->defaultValidators[3] = new Validator06($bank);
+        $this->defaultValidators[3]->setEnd(3);
+
         $this->exceptionValidators = Validator51::getExceptionValidators($bank);
     }
 
