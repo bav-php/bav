@@ -232,7 +232,6 @@ class PDODataBackend extends SQLDataBackend
         try {
             $createOptions = '';
             switch ($this->pdo->getAttribute(\PDO::ATTR_DRIVER_NAME)) {
-
                 case 'mysql':
                     $createOptions .= " engine=InnoDB";
                     break;
@@ -540,7 +539,6 @@ class PDODataBackend extends SQLDataBackend
     {
         try {
             switch ($this->pdo->getAttribute(\PDO::ATTR_DRIVER_NAME)) {
-                
                 case "sqlite":
                     $query =
                         "SELECT count(*) FROM sqlite_master

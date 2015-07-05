@@ -91,7 +91,6 @@ class KontocheckTestAPI extends TestAPI
         $isValid = kto_check_blz($bank->getBankID(), $account);
 
         switch ($isValid) {
-
             case self::NOT_INITIALIZED:
                 throw new NotInitializedTestAPIException("LUT not initialized");
 

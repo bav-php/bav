@@ -102,7 +102,6 @@ class KtoblzcheckTestAPI extends TestAPI
         exec($cmd, $out, $result);
 
         switch ($result) {
-
             case self::VALID:
                 return true;
 
