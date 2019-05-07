@@ -60,6 +60,7 @@ class Validator68 extends ValidatorChain
     protected function getResult()
     {
         switch (strlen($this->account)) {
+
             case 10:
                 return $this->account{3} == 9 && $this->validator10->isValid($this->account);
 

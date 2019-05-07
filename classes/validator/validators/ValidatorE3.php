@@ -1,11 +1,9 @@
 <?php
-
 namespace malkusch\bav;
-
 /**
- * Implements B1
+ * Implements E3
  *
- * Copyright (C) 2006  Markus Malkusch <markus@malkusch.de>
+ * Copyright (C) 2017  Dennis Ditte <dennis@double-d.it>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,15 +19,13 @@ namespace malkusch\bav;
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-class ValidatorB1 extends ValidatorChain
+class ValidatorE3 extends ValidatorChain
 {
-
     public function __construct(Bank $bank)
     {
         parent::__construct($bank);
-
-        $this->validators[] = new Validator05($bank);
-        $this->validators[] = new Validator01($bank);
         $this->validators[] = new Validator00($bank);
+        $this->validators[] = new Validator21($bank);
     }
+
 }

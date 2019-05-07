@@ -63,17 +63,13 @@ class Validator87a extends Validator
 
         while ($i < 10) {
             switch ($konto[$i]) {
-                case 0:
-                    $konto[$i] = 5;
+                case 0: $konto[$i] = 5;
                     break;
-                case 1:
-                    $konto[$i] = 6;
+                case 1: $konto[$i] = 6;
                     break;
-                case 5:
-                    $konto[$i] = 10;
+                case 5: $konto[$i] = 10;
                     break;
-                case 6:
-                    $konto[$i] = 1;
+                case 6: $konto[$i] = 1;
                     break;
             }
 

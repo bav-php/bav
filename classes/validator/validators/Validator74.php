@@ -38,17 +38,29 @@ class Validator74 extends Validator00
 
     protected function getResult()
     {
+        return $this->variantOne() || $this->variantTwo();
+    }
+
+    private function variantOne()
+    {
         if (parent::getResult()) {
             return true;
-
         } elseif (strlen(ltrim($this->account, '0')) == 6) {
-            $nextHalfDecade = round($this->accumulator/10) * 10 + 5;
-            $check          = ($nextHalfDecade - $this->accumulator) % 10;
-            return (string) $check === $this->getChecknumber();
+            $nextHalfDecade = round($this->accumulator / 10) * 10 + 5;
+            $check = ($nextHalfDecade - $this->accumulator) % 10;
 
-        } else {
-            return false;
-
+            return (string)$check === $this->getChecknumber();
         }
+
+        return false;
+    }
+
+    private function variantTwo()
+    {
+        $validator = new Validator04($this->bank);
+        $validator->setWeights([2, 3, 4, 5, 6, 7, 2, 3, 4]);
+        $validator->setDivisor(11);
+
+        return $validator->isValid($this->account);
     }
 }

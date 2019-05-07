@@ -1,5 +1,5 @@
 {
-    "name": "malkusch/bav",
+    "name": "asdfklgash/bav",
     "type": "library",
     "description": "BAV provides validation for German Bank Accounts (Konto)",
     "keywords": ["bank", "account", "bankaccount", "validation", "check", "konto"],
@@ -10,6 +10,12 @@
             "name": "Markus Malkusch",
             "email": "markus@malkusch.de",
             "homepage": "http://markus.malkusch.de",
+            "role": "Developer"
+        },
+        {
+            "name": "Markus Zierhut",
+            "email": "markus@zierhut.net",
+            "homepage": "https://markus.zierhut.name",
             "role": "Developer"
         }
     ],

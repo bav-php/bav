@@ -70,6 +70,7 @@ class ValidatorC5 extends Validator
         $length  = strlen($account);
 
         switch ($length) {
+
             case 6:
             case 9:
                 if ($account{0} < 9) {
