@@ -1,9 +1,9 @@
 {
-    "name": "asdfklgash/bav",
+    "name": "rotdrop/bav",
     "type": "library",
     "description": "BAV provides validation for German Bank Accounts (Konto)",
     "keywords": ["bank", "account", "bankaccount", "validation", "check", "konto"],
-    "homepage": "http://bav.malkusch.de/",
+    "homepage": "http://github.com/rotdrop/bav/",
     "license": "WTFPL",
     "authors": [
         {
@@ -17,7 +17,13 @@
             "email": "markus@zierhut.net",
             "homepage": "https://markus.zierhut.name",
             "role": "Developer"
-        }
+        },
+        {
+            "name": "Claus-Justus Heine",
+            "email": "himself@claus-justus-heine.de",
+            "homepage": "https://claus-justus-heine.de",
+            "role": "Developer"
+        },
     ],
     "autoload": {
         "files": ["autoloader/autoloader.php"]
