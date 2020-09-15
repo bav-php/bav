@@ -18,7 +18,7 @@ class FileDataBackend extends DataBackend
 {
     
     // @codingStandardsIgnoreStart
-    const DOWNLOAD_URI = "http://www.bundesbank.de/Redaktion/DE/Standardartikel/Aufgaben/Unbarer_Zahlungsverkehr/bankleitzahlen_download.html";
+    const DOWNLOAD_URI = "https://www.bundesbank.de/resource/blob/602632/31fec41357f012d537ce62045395929a/mL/blz-aktuell-txt-data.txt";
     // @codingStandardsIgnoreEnd
 
     /**
@@ -159,34 +159,9 @@ class FileDataBackend extends DataBackend
     public function update()
     {
         $downloader = new Downloader();
-        $content = $downloader->downloadContent(self::DOWNLOAD_URI);
-
-        $uriPicker = new FallbackURIPicker();
-        $path = $uriPicker->pickURI($content);
-
-        if (strlen($path) > 0 && $path{0} != "/") {
-            $path = sprintf("/%s/%s", dirname(self::DOWNLOAD_URI), $path);
-
-        }
-        $pathParts = explode('/', $path);
-        foreach ($pathParts as $i => $part) {
-            switch ($part) {
-                case '..':
-                    unset($pathParts[$i-1]);
-                    // fall-through as the current part ("..") should be removed as well.
-
-                case '.':
-                    unset($pathParts[$i]);
-                    break;
-            }
-
-        }
-        $path = implode('/', $pathParts);
-        $urlParts = parse_url(self::DOWNLOAD_URI);
-        $url = sprintf("%s://%s%s", $urlParts["scheme"], $urlParts["host"], $path);
 
         // download file
-        $file = $downloader->downloadFile($url);
+        $file = $downloader->downloadFile(self::DOWNLOAD_URI);
 
         // Validate file format.
         $validator = new FileValidator();
