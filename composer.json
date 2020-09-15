@@ -5,6 +5,7 @@
     "keywords": ["bank", "account", "bankaccount", "validation", "check", "konto"],
     "homepage": "http://github.com/rotdrop/bav/",
     "license": "WTFPL",
+    "version": "dev-master",
     "authors": [
         {
             "name": "Markus Malkusch",
@@ -23,14 +24,14 @@
             "email": "himself@claus-justus-heine.de",
             "homepage": "https://claus-justus-heine.de",
             "role": "Developer"
-        },
+        }
     ],
     "autoload": {
         "files": ["autoloader/autoloader.php"]
     },
     "require": {
-        "php": ">=5.4",
-        "malkusch/php-index": "~0.1"
+        "php": ">=7.4",
+        "malkusch/php-index": "dev-master"
     },
     "suggest": {
         "ext-PDO": "Allows storing bank information in a database",
@@ -49,5 +50,13 @@
     "bin": [
         "bin/bav-update.php",
         "bin/bav-install.php"
-    ]
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/bav-php/php-index"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
