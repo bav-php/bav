@@ -104,7 +104,7 @@ abstract class ValidatorIteration extends Validator
 
 
         for ($this->i = 0; $this->i < $length; $this->i++) {
-            $this->number = (int)$this->account{$this->position};
+            $this->number = (int)$this->account[$this->position];
             $this->iterationStep();
             $this->position += $stepping;
 

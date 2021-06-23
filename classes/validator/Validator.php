@@ -74,7 +74,7 @@ abstract class Validator
     {
         if (is_string($account)) {
             return;
-            
+
         }
         trigger_error(
             "Only validation of strings are defined."
@@ -82,7 +82,7 @@ abstract class Validator
             E_USER_WARNING
         );
     }
-    
+
     /**
      * Validates a bank account.
      *
@@ -101,7 +101,7 @@ abstract class Validator
         try {
             if ($account == null) {
                 return false;
-                
+
             }
             $this->checkType($account);
             $this->init($account);
@@ -148,7 +148,7 @@ abstract class Validator
      */
     protected function getChecknumber()
     {
-        return $this->account{$this->getNormalizedPosition($this->checknumberPosition)};
+        return $this->account[$this->getNormalizedPosition($this->checknumberPosition)];
     }
 
     /**
@@ -230,7 +230,7 @@ abstract class Validator
 
         }
         $accountPart = ltrim(substr($account, 2), '0');
-        $eser        = $blzPart.$account{0}.$account{1}.$accountPart;
+        $eser        = $blzPart.$account[0].$account[1].$accountPart;
 
         return $eser;
     }
@@ -257,9 +257,9 @@ abstract class Validator
         $blzPart0 = substr($bankID, -4, 2);
         $blzPart1 = substr($bankID, -1);
 
-        $accountPart0 = $account{0};
-        $t            = $account{1};
-        $p            = $account{2};
+        $accountPart0 = $account[0];
+        $t            = $account[1];
+        $p            = $account[2];
         $accountTail  = ltrim(substr($account, 3), '0');
 
         $eser = $blzPart0.$t.$blzPart1.$accountPart0.$p.$accountTail;
@@ -273,7 +273,7 @@ abstract class Validator
 
     protected function getEserChecknumber()
     {
-        return $this->account{$this->getEserChecknumberPosition()};
+        return $this->account[$this->getEserChecknumberPosition()];
     }
 
     protected function isBetween($a, $b)
