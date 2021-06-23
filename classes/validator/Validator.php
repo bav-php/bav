@@ -184,7 +184,7 @@ abstract class Validator
         $str_int = (string) $int;
         for ($i = 0; $i < strlen($str_int); $i++) {
             //$sum = bcadd($str_int{$i}, $sum);
-            $sum += $str_int{$i};
+            $sum += $str_int[$i];
 
         }
         return $sum;
@@ -217,7 +217,7 @@ abstract class Validator
 
         }
         $bankID = $this->bank->getBankID();
-        if ($bankID{3} != 5) {
+        if ($bankID[3] != 5) {
             throw new ValidatorESERException();
 
         }
@@ -249,7 +249,7 @@ abstract class Validator
             throw new ValidatorESERException();
 
         }
-        if ($bankID{3} != 5) {
+        if ($bankID[3] != 5) {
             throw new ValidatorESERException();
 
         }
