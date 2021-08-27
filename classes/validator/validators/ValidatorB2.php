@@ -57,7 +57,7 @@ class ValidatorB2 extends Validator
 
     protected function validate()
     {
-        $this->validator = $this->account{0} <= 7
+        $this->validator = $this->account[0] <= 7
                          ? $this->mode1
                          : $this->mode2;
     }

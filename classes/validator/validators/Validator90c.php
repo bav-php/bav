@@ -43,6 +43,6 @@ class Validator90c extends WeightedIterationValidator
         $result = $result == 7
                 ? 0
                 : $result % 10;
-        return $this->account{9} < 7 && (string)$result === $this->getCheckNumber();
+        return $this->account[9] < 7 && (string)$result === $this->getCheckNumber();
     }
 }

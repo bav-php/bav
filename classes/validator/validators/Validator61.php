@@ -37,7 +37,7 @@ class Validator61 extends WeightedIterationValidator
         parent::init($account);
 
 
-        if ($this->account{8} == 8) {
+        if ($this->account[8] == 8) {
             $this->setWeights(array(2, 1, 2, 1, 2, 1, 2, 0, 1, 2));
             $this->setEnd(-1);
 

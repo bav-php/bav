@@ -49,7 +49,7 @@ class Validator52 extends WeightedIterationValidator implements ValidatorBankDep
     public function isValid($account)
     {
         try {
-            return strlen($account) == 10 && $account{0} == 9
+            return strlen($account) == 10 && $account[0] == 9
                  ? $this->validator20->isValid($account)
                  : parent::isValid($account);
 

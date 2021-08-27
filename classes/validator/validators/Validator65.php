@@ -37,7 +37,7 @@ class Validator65 extends Validator00
     {
         parent::init($account);
 
-        if ($this->account{8} == 9) {
+        if ($this->account[8] == 9) {
             $this->setEnd(-1);
 
         } else {

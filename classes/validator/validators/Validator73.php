@@ -59,7 +59,7 @@ class Validator73 extends ValidatorChain
     {
         parent::init($account);
 
-        if ($this->account{2} == 9) {
+        if ($this->account[2] == 9) {
             $this->validators = $this->exceptionValidators;
 
         } else {

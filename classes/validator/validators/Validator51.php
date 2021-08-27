@@ -93,7 +93,7 @@ class Validator51 extends ValidatorChain
     {
         parent::init($account);
 
-        $this->validators = $this->account{2} == 9
+        $this->validators = $this->account[2] == 9
                           ? $this->exceptionValidators
                           : $this->defaultValidators;
     }
@@ -104,7 +104,7 @@ class Validator51 extends ValidatorChain
             return true;
 
         }
-        switch ($this->account{9}) {
+        switch ($this->account[9]) {
             case 7:
             case 8:
             case 9:

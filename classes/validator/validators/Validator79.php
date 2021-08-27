@@ -63,10 +63,10 @@ class Validator79 extends Validator
 
     protected function validate()
     {
-        if (array_search($this->account{0}, array(1, 2, 9)) !== false) {
+        if (array_search($this->account[0], array(1, 2, 9)) !== false) {
             $this->validator = $this->mode2;
 
-        } elseif ($this->account{0} == 0) {
+        } elseif ($this->account[0] == 0) {
             $this->validator = null;
 
         } else {

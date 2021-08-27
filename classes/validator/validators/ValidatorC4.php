@@ -57,7 +57,7 @@ class ValidatorC4 extends Validator
 
     protected function validate()
     {
-        $this->validator = $this->account{0} != '9'
+        $this->validator = $this->account[0] != '9'
                          ? $this->mode1
                          : $this->mode2;
     }

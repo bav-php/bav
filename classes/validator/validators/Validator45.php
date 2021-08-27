@@ -36,8 +36,8 @@ class Validator45 extends Validator00
      */
     protected function getResult()
     {
-        return $this->account{0} === '0'
-            || $this->account{4} === '1'
+        return $this->account[0] === '0'
+            || $this->account[4] === '1'
             || parent::getResult();
     }
 }

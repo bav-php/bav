@@ -41,7 +41,7 @@ class ValidatorB5 extends ValidatorChain
     protected function continueValidation(Validator $validator)
     {
         if ($validator === $this->validators[1]) {
-            return $this->account{0} < 8;
+            return $this->account[0] < 8;
 
         }
         return true;

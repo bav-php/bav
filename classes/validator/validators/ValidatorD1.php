@@ -93,6 +93,6 @@ class ValidatorD1 extends Validator
      */
     private function getTransformationIndex()
     {
-        return $this->account{0};
+        return $this->account[0];
     }
 }

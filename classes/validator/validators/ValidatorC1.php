@@ -56,7 +56,7 @@ class ValidatorC1 extends Validator
 
     protected function validate()
     {
-        $this->validator = $this->account{0} != '5'
+        $this->validator = $this->account[0] != '5'
                          ? $this->mode1
                          : $this->mode2;
     }

@@ -57,7 +57,7 @@ class Validator76 extends WeightedIterationValidator
     protected function getResult()
     {
         $result = $this->accumulator % 11;
-        return array_search((int)$this->account{0}, array(0, 4, 6, 7, 8, 9)) !== false
+        return array_search((int)$this->account[0], array(0, 4, 6, 7, 8, 9)) !== false
             && $result != 10
             && (string)$result === $this->getCheckNumber();
     }

@@ -33,7 +33,7 @@ class Validator70 extends Validator06
 
     protected function iterationStep()
     {
-        if ($this->position <= 2 && ($this->account{3} == 5 || substr($this->account, 3, 2) == 69)) {
+        if ($this->position <= 2 && ($this->account[3] == 5 || substr($this->account, 3, 2) == 69)) {
             return;
 
         }

@@ -40,7 +40,6 @@ class Validator87a extends Validator
      */
     protected function getResult()
     {
-        $accountID = $this->account;
         $i      = 0;
         $c2     = 0;
         $d2     = 0;
@@ -50,8 +49,8 @@ class Validator87a extends Validator
         $tab2   = array(7, 1, 5, 9, 8);
         $konto  = array();
 
-        for ($i = 0; $i < strlen($accountID); $i++) {
-            $konto[$i+1] = $accountID{$i};
+        for ($i = 0; $i < strlen($this->account); $i++) {
+            $konto[$i+1] = $this->account[$i];
         }
 
         $i = 4;

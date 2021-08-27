@@ -57,7 +57,7 @@ class ValidatorB6 extends Validator implements ValidatorBankDependent
 
     protected function validate()
     {
-        if ($this->account{0} !== '0' || preg_match("/^0269[1-9]/", $this->account)) {
+        if ($this->account[0] !== '0' || preg_match("/^0269[1-9]/", $this->account)) {
             $this->validator = $this->mode1;
 
         } else {

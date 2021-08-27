@@ -63,7 +63,7 @@ class Validator90 extends ValidatorChain
     {
         parent::init($account);
 
-        $this->validators = $this->account{2} == 9
+        $this->validators = $this->account[2] == 9
                           ? array($this->modeF)
                           : $this->defaultValidators;
     }

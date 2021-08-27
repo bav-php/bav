@@ -64,8 +64,8 @@ class ValidatorC6 extends Validator
 
     protected function validate()
     {
-        $transformation = array_key_exists($this->account{0}, self::$transformation)
-                        ? self::$transformation[$this->account{0}]
+        $transformation = array_key_exists($this->account[0], self::$transformation)
+                        ? self::$transformation[$this->account[0]]
                         : '';
         $this->transformedAccount = $transformation . substr($this->account, 1);
         $this->validator->setNormalizedSize(9 + strlen($transformation));
@@ -76,7 +76,7 @@ class ValidatorC6 extends Validator
      */
     protected function getResult()
     {
-        return in_array($this->account{0}, array_keys(self::$transformation))
+        return in_array($this->account[0], array_keys(self::$transformation))
              ? $this->validator->isValid($this->transformedAccount)
              : false;
     }
