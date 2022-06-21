@@ -16,9 +16,12 @@ use \malkusch\index\IndexException;
  */
 class FileDataBackend extends DataBackend
 {
-    
+
     // @codingStandardsIgnoreStart
-    const DOWNLOAD_URI = "https://www.bundesbank.de/resource/blob/602632/31fec41357f012d537ce62045395929a/mL/blz-aktuell-txt-data.txt";
+    // The parent contains something like this:
+    // https://www.bundesbank.de/resource/blob/602632/31fec41357f012d537ce62045395929a/mL/blz-aktuell-txt-data.txt
+    const DOWNLOAD_BASE_URI = "https://www.bundesbank.de";
+    const DOWNLOAD_PARENT_URI= self::DOWNLOAD_BASE_URI . "/de/aufgaben/unbarer-zahlungsverkehr/serviceangebot/bankleitzahlen/download-bankleitzahlen-602592";
     // @codingStandardsIgnoreEnd
 
     /**
@@ -30,7 +33,7 @@ class FileDataBackend extends DataBackend
      * @var FileParser
      */
     private $parser;
-    
+
     /**
      * @var Index_FixedSize
      */
@@ -49,7 +52,7 @@ class FileDataBackend extends DataBackend
         $this->parser = new FileParser($file);
         $this->fileUtil = new FileUtil();
     }
-    
+
     /**
      * @return FixedSizeIndex
      */
@@ -61,7 +64,7 @@ class FileDataBackend extends DataBackend
                 FileParser::BANKID_OFFSET,
                 FileParser::BANKID_LENGTH
             );
-            
+
         }
         return $this->index;
     }
@@ -160,8 +163,18 @@ class FileDataBackend extends DataBackend
     {
         $downloader = new Downloader();
 
+        $parentContent = $downloader->downloadContent(self::DOWNLOAD_PARENT_URI);
+        if (preg_match('|href="([^"]+/blz-aktuell-txt-data.txt)"|', $parentContent, $matches)) {
+            $downloadUri = $matches[1];
+            if (!str_starts_with($downloadUri, 'https://')) {
+                $downloadUri = self::DOWNLOAD_BASE_URI . $downloadUri;
+            }
+        } else {
+            throw new DownloaderException("Failed opening parent page " . self::DOWNLOAD_PARENT_URI . " containing download-uri");
+        }
+
         // download file
-        $file = $downloader->downloadFile(self::DOWNLOAD_URI);
+        $file = $downloader->downloadFile($downloadUri);
 
         // Validate file format.
         $validator = new FileValidator();
@@ -220,7 +233,7 @@ class FileDataBackend extends DataBackend
     {
         try {
             $result = $this->getIndex()->search($bankID);
-        
+
             if ($result == null) {
                 throw new BankNotFoundException($bankID);
 
@@ -236,7 +249,7 @@ class FileDataBackend extends DataBackend
 
         } catch (IndexException $e) {
             throw new DataBackendIOException($e->getMessage(), $e->getCode(), $e);
-            
+
         }
     }
 
@@ -394,7 +407,7 @@ class FileDataBackend extends DataBackend
         }
         return $agencies;
     }
-    
+
     public function free()
     {
         parent::free();
