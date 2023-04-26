@@ -171,6 +171,8 @@ return array(
     'malkusch\bav\validatord9' => '../classes/validator/validators/ValidatorD9.php',
     'malkusch\bav\validatore0' => '../classes/validator/validators/ValidatorE0.php',
     'malkusch\bav\validatore1' => '../classes/validator/validators/ValidatorE1.php',
+    'malkusch\bav\validatore2' => '../classes/validator/validators/ValidatorE2.php',
+    'malkusch\bav\validatore3' => '../classes/validator/validators/ValidatorE3.php',
     'malkusch\bav\domuripicker' => '../classes/dataBackend/file/download/uripicker/DOMURIPicker.php',
     'malkusch\bav\bavexception' => '../classes/exception/BAVException.php',
     'malkusch\bav\validator51x' => '../classes/validator/validators/Validator51x.php',

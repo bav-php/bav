@@ -40,9 +40,10 @@ class Validator25 extends WeightedIterationValidator
     {
         $result = 11 - ($this->accumulator % 11);
         switch ($result) {
+
             case 10:
                 $result = 0;
-                if ($this->account{1} != 8 && $this->account{1} != 9) {
+                if ($this->account[1] != 8 && $this->account[1] != 9) {
                     return false;
 
                 }

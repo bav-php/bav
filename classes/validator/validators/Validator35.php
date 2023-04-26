@@ -40,7 +40,7 @@ class Validator35 extends WeightedIterationValidator
     {
         $result = $this->accumulator % 11;
         if ($result === 10) {
-            return $this->account{9} === $this->account{8};
+            return $this->account[9] === $this->account[8];
 
         }
         return (string)$result === $this->getCheckNumber();

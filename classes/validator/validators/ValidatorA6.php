@@ -57,7 +57,7 @@ class ValidatorA6 extends Validator
 
     protected function validate()
     {
-        $this->validator = $this->account{1} === '8'
+        $this->validator = $this->account[1] === '8'
                          ? $this->mode1
                          : $this->mode2;
     }

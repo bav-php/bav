@@ -70,25 +70,26 @@ class ValidatorC5 extends Validator
         $length  = strlen($account);
 
         switch ($length) {
+
             case 6:
             case 9:
-                if ($account{0} < 9) {
+                if ($account[0] < 9) {
                     $this->validator = $this->mode1;
                 }
                 break;
 
             case 8:
-                if ($account{0} >= 3 && $account{0} <= 5) {
+                if ($account[0] >= 3 && $account[0] <= 5) {
                     $this->validator = $this->mode4;
 
                 }
                 break;
 
             case 10:
-                if ($account{0} == 1 || $account{0} >= 4 && $account{0} <= 6 || $account{0} == 9) {
+                if ($account[0] == 1 || $account[0] >= 4 && $account[0] <= 6 || $account[0] == 9) {
                     $this->validator = $this->mode2;
 
-                } elseif ($account{0} == 3) {
+                } elseif ($account[0] == 3) {
                     $this->validator = $this->mode3;
 
                 } else {

@@ -73,6 +73,6 @@ class Validator83 extends ValidatorChain
 
     protected function continueValidation(Validator $validator)
     {
-        return $validator !== $this->modeC || $this->account{9} < 7;
+        return $validator !== $this->modeC || $this->account[9] < 7;
     }
 }

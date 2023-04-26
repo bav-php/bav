@@ -55,6 +55,6 @@ class Validator63 extends WeightedIterationValidator
     protected function getResult()
     {
         $result = (10 - ($this->accumulator % 10)) % 10;
-        return $this->account{0} == '0' && (string)$result === $this->getCheckNumber();
+        return $this->account[0] == '0' && (string)$result === $this->getCheckNumber();
     }
 }

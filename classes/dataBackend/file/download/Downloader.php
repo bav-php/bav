@@ -25,7 +25,7 @@ class Downloader
     public function __construct()
     {
         $this->handle = curl_init();
-        if (! is_resource($this->handle)) {
+        if (! is_resource($this->handle) && !($this->handle instanceof \CurlHandle)) {
             throw new DownloaderException("Failed initializing curl");
 
         }
@@ -92,6 +92,7 @@ class Downloader
 
         }
         curl_setopt($this->handle, CURLOPT_FILE, $fp);
+        curl_setopt($this->handle, CURLOPT_FOLLOWLOCATION, 1);
 
         if (! $this->download($uri)) {
             fclose($fp);

@@ -41,11 +41,11 @@ class Validator66 extends WeightedIterationValidator
     protected function getResult()
     {
         // update 2014-03-03
-        if ($this->account{1} == '9') {
+        if ($this->account[1] == '9') {
             return true;
 
         }
         $result = (11 - $this->accumulator % 11) % 10;
-        return $this->account{0} == '0' && (string)$result === $this->getCheckNumber();
+        return $this->account[0] == '0' && (string)$result === $this->getCheckNumber();
     }
 }

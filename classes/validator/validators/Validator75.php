@@ -45,7 +45,7 @@ class Validator75 extends Validator00
 
         }
         if ($length == 9) {
-            if ($account{0} == 9) {
+            if ($account[0] == 9) {
                 $account = substr($account, 1, 6);
 
             } else {

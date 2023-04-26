@@ -1,15 +1,28 @@
 {
-    "name": "malkusch/bav",
+    "name": "rotdrop/bav",
     "type": "library",
     "description": "BAV provides validation for German Bank Accounts (Konto)",
     "keywords": ["bank", "account", "bankaccount", "validation", "check", "konto"],
-    "homepage": "http://bav.malkusch.de/",
+    "homepage": "http://github.com/rotdrop/bav/",
     "license": "WTFPL",
+    "version": "dev-master",
     "authors": [
         {
             "name": "Markus Malkusch",
             "email": "markus@malkusch.de",
             "homepage": "http://markus.malkusch.de",
+            "role": "Developer"
+        },
+        {
+            "name": "Markus Zierhut",
+            "email": "markus@zierhut.net",
+            "homepage": "https://markus.zierhut.name",
+            "role": "Developer"
+        },
+        {
+            "name": "Claus-Justus Heine",
+            "email": "himself@claus-justus-heine.de",
+            "homepage": "https://claus-justus-heine.de",
             "role": "Developer"
         }
     ],
@@ -17,8 +30,8 @@
         "files": ["autoloader/autoloader.php"]
     },
     "require": {
-        "php": ">=5.4",
-        "malkusch/php-index": "~0.1"
+        "php": ">=7.4",
+        "malkusch/php-index": "dev-master"
     },
     "suggest": {
         "ext-PDO": "Allows storing bank information in a database",
@@ -37,5 +50,13 @@
     "bin": [
         "bin/bav-update.php",
         "bin/bav-install.php"
-    ]
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/bav-php/php-index"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

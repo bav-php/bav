@@ -56,7 +56,7 @@ class ValidatorB0 extends Validator
 
     protected function validate()
     {
-        $this->validator = array_search($this->account{7}, array(1, 2, 3, 6)) !== false
+        $this->validator = array_search($this->account[7], array(1, 2, 3, 6)) !== false
                          ? $this->mode1
                          : $this->mode2;
     }
@@ -67,7 +67,7 @@ class ValidatorB0 extends Validator
     protected function getResult()
     {
         return strlen(ltrim($this->account, '0')) === 10
-            && $this->account{0} !== '8'
+            && $this->account[0] !== '8'
             && $this->validator->isValid($this->account);
     }
 }

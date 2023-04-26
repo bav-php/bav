@@ -43,7 +43,7 @@ class ValidatorE2 extends Validator
     
     protected function validate()
     {
-        if (in_array($this->account{0}, [6, 7, 8, 9])) {
+        if (in_array($this->account[0], [6, 7, 8, 9])) {
             $this->result = false;
             return;
         }
@@ -51,7 +51,7 @@ class ValidatorE2 extends Validator
         $validator = new Validator00($this->bank);
         $validator->doNormalization = false;
 
-        $prefixedAccount = self::$prefixes[$this->account{0}] . substr($this->account, 1);
+        $prefixedAccount = self::$prefixes[$this->account[0]] . substr($this->account, 1);
         
         $this->result = $validator->isValid($prefixedAccount);
     }

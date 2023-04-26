@@ -53,7 +53,7 @@ class ValidatorD8 extends Validator
      */
     protected function getResult()
     {
-        if ($this->account{0} != 0) {
+        if ($this->account[0] != 0) {
             return $this->validator->isValid($this->account);
 
         }

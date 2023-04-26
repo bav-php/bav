@@ -36,6 +36,6 @@ class Validator88 extends Validator06
     {
         parent::init($account);
 
-        $this->setEnd($this->account{2} == 9 ? 2: 3);
+        $this->setEnd($this->account[2] == 9 ? 2: 3);
     }
 }

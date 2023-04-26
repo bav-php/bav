@@ -34,7 +34,7 @@ class Validator16 extends Validator06
     protected function getResult()
     {
          return $this->accumulator % 11 === 1
-              ? $this->getChecknumber() === $this->account{$this->getNormalizedPosition($this->checknumberPosition) - 1}
+              ? $this->getChecknumber() === $this->account[$this->getNormalizedPosition($this->checknumberPosition) - 1]
               : parent::getResult();
     }
 }

@@ -61,7 +61,7 @@ class ValidatorD4 extends Validator
      */
     protected function getResult()
     {
-        return $this->account{0} != 0
+        return $this->account[0] != 0
             && $this->validator->isValid($this->transformedAccount);
     }
 }
